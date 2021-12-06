@@ -16,7 +16,7 @@
 <body>
 	<c:import url="${contextPath }/defualt/header" />
 	<div align="center">
-		<form id="signupform" action="signUp" method="post">
+		<form id="signUp" action="signUp" method="post">
 
 			<table>
 				<tr>
