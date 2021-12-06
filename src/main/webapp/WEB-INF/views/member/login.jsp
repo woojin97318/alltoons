@@ -9,7 +9,7 @@
 <body>
 	<div align="center">
 		<h3>로그인</h3>
-		<form action="loginChk">
+		<form action="loginChk" method="post">
 			<input type="text" name="id" placeholder="ID"><br>
 			<input type="text" name="pw" placeholder="PW"><br>
 			<input type="checkbox" name="auto">&nbsp;자동 로그인
