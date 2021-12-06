@@ -15,7 +15,7 @@
 </head>
 <body>
 	<c:import url="${contextPath }/defualt/header" />
-	<div>
+	<div align="center">
 		<form id="signupform" action="signUp" method="post">
 
 			<table>
@@ -30,8 +30,8 @@
 
 				<tr>
 					<th>닉네임*</th>
-					<td><input type="text" id="inputId" placeholder="내용을 입력해주세요"></td>
-					<td><input type="button" id="idChk" value="중복 확인"></td>
+					<td><input type="text" id="inputNick" placeholder="내용을 입력해주세요"></td>
+					<td><input type="button" id="nickChk" value="중복 확인"></td>
 				</tr>
 				<tr>
 					<th colspan="3">비밀번호*</th>
@@ -41,10 +41,10 @@
 				</tr>
 				<tr>
 					<th colspan="2">이메일*</th>
-					<td><input type="text" placeholder="이메일을 입력해주세요">
+					<td><input type="text" id="email" placeholder="이메일을 입력해주세요">
 				</tr>
 				<tr>
-					<td><input type="button" value="이메일 인증하기"></td>
+					<td><input type="button" onclick="emailAuth()" value="이메일 인증하기"></td>
 				</tr>
 				<tr>
 					<td>*는 반드시 입력해야 하는 정보입니다.</td>
@@ -57,5 +57,7 @@
 		</form>
 
 	</div>
+	<c:import url="${contextPath }/defualt/header" />
+
 </body>
 </html>
