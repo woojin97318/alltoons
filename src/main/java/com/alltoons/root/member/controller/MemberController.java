@@ -1,7 +1,5 @@
 package com.alltoons.root.member.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,12 +32,10 @@ public class MemberController implements MemberSessionName {
 	public String userChk(@RequestParam("userEmail") String userEmail,
 			@RequestParam("userPw") String userPw,
 			@RequestParam(required = false) String autoLogin,
-			HttpServletResponse response, HttpSession session) throws IOException {
+			HttpServletResponse response, HttpSession session,
+			Model model) {
 		String message = ms.loginChk(userEmail, userPw);
-		PrintWriter out = null;
-		response.setContentType("text/html; charset=utf-8");
-		out = response.getWriter();
-		
+		String url = null;
 		if(message.equals("로그인 성공")) {
 			session.setAttribute(LOGIN, userEmail);
 			if(autoLogin != null) {
@@ -55,12 +52,13 @@ public class MemberController implements MemberSessionName {
 				java.sql.Date limitDate = new java.sql.Date(cal.getTimeInMillis());
 				ms.keepLogin(session.getId(), limitDate, userEmail);
 			}
-			out.println("<script>alert('" + message + "');</script>");
-			return "redirect:/index";
+			url = "index";
 		}else { //가입된 사용자가 아닐경우 or 비밀번호가 틀릴경우 해당 메시지 출력
-			out.println("<script>alert('" + message + "');</script>");
-			return "redirect:/member/login";
+			url = "member/login";
 		}
+		model.addAttribute("message", message);
+		model.addAttribute("url", url);
+		return "/common/alertHref";
 	}
 
 	@GetMapping("signup")
