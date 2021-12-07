@@ -20,5 +20,5 @@
 		<a href="#">비밀번호 찾기</a> / 
 		<a href="#">회원가입</a>
 	</div>
-</body>
+</body> 
 </html>

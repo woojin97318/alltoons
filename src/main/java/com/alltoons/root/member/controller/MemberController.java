@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +32,11 @@ public class MemberController implements MemberSessionName {
 
 	@PostMapping("loginChk")
 	public String userChk(@RequestParam("userEmail") String userEmail, @RequestParam("userPw") String userPw,
-			@RequestParam(required = false) String autoLogin, HttpSession session, HttpServletResponse response) {
-		if (ms.loginChk(userEmail, userPw)) { // 로그인 성공
+			@RequestParam(required = false) String autoLogin, HttpServletResponse response, HttpSession session,
+			Model model) {
+		String message = ms.loginChk(userEmail, userPw);
+		String url = null;
+		if (message.equals("로그인 성공")) {
 			session.setAttribute(LOGIN, userEmail);
 			if (autoLogin != null) {
 				int limitTime = 60 * 60 * 24 * 90; // 90일
@@ -48,10 +52,13 @@ public class MemberController implements MemberSessionName {
 				java.sql.Date limitDate = new java.sql.Date(cal.getTimeInMillis());
 				ms.keepLogin(session.getId(), limitDate, userEmail);
 			}
-		} else { // 로그인 실패
-
+			url = "index";
+		} else { // 가입된 사용자가 아닐경우 or 비밀번호가 틀릴경우 해당 메시지 출력
+			url = "member/login";
 		}
-		return "member/login";
+		model.addAttribute("message", message);
+		model.addAttribute("url", url);
+		return "/common/alertHref";
 	}
 
 	@GetMapping("signup")
@@ -63,9 +70,9 @@ public class MemberController implements MemberSessionName {
 	@PostMapping("signupform")
 	public String signUpForm(MemberDTO dto) {
 		int result = ms.signUpForm(dto);
-		if(result == 1) {
+		if (result == 1) {
 			return "redirect:login";
-		}else {
+		} else {
 			return "redirect:signup";
 		}
 	}
