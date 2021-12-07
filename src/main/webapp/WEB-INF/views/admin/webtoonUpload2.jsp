@@ -39,8 +39,8 @@
 	        cnt += (str.charCodeAt(i) >128) ? 2 : 1;
 	    }
 	    return cnt;
-	}
-	/* //const 사용시 변수 재할당, 재선언 불가능
+	}/*
+	//const 사용시 변수 재할당, 재선언 불가능
 	const add_box = () =>{
 		const platform_link = document.getElementById("platform_link");
 		const newP = document.createElement('p');
@@ -78,9 +78,9 @@
 		<br> 
 		<b>작가명</b><input type="text" name="webtoonWriter" placeholder="글작가/그림작가"><br>
 		
-		<b>링크</b> 
-		<div id="box">
-			<button onclick="add_textbox">+</button> <br> 
+		<b>링크</b> <button onclick="add_box">+</button> <br> 
+		<div id="platform_link">
+			
 			<select name="platformName" id="platformName">
 				<option value="naver">네이버</option>
 				<option value="kakaoWebtoon">카카오웹툰</option>
@@ -122,7 +122,7 @@
 				<option value="mrblue">리디북스</option>
 				<option value="ridibooks">탑툰</option>
 		</select> 
-		<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" ><br> 
+		<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크"><br> 
 		<b>세부설명</b><br>
 		<div class="webtoonContent_wrap">
 			<textarea rows="5" cols="45" name="webtoonContent"id="webtoonContent"></textarea> 
