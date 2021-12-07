@@ -18,25 +18,18 @@ import com.alltoons.root.admin.upload.service.WebtoonService;
 public class AdminUploadController {
 	@Autowired
 	WebtoonService ws;
-
-	/*
-	 * GenreDTO gd; PlatformDTO pd; OriginDTO od;
-	 * 
-	 * public AdminUploadController() { wd = new WebtoonDTO(); gd = new GenreDTO();
-	 * od = new OriginDTO(); }
-	 */
-
+	
 	@GetMapping("/webtoonUpload")
 	public String webtoonUpload() {
 		return "admin/webtoonUpload";
 	}
 
 	@PostMapping("/webtoonUpload")
-	public String postWebtoonUpload(HttpServletRequest mul, WebtoonDTO wd) {
+	public String postWebtoonUpload(MultipartHttpServletRequest mul, WebtoonDTO wd) {
 		if (wd.getOriginalPlatform().equals("nan")) {
 			wd.setWebtoonOriginalLink("nan");
 		}
-		ws.upload(wd);
+		ws.upload(mul,wd);
 		return "redirect:webtoonUpload";
 	}
 }

@@ -53,20 +53,33 @@
 	const remove = (obj)=>{
 		document.getElementById('platform_link').removeChild(obj.parentNode);
 	} */
+	
+	function readURL(input) {
+	      var file = input.files[0] //파일에 대한 정보
+	      console.log(file)
+	      if (file != '') {
+	         var reader = new FileReader();
+	         reader.readAsDataURL(file); //파일의 정보를 토대로 파일을 읽고 
+	         reader.onload = function (e) { // 파일 로드한 값을 표현한다
+	          //e : 이벤트 안에 result값이 파일의 정보를 가지고 있다.
+	           $('#webtoonImage').attr('src', e.target.result);
+	          }
+	      }
+	  }  
 </script>
 
 <title>작품 추가</title>
 </head>
 <body>
 	<h1>작품 추가</h1>
-	<form action="webtoonUpload" method="post">
+	<form action="${contextPath}/webtoonUpload" method="post" enctype="multipart/form-data">
 		<div style="display: flex;">
 			<div>
 				<img id="webtoonImage" src="default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
 			</div>
 			<div>
 				<!-- <label id="image_name">default image</label><br> -->
-				<input type="file" name="image_file_name" onchange="readURL(this);" /> 
+				<input type="file" name="webtoon_Image" onchange="readURL(this);" /> 
 			</div>
 		</div>
 		<br>

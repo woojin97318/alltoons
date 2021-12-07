@@ -36,8 +36,8 @@
 	</select>
 	<insert id="uploadWetoon">
 		insert into
-		webtoon_info(webtoon_title,webtoon_num,webtoon_writer,webtoon_content)
-		values(#{webtoonTitle},webtoon_num_seq.nextval,#{webtoonWriter},#{webtoonContent})
+		webtoon_info(webtoon_title,webtoon_num,webtoon_writer,webtoon_content,webtoon_image)
+		values(#{webtoonTitle},webtoon_num_seq.nextval,#{webtoonWriter},#{webtoonContent},#{webtoonImage})
 
 	</insert>
 	<insert id="uploadGenre">
