@@ -22,8 +22,7 @@ import com.alltoons.root.member.service.MemberService;
 @Controller
 @RequestMapping("member")
 public class MemberController implements MemberSessionName {
-	@Autowired
-	MemberService ms;
+	@Autowired MemberService ms;
 
 	@GetMapping("login")
 	public String login() {

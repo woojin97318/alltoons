@@ -13,8 +13,7 @@ import com.alltoons.root.member.mapper.MemberMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	@Autowired
-	MemberMapper mapper;
+	@Autowired MemberMapper mapper;
 	BCryptPasswordEncoder encoder;
 
 	public MemberServiceImpl() {
