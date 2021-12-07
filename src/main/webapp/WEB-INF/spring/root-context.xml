@@ -27,10 +27,10 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds" />
 		<property name="mapperLocations"
-			value="classpath:/mappers/*/Mapper.xml" />
+			value="classpath:/mappers/**/*Mapper.xml" />
 	</bean>
 	
-	<!-- 마이바티스 xml파일과 dao빈 연결 (dao,mapper의 패키지까지만 적어줘야함) -->
+	<!-- 마이바티스 xml파일과 dao빈 연결 (dao, mapper의 패키지까지만 적어줘야함) -->
 	<mybatis-spring:scan
-		base-package="com.alltoons.root" />
+		base-package="com.alltoons.root.member.mapper" />
 </beans>
