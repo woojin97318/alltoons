@@ -2,3 +2,52 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alltoons.root.admin.upload.WebtoonMapper">
+	<resultMap
+		type="com.alltoons.root.admin.upload.dto.WebtoonDTO" id="webtoon">
+		<id property="webtoonNum" column="webtoon_num" />
+		<result property="webtoonTitle" column="webtoon_title" />
+		<result property="webtoonWriter" column="webtoon_writer" />
+		<result property="webtoonContent" column="webtoon_content" />
+		<result property="webtoonImage" column="webtoon_image" />
+	</resultMap>
+	<resultMap
+		type="com.alltoons.root.admin.upload.dto.WebtoonDTO" id="genre">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="webtoonGenre" column="webtoon_genre" />
+	</resultMap>
+	<resultMap
+		type="com.alltoons.root.admin.upload.dto.WebtoonDTO" id="platform">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="platformName" column="platform_name" />
+		<result property="webtoonLink" column="webtoon_link" />
+	</resultMap>
+	<resultMap
+		type="com.alltoons.root.admin.upload.dto.WebtoonDTO" id="original">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="originalPlatform" column="origin_platform_name" />
+		<result property="webtoonOriginalLink" column="webtoon_original_link" />
+	</resultMap>
+	
+	
+	<select id="selectNum" resultMap="webtoon">
+		select * from webtoon_info where
+		webtoon_title = #{webtoonTitle}
+	</select>
+	<insert id="uploadWetoon">
+		insert into
+		webtoon_info(webtoon_title,webtoon_num,webtoon_writer,webtoon_content)
+		values(#{webtoonTitle},webtoon_num_seq.nextval,#{webtoonWriter},#{webtoonContent})
+
+	</insert>
+	<insert id="uploadGenre">
+		insert into genre_table values(#{webtoonNum},#{webtoonGenre})
+		
+	</insert>
+	<insert id="uploadPlatform">
+		insert into platform_table values(#{webtoonNum},#{platformName},#{webtoonLink})
+	</insert>
+	<insert id="uploadOriginal">
+		insert into origin_table values(#{webtoonNum},#{originalPlatform},#{webtoonOriginalLink})
+	</insert>
+</mapper>
