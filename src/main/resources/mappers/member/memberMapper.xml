@@ -23,4 +23,8 @@
 		set session_id = #{sessionId}, limit_time = #{limitDate}
 		where user_email = #{userEmail}
 	</update>
+	
+	<insert id="signUpForm">
+		insert into user_info(user_email, user_password) values(#{userEmail}, #{userPassword})
+	</insert>
 </mapper>

@@ -13,9 +13,10 @@ import com.alltoons.root.member.mapper.MemberMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	@Autowired MemberMapper mapper;
+	@Autowired
+	MemberMapper mapper;
 	BCryptPasswordEncoder encoder;
-	
+
 	public MemberServiceImpl() {
 		encoder = new BCryptPasswordEncoder();
 	}
@@ -24,8 +25,7 @@ public class MemberServiceImpl implements MemberService {
 	public boolean loginChk(String userEmail, String userPw) {
 		boolean result = false;
 		MemberDTO dto = mapper.loginChk(userEmail);
-		if(userEmail.equals(dto.getUserEmail()) &&
-				encoder.matches(userPw, dto.getUserPassword())) {
+		if (userEmail.equals(dto.getUserEmail()) && encoder.matches(userPw, dto.getUserPassword())) {
 			result = true;
 		}
 		return result;
@@ -38,5 +38,25 @@ public class MemberServiceImpl implements MemberService {
 		map.put("limitDate", limitDate);
 		map.put("userEmail", userEmail);
 		mapper.keepLogin(map);
+	}
+
+	@Override
+	public int signUpForm(MemberDTO dto) {
+		System.out.println(dto.getUserEmail());
+		System.out.println(dto.getUserPassword());
+		System.out.println("변경 전" + dto.getUserPassword());
+		String securePw = encoder.encode(dto.getUserPassword());
+		System.out.println(securePw);
+		dto.setUserPassword(securePw);
+		int result = 0;
+		try {
+			result = mapper.signUpForm(dto);
+			System.out.println("회원가입 성공");
+		} catch (Exception e) {
+			System.out.println("회원가입 실패");
+
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

@@ -1,7 +1,5 @@
 package com.alltoons.root.member.controller;
 
-<<<<<<< HEAD
-=======
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> member
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,69 +15,58 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alltoons.root.common.MemberSessionName;
+import com.alltoons.root.member.dto.MemberDTO;
 import com.alltoons.root.member.service.MemberService;
 
 @Controller
 @RequestMapping("member")
-<<<<<<< HEAD
-public class MemberController {
-	MemberService ms;
-=======
 public class MemberController implements MemberSessionName {
-	@Autowired MemberService ms;
->>>>>>> member
+	@Autowired
+	MemberService ms;
 
 	@GetMapping("login")
 	public String login() {
 		return "member/login";
 	}
 
-<<<<<<< HEAD
-	@PostMapping("userChk")
-	public String userChk() {
-		return "";
-=======
 	@PostMapping("loginChk")
-	public String userChk(@RequestParam("userEmail") String userEmail,
-			@RequestParam("userPw") String userPw,
-			@RequestParam(required = false) String autoLogin,
-			HttpSession session, HttpServletResponse response) {
-		if (ms.loginChk(userEmail, userPw)) { //로그인 성공
+	public String userChk(@RequestParam("userEmail") String userEmail, @RequestParam("userPw") String userPw,
+			@RequestParam(required = false) String autoLogin, HttpSession session, HttpServletResponse response) {
+		if (ms.loginChk(userEmail, userPw)) { // 로그인 성공
 			session.setAttribute(LOGIN, userEmail);
-			if(autoLogin != null) {
-				int limitTime = 60*60*24*90; //90일
+			if (autoLogin != null) {
+				int limitTime = 60 * 60 * 24 * 90; // 90일
 				Cookie logincookie = new Cookie("loginCookie", session.getId());
 				logincookie.setPath("/");
 				logincookie.setMaxAge(limitTime);
 				response.addCookie(logincookie);
-				
+
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(new Date());
 				cal.add(Calendar.MONTH, 3);
-				
+
 				java.sql.Date limitDate = new java.sql.Date(cal.getTimeInMillis());
 				ms.keepLogin(session.getId(), limitDate, userEmail);
 			}
-		} else { //로그인 실패
-			
+		} else { // 로그인 실패
+
 		}
 		return "member/login";
->>>>>>> member
 	}
 
 	@GetMapping("signup")
 	public String signUp() {
 		return "member/signup";
 	}
-<<<<<<< HEAD
-	
-	//signup.jsp의 가입하기 버튼 클릭시 동작(회원가입처리)
-=======
 
 	// signup.jsp의 가입하기 버튼 클릭시 동작(회원가입처리)
->>>>>>> member
 	@PostMapping("signupform")
-	public String signUpForm() {
-		return "member/signupform";
+	public String signUpForm(MemberDTO dto) {
+		int result = ms.signUpForm(dto);
+		if(result == 1) {
+			return "redirect:login";
+		}else {
+			return "redirect:signup";
+		}
 	}
 }

@@ -7,4 +7,5 @@ import com.alltoons.root.member.dto.MemberDTO;
 public interface MemberMapper {
 	public MemberDTO loginChk(String userEmail);
 	public void keepLogin(Map<String, Object> map);
+	public int signUpForm(MemberDTO dto);
 }
