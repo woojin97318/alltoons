@@ -1,18 +1,20 @@
 package com.alltoons.root.member.dto;
 
+import java.sql.Date;
+
 public class MemberDTO {
-	private String userId;
+	private String userEmail;
 	private String userPassword;
 	private String userNick;
-	private String userEmail;
 	private String userImage;
-	private String userDivision;
-	
-	public String getUserId() {
-		return userId;
+	private String division;
+	private String sessionId;
+	private Date limitTime;
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	public String getUserPassword() {
 		return userPassword;
@@ -26,22 +28,28 @@ public class MemberDTO {
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
 	}
-	public String getUserEmail() {
-		return userEmail;
-	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
 	public String getUserImage() {
 		return userImage;
 	}
 	public void setUserImage(String userImage) {
 		this.userImage = userImage;
 	}
-	public String getUserDivision() {
-		return userDivision;
+	public String getDivision() {
+		return division;
 	}
-	public void setUserDivision(String userDivision) {
-		this.userDivision = userDivision;
+	public void setDivision(String division) {
+		this.division = division;
+	}
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	public Date getLimitTime() {
+		return limitTime;
+	}
+	public void setLimitTime(Date limitTime) {
+		this.limitTime = limitTime;
 	}
 }

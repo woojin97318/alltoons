@@ -3,15 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.alltoons.root.member.MemberMapper">
+<mapper namespace="com.alltoons.root.member.mapper.MemberMapper">
 
-	<resultMap id="member" type="com.alltoons.root.member.dto.MemberDTO">
-		<result property="userId" column="user_id"/>
+	<resultMap id="user" type="com.alltoons.root.member.dto.MemberDTO">
+		<result property="userEmail" column="user_email"/>
 		<result property="userPassword" column="user_password"/>
 		<result property="userNick" column="user_nick"/>
-		<result property="userEmail" column="user_email"/>
 		<result property="userImage" column="user_image"/>
-		<result property="userDivision" column="division"/>
+		<result property="division" column="division"/>
 	</resultMap>
+	
+	<select id="loginChk" resultMap="user">
+		select * from user_info
+		where user_email = #{userEmail}
+	</select>
 
+	<update id="keepLogin">
+		update user_info
+		set session_id = #{sessionId}, limit_time = #{limitDate}
+		where user_email = #{userEmail}
+	</update>
 </mapper>
