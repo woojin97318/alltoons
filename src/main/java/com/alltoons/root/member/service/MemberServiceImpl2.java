@@ -25,8 +25,24 @@ public class MemberServiceImpl2 implements MemberService2 {
 			mapper2.memberDelete(userEmail);//회원정보 삭제
 			return "탈퇴가 완료되었습니다";
 		}else {
-			return "비밀번호가 틀립니다";
+			return "비밀번호가 일치하지 않습니다";
 		}
+	}
+
+	@Override
+	public String pwModifyChk(String userPw, String userEmail) {
+		MemberDTO dto = mapper.userChk(userEmail);
+		if(encoder.matches(userPw, dto.getUserPassword())) {
+			return "비밀번호확인";
+		}else {
+			return "비밀번호가 일치하지 않습니다";
+		}
+	}
+
+	@Override
+	public void PasswordModify(String newUserPw, String userEmail) {
+		newUserPw = encoder.encode(newUserPw);
+		mapper2.PasswordModify(newUserPw, userEmail);
 	}
 	
 	

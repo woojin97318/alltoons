@@ -7,8 +7,6 @@
 <title>마이페이지</title>
 </head>
 <body>
-	<div align="center">
-		
-	</div>
+
 </body>
 </html>

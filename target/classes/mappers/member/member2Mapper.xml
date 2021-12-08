@@ -18,4 +18,10 @@
 		where user_email = #{userEmail}
 	</delete>
 	
+	<update id="PasswordModify">
+		update user_info
+		set user_password = #{pw}
+		where user_email = #{email}
+	</update>
+	
 </mapper>
