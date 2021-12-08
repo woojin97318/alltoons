@@ -35,6 +35,14 @@ public class AdminUploadController {
 			if (wd.getOriginalPlatform().equals("nan")) {
 				wd.setWebtoonOriginalLink("nan");
 			}
+			//int cnt = ws.linkNum(mul);
+			String arry[] = mul.getParameterValues("platformName");
+			String arry2[] = mul.getParameterValues("webtoonLink");
+			for(int i=0;i<arry.length;i++) {
+				System.out.println(arry[i]);
+				System.out.println(arry2[i]);
+			}
+			
 			int result = ws.upload(mul, wd);
 			if(result ==1) {
 				model.addAttribute("message", "작품이 추가되었습니다");

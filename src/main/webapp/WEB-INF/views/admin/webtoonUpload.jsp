@@ -58,8 +58,7 @@
 		var html ='';
 		cnt +=1;
 		html+= '<br>'
-		html+='<select name="platformName'
-		html+= cnt+'" id="platformName">'
+		html+='<select name="platformName" id="platformName">'
 		html+='<option value="naver">네이버</option>'
 		html+=	'<option value="kakaoWebtoon">카카오웹툰</option>'
 		html+=	'<option value="kakaoPage">카카오페이지</option>'
@@ -69,9 +68,11 @@
 		html+='<option value="mrblue">리디북스</option>'
 		html+=	'<option value="ridibooks">탑툰</option>'
 		html+='</select> ';
-		html+= '<input type="text" name="webtoonLink'+cnt+'" id="webtoonLink'+cnt+'" placeholder="웹툰 링크"> '
+		html+= '<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크"> '
 		newP.innerHTML =html;
 		box.appendChild(newP);
+		$('#countLink').val(cnt);
+		console.log(cnt)
 	}
 </script>
 
@@ -112,7 +113,7 @@
 				<option value="ridibooks">탑툰</option>
 			</select> 
 			
-			<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크"> 
+			<input type="text" id="webtoonLink" name="webtoonLink" placeholder="웹툰 링크"> 
 		</div>
 		<br>
 		<b>장르</b><br>

@@ -4,6 +4,7 @@ public class PlatformDTO {
 	public int webtoonNum;
 	public String platformName;
 	public String webtoonLink;
+	
 	public int getWebtoonNum() {
 		return webtoonNum;
 	}

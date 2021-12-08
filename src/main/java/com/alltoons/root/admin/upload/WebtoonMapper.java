@@ -1,5 +1,6 @@
 package com.alltoons.root.admin.upload;
 
+import com.alltoons.root.admin.upload.dto.PlatformDTO;
 import com.alltoons.root.admin.upload.dto.WebtoonDTO;
 
 public interface WebtoonMapper {
@@ -11,10 +12,12 @@ public interface WebtoonMapper {
 
 	public int uploadGenre(WebtoonDTO wd);
 
-	public int uploadPlatform(WebtoonDTO wd);
+	//public int uploadPlatform(WebtoonDTO wd);
 
 	public int uploadOriginal(WebtoonDTO wd);
 
 	public WebtoonDTO selectTitle(String webtoonTitle);
+
+	public int uploadPlatform(PlatformDTO pd);
 
 }
