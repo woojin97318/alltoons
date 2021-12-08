@@ -55,27 +55,25 @@
 	function add_link(){
 		var newP = document.createElement('span');
 		
-		var html ='';
-		cnt +=1;
-		html+= '<br>'
-		html+='<select name="platformName" id="platformName">'
-		html+='<option value="naver">네이버</option>'
-		html+=	'<option value="kakaoWebtoon">카카오웹툰</option>'
-		html+=	'<option value="kakaoPage">카카오페이지</option>'
-		html+=	'<option value="bomtoon">봄툰</option>'
-		html+=	'<option value="lezhin">레진</option>'
-		html+=	'<option value="toptoon">탑툰</option>'
-		html+='<option value="mrblue">리디북스</option>'
-		html+=	'<option value="ridibooks">탑툰</option>'
-		html+='</select> ';
-		html+= '<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크"> '
-		newP.innerHTML =html;
+		var html = '';
+		cnt += 1;
+		html += '<br>'
+		html += '<select name="platformName" id="platformName">'
+		html += '<option value="naver">네이버</option>'
+		html += '<option value="kakaoWebtoon">카카오웹툰</option>'
+		html += '<option value="kakaoPage">카카오페이지</option>'
+		html += '<option value="bomtoon">봄툰</option>'
+		html += '<option value="lezhin">레진</option>'
+		html += '<option value="toptoon">탑툰</option>'
+		html += '<option value="mrblue">리디북스</option>'
+		html += '<option value="ridibooks">탑툰</option>'
+		html += '</select> ';
+		html += '<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크"> '
+		newP.innerHTML = html;
 		box.appendChild(newP);
-		$('#countLink').val(cnt);
-		console.log(cnt)
 	}
 </script>
-
+<link rel="stylesheet" href="resources/css/webtoonUpload.css">
 <title>작품 추가</title>
 </head>
 <body>
@@ -83,7 +81,7 @@
 	<form action="${contextPath}/webtoonUpload" method="post" enctype="multipart/form-data">
 		<div style="display: flex;">
 			<div>
-				<img id="webtoonImage" src="default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
+				<img id="webtoonImage" src="resources/resources/default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
 			</div>
 			<div>
 				<!-- <label id="image_name">default image</label><br> -->
