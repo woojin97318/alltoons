@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -18,18 +19,33 @@ import com.alltoons.root.admin.upload.service.WebtoonService;
 public class AdminUploadController {
 	@Autowired
 	WebtoonService ws;
-	
+
 	@GetMapping("/webtoonUpload")
 	public String webtoonUpload() {
 		return "admin/webtoonUpload";
 	}
 
 	@PostMapping("/webtoonUpload")
-	public String postWebtoonUpload(MultipartHttpServletRequest mul, WebtoonDTO wd) {
-		if (wd.getOriginalPlatform().equals("nan")) {
-			wd.setWebtoonOriginalLink("nan");
+	public String postWebtoonUpload(MultipartHttpServletRequest mul, WebtoonDTO wd, Model model) {
+		if (wd.getWebtoonTitle().isEmpty()) {
+			model.addAttribute("message", "작품 제목을 입력해주세요.");
+			model.addAttribute("url", "webtoonUpload");
+			return "/common/alertHref";
+		} else {
+			if (wd.getOriginalPlatform().equals("nan")) {
+				wd.setWebtoonOriginalLink("nan");
+			}
+			int result = ws.upload(mul, wd);
+			if(result ==1) {
+				model.addAttribute("message", "작품이 추가되었습니다");
+				model.addAttribute("url", "webtoonUpload");
+				return "/common/alertHref";
+			}else {
+				model.addAttribute("message", "작품 추가에 실패하였습니다.");
+				model.addAttribute("url", "webtoonUpload");
+				return "/common/alertHref";
+			}
+			
 		}
-		ws.upload(mul,wd);
-		return "redirect:webtoonUpload";
 	}
 }

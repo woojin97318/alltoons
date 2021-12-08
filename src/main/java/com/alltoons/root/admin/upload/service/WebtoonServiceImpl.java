@@ -17,13 +17,16 @@ public class WebtoonServiceImpl implements WebtoonService{
 	@Autowired WebtoonMapper wm;
 
 	@Override
-	public void upload(MultipartHttpServletRequest mul, WebtoonDTO wd) {
+	public int upload(MultipartHttpServletRequest mul, WebtoonDTO wd) {
+		int result = 0;
 		System.out.println(wd.getWebtoonTitle());
 		imgUpload(mul,wd);
-		wm.uploadWetoon(wd);
+		result = wm.uploadWetoon(wd);
 		wd.setWebtoonNum(wm.selectNum(wd).getWebtoonNum());
-		wm.uploadGenre(wd);wm.uploadPlatform(wd);	wm.uploadOriginal(wd);
-		
+		result = wm.uploadGenre(wd);
+		result = wm.uploadPlatform(wd);	
+		result = wm.uploadOriginal(wd);
+		return result;
 	}
 	public void imgUpload(MultipartHttpServletRequest mul,WebtoonDTO wd) {
 		MultipartFile file = mul.getFile("webtoon_Image");

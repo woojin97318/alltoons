@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script src="jquery-1.7.1.min.js"></script>    
 <script type="text/javascript">
 	/* webtoonTitle */
 	$(function(){
@@ -54,10 +53,11 @@
 	  }  
 	var cnt=0;
 	function add_link(){
-		var newP = document.createElement('p');
+		var newP = document.createElement('span');
 		
 		var html ='';
 		cnt +=1;
+		html+= '<br>'
 		html+='<select name="platformName'
 		html+= cnt+'" id="platformName">'
 		html+='<option value="naver">네이버</option>'
@@ -69,6 +69,7 @@
 		html+='<option value="mrblue">리디북스</option>'
 		html+=	'<option value="ridibooks">탑툰</option>'
 		html+='</select> ';
+		html+= '<input type="text" name="webtoonLink'+cnt+'" id="webtoonLink'+cnt+'" placeholder="웹툰 링크"> '
 		newP.innerHTML =html;
 		box.appendChild(newP);
 	}
@@ -99,7 +100,7 @@
 		
 		<b>링크</b> 
 		<div id="box">
-			<button onclick="add_link()">+</button> <br> 
+			<button type="button" onclick="add_link()">+</button> <br> 
 			<select name="platformName" id="platformName">
 				<option value="naver">네이버</option>
 				<option value="kakaoWebtoon">카카오웹툰</option>

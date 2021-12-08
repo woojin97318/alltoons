@@ -32,7 +32,7 @@
 	
 	<select id="selectNum" resultMap="webtoon">
 		select * from webtoon_info where
-		webtoon_title = #{webtoonTitle}
+		webtoon_title = #{webtoonTitle} and webtoon_writer = #{webtoonWriter}
 	</select>
 	<insert id="uploadWetoon">
 		insert into
@@ -50,4 +50,5 @@
 	<insert id="uploadOriginal">
 		insert into origin_table values(#{webtoonNum},#{originalPlatform},#{webtoonOriginalLink})
 	</insert>
+	
 </mapper>
