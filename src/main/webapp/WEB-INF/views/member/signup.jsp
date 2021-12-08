@@ -9,6 +9,12 @@
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+	function emailAuth(){
+		
+	}
+</script>
+
 </head>
 <body>
 	<div align="center">
@@ -23,6 +29,11 @@
 					<td>이메일*</td>
 					<td><input type="text" name="userEmail"
 						placeholder="이메일을 입력해주세요"></td>
+				</tr>
+				<tr>
+					<td>  </td>
+					<td><input type="button" onclick="emailAuth()"
+						value="이메일 인증하기"></td>
 				</tr>
 				<tr>
 					<td>비밀번호*</td>

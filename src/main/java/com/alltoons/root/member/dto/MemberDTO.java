@@ -10,6 +10,13 @@ public class MemberDTO {
 	private String division;
 	private String sessionId;
 	private Date limitTime;
+	private String authKey;
+	public String getAuthKey() {
+		return authKey;
+	}
+	public void setAuthKey(String authKey) {
+		this.authKey = authKey;
+	}
 	public String getUserEmail() {
 		return userEmail;
 	}
