@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="jquery-1.7.1.min.js"></script>    
 <script type="text/javascript">
 	/* webtoonTitle */
 	$(function(){
@@ -40,32 +41,37 @@
 	    }
 	    return cnt;
 	}
-	/* //const 사용시 변수 재할당, 재선언 불가능
-	const add_box = () =>{
-		const platform_link = document.getElementById("platform_link");
-		const newP = document.createElement('p');
-		consol.log("innerHTMl전")
-		newP.innerHTML = "<select name='platformName'><option value='naver'>네이버</option> <option value='kakaoWebtoon'>카카오웹툰</option>	<option value='kakaoPage'>카카오페이지</option>	<option value='bomtoon'>봄툰</option>	<option value='lezhin'>레진</option>	<option value='toptoon'>탑툰</option>	<option value='mrblue'>리디북스</option><option value='ridibooks'>탑툰</option>	</select><input type='text' name='webtoonLink' placeholder='웹툰 링크'><input type='button' value='-' onclick='remove(this)'>	";
-		consol.log("innerHTMl후")
-		platform_link.appenChild(newP);
-		consol.log("appenChild후")
-	}
-	const remove = (obj)=>{
-		document.getElementById('platform_link').removeChild(obj.parentNode);
-	} */
-	
 	function readURL(input) {
-	      var file = input.files[0] //파일에 대한 정보
+	      var file = input.files[0] 
 	      console.log(file)
 	      if (file != '') {
 	         var reader = new FileReader();
-	         reader.readAsDataURL(file); //파일의 정보를 토대로 파일을 읽고 
-	         reader.onload = function (e) { // 파일 로드한 값을 표현한다
-	          //e : 이벤트 안에 result값이 파일의 정보를 가지고 있다.
+	         reader.readAsDataURL(file); 
+	         reader.onload = function (e) { 
 	           $('#webtoonImage').attr('src', e.target.result);
 	          }
 	      }
 	  }  
+	var cnt=0;
+	function add_link(){
+		var newP = document.createElement('p');
+		
+		var html ='';
+		cnt +=1;
+		html+='<select name="platformName'
+		html+= cnt+'" id="platformName">'
+		html+='<option value="naver">네이버</option>'
+		html+=	'<option value="kakaoWebtoon">카카오웹툰</option>'
+		html+=	'<option value="kakaoPage">카카오페이지</option>'
+		html+=	'<option value="bomtoon">봄툰</option>'
+		html+=	'<option value="lezhin">레진</option>'
+		html+=	'<option value="toptoon">탑툰</option>'
+		html+='<option value="mrblue">리디북스</option>'
+		html+=	'<option value="ridibooks">탑툰</option>'
+		html+='</select> ';
+		newP.innerHTML =html;
+		box.appendChild(newP);
+	}
 </script>
 
 <title>작품 추가</title>
@@ -93,7 +99,7 @@
 		
 		<b>링크</b> 
 		<div id="box">
-			<button onclick="add_textbox">+</button> <br> 
+			<button onclick="add_link()">+</button> <br> 
 			<select name="platformName" id="platformName">
 				<option value="naver">네이버</option>
 				<option value="kakaoWebtoon">카카오웹툰</option>
