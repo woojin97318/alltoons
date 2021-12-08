@@ -13,6 +13,9 @@
 		<result property="division" column="division"/>
 	</resultMap>
 	
-	
+	<delete id="memberDelete">
+		delete from user_info
+		where user_email = #{userEmail}
+	</delete>
 	
 </mapper>
