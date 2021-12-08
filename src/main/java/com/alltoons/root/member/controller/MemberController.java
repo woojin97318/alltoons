@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -25,7 +26,12 @@ public class MemberController implements MemberSessionName {
 	@Autowired
 	MemberService ms;
 
-	@Autowired
+	/*
+	 * private MemberDTO dto;
+	 * 
+	 * public void setDTO(MemberDTO dto) { this.dto = dto; } public MemberDTO
+	 * getDTO() { return dto; }
+	 */
 
 	@GetMapping("login")
 	public String login() {
@@ -71,9 +77,7 @@ public class MemberController implements MemberSessionName {
 	// signup.jsp의 가입하기 버튼 클릭시 동작(회원가입처리)
 	@PostMapping("signupform")
 	public String signUpForm(MemberDTO dto) {
-		// db에 기본정보 insert
 		int result = ms.signUpForm(dto);
-
 		if (result == 1) {
 			return "redirect:login";
 		} else {

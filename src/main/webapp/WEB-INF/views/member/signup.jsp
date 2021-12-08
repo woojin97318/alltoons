@@ -10,11 +10,33 @@
 <title>회원가입 페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	function emailAuth(){
+	function emailSend() {
+		let clientEmail = document.getElentById('emailText').value;
+		let emailYN = isEmail(clientEmail);
+		console.log('입력 이메일' + clientEmail);
+		
+		if(emailYN == true){
+			alert('이메일 형식입니다.');
+			
+			$.ajax({
+				type="POST",
+				url:"/member/email",
+				data:{uEmail:clientEmail},
+				success : function(data){
+				},error : function(e){
+					alert('오류입니다. 잠시 후 다시 시도해주세요.');
+				}
+			});
+		}else{
+			alert('이메일 형식에 알맞게 입력해주세요 xxx@xxx.com');
+		}
 		
 	}
+	function isEmail(asValue){
+		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		return regExp.test(asValue); //형식에 맞는경우 true 리턴
+	}
 </script>
-
 </head>
 <body>
 	<div align="center">
@@ -27,14 +49,24 @@
 
 				<tr>
 					<td>이메일*</td>
-					<td><input type="text" name="userEmail"
+					<td><input type="text" id="emailText" name="userEmail"
 						placeholder="이메일을 입력해주세요"></td>
 				</tr>
 				<tr>
-					<td>  </td>
-					<td><input type="button" onclick="emailAuth()"
-						value="이메일 인증하기"></td>
+					<td></td>
+					<td><button id="emailCheck" onclick="emailSend()">인증번호
+							받기</button></td>
 				</tr>
+
+				<tr>
+					<td colspan="2">인증번호 <input type="text"
+						id="certificationNumber">
+						<button id="certificationBtn" onclick="emailCertification()">인증하기</button></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" id="certificationYN" value="false"></td>
+				</tr>
+
 				<tr>
 					<td>비밀번호*</td>
 					<td><input type="password" name="userPassword"
