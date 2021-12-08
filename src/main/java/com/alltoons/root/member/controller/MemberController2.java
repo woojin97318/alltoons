@@ -41,8 +41,55 @@ public class MemberController2 implements MemberSessionName {
 		return "/common/alertHref";
 	}
 	@GetMapping("myPage")
-	public String myPage(HttpSession session, Model model) {
-		
+	public String myPage() {
 		return "member/myPage";
+	}
+	@GetMapping("pwModify")
+	public String pwModify() { //비밀번호 변경전 현재 비밀번호 확인 페이지
+		return "member/pwModify";
+	}
+	@PostMapping("pwModifyChk")
+	public String pwModifyChk(@RequestParam String userPw,
+			HttpSession session, Model model) {
+		String message = ms2.pwModifyChk(userPw, session.getAttribute(LOGIN).toString());
+		String url = null;
+		if(message.equals("비밀번호확인")) {
+			return "redirect:newPassword";
+		}else {
+			url = "member/pwModify";
+			model.addAttribute("message", message);
+			model.addAttribute("url", url);
+			return "/common/alertHref";
+		}
+	}
+	@GetMapping("newPassword")
+	public String newPassword() {
+		return "member/newPassword";
+	}
+	@PostMapping("newPasswordChk")
+	public String newPasswordChk(Model model, HttpSession session,
+			@RequestParam String newUserPw, @RequestParam String newUserPwChk) {
+		String message = null;
+		String url = null;
+		if(newUserPw.equals("") || newUserPwChk.equals("")) {
+			message = "비밀번호를 입력해주세요";
+			url = "member/newPassword";
+			model.addAttribute("message", message);
+			model.addAttribute("url", url);
+			return "/common/alertHref";
+		}else if(newUserPw.equals(newUserPwChk)) {
+			ms2.PasswordModify(newUserPw, session.getAttribute(LOGIN).toString());
+			message = "비밀번호가 변경되었습니다";
+			url = "member/myPage";
+			model.addAttribute("message", message);
+			model.addAttribute("url", url);
+			return "/common/alertHref";
+		}else {
+			message = "비밀번호가 일치하지 않습니다";
+			url = "member/newPassword";
+			model.addAttribute("message", message);
+			model.addAttribute("url", url);
+			return "/common/alertHref";
+		}
 	}
 }
