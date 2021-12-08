@@ -29,11 +29,11 @@ public class MemberController implements MemberSessionName {
 		return "member/login";
 	}
 
-	@PostMapping("loginChk")
+	@PostMapping("userChk")
 	public String userChk(@RequestParam("userEmail") String userEmail, @RequestParam("userPw") String userPw,
 			@RequestParam(required = false) String autoLogin, HttpServletResponse response, HttpSession session,
 			Model model) {
-		String message = ms.loginChk(userEmail, userPw);
+		String message = ms.userChk(userEmail, userPw);
 		String url = null;
 		if (message.equals("로그인 성공")) {
 			session.setAttribute(LOGIN, userEmail);

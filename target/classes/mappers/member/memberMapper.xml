@@ -13,7 +13,7 @@
 		<result property="division" column="division"/>
 	</resultMap>
 	
-	<select id="loginChk" resultMap="user">
+	<select id="userChk" resultMap="user">
 		select * from user_info
 		where user_email = #{userEmail}
 	</select>
