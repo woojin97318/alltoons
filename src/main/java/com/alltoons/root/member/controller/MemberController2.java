@@ -19,16 +19,16 @@ public class MemberController2 implements MemberSessionName {
 	@Autowired MemberService2 ms2;
 	
 	@GetMapping("findPassword")
-	public String findPassword() {
+	public String findPassword() { //비밀번호 찾기
 		return "findPassword";
 	}
 	@GetMapping("memberDelete")
-	public String memberDelete() {
+	public String memberDelete() { //회원 탈퇴 전 비밀번호 확인
 		return "member/memberDelete";
 	}
 	@PostMapping("memberDeleteChk")
 	public String memberDeleteChk(@RequestParam String userPw,
-			Model model, HttpSession session) {
+			Model model, HttpSession session) { //회원 탈퇴
 		String message = ms2.memberDeleteChk(userPw, session.getAttribute(LOGIN).toString());
 		String url = null;
 		if(message.equals("탈퇴가 완료되었습니다")) {
@@ -41,7 +41,7 @@ public class MemberController2 implements MemberSessionName {
 		return "/common/alertHref";
 	}
 	@GetMapping("myPage")
-	public String myPage() {
+	public String myPage() { //마이페이지
 		return "member/myPage";
 	}
 	@GetMapping("pwModify")

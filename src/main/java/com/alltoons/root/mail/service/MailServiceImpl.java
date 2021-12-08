@@ -11,7 +11,7 @@ public class MailServiceImpl implements MailService{
 	@Override
 	public void mailSend(HttpServletRequest request, String uEmail) {
 		try {
-			MailHandler mailHandler = new MailHandler(JavaMailSenderImpl);
+//			MailHandler mailHandler = new MailHandler(JavaMailSenderImpl);
 		} catch (Exception e) {
 		}
 	}

@@ -1,12 +1,17 @@
 package com.alltoons.root.member.service;
 
+import java.io.File;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alltoons.root.member.dto.MemberDTO;
 import com.alltoons.root.member.mapper.MemberMapper;
@@ -43,20 +48,38 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int signUpForm(MemberDTO dto) {
-		System.out.println(dto.getUserEmail());
-		System.out.println(dto.getUserPassword());
-		System.out.println("변경 전" + dto.getUserPassword());
-		String securePw = encoder.encode(dto.getUserPassword());
-		System.out.println(securePw);
-		dto.setUserPassword(securePw);
+	public int signUpForm(MultipartHttpServletRequest mul) {
 		int result = 0;
+		
+		MemberDTO dto = new MemberDTO();
+		dto.setUserEmail(mul.getParameter("userEmail"));
+		dto.setUserPassword(encoder.encode(mul.getParameter("userPassword")));
+		
+		MultipartFile file = mul.getFile("userImage");
+		if (file.getSize() != 0) { //사용자 이미지가 들어왔다면
+			SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss-");
+			Calendar calendar = Calendar.getInstance();
+			String sysFileName = format.format(calendar.getTime());
+			
+			sysFileName += file.getOriginalFilename();
+			
+			dto.setUserImage(sysFileName);
+			
+			File saveFile = new File(IMAGE_REPO + "/" + sysFileName);
+			try {
+				file.transferTo(saveFile);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			dto.setUserImage("default_image");
+		}
+		//DB에 가입하려는 회원정보 저장
 		try {
 			result = mapper.signUpForm(dto);
 			System.out.println("회원가입 성공");
 		} catch (Exception e) {
 			System.out.println("회원가입 실패");
-
 			e.printStackTrace();
 		}
 		return result;

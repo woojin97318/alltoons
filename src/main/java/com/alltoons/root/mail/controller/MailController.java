@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alltoons.root.mail.service.MailService;
 
-@Controller
-@RequestMapping("/member")
+//@Controller
+//@RequestMapping("/member")
 public class MailController {
 	
 	@Autowired
@@ -20,7 +20,7 @@ public class MailController {
 	@PostMapping("email")
 	private int sendEmail(HttpServletRequest request, String uEmail) {
 		HttpSession session = request.getSession();
-		mailService.mailSend(session,uEmail);
+//		mailService.mailSend(session, uEmail);
 		return 123;
 	}
 
