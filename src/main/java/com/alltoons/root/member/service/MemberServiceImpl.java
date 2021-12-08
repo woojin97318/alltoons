@@ -21,16 +21,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String loginChk(String userEmail, String userPw) {
-		MemberDTO dto = mapper.loginChk(userEmail);
-		if (dto == null) {
-			return "가입된 사용자가 아닙니다"; // 이메일 없음
-		} else if (userEmail.equals(dto.getUserEmail()) && encoder.matches(userPw, dto.getUserPassword())) {
-			return "로그인 성공"; // 로그인 성공
-		} else {
-			return "비밀번호가 틀립니다"; // 비밀번호 틀림
-		}
-	}
+	   public String userChk(String userEmail, String userPw) {
+	      MemberDTO dto = mapper.userChk(userEmail);
+	      if (dto == null) {
+	         return "가입된 사용자가 아닙니다"; // 이메일 없음
+	      } else if (userEmail.equals(dto.getUserEmail()) && encoder.matches(userPw, dto.getUserPassword())) {
+	         return "로그인 성공"; // 로그인 성공
+	      } else {
+	         return "비밀번호가 틀립니다"; // 비밀번호 틀림
+	      }
+	   }
 
 	@Override
 	public void keepLogin(String sessionId, Date limitDate, String userEmail) {

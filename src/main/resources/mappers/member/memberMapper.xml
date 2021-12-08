@@ -13,10 +13,10 @@
 		<result property="division" column="division"/>
 	</resultMap>
 	
-	<select id="loginChk" resultMap="user">
-		select * from user_info
-		where user_email = #{userEmail}
-	</select>
+	<select id="userChk" resultMap="user">
+      select * from user_info
+      where user_email = #{userEmail}
+   </select>
 
 	<update id="keepLogin">
 		update user_info

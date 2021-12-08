@@ -29,36 +29,36 @@ public class MemberController implements MemberSessionName {
 		return "member/login";
 	}
 
-	@PostMapping("loginChk")
-	public String userChk(@RequestParam("userEmail") String userEmail, @RequestParam("userPw") String userPw,
-			@RequestParam(required = false) String autoLogin, HttpServletResponse response, HttpSession session,
-			Model model) {
-		String message = ms.loginChk(userEmail, userPw);
-		String url = null;
-		if (message.equals("로그인 성공")) {
-			session.setAttribute(LOGIN, userEmail);
-			if (autoLogin != null) {
-				int limitTime = 60 * 60 * 24 * 90; // 90일
-				Cookie logincookie = new Cookie("loginCookie", session.getId());
-				logincookie.setPath("/");
-				logincookie.setMaxAge(limitTime);
-				response.addCookie(logincookie);
+	@PostMapping("userChk")
+	   public String userChk(@RequestParam("userEmail") String userEmail, @RequestParam("userPw") String userPw,
+	         @RequestParam(required = false) String autoLogin, HttpServletResponse response, HttpSession session,
+	         Model model) {
+	      String message = ms.userChk(userEmail, userPw);
+	      String url = null;
+	      if (message.equals("로그인 성공")) {
+	         session.setAttribute(LOGIN, userEmail);
+	         if (autoLogin != null) {
+	            int limitTime = 60 * 60 * 24 * 90; // 90일
+	            Cookie logincookie = new Cookie("loginCookie", session.getId());
+	            logincookie.setPath("/");
+	            logincookie.setMaxAge(limitTime);
+	            response.addCookie(logincookie);
 
-				Calendar cal = Calendar.getInstance();
-				cal.setTime(new Date());
-				cal.add(Calendar.MONTH, 3);
+	            Calendar cal = Calendar.getInstance();
+	            cal.setTime(new Date());
+	            cal.add(Calendar.MONTH, 3);
 
-				java.sql.Date limitDate = new java.sql.Date(cal.getTimeInMillis());
-				ms.keepLogin(session.getId(), limitDate, userEmail);
-			}
-			url = "index";
-		} else { // 가입된 사용자가 아닐경우 or 비밀번호가 틀릴경우 해당 메시지 출력
-			url = "member/login";
-		}
-		model.addAttribute("message", message);
-		model.addAttribute("url", url);
-		return "/common/alertHref";
-	}
+	            java.sql.Date limitDate = new java.sql.Date(cal.getTimeInMillis());
+	            ms.keepLogin(session.getId(), limitDate, userEmail);
+	         }
+	         url = "index";
+	      } else { // 가입된 사용자가 아닐경우 or 비밀번호가 틀릴경우 해당 메시지 출력
+	         url = "member/login";
+	      }
+	      model.addAttribute("message", message);
+	      model.addAttribute("url", url);
+	      return "/common/alertHref";
+	   }
 
 	@GetMapping("signup")
 	public String signUp() {
