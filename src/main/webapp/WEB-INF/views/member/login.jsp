@@ -16,9 +16,8 @@
 			<input type="checkbox" name="autoLogin">&nbsp;자동 로그인
 			<input type="submit" value="로그인">
 		</form>
-		<a href="#">이메일 찾기</a> / 
 		<a href="#">비밀번호 찾기</a> / 
-		<a href="#">회원가입</a>
+		<a href="signup">회원가입</a>
 	</div>
 </body> 
 </html>
