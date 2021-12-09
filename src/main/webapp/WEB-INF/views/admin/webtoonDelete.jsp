@@ -9,6 +9,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/adminStyle.css">
 
+<style type="text/css">
+.webtoonImage{
+	max-width: 50px;
+	overflow: hidden;
+}
+.webtoonImage > img {
+	max-height: 50px;
+	object-fit: cover;
+	transform: translate(-15%, 0);
+}
+</style>
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	function change() {
@@ -60,7 +72,7 @@
 				<c:otherwise>
 					<c:forEach var="dto" items="${titleList }">
 					<tr>
-						<td>${dto.webtoonImage }</td>
+						<td><div class="webtoonImage"><img src="https://shared-comic.pstatic.net/thumb/webtoon/783862/thumbnail/thumbnail_IMAG06_338076d7-ac93-4014-9613-60e8a82db8d4.jpg"></div>${dto.webtoonImage }</td>
 						<td>${dto.webtoonNum }</td>
 						<td>${dto.webtoonTitle }</td>
 						<td>${dto.webtoonWriter }</td>
@@ -91,7 +103,7 @@
 				<c:otherwise>
 					<c:forEach var="dto" items="${writerList }">
 					<tr>
-						<td>${dto.webtoonImage }</td>
+						<td><div class="webtoonImage"><img src="${dto.webtoonImage }"></div></td>
 						<td>${dto.webtoonNum }</td>
 						<td>${dto.webtoonTitle }</td>
 						<td>${dto.webtoonWriter }</td>
@@ -122,7 +134,7 @@
 				<c:otherwise>
 					<c:forEach var="dto" items="${webtoonAllList }">
 					<tr>
-						<td>${dto.webtoonImage }</td>
+						<td><div class="webtoonImage"><img src="${dto.webtoonImage }"></div></td>
 						<td>${dto.webtoonNum }</td>
 						<td>${dto.webtoonTitle }</td>
 						<td>${dto.webtoonWriter }</td>

@@ -21,7 +21,15 @@ body { -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; us
     background-clip: padding-box;
     border: 5px solid transparent;
   }
-  
+.webtoonImage{
+	max-width: 50px;
+	overflow: hidden;
+}
+.webtoonImage > img {
+	max-height: 50px;
+	object-fit: cover;
+	transform: translate(-15%, 0);
+}
 nav ul {
 	list-style: none;
 	display: flex;
