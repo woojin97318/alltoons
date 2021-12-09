@@ -1,5 +1,9 @@
 package com.alltoons.root.admin.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.alltoons.root.admin.dto.PlatformDTO;
 import com.alltoons.root.admin.dto.WebtoonDTO;
 import com.alltoons.root.admin.service.WebtoonService;
 
@@ -53,5 +59,22 @@ public class AdminUploadController {
 			}
 			
 		}
+	}
+	
+	@GetMapping("webtoonModify")
+	public String webtoonModify(Model model,WebtoonDTO wd,HttpServletRequest request) {
+		ArrayList<PlatformDTO> list =new ArrayList<PlatformDTO>();
+		wd = ws.list(request.getParameter("webtoonNum"));//웹툰 정보
+		list = ws.selectLinks(request.getParameter("webtoonNum"));//링크 주소들 들어있음
+		model.addAttribute("webtoonList",wd);
+		model.addAttribute("linkList",list);
+		return "admin/webtoonModify";
+	}
+	
+	
+	
+	@RequestMapping("test")
+	public String test() {
+		return "test";
 	}
 }

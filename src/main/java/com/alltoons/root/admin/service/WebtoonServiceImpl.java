@@ -2,13 +2,17 @@ package com.alltoons.root.admin.service;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.alltoons.root.admin.dto.OriginDTO;
 import com.alltoons.root.admin.dto.PlatformDTO;
 import com.alltoons.root.admin.dto.WebtoonDTO;
 import com.alltoons.root.admin.mapper.WebtoonMapper;
@@ -61,6 +65,21 @@ public class WebtoonServiceImpl implements WebtoonService{
 		}else {
 			wd.setWebtoonImage("default_image");
 		}
+	}
+	@Override
+	public WebtoonDTO list(String webtoonNum) {
+		WebtoonDTO wd = new WebtoonDTO();
+		OriginDTO od = new OriginDTO();
+		wd = wm.selectList(webtoonNum);
+		od = wm.selectOrigin(webtoonNum);
+		wd.setOriginalPlatform(od.getOriginalPlatform());
+		wd.setWebtoonOriginalLink(wd.getWebtoonOriginalLink());
+		return wd;
+	}
+	@Override
+	public ArrayList<PlatformDTO> selectLinks(String webtoonNum) {
+		ArrayList<PlatformDTO> list = wm.selectLinks(webtoonNum);
+		return list;
 	}
 	
 }

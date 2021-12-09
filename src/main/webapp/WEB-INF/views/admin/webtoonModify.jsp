@@ -74,11 +74,11 @@
 	}
 </script>
 <link rel="stylesheet" href="resources/css/webtoonUpload.css">
-<title>작품 추가</title>
+<title>작품 수정</title>
 </head>
 <body>
-	<h1>작품 추가</h1>
-	<form action="${contextPath}/webtoonUpload" method="post" enctype="multipart/form-data">
+	<h1>작품 수정</h1>
+	<form action="${contextPath}/webtoonModify" method="post" enctype="multipart/form-data">
 		<div style="display: flex;">
 			<div>
 				<img id="webtoonImage" src="resources/resources/default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
@@ -91,11 +91,11 @@
 		<br>
 		<div class="webtoonName_wrap">
 			<b>작품제목</b>
-			<textarea rows="1" cols="30" id="webtoonTitle" name="webtoonTitle"></textarea>
+			<textarea rows="1" cols="30" id="webtoonTitle" name="webtoonTitle">${webtoonList.webtoonTitle }</textarea>
 			<span id="webtoonTitle_cnt"></span>
 		</div>
 		<br> 
-		<b>작가명</b><input type="text" name="webtoonWriter" placeholder="글작가/그림작가"><br>
+		<b>작가명</b><input type="text" name="webtoonWriter" placeholder="글작가/그림작가" value="${webtoonList.webtoonWriter }"><br>
 		
 		<b>링크</b> 
 		<div id="box">
@@ -130,24 +130,43 @@
 			<input type="checkbox" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
 		
 		<b>원작 링크</b><br>
-		<select name="originalPlatform" id="originalPlatform">
-				<option value="nan" selected>없음</option>
-				<option value="naver">네이버</option>
-				<option value="kakaoWebtoon">카카오웹툰</option>
-				<option value="kakaoPage">카카오페이지</option>
-				<option value="bomtoon">봄툰</option>
-				<option value="lezhin">레진</option>
-				<option value="toptoon">탑툰</option>
-				<option value="mrblue">리디북스</option>
-				<option value="ridibooks">탑툰</option>
-		</select> 
-		<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" ><br> 
+		<c:choose>
+			<c:when test="${webtoonList.originalPlatform == 'nan' }">
+				<select name="originalPlatform" id="originalPlatform">
+						<option value="nan" selected>없음</option>
+						<option value="naver">네이버</option>
+						<option value="kakaoWebtoon">카카오웹툰</option>
+						<option value="kakaoPage">카카오페이지</option>
+						<option value="bomtoon">봄툰</option>
+						<option value="lezhin">레진</option>
+						<option value="toptoon">탑툰</option>
+						<option value="mrblue">리디북스</option>
+						<option value="ridibooks">탑툰</option>
+				</select> 
+				<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" value="${webtoonList.webtoonOriginalLink }"><br> 
+			</c:when>
+				<c:otherwise>
+					<select name="originalPlatform" id="originalPlatform">
+							<option value="nan" selected>없음</option>
+							<option value="naver">네이버</option>
+							<option value="kakaoWebtoon">카카오웹툰</option>
+							<option value="kakaoPage">카카오페이지</option>
+							<option value="bomtoon">봄툰</option>
+							<option value="lezhin">레진</option>
+							<option value="toptoon">탑툰</option>
+							<option value="mrblue">리디북스</option>
+							<option value="ridibooks">탑툰</option>
+					</select> 
+					<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" value="${webtoonList.webtoonOriginalLink }" ><br> 
+				
+			</c:otherwise>
+		</c:choose>
 		<b>세부설명</b><br>
 		<div class="webtoonContent_wrap">
-			<textarea rows="5" cols="45" name="webtoonContent"id="webtoonContent"></textarea> 
+			<textarea rows="5" cols="45" name="webtoonContent"id="webtoonContent">${webtoonList.webtoonContent }</textarea> 
 			<span id="webtoonContent_cnt"></span><br>
 		</div>
-		<input type="submit" value="작품 추가">
+		<input type="submit" value="작품 수정">
 	</form>
 
 </body>
