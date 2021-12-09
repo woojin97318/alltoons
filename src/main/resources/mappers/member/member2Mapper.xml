@@ -24,4 +24,10 @@
 		where user_email = #{email}
 	</update>
 	
+	<update id="userImageModify">
+		update user_info
+		set user_image = #{image}
+		where user_email = #{email}
+	</update>
+	
 </mapper>
