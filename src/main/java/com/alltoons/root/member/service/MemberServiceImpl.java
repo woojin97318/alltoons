@@ -125,7 +125,7 @@ public class MemberServiceImpl implements MemberService {
 				e.printStackTrace();
 			}
 		} else {
-			dto.setUserImage("default_image");
+			dto.setUserImage("default_image.png");
 		}
 		// DB에 가입하려는 회원정보 저장
 		try {

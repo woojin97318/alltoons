@@ -10,9 +10,18 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	function sendmail() {
-		location.href = "sendmail";
+		$.ajax({
+			url : "sendmail", //"ajax",
+			type : "GET",
+			success : function(data) {
+				$("#emailText").text(data)
+				console.log("메일 전송 성공")
+			},
+			error : function() {
+				alert('통신 실패')
+			}
+		})
 	}
-
 	//
 	function readURL(input) {
 		if (input.files && input.files[0]) {
@@ -45,7 +54,8 @@
 				<tr>
 					<td></td>
 					<td>
-						<button id="emailCheck" onclick="sendmail()">인증번호 받기</button>
+						<button type="button" id="emailCheck" onclick="sendmail()">인증번호
+							받기</button>
 					</td>
 				</tr>
 				<tr>
