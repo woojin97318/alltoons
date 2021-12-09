@@ -1,4 +1,4 @@
-package com.alltoons.root.admin.upload.dto;
+package com.alltoons.root.admin.dto;
 
 public class WebtoonDTO {
 	public String webtoonTitle;

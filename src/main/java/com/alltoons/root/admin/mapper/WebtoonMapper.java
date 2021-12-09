@@ -1,7 +1,7 @@
-package com.alltoons.root.admin.upload;
+package com.alltoons.root.admin.mapper;
 
-import com.alltoons.root.admin.upload.dto.PlatformDTO;
-import com.alltoons.root.admin.upload.dto.WebtoonDTO;
+import com.alltoons.root.admin.dto.PlatformDTO;
+import com.alltoons.root.admin.dto.WebtoonDTO;
 
 public interface WebtoonMapper {
 	//public void upload(WebtoonDTO wd);

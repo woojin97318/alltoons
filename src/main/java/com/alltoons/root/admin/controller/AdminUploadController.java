@@ -1,4 +1,4 @@
-package com.alltoons.root.admin.upload.controller;
+package com.alltoons.root.admin.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.alltoons.root.admin.upload.dto.GenreDTO;
-import com.alltoons.root.admin.upload.dto.OriginDTO;
-import com.alltoons.root.admin.upload.dto.PlatformDTO;
-import com.alltoons.root.admin.upload.dto.WebtoonDTO;
-import com.alltoons.root.admin.upload.service.WebtoonService;
+import com.alltoons.root.admin.dto.WebtoonDTO;
+import com.alltoons.root.admin.service.WebtoonService;
+
 
 @Controller
 public class AdminUploadController {

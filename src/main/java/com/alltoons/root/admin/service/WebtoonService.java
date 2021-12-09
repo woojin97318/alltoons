@@ -1,8 +1,9 @@
-package com.alltoons.root.admin.upload.service;
+package com.alltoons.root.admin.service;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.alltoons.root.admin.upload.dto.WebtoonDTO;
+import com.alltoons.root.admin.dto.WebtoonDTO;
+
 
 public interface WebtoonService {
 	public static final String WEBTOON_IMAGE="C:/alltoonsImage/webtoon";

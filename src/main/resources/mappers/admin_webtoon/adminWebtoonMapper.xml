@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.alltoons.root.admin.upload.WebtoonMapper">
+<mapper namespace="com.alltoons.root.admin.mapper.WebtoonMapper">
 	<resultMap
-		type="com.alltoons.root.admin.upload.dto.WebtoonDTO" id="webtoon">
+		type="com.alltoons.root.admin.dto.WebtoonDTO" id="webtoon">
 		<id property="webtoonNum" column="webtoon_num" />
 		<result property="webtoonTitle" column="webtoon_title" />
 		<result property="webtoonWriter" column="webtoon_writer" />
@@ -12,18 +12,24 @@
 		<result property="webtoonImage" column="webtoon_image" />
 	</resultMap>
 	<resultMap
-		type="com.alltoons.root.admin.upload.dto.WebtoonDTO" id="genre">
+		type="com.alltoons.root.admin.dto.WebtoonDTO" id="genre">
 		<result property="webtoonNum" column="webtoon_num" />
 		<result property="webtoonGenre" column="webtoon_genre" />
 	</resultMap>
 	<resultMap
-		type="com.alltoons.root.admin.upload.dto.WebtoonDTO" id="platform">
+		type="com.alltoons.root.admin.dto.WebtoonDTO" id="platform">
 		<result property="webtoonNum" column="webtoon_num" />
 		<result property="platformName" column="platform_name" />
 		<result property="webtoonLink" column="webtoon_link" />
 	</resultMap>
 	<resultMap
-		type="com.alltoons.root.admin.upload.dto.WebtoonDTO" id="original">
+		type="com.alltoons.root.admin.dto.PlatformDTO" id="platform2">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="platformName" column="platform_name" />
+		<result property="webtoonLink" column="webtoon_link" />
+	</resultMap>
+	<resultMap
+		type="com.alltoons.root.admin.dto.WebtoonDTO" id="original">
 		<result property="webtoonNum" column="webtoon_num" />
 		<result property="originalPlatform" column="origin_platform_name" />
 		<result property="webtoonOriginalLink" column="webtoon_original_link" />

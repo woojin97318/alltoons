@@ -1,9 +1,10 @@
-package com.alltoons.root.admin.upload.dto;
+package com.alltoons.root.admin.dto;
 
-public class OriginDTO {
+public class PlatformDTO {
 	public int webtoonNum;
 	public String platformName;
-	public String webtoonOriginalLink;
+	public String webtoonLink;
+	
 	public int getWebtoonNum() {
 		return webtoonNum;
 	}
@@ -16,10 +17,10 @@ public class OriginDTO {
 	public void setPlatformName(String platformName) {
 		this.platformName = platformName;
 	}
-	public String getWebtoonOriginalLink() {
-		return webtoonOriginalLink;
+	public String getWebtoonLink() {
+		return webtoonLink;
 	}
-	public void setWebtoonOriginalLink(String webtoonOriginalLink) {
-		this.webtoonOriginalLink = webtoonOriginalLink;
+	public void setWebtoonLink(String webtoonLink) {
+		this.webtoonLink = webtoonLink;
 	}
 }
