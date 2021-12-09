@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alltoons.root.admin.mapper.DeleteMapper">
+	<resultMap type="com.alltoons.root.admin.dto.WebtoonDTO" id="wtnList">
+		<id property="webtoonNum" column="webtoon_num"/>
+		<result property="webtoonImage" column="webtoon_image"/>
+		<result property="webtoonTitle" column="webtoon_title"/>
+		<result property="webtoonWriter" column="webtoon_writer"/>
+		<result property="webtoonContent" column="webtoon_content"/>
+		<result property="platformName" column="platform_name"/>
+		<result property="webtoonLink" column="webtoon_link"/>
+		<result property="originalPlatform" column="original_platform"/>
+		<result property="webtoonOriginalLink" column="origin_webtoon_link"/>
+		<result property="webtoonGenre" column="webtoon_genre"/>
+	</resultMap>
+	<select id="webtoonAllList" resultMap="wtnList">
+		select * from webtoon_info
+	</select>
+	<select id="writerList" resultMap="wtnList">
+		select * from webtoon_info where webtoon_writer like '%'||#{search}||'%'
+	</select>
+	<select id="titleList" resultMap="wtnList">
+		select * from webtoon_info where webtoon_title like '%'||#{search}||'%'
+	</select>
+	<delete id="deleteWebtoon" >
+		delete from webtoon_info where webtoon_num=#{webtoonNum}
+	</delete>
+</mapper>
