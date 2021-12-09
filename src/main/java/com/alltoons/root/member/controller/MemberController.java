@@ -1,5 +1,6 @@
 package com.alltoons.root.member.controller;
 
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -41,11 +42,9 @@ public class MemberController implements MemberSessionName {
 	}
 
 	@PostMapping("userChk")
-	public String userChk(@RequestParam("userEmail") String userEmail,
-			@RequestParam("userPw") String userPw,
-			@RequestParam(required = false) String autoLogin,
-			HttpServletResponse response, HttpSession session,
-			Model model) { //로그인 사용자 확인
+	public String userChk(@RequestParam("userEmail") String userEmail, @RequestParam("userPw") String userPw,
+			@RequestParam(required = false) String autoLogin, HttpServletResponse response, HttpSession session,
+			Model model) { // 로그인 사용자 확인
 		String message = ms.userChk(userEmail, userPw);
 		String url = null;
 		if (message.equals("로그인 성공")) {
@@ -80,8 +79,7 @@ public class MemberController implements MemberSessionName {
 
 	// 정보 입력 후 회원가입 '가입하기'버튼 클릭시 동작
 	@PostMapping("signupform")
-	public String signupform(MultipartHttpServletRequest mul,
-			Model model) {
+	public String signupform(MultipartHttpServletRequest mul, Model model) {
 		int result = ms.signUpForm(mul);
 		String message, url;
 		if (result == 1) {
@@ -94,5 +92,47 @@ public class MemberController implements MemberSessionName {
 		model.addAttribute("message", message);
 		model.addAttribute("url", url);
 		return "/common/alertHref";
+	}
+
+	@GetMapping("sendmail")
+	public void sendMail(HttpServletResponse response) throws Exception {
+		String authKey = ms.rand();
+		StringBuffer sb = new StringBuffer();// 일반 String 보다 처리속도가 빠르다
+		sb.append("<h1>올툰즈 이메일 인증입니다!</h1>");
+		sb.append("	<div>하단의 인증번호를 3분안에 입력해주세요!</div>\r\n");
+
+		sb.append("<h2>" + authKey + "</h2>\r\n");
+		sb.append("</a>");
+		String msg = sb.toString();
+		ms.sendMail("tmd0915mp@naver.com", "(Alltoons) 이메일 인증번호입니다.", msg);
+		// ms.sendMail("tmd0915mp@naver.com", "(title)text mail ", "(content) Hello");
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print("메일 전송 완료");
+
+	}
+
+	@GetMapping("auth_form")
+	public String authForm() {
+		return "auth";
+	}
+
+	@GetMapping("auth")
+	public String auth(HttpServletRequest request) {
+		ms.auth(request);
+		return "redirect:https://www.naver.com/";
+
+	}
+
+	@GetMapping("auth_check")
+	public String authCheck(@RequestParam String userid, @RequestParam String userkey, HttpSession session) {
+		String sessionKey = (String) session.getAttribute(userid);
+		if (sessionKey != null) {
+			if (sessionKey.equals(userkey)) {
+				session.setAttribute("userid", userid);
+			}
+		}
+		return "redirect:auth_form";
 	}
 }
