@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alltoons.root.common.MemberSessionName;
+import com.alltoons.root.mail.service.MailService;
 import com.alltoons.root.member.dto.MemberDTO;
 import com.alltoons.root.member.service.MemberService;
 
@@ -31,6 +33,9 @@ import com.alltoons.root.member.service.MemberService;
 public class MemberController implements MemberSessionName {
 	@Autowired
 	MemberService ms;
+
+	@Autowired
+	MailService mailService;
 
 	/*
 	 * private MemberDTO dto;
@@ -97,26 +102,37 @@ public class MemberController implements MemberSessionName {
 		return "/common/alertHref";
 	}
 
-	@GetMapping(value= "sendmail", produces = "application/json; charset=utf-8")
+	/*
+	 * @GetMapping(value= "sendmail", produces = "application/json; charset=utf-8")
+	 * 
+	 * @ResponseBody public void sendMail(HttpServletResponse response, @RequestBody
+	 * Map<String, Object> email) throws Exception {
+	 * System.out.println("사용자 입력 이메일 : " + email.get("email")); String userEmail =
+	 * (String)email.get("email"); String authKey = ms.rand(); StringBuffer sb = new
+	 * StringBuffer();// 일반 String 보다 처리속도가 빠르다
+	 * sb.append("<h1>올툰즈 이메일 인증입니다!</h1>");
+	 * sb.append("	<div>하단의 인증번호를 3분안에 입력해주세요!</div>\r\n");
+	 * 
+	 * sb.append("<h2>" + authKey + "</h2>\r\n"); sb.append("</a>"); String msg =
+	 * sb.toString(); ms.sendMail(userEmail, "(Alltoons) 이메일 인증번호입니다.", msg); //
+	 * ms.sendMail("tmd0915mp@naver.com", "(title)text mail ", "(content) Hello");
+	 * 
+	 * response.setContentType("text/html;charset=utf-8"); PrintWriter out =
+	 * response.getWriter(); out.print("메일 전송 완료");
+	 * 
+	 * }
+	 */
+	@PostMapping(value = "sendmail", produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public void sendMail(HttpServletResponse response, @RequestBody Map<String, Object> email) throws Exception {
-		System.out.println("사용자 입력 이메일 : " + email.get("email"));
-		String userEmail = (String)email.get("email");
-		String authKey = ms.rand();
-		StringBuffer sb = new StringBuffer();// 일반 String 보다 처리속도가 빠르다
-		sb.append("<h1>올툰즈 이메일 인증입니다!</h1>");
-		sb.append("	<div>하단의 인증번호를 3분안에 입력해주세요!</div>\r\n");
+	public boolean sendMailAuth(HttpSession session, @RequestParam String email) {
+		int ran = new Random().nextInt(100000) + 10000; // 10000~99999
+		String joinCode = String.valueOf(ran);
+		session.setAttribute("joinCode", joinCode);
 
-		sb.append("<h2>" + authKey + "</h2>\r\n");
-		sb.append("</a>");
-		String msg = sb.toString();
-		ms.sendMail(userEmail, "(Alltoons) 이메일 인증번호입니다.", msg);
-		// ms.sendMail("tmd0915mp@naver.com", "(title)text mail ", "(content) Hello");
-
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.print("메일 전송 완료");
-
+		String subject = "올툰즈 회원가입 인증 코드 발급 안내 입니다!";
+		StringBuilder sb = new StringBuilder();
+		sb.append("귀하의 인증 코드는 " + joinCode + " 입니다.");
+		return mailService.send(subject, sb.toString(), "tmd0915mp@naver.com", email, null);
 	}
 
 }

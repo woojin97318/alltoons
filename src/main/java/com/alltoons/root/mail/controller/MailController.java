@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+//import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 //import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,32 +17,28 @@ import com.alltoons.root.mail.service.MailService;
 //import com.alltoons.root.member.dto.MemberDTO;
 import com.alltoons.root.member.service.MemberService;
 
-@Controller
-@RequestMapping("member")
+//@Controller
+//@RequestMapping("member")
 public class MailController {
-	@Autowired
-	MailService mailService;
-	@Autowired
-	MemberService memberService;
-
-	public void setMailService(MailService mailService) {
-		this.mailService = mailService;
-	}
-
-	@PostMapping(value = "sendMail/auth", produces = "application/json; charset=utf-8")
-	@RequestMapping(value = "/sendMail/auth", method = RequestMethod.POST, produces = "application/json")
-	@ResponseBody
-	public boolean sendMailAuth(HttpSession session, @RequestParam String email) {
-		int ran = new Random().nextInt(100000) + 10000; // 10000~99999
-		String joinCode = String.valueOf(ran);
-		session.setAttribute("joinCode", joinCode);
-
-		String subject = "올툰즈 회원가입 인증 코드 발급 안내 입니다!";
-		StringBuilder sb = new StringBuilder();
-		sb.append("귀하의 인증 코드는 " + joinCode + " 입니다.");
-		return mailService.send(subject, sb.toString(), "tmd0915mp@naver.com", email, null);
-	}
-
+	/*
+	 * MailService mailService; MemberService memberService;
+	 * 
+	 * public void setMailService(MailService mailService) { this.mailService =
+	 * mailService; }
+	 * 
+	 * @PostMapping(value = "sendmail", produces =
+	 * "application/json; charset=utf-8")
+	 * 
+	 * @ResponseBody public boolean sendMailAuth(HttpSession session, @RequestParam
+	 * String email) { int ran = new Random().nextInt(100000) + 10000; //
+	 * 10000~99999 String joinCode = String.valueOf(ran);
+	 * session.setAttribute("joinCode", joinCode);
+	 * 
+	 * String subject = "올툰즈 회원가입 인증 코드 발급 안내 입니다!"; StringBuilder sb = new
+	 * StringBuilder(); sb.append("귀하의 인증 코드는 " + joinCode + " 입니다."); return
+	 * mailService.send(subject, sb.toString(), "tmd0915mp@naver.com", email, null);
+	 * }
+	 */
 	// 비밀번호 찾기
 	/*
 	 * @RequestMapping(value = "/sendMail/password", method = RequestMethod.POST)
