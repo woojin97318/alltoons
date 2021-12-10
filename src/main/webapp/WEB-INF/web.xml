@@ -33,6 +33,16 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	<!-- captcha 추가부분 (박승재) -->
+	<servlet>
+		<servlet-name>captcha</servlet-name>
+		<servlet-class>servlet.CaptchaServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>captcha</servlet-name>
+		<url-pattern>/captcha</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>encodingFilter</filter-name>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
@@ -9,7 +10,7 @@
 <title>회원가입 페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	function sendmail() {
+	/* function sendmail() {
 		var userEmail = $("#emailText").val();
 		var form = {email : userEmail}
 		$.ajax({
@@ -27,8 +28,8 @@
 				alert('메일 전송 실패')
 			}
 		})
-	}
-	//
+	} */
+
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -38,11 +39,10 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-	
 </script>
 </head>
 <body>
-	<div align="center">
+	<!-- <div align="center">
 		<form action="signupform" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
@@ -55,14 +55,13 @@
 				</tr>
 				<tr>
 					<td>이메일*</td>
-					<td><input type="text" id="emailText" name="userEmail"
+					<td><input type="text" id="emailCheck" name="userEmail"
 						placeholder="이메일을 입력해주세요"></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td>
-						<button type="button" id="emailCheck" onclick="sendmail()">인증번호
-							받기</button><label id= "authTimer"></label>
+					<td><input type="submit" value="인증확인">
+						<button type="button" id="emailCheck" onclick="sendmail()">인증번호받기</button>
 					</td>
 				</tr>
 				<tr>
@@ -73,8 +72,7 @@
 				</tr>
 				<tr>
 					<td>
-						<!-- <input type="hidden" id="certificationYN" value="false">
- -->
+			
 					</td>
 				</tr>
 				<tr>
@@ -87,6 +85,30 @@
 				</tr>
 			</table>
 		</form>
-	</div>
+ -->
+		<form action="/sendMail/auth" id="joinForm" method="post">
+			<fieldset>
+				<legend class="screen_out">	회원가입 폼</legend>
+					<div class="box email">
+						<label for="email">이메일</label> <input type="text" id="email"
+							name="email" autofocus autocomplete="off" required />
+					</div>
+					
+					<div class="box captcha">
+						<div class="loading"></div>
+						
+						<label for="captcha">자동 방지 코드</label>
+						<input type= "text" id= "captcha" name = "captcha" autocomplete="off" required />
+						<img src="/captcha" alt="캡차 이미지" title="클릭시 새로고침"/>
+					</div>
+					
+					<div class="box btn">
+						<button type="submit" class="btn join">
+						<i class="fa fa-envelope"></i>
+						이메일 전송
+						</button>
+					</div>
+			</fieldset>
+		</form>
 </body>
 </html>
