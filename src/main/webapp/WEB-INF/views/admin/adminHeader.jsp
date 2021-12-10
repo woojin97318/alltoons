@@ -21,7 +21,7 @@
 
 </head>
 <body>
-	<label class="title">작품 삭제</label>
+	<div class="menu-title">작품 삭제</div>
 	<button id="backBtn" onclick="back()" type="button"></button><br>
 	<div class="scrollBtn">
 		<nav>

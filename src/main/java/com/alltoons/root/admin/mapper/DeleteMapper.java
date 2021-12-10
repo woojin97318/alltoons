@@ -11,4 +11,5 @@ public interface DeleteMapper {
 	public ArrayList<WebtoonDTO> titleList(String parameter);
 	public int deleteWebtoon(int webtoonNum);
 	public ArrayList<WebtoonDTO> webtoonAllList(Model model);
+	public WebtoonDTO getImageFileName(int webtoonNum);
 }

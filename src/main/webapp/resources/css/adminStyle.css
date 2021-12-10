@@ -10,8 +10,17 @@ font-family: 'Song Myung', serif;
 font-family: 'Gowun Dodum', sans-serif;
 버튼 컬러:70A9FF, 3665FF
 */
-body { -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none }
-
+body {
+	padding-top: 95px;
+	-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none }
+header {
+	position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient( to bottom, white 80%, transparent );
+  max-height:95px;
+}
 ::-webkit-scrollbar {/*스크롤바 전체*/
     background-color: transparent;
 }
@@ -21,16 +30,21 @@ body { -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; us
     background-clip: padding-box;
     border: 5px solid transparent;
   }
-.webtoonImage{
-	max-width: 50px;
-	overflow: hidden;
+.menu-title {/*카테고리?*/
+	
+	font-weight: bold;
+	font-size : 40px;
+	/*font-family: 'Song Myung', serif;*/
+	font-family: 'Gowun Dodum', sans-serif;
+	margin : 5px 20px -40px 20px;
+	
 }
-.webtoonImage > img {
-	max-height: 50px;
-	object-fit: cover;
-	transform: translate(-15%, 0);
+label{
+	font-family: 'Gowun Dodum', sans-serif;
 }
-nav ul {
+
+
+nav ul {/*횡스크롤 버튼*/
 	list-style: none;
 	display: flex;
 	justify-content: flex-start;
@@ -38,17 +52,44 @@ nav ul {
 	white-space:nowrap;
 	margin : 20px 0;
 }
-.title {
-	font-size : 40px;
-	/*font-family: 'Song Myung', serif;*/
-	font-family: 'Poor Story', cursive;
-	margin : 20px 20px;
-}
 nav ul li {
 	margin : 0 5px;
 }
-
-#backBtn {
+table{
+	padding : 10px;
+	border-left: none;
+	border-right: none;
+	width: 100%;
+	border-collapse: collapse;
+}
+h1, h2, th, td{
+	font-family: 'Gowun Dodum', sans-serif;
+	border-left: none;
+	border-right: none;
+}
+td{
+	max-width:100px;
+	white-space : nowrap;
+	overflow : hidden;
+	text-overflow : ellipsis;
+	text-align:center;
+}
+.table-top{
+	background-color: #e1edff;
+}
+.table-top > th{
+	color: #004080;
+}
+.webtoonImage{/*div에 주는 속성*/
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+}
+.webtoonImage > img {/*div안에 img 속성*/
+	width: 50px;
+	object-fit: cover;
+}
+#backBtn {/*뒤로가기*/
 	all: unset;
 	background:
 		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2017/png/iconmonstr-arrow-68.png&r=112&g=169&b=255')
@@ -64,7 +105,7 @@ nav ul li {
 	top:20px;
 	right :20px;
 }
-#backBtn:hover{
+#backBtn:hover{/*뒤로가기*/
 	background-color: #eaeaea;
 	background:
 		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2017/png/iconmonstr-arrow-68.png&r=54&g=101&b=255')
@@ -85,21 +126,21 @@ nav ul li {
 	color: white;
 	border-radius: 12px;
 	text-align: center;
-	font-family: 'Gowun Dodum', sans-serif;
+	font-family: 'Poor Story', cursive;
 }
-
 .listBtn:hover {
 	background-color: #f3b201;
 }
 .listBtn:active{
-	box-shadow:inset 0 0 20px #ca7a01;
+	/*box-shadow:inset 0 0 20px #ca7a01;*/
+	background-color: #f3b201;
 }
 
 .searchBar:focus{
 	all: unset;	
 	border:yellow;
 }
-.mainBtn{
+.mainBtn{/*홈버튼*/
 	background: 
 	url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-home-7.png&r=112&g=169&b=255')
 	no-repeat;
@@ -115,7 +156,7 @@ nav ul li {
 	right :20px;
 	box-shadow : 3px 5px 5px #d1d1d1;
 }
-.mainBtn:hover{
+.mainBtn:hover{/*홈버튼*/
 	background:
 	url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-home-7.png&r=255&g=255&b=255')
 	no-repeat;
@@ -125,10 +166,15 @@ nav ul li {
 	
 	transition: all 1s;
 }
-.x-box:hover{
-	background-color: #eaeaea;
+.mainBtn:active{/*홈버튼*/
+	background:
+	url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-home-7.png&r=255&g=255&b=255')
+	no-repeat;
+	background-color: #70A9FF;
+	background-size: 70%;
 }
-.x-box{
+
+.x-box{/*x버튼*/
 	border: none;
 	border-radius:75px;
 	background: 
@@ -138,4 +184,7 @@ nav ul li {
 	background-size: contain;
 	width: 30px;
 	height: 30px;
+}
+.x-box:hover{/*x버튼*/
+	background-color: #eaeaea;
 }
