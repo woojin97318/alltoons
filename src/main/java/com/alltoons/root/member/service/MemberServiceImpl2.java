@@ -76,7 +76,7 @@ public class MemberServiceImpl2 implements MemberService2 {
 
 			dto.setUserImage(sysFileName);
 
-			File saveFile = new File(IMAGE_REPO + "/" + sysFileName);
+			File saveFile = new File(MEMBER_IMAGE_REPO + "/" + sysFileName);
 			try {
 				file.transferTo(saveFile);
 			} catch (Exception e) {
@@ -113,6 +113,11 @@ public class MemberServiceImpl2 implements MemberService2 {
 	public void myReviewContent(Model model, String userEmail) {
 		ArrayList<MyReviewDTO> list = mapper2.getMyReview(userEmail);
 		model.addAttribute("myReview", list);
+	}
+
+	@Override
+	public int myReviewDelete(String reviewNum) {
+		return mapper2.myReviewDelete(reviewNum);
 	}
 	
 	

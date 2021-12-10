@@ -7,18 +7,59 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.td1 {
+	width: 20%;
+}
+.td2 {
+	width: 30%;
+}
+</style>
+<script type="text/javascript">
+	function webtoonInfo() {
+		location.href="${contextPath}/index";
+	}
+</script>
 </head>
 <body>
 	<div align="center">
 		<h3>내가 작성한 리뷰</h3>
-		<p>총 댓글 수<br>${myReviewCnt }</p>
-		<hr>
-		<c:forEach var="myReview" items="${myReview }">
-			내용 : ${myReview.reviewContent }<br>
-			작성시간 : ${myReview.reviewTime }<br>
-			<a href="#">웹툰 : ${myReview.webtoonTitle }</a>
-			<hr>
-		</c:forEach>
+		<p>총 댓글 수<br>${myReviewCnt } 개</p>
+		<table>
+			<c:forEach var="myReview" items="${myReview }">
+				<tr>
+					<td colspan="2">
+						작성 내용 : ${myReview.reviewContent }<br>	
+					</td>
+					<td class="td1">
+						<button type="button" onclick="location.href='${contextPath}/member/myReviewDelete?reviewNum=${myReview.reviewNum }'">
+							리뷰 삭제
+						</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						작성시간 : ${myReview.reviewTime }<br>
+					</td>
+				</tr>
+				<tr>
+					<td class="td2">
+						<img src="${contextPath }/member/webtoonImageView?file=${myReview.webtoonImage}"
+							width="70px", height="70px" onclick="webtoonInfo()" style="cursor:pointer">
+					</td>
+					<td colspan="2">
+						<span onclick="webtoonInfo()" style="cursor:pointer">
+							${myReview.webtoonTitle }(링크연결필요)
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<hr>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
 	</div>
 </body>
 </html>

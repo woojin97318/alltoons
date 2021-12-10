@@ -105,7 +105,7 @@ public class MemberController2 implements MemberSessionName {
 		// Content-disposition : 파일 다운로드하겠다는 의미
 		// attachment : 파일을 다운로드하여 브라우저로 표현하겠다
 		response.addHeader("Content-disposition", "attachment; fileName=" + fileName);
-		File file = new File(MemberService.IMAGE_REPO + "/" + fileName);
+		File file = new File(MemberService2.MEMBER_IMAGE_REPO + "/" + fileName);
 		FileInputStream in = new FileInputStream(file);
 		FileCopyUtils.copy(in, response.getOutputStream());
 		in.close();
@@ -138,6 +138,28 @@ public class MemberController2 implements MemberSessionName {
 		ms2.myReviewCnt(model, session.getAttribute(LOGIN).toString());
 		ms2.myReviewContent(model, session.getAttribute(LOGIN).toString());
 		return "member/myReview";
+	}
+	@GetMapping("myReviewDelete")
+	public String myReviewDelete(@RequestParam String reviewNum, Model model) {
+		int result = ms2.myReviewDelete(reviewNum);
+		String message;
+		if(result == 1) {
+			message = "삭제가 완료되었습니다";
+		}else {
+			message = "삭제 Error";
+		}
+		model.addAttribute("message", message);
+		model.addAttribute("url", "member/myReview");
+		return "/common/alertHref";
+	}
+	@GetMapping("webtoonImageView")
+	public void webtoonImageView(@RequestParam("file") String fileName,
+			HttpServletResponse response) throws Exception {
+		response.addHeader("Content-disposition", "attachment; fileName=" + fileName);
+		File file = new File(MemberService2.WEBTOON_IMAGE_REPO + "/" + fileName);
+		FileInputStream in = new FileInputStream(file);
+		FileCopyUtils.copy(in, response.getOutputStream());
+		in.close();
 	}
 	
 }

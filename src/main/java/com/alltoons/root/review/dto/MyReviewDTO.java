@@ -1,5 +1,8 @@
 package com.alltoons.root.review.dto;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 public class MyReviewDTO {
 	private int reviewNum;
 	private String reviewContent;
@@ -22,8 +25,9 @@ public class MyReviewDTO {
 	public String getReviewTime() {
 		return reviewTime;
 	}
-	public void setReviewTime(String reviewTime) {
-		this.reviewTime = reviewTime;
+	public void setReviewTime(Timestamp reviewTime) {
+		SimpleDateFormat fo = new SimpleDateFormat("YYYY년MM월dd일 HH시mm분");
+		this.reviewTime = fo.format(reviewTime);
 	}
 	public String getWebtoonImage() {
 		return webtoonImage;
