@@ -10,15 +10,21 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	function sendmail() {
+		var userEmail = $("#emailText").val();
+		var form = {email : userEmail}
 		$.ajax({
 			url : "sendmail", //"ajax",
 			type : "GET",
-			success : function(data) {
-				$("#emailText").text(data)
+			data : JSON.stringify(form),
+			dataType : "json",
+			contentType : "application/json; charset=utf-8",
+			success : function(result) {
+				$("#authTimer").text(result.email+"인증 타이머 시작")
 				console.log("메일 전송 성공")
+				
 			},
 			error : function() {
-				alert('통신 실패')
+				alert('메일 전송 실패')
 			}
 		})
 	}
@@ -32,6 +38,7 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+	
 </script>
 </head>
 <body>
@@ -55,7 +62,7 @@
 					<td></td>
 					<td>
 						<button type="button" id="emailCheck" onclick="sendmail()">인증번호
-							받기</button>
+							받기</button><label id= "authTimer"></label>
 					</td>
 				</tr>
 				<tr>

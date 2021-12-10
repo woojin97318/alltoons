@@ -3,6 +3,7 @@ package com.alltoons.root.member.controller;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -94,8 +97,11 @@ public class MemberController implements MemberSessionName {
 		return "/common/alertHref";
 	}
 
-	@GetMapping("sendmail")
-	public void sendMail(HttpServletResponse response) throws Exception {
+	@GetMapping(value= "sendmail", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public void sendMail(HttpServletResponse response, @RequestBody Map<String, Object> email) throws Exception {
+		System.out.println("사용자 입력 이메일 : " + email.get("email"));
+		String userEmail = (String)email.get("email");
 		String authKey = ms.rand();
 		StringBuffer sb = new StringBuffer();// 일반 String 보다 처리속도가 빠르다
 		sb.append("<h1>올툰즈 이메일 인증입니다!</h1>");
@@ -104,7 +110,7 @@ public class MemberController implements MemberSessionName {
 		sb.append("<h2>" + authKey + "</h2>\r\n");
 		sb.append("</a>");
 		String msg = sb.toString();
-		ms.sendMail("tmd0915mp@naver.com", "(Alltoons) 이메일 인증번호입니다.", msg);
+		ms.sendMail(userEmail, "(Alltoons) 이메일 인증번호입니다.", msg);
 		// ms.sendMail("tmd0915mp@naver.com", "(title)text mail ", "(content) Hello");
 
 		response.setContentType("text/html;charset=utf-8");
@@ -113,26 +119,4 @@ public class MemberController implements MemberSessionName {
 
 	}
 
-	@GetMapping("auth_form")
-	public String authForm() {
-		return "auth";
-	}
-
-	@GetMapping("auth")
-	public String auth(HttpServletRequest request) {
-		ms.auth(request);
-		return "redirect:https://www.naver.com/";
-
-	}
-
-	@GetMapping("auth_check")
-	public String authCheck(@RequestParam String userid, @RequestParam String userkey, HttpSession session) {
-		String sessionKey = (String) session.getAttribute(userid);
-		if (sessionKey != null) {
-			if (sessionKey.equals(userkey)) {
-				session.setAttribute("userid", userid);
-			}
-		}
-		return "redirect:auth_form";
-	}
 }

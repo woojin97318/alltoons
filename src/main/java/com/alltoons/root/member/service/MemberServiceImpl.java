@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -51,17 +49,6 @@ public class MemberServiceImpl implements MemberService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void auth(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String userid = "tmd0915mp";
-		String userkey = rand();
-		session.setAttribute(userid, userkey);
-		String body = "<h2>안녕하세요 아뱅입니다</h2><hr>" + "<h3>" + userid + " 님</h3>" + "<p>인증하기 버튼을 누르면 로그인 됩니다</p>"
-				+ "<a href='http://localhost:8085" + request.getContextPath() + "/auth_check?userid=" + userid
-				+ "&userkey=" + userkey + "'>인증하기</a>";
-		sendMail("tmd0915mp@naver.com", "이메일 인증입니다", body);
 	}
 
 	public String rand() {
