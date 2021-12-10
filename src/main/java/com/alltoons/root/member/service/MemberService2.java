@@ -10,4 +10,7 @@ public interface MemberService2 {
 	public void PasswordModify(String newUserPw, String userEmail);
 	public void getUserInfo(Model model, String userEmail);
 	public int userImageModify(MultipartHttpServletRequest mul);
+	public void getFavoritesInterest(Model model, String userEmail);
+	public void myReviewCnt(Model model, String userEmail);
+	public void myReviewContent(Model model, String userEmail);
 }

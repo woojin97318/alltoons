@@ -2,6 +2,7 @@ package com.alltoons.root.member.service;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.alltoons.root.member.dto.MemberDTO;
 import com.alltoons.root.member.mapper.MemberMapper;
 import com.alltoons.root.member.mapper.MemberMapper2;
+import com.alltoons.root.review.dto.MyReviewDTO;
 
 @Service
 public class MemberServiceImpl2 implements MemberService2 {
@@ -91,6 +93,26 @@ public class MemberServiceImpl2 implements MemberService2 {
 			System.out.println("mapper2.userImageModify 에러");
 		}
 		return result;
+	}
+
+	@Override
+	public void getFavoritesInterest(Model model, String userEmail) {
+		int favorites = mapper2.getFavorites(userEmail);
+		int interest = mapper2.getInterest(userEmail);
+		model.addAttribute("favorites", favorites);
+		model.addAttribute("interest", interest);
+	}
+
+	@Override
+	public void myReviewCnt(Model model, String userEmail) {
+		int myReviewCnt = mapper2.myReviewCnt(userEmail);
+		model.addAttribute("myReviewCnt", myReviewCnt);
+	}
+
+	@Override
+	public void myReviewContent(Model model, String userEmail) {
+		ArrayList<MyReviewDTO> list = mapper2.getMyReview(userEmail);
+		model.addAttribute("myReview", list);
 	}
 	
 	

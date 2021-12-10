@@ -96,6 +96,7 @@ public class MemberController2 implements MemberSessionName {
 	@GetMapping("myPage")
 	public String myPage(Model model, HttpSession session) { //마이페이지
 		ms2.getUserInfo(model, session.getAttribute(LOGIN).toString());
+		ms2.getFavoritesInterest(model, session.getAttribute(LOGIN).toString());
 		return "member/myPage";
 	}
 	@GetMapping("userImageView")
@@ -130,6 +131,13 @@ public class MemberController2 implements MemberSessionName {
 		model.addAttribute("message", message);
 		model.addAttribute("url", url);
 		return "/common/alertHref";
+	}
+	
+	@GetMapping("myReview")
+	public String myReview(Model model, HttpSession session) {
+		ms2.myReviewCnt(model, session.getAttribute(LOGIN).toString());
+		ms2.myReviewContent(model, session.getAttribute(LOGIN).toString());
+		return "member/myReview";
 	}
 	
 }
