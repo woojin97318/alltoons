@@ -3,6 +3,7 @@ package com.alltoons.root.admin.mapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.alltoons.root.admin.dto.GenreDTO;
 import com.alltoons.root.admin.dto.OriginDTO;
 import com.alltoons.root.admin.dto.PlatformDTO;
 import com.alltoons.root.admin.dto.WebtoonDTO;
@@ -33,5 +34,7 @@ public interface WebtoonMapper {
 	public int countPlatfrom(String webtoonNum);
 
 	public OriginDTO selectOrigin(String webtoonNum);
+
+	public GenreDTO selectGenre(String webtoonNum);
 
 }

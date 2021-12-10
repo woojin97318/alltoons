@@ -10,9 +10,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){//페이지 들어왔을때 작동
-		
 		<c:forEach items="${linkList}" var="platformlist">
-			var newP = document.createElement('span');
+			
+			 var newP = document.createElement('span');
 			var platform='';
 			switch('${platformlist.getPlatformName()}'){
 			case 'naver':platform='네이버';break;
@@ -26,8 +26,8 @@
 			}
 			html = '';
 			html += '<select name="platformName" id="platformName">'
-			html += '<option value="'+"${platformlist.getPlatformName()}"
-			html +=	' selected">'+platform+'</option>'
+		 	html += '<option value="'+"${platformlist.getPlatformName()}"
+			html +=	' selected">'+platform+'</option>'  
 			html += '<option value="naver">네이버</option>'
 			html += '<option value="kakaoWebtoon">카카오웹툰</option>'
 			html += '<option value="kakaoPage">카카오페이지</option>'
@@ -40,8 +40,12 @@
 			html += '<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크" value="'+"${platformlist.getWebtoonLink()}"+'"> '
 			html += '<br>'
 			newP.innerHTML = html;
-			box.appendChild(newP);
+			box.appendChild(newP); 
+			/* $('#platformName'+count).val('${platformlist.getPlatformName()}').prop("selected",true); */
 	</c:forEach>
+	
+	$('#originalPlatform').val('${webtoonList.originalPlatform}').prop("selected",true);
+	
 	});
 
 	/* webtoonTitle */
@@ -117,11 +121,19 @@
 	<form action="${contextPath}/webtoonModify" method="post" enctype="multipart/form-data">
 		<div style="display: flex;">
 			<div>
-				<img id="webtoonImage" src="resources/resources/default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
+			<c:choose>
+				<c:when test="${webtoonList.webtoonImage=='default_image'}">
+					<img id="webtoonImage" src="resources/resources/default_image.jpg" width=100 height=100 alt="선택된 이미지가 없습니다" />
+				</c:when>
+				<c:otherwise>
+					<img id="webtoonImage" src="${contextPath }/thumbnail?webtoonImage=${webtoonList.webtoonImage}" width=100 height=100 alt="썸네일이 존재" />
+				
+				</c:otherwise>
+			</c:choose>
+				
 			</div>
 			<div>
-				<!-- <label id="image_name">default image</label><br> -->
-				<input type="file" name="webtoon_Image" onchange="readURL(this);" /> 
+				<input type="file" name="webtoonImage" onchange="readURL(this);" /> 
 			</div>
 		</div>
 		<br>
@@ -132,25 +144,24 @@
 		</div>
 		<br> 
 		<b>작가명</b><input type="text" name="webtoonWriter" placeholder="글작가/그림작가" value="${webtoonList.webtoonWriter }"><br>
-		
 		<b>링크</b> <button type="button" onclick="add_link()">+</button> <br>
-		
 		<div id="box">
-			<%-- <c:forEach var="platformlist" items="${linkList }">
-				<select name="platformName" id="platformName"> 
-					<option value="naver">네이버</option>		
-					<option value="kakaoWebtoon">카카오웹툰</option>	
-					<option value="kakaoPage">카카오페이지</option>
-					<option value="bomtoon">봄툰</option>
-					<option value="lezhin">레진</option>
-					<option value="toptoon">탑툰</option>
-					<option value="mrblue">미스터블루</option>
-					<option value="ridibooks">리디북스</option>
-				</select> 
-				
-				<input type="text" id="webtoonLink" name="webtoonLink" placeholder="웹툰 링크" value="${platformlist.getWebtoonLink()}"> <br>
-			</c:forEach> --%>
+			<%-- <c:forEach items="${linkList}" var="platformlist">
+			<select name="platformName" id="platformName">
+				<option value="naver">네이버</option>
+				<option value="kakaoWebtoon">카카오웹툰</option>
+				<option value="kakaoPage">카카오페이지</option>
+				<option value="bomtoon">봄툰</option>
+				<option value="lezhin">레진</option>
+				<option value="toptoon">탑툰</option>
+				<option value="mrblue">미스터블루</option>
+				<option value="ridibooks">리디북스</option>
+			</select> 
+			
+			<input type="text" id="webtoonLink" name="webtoonLink" placeholder="웹툰 링크" value="${platformlist.getWebtoonLink()}">  <br>
+		</c:forEach> --%>
 		</div>
+		
 		<br>
 		<b>장르</b><br>
 			<input type="checkbox" name="webtoonGenre" value="g1">에피소드 &ensp; 
@@ -168,37 +179,19 @@
 			<input type="checkbox" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
 		
 		<b>원작 링크</b><br>
-		<c:choose>
-			<c:when test="${webtoonList.originalPlatform == 'nan' }">
-				<select name="originalPlatform" id="originalPlatform">
-						<option value="nan" selected>없음</option>
-						<option value="naver">네이버</option>
-						<option value="kakaoWebtoon">카카오웹툰</option>
-						<option value="kakaoPage">카카오페이지</option>
-						<option value="bomtoon">봄툰</option>
-						<option value="lezhin">레진</option>
-						<option value="toptoon">탑툰</option>
-						<option value="mrblue">리디북스</option>
-						<option value="ridibooks">탑툰</option>
-				</select> 
-				<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" value="${webtoonList.webtoonOriginalLink }"><br> 
-			</c:when>
-				<c:otherwise>
-					<select name="originalPlatform" id="originalPlatform">
-							<option value="nan" selected>없음</option>
-							<option value="naver">네이버</option>
-							<option value="kakaoWebtoon">카카오웹툰</option>
-							<option value="kakaoPage">카카오페이지</option>
-							<option value="bomtoon">봄툰</option>
-							<option value="lezhin">레진</option>
-							<option value="toptoon">탑툰</option>
-							<option value="mrblue">리디북스</option>
-							<option value="ridibooks">탑툰</option>
-					</select> 
-					<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" value="${webtoonList.webtoonOriginalLink }" ><br> 
+		<select name="originalPlatform" id="originalPlatform">
+				<option value="nan">없음</option>
+				<option value="naver">네이버</option>
+				<option value="kakaoWebtoon">카카오웹툰</option>
+				<option value="kakaoPage">카카오페이지</option>
+				<option value="bomtoon">봄툰</option>
+				<option value="lezhin">레진</option>
+				<option value="toptoon">탑툰</option>
+				<option value="mrblue">리디북스</option>
+				<option value="ridibooks">탑툰</option>
+		</select> 
+		<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" value="${webtoonList.webtoonOriginalLink }" ><br> 
 				
-			</c:otherwise>
-		</c:choose>
 		<b>세부설명</b><br>
 		<div class="webtoonContent_wrap">
 			<textarea rows="5" cols="45" name="webtoonContent"id="webtoonContent">${webtoonList.webtoonContent }</textarea> 

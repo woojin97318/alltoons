@@ -81,7 +81,7 @@
 	<form action="${contextPath}/webtoonUpload" method="post" enctype="multipart/form-data">
 		<div style="display: flex;">
 			<div>
-				<img id="webtoonImage" src="resources/resources/default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
+				<img id="webtoonImage" src="resources/resources/default_image.jpg" width=100 height=100 alt="선택된 이미지가 없습니다" />
 			</div>
 			<div>
 				<!-- <label id="image_name">default image</label><br> -->

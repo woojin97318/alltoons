@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.alltoons.root.admin.dto.GenreDTO;
 import com.alltoons.root.admin.dto.OriginDTO;
 import com.alltoons.root.admin.dto.PlatformDTO;
 import com.alltoons.root.admin.dto.WebtoonDTO;
@@ -56,7 +57,7 @@ public class WebtoonServiceImpl implements WebtoonService{
 
 			wd.setWebtoonImage(sysFileName);
 			
-			File saveImgFila = new File(WEBTOON_IMAGE+"/"+sysFileName);
+			File saveImgFila = new File(ModifyService.WEBTOON_IMAGE+"/"+sysFileName);
 			try {
 				file.transferTo(saveImgFila);
 			} catch (Exception e) {
@@ -65,22 +66,6 @@ public class WebtoonServiceImpl implements WebtoonService{
 		}else {
 			wd.setWebtoonImage("default_image");
 		}
-	}
-	@Override
-	public WebtoonDTO list(String webtoonNum,Model model) {
-		WebtoonDTO wd = new WebtoonDTO();
-		OriginDTO od = new OriginDTO();
-		wd = wm.selectList(webtoonNum);
-		od = wm.selectOrigin(webtoonNum);
-		wd.setOriginalPlatform(od.getOriginalPlatform());
-		wd.setWebtoonOriginalLink(wd.getWebtoonOriginalLink());
-		model.addAttribute("countLink",wm.countPlatfrom(webtoonNum));
-		return wd;
-	}
-	@Override
-	public ArrayList<PlatformDTO> selectLinks(String webtoonNum) {
-		ArrayList<PlatformDTO> list = wm.selectLinks(webtoonNum);
-		return list;
 	}
 	
 }

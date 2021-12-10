@@ -12,7 +12,7 @@
 		<result property="webtoonImage" column="webtoon_image" />
 	</resultMap>
 	<resultMap
-		type="com.alltoons.root.admin.dto.WebtoonDTO" id="genre">
+		type="com.alltoons.root.admin.dto.GenreDTO" id="genre">
 		<result property="webtoonNum" column="webtoon_num" />
 		<result property="webtoonGenre" column="webtoon_genre" />
 	</resultMap>
@@ -23,10 +23,10 @@
 		<result property="webtoonLink" column="webtoon_link" />
 	</resultMap>
 	<resultMap
-		type="com.alltoons.root.admin.dto.OriginDTO" id="original">
+		type="com.alltoons.root.admin.dto.OriginDTO" id="origin">
 		<result property="webtoonNum" column="webtoon_num" />
 		<result property="originalPlatform" column="origin_platform_name" />
-		<result property="webtoonOriginalLink" column="webtoon_original_link" />
+		<result property="webtoonOriginalLink" column="ORIGIN_WEBTOON_LINK" />
 	</resultMap>
 	
 	
@@ -40,7 +40,10 @@
 	<select id="selectLinks" resultMap="platform"><!-- 행 하나씩 dto형태로 넘어감 -->
 		select * from platform_table where webtoon_num = #{webtoonNum}
 	</select>
-	<select id="selectOrigin" resultMap="original">
+	<select id="selectGenre" resultMap="genre">
+		select * from genre_table where webtoon_num = #{webtoonNum}
+	</select>
+	<select id="selectOrigin" resultMap="origin">
 		select * from origin_table where webtoon_num = #{webtoonNum}
 	</select>
 	
