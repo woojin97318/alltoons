@@ -65,8 +65,8 @@
 		html += '<option value="bomtoon">봄툰</option>'
 		html += '<option value="lezhin">레진</option>'
 		html += '<option value="toptoon">탑툰</option>'
-		html += '<option value="mrblue">리디북스</option>'
-		html += '<option value="ridibooks">탑툰</option>'
+		html += '<option value="mrblue">미스터블루</option>'
+		html += '<option value="ridibooks">리디북스</option>'
 		html += '</select> ';
 		html += '<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크"> '
 		newP.innerHTML = html;
@@ -107,8 +107,8 @@
 				<option value="bomtoon">봄툰</option>
 				<option value="lezhin">레진</option>
 				<option value="toptoon">탑툰</option>
-				<option value="mrblue">리디북스</option>
-				<option value="ridibooks">탑툰</option>
+				<option value="mrblue">미스터블루</option>
+				<option value="ridibooks">리디북스</option>
 			</select> 
 			
 			<input type="text" id="webtoonLink" name="webtoonLink" placeholder="웹툰 링크"> 

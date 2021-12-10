@@ -67,13 +67,14 @@ public class WebtoonServiceImpl implements WebtoonService{
 		}
 	}
 	@Override
-	public WebtoonDTO list(String webtoonNum) {
+	public WebtoonDTO list(String webtoonNum,Model model) {
 		WebtoonDTO wd = new WebtoonDTO();
 		OriginDTO od = new OriginDTO();
 		wd = wm.selectList(webtoonNum);
 		od = wm.selectOrigin(webtoonNum);
 		wd.setOriginalPlatform(od.getOriginalPlatform());
 		wd.setWebtoonOriginalLink(wd.getWebtoonOriginalLink());
+		model.addAttribute("countLink",wm.countPlatfrom(webtoonNum));
 		return wd;
 	}
 	@Override

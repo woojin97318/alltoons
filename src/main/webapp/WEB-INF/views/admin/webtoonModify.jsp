@@ -9,6 +9,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+	$(document).ready(function(){//페이지 들어왔을때 작동
+		
+		<c:forEach items="${linkList}" var="platformlist">
+			var newP = document.createElement('span');
+			var platform='';
+			switch('${platformlist.getPlatformName()}'){
+			case 'naver':platform='네이버';break;
+			case 'kakaoWebtoon':platform='카카오웹툰';break;
+			case 'kakaoPage':platform='카카오페이지';break;
+			case 'bomtoon':platform='봄툰';break;
+			case 'lezhin':platform='레진';break;
+			case 'toptoon':platform='탑툰';break;
+			case 'mrblue':platform='미스터블루';break;
+			case 'ridibooks':platform='리디북스';break;
+			}
+			html = '';
+			html += '<select name="platformName" id="platformName">'
+			html += '<option value="'+"${platformlist.getPlatformName()}"
+			html +=	' selected">'+platform+'</option>'
+			html += '<option value="naver">네이버</option>'
+			html += '<option value="kakaoWebtoon">카카오웹툰</option>'
+			html += '<option value="kakaoPage">카카오페이지</option>'
+			html += '<option value="bomtoon">봄툰</option>'
+			html += '<option value="lezhin">레진</option>'
+			html += '<option value="toptoon">탑툰</option>'
+			html += '<option value="mrblue">미스터블루</option>'
+			html += '<option value="ridibooks">리디북스</option>'
+			html += '</select> ';
+			html += '<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크" value="'+"${platformlist.getWebtoonLink()}"+'"> '
+			html += '<br>'
+			newP.innerHTML = html;
+			box.appendChild(newP);
+	</c:forEach>
+	});
+
 	/* webtoonTitle */
 	$(function(){
 		$(document).on('keyup', '#webtoonTitle', function(e){
@@ -57,7 +92,7 @@
 		
 		var html = '';
 		cnt += 1;
-		html += '<br>'
+		
 		html += '<select name="platformName" id="platformName">'
 		html += '<option value="naver">네이버</option>'
 		html += '<option value="kakaoWebtoon">카카오웹툰</option>'
@@ -65,10 +100,11 @@
 		html += '<option value="bomtoon">봄툰</option>'
 		html += '<option value="lezhin">레진</option>'
 		html += '<option value="toptoon">탑툰</option>'
-		html += '<option value="mrblue">리디북스</option>'
-		html += '<option value="ridibooks">탑툰</option>'
+		html += '<option value="mrblue">미스터블루</option>'
+		html += '<option value="ridibooks">리디북스</option>'
 		html += '</select> ';
 		html += '<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크"> '
+		html += '<br>'
 		newP.innerHTML = html;
 		box.appendChild(newP);
 	}
@@ -97,21 +133,23 @@
 		<br> 
 		<b>작가명</b><input type="text" name="webtoonWriter" placeholder="글작가/그림작가" value="${webtoonList.webtoonWriter }"><br>
 		
-		<b>링크</b> 
+		<b>링크</b> <button type="button" onclick="add_link()">+</button> <br>
+		
 		<div id="box">
-			<button type="button" onclick="add_link()">+</button> <br> 
-			<select name="platformName" id="platformName">
-				<option value="naver">네이버</option>
-				<option value="kakaoWebtoon">카카오웹툰</option>
-				<option value="kakaoPage">카카오페이지</option>
-				<option value="bomtoon">봄툰</option>
-				<option value="lezhin">레진</option>
-				<option value="toptoon">탑툰</option>
-				<option value="mrblue">리디북스</option>
-				<option value="ridibooks">탑툰</option>
-			</select> 
-			
-			<input type="text" id="webtoonLink" name="webtoonLink" placeholder="웹툰 링크"> 
+			<%-- <c:forEach var="platformlist" items="${linkList }">
+				<select name="platformName" id="platformName"> 
+					<option value="naver">네이버</option>		
+					<option value="kakaoWebtoon">카카오웹툰</option>	
+					<option value="kakaoPage">카카오페이지</option>
+					<option value="bomtoon">봄툰</option>
+					<option value="lezhin">레진</option>
+					<option value="toptoon">탑툰</option>
+					<option value="mrblue">미스터블루</option>
+					<option value="ridibooks">리디북스</option>
+				</select> 
+				
+				<input type="text" id="webtoonLink" name="webtoonLink" placeholder="웹툰 링크" value="${platformlist.getWebtoonLink()}"> <br>
+			</c:forEach> --%>
 		</div>
 		<br>
 		<b>장르</b><br>

@@ -64,10 +64,11 @@ public class AdminUploadController {
 	@GetMapping("webtoonModify")
 	public String webtoonModify(Model model,WebtoonDTO wd,HttpServletRequest request) {
 		ArrayList<PlatformDTO> list =new ArrayList<PlatformDTO>();
-		wd = ws.list(request.getParameter("webtoonNum"));//웹툰 정보
+		wd = ws.list(request.getParameter("webtoonNum"),model);//웹툰 정보
 		list = ws.selectLinks(request.getParameter("webtoonNum"));//링크 주소들 들어있음
 		model.addAttribute("webtoonList",wd);
-		model.addAttribute("linkList",list);
+		model.addAttribute("linkList",list);//여기서 모델을 가져왔습니다.
+		
 		return "admin/webtoonModify";
 	}
 	
