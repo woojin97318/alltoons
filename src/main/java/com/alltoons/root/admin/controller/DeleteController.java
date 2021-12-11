@@ -21,21 +21,30 @@ public class DeleteController {
 		dele.webtoonAllList(model);
 		return "admin/webtoonDelete";
 	}
+	
 	@PostMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
 		dele.webtoonAllList(model);
 		dele.searchList(request.getParameter("search"), model);
 		return "admin/webtoonDelete";
 	}
+	
 	@GetMapping("/deleteWebtoon")
 	public String deleteWebtoon(@RequestParam("webtoonNum") int webtoonNum, 
 								@RequestParam("imageFileName") String webtoonImage,
 								HttpServletResponse response,
 								Model model) {
-		String message = dele.deleteImage(webtoonNum, webtoonImage);//파일 삭제
-		dele.webtoonAllList(model);
+		
+		String message = dele.deleteImage(webtoonNum, webtoonImage);//이미지 파일 삭제
+		System.out.println(message);//message="삭제되었습니다."
+		
 		dele.deleteWebtoon(webtoonNum);//db삭제
-		System.out.println(message);//message="파일 삭제 성공"
-		return "admin/webtoonDelete";
+		
+		model.addAttribute("message", message);
+		model.addAttribute("url", "/delete");
+		
+		dele.webtoonAllList(model);
+		//return "admin/webtoonDelete";
+		return "common/alertHref";
 	}
 }

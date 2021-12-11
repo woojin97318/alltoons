@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
-<c:set var="nodata" value="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +88,7 @@
 						<th>${dto.webtoonNum }</th>
 						<td>${dto.webtoonTitle }</td>
 						<td>${dto.webtoonWriter }</td>
-						<th><input type="button" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}'" class="x-box"></th>
+						<th><input type="button" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
@@ -128,7 +127,7 @@
 						<th>${dto.webtoonNum }</th>
 						<td>${dto.webtoonTitle }</td>
 						<td>${dto.webtoonWriter }</td>
-						<th><input type="button" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}'" class="x-box"></th>
+						<th><input type="button" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
