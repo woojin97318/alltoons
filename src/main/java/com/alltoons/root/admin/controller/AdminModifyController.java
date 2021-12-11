@@ -47,9 +47,6 @@ public class AdminModifyController {
 		FileCopyUtils.copy(in, response.getOutputStream());
 		in.close();
 	}
-	/*
-	 * @PostMapping("webtoonModify") public String test1() { return"test"; }
-	 */
 
 	@PostMapping("webtoonModify")
 	public String postWebtoonModify(MultipartHttpServletRequest mul, WebtoonDTO wd,Model model) {
@@ -57,7 +54,7 @@ public class AdminModifyController {
 		int result = ms.modify(mul, wd);
 		if(result==1) {
 			model.addAttribute("message", "작품이 수정되었습니다");
-			model.addAttribute("url", "webtoonModify?webtoonNm="+wd.getWebtoonNum());
+			model.addAttribute("url","test");//후에 합친 후에는 삭제list페이지로 이동
 			return "/common/alertHref";
 		}
 		model.addAttribute("message", "작품 수정에 실패하였습니다");

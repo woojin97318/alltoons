@@ -38,7 +38,7 @@
 			html += '<option value="ridibooks">리디북스</option>'
 			html += '</select> ';
 			html += '<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크" value="'+"${platformlist.getWebtoonLink()}"+'"> '
-			html += '<button type="button" onclick="del_link()">-</button>'
+			html += '<button type="button" onclick="del_link(this)">-</button>'
 			html += '<br>'
 			newP.innerHTML = html;
 			box.appendChild(newP); 
@@ -114,6 +114,9 @@
 		newP.innerHTML = html;
 		box.appendChild(newP);
 	}
+	 const del_link = (obj) => {
+         document.getElementById('box').removeChild(obj.parentNode);
+     }
 </script>
 <link rel="stylesheet" href="resources/css/webtoonUpload.css">
 <title>작품 수정</title>
@@ -153,19 +156,19 @@
 		
 		<br>
 		<b>장르</b><br>
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g1">에피소드 &ensp; 
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g2">옴니버스 &ensp; 
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g3">스토리 &ensp; 
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g4">일상 &ensp; <br>
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g5">개그 &ensp; 
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g6">판타지 &ensp; 
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g7">액션 &ensp; 
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g8">드라마 &ensp; <br>
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g9">순정 &ensp; 
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g10">감성 &ensp; 
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g11">스릴러 &ensp; 
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; <br>
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g1">에피소드 &ensp; 
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g2">옴니버스 &ensp; 
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g3">스토리 &ensp; 
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g4">일상 &ensp; <br>
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g5">개그 &ensp; 
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g6">판타지 &ensp; 
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g7">액션 &ensp; 
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g8">드라마 &ensp; <br>
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g9">순정 &ensp; 
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g10">감성 &ensp; 
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g11">스릴러 &ensp; 
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; <br>
+			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
 		
 		<b>원작 링크</b><br>
 		<select name="originalPlatform" id="originalPlatform">

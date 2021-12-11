@@ -39,6 +39,7 @@
 	</select>
 	<select id="selectLinks" resultMap="platform"><!-- 행 하나씩 dto형태로 넘어감 -->
 		select * from platform_table where webtoon_num = #{webtoonNum}
+		order by WEBTOON_PLATFORM_NAME
 	</select>
 	<select id="selectGenre" resultMap="genre">
 		select * from genre_table where webtoon_num = #{webtoonNum}
@@ -99,4 +100,8 @@
 		set webtoon_link = #{webtoonLink}
 		where webtoon_num = #{webtoonNum} and WEBTOON_PLATFORM_NAME = #{platformName}
 	</update>
+	
+	<delete id="delLink">
+		delete from platform_table where webtoon_num = #{webtoonNum}
+	</delete>
 </mapper>

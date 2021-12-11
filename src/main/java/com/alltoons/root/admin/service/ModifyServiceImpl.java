@@ -55,6 +55,7 @@ public class ModifyServiceImpl implements ModifyService{
 			
 		}else {
 			System.out.println("이미지 변경");
+			deleteImage(wd.getWebtoonNum());
 			WebtoonServiceImpl.imgUpload(mul,wd);
 		}
 		
@@ -66,6 +67,9 @@ public class ModifyServiceImpl implements ModifyService{
 		System.out.println("gener 처리: "+result);
 		result = wm.modifyOrigin(wd);
 		System.out.println("origin 처리: "+result);
+		
+		wm.delLink(wd.getWebtoonNum());
+		
 		String platform[] = mul.getParameterValues("platformName");
 		String link[] = mul.getParameterValues("webtoonLink");
 		PlatformDTO pd = new PlatformDTO();
@@ -73,10 +77,17 @@ public class ModifyServiceImpl implements ModifyService{
 			pd.setWebtoonNum(wd.getWebtoonNum());
 			pd.setPlatformName(platform[i]);
 			pd.setWebtoonLink(link[i]);
+			result = wm.uploadPlatform(pd);	
 			//System.out.println(pd.getPlatformName() +" : "+pd.getWebtoonLink());
-			result = wm.modifyPlatform(pd);
-			System.out.println("플랫폼 처리"+i+": "+result);
+			//result = wm.modifyPlatform(pd);
+			//System.out.println("플랫폼 처리"+i+": "+result);
 		}
 		return result;
+	}
+	private void deleteImage(int webtoonNum) {
+		String originalImg = wm.selectList(Integer.toString(webtoonNum)).getWebtoonImage();
+		File deleteImg = new File(WEBTOON_IMAGE+"/"+originalImg);
+		System.out.println("이미지 삭제"+deleteImg.getName());
+		deleteImg.delete();
 	}
 }

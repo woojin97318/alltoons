@@ -45,4 +45,6 @@ public interface WebtoonMapper {
 
 	public int modifyPlatform(PlatformDTO pd);
 
+	public void delLink(int webtoonNum);
+
 }
