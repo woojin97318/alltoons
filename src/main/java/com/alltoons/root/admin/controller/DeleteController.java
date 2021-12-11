@@ -30,8 +30,10 @@ public class DeleteController {
 	@GetMapping("/deleteWebtoon")
 	public String deleteWebtoon(@RequestParam("webtoonNum") int webtoonNum, 
 								@RequestParam("imageFileName") String webtoonImage,
-								HttpServletResponse response) {
+								HttpServletResponse response,
+								Model model) {
 		String message = dele.deleteImage(webtoonNum, webtoonImage);//파일 삭제
+		dele.webtoonAllList(model);
 		dele.deleteWebtoon(webtoonNum);//db삭제
 		System.out.println(message);//message="파일 삭제 성공"
 		return "admin/webtoonDelete";
