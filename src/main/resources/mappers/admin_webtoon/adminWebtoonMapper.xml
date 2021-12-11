@@ -73,4 +73,30 @@
 		insert into origin_table values(#{webtoonNum},#{originalPlatform},#{webtoonOriginalLink})
 	</insert>
 	
+	
+	
+	<update id="modifyWebtoon">
+		update webtoon_info 
+		set webtoon_title = #{webtoonTitle},
+			webtoon_writer = #{webtoonWriter},
+			webtoon_content = #{webtoonContent},
+			webtoon_image = #{webtoonImage}
+		where webtoon_num = #{webtoonNum}
+	</update>
+	<update id="modifyGerne">
+		update genre_table 
+		set webtoon_genre = #{webtoonGenre}
+		where webtoon_num = #{webtoonNum}
+	</update>
+	<update id="modifyOrigin">
+		update origin_table 
+		set origin_platform_name = #{originalPlatform},
+			ORIGIN_WEBTOON_LINK = #{webtoonOriginalLink}
+		where webtoon_num = #{webtoonNum}
+	</update>
+	<update id="modifyPlatform">
+		update platform_table 
+		set webtoon_link = #{webtoonLink}
+		where webtoon_num = #{webtoonNum} and WEBTOON_PLATFORM_NAME = #{platformName}
+	</update>
 </mapper>

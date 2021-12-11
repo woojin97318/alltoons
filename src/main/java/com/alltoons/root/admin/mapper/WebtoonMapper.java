@@ -37,4 +37,12 @@ public interface WebtoonMapper {
 
 	public GenreDTO selectGenre(String webtoonNum);
 
+	public int modifyWebtoon(WebtoonDTO wd);
+
+	public int modifyGerne(WebtoonDTO wd);
+
+	public int modifyOrigin(WebtoonDTO wd);
+
+	public int modifyPlatform(PlatformDTO pd);
+
 }

@@ -91,11 +91,11 @@
 		<br>
 		<div class="webtoonName_wrap">
 			<b>작품제목</b>
-			<textarea rows="1" cols="30" id="webtoonTitle" name="webtoonTitle"></textarea>
+			<textarea rows="1" cols="30" id="webtoonTitle" name="webtoonTitle" required></textarea>
 			<span id="webtoonTitle_cnt"></span>
 		</div>
 		<br> 
-		<b>작가명</b><input type="text" name="webtoonWriter" placeholder="글작가/그림작가"><br>
+		<b>작가명</b><input type="text" name="webtoonWriter" placeholder="글작가/그림작가" required><br>
 		
 		<b>링크</b> 
 		<div id="box">
@@ -111,7 +111,7 @@
 				<option value="ridibooks">리디북스</option>
 			</select> 
 			
-			<input type="text" id="webtoonLink" name="webtoonLink" placeholder="웹툰 링크"> 
+			<input type="text" id="webtoonLink" name="webtoonLink" placeholder="웹툰 링크" required> 
 		</div>
 		<br>
 		<b>장르</b><br>
@@ -144,7 +144,7 @@
 		<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" ><br> 
 		<b>세부설명</b><br>
 		<div class="webtoonContent_wrap">
-			<textarea rows="5" cols="45" name="webtoonContent"id="webtoonContent"></textarea> 
+			<textarea rows="5" cols="45" name="webtoonContent"id="webtoonContent" required></textarea> 
 			<span id="webtoonContent_cnt"></span><br>
 		</div>
 		<input type="submit" value="작품 추가">

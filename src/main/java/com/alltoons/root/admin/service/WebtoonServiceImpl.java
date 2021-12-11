@@ -47,7 +47,7 @@ public class WebtoonServiceImpl implements WebtoonService{
 		
 		return result;
 	}
-	public void imgUpload(MultipartHttpServletRequest mul,WebtoonDTO wd) {
+	public static void imgUpload(MultipartHttpServletRequest mul,WebtoonDTO wd) {
 		MultipartFile file = mul.getFile("webtoon_Image");
 		if(file.getSize() !=0) {
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss-");

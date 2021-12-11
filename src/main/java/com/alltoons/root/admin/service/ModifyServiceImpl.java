@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -37,5 +39,44 @@ public class ModifyServiceImpl implements ModifyService{
 	public ArrayList<PlatformDTO> selectLinks(String webtoonNum) {
 		ArrayList<PlatformDTO> list = wm.selectLinks(webtoonNum);
 		return list;
+	}
+	@Override
+	public int modify(MultipartHttpServletRequest mul, WebtoonDTO wd) {
+		int result =0;
+		//이미지 처리
+		if(mul.getFile("webtoon_Image").getSize() ==0) {
+			System.out.println("기존 이미지를 유지");
+			String img = wm.selectList(Integer.toString(wd.getWebtoonNum())).getWebtoonImage();
+			if(img.equals("default_image")) {
+				wd.setWebtoonImage("default_image");
+			}else {
+				wd.setWebtoonImage(img);
+			}
+			
+		}else {
+			System.out.println("이미지 변경");
+			WebtoonServiceImpl.imgUpload(mul,wd);
+		}
+		
+		result = wm.modifyWebtoon(wd);
+		System.out.println("webtoon_info 처리: "+result);
+		
+		System.out.println(wd.getWebtoonGenre());
+		result = wm.modifyGerne(wd);
+		System.out.println("gener 처리: "+result);
+		result = wm.modifyOrigin(wd);
+		System.out.println("origin 처리: "+result);
+		String platform[] = mul.getParameterValues("platformName");
+		String link[] = mul.getParameterValues("webtoonLink");
+		PlatformDTO pd = new PlatformDTO();
+		for(int i=0;i<platform.length;i++) {
+			pd.setWebtoonNum(wd.getWebtoonNum());
+			pd.setPlatformName(platform[i]);
+			pd.setWebtoonLink(link[i]);
+			//System.out.println(pd.getPlatformName() +" : "+pd.getWebtoonLink());
+			result = wm.modifyPlatform(pd);
+			System.out.println("플랫폼 처리"+i+": "+result);
+		}
+		return result;
 	}
 }

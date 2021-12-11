@@ -26,8 +26,8 @@
 			}
 			html = '';
 			html += '<select name="platformName" id="platformName">'
-		 	html += '<option value="'+"${platformlist.getPlatformName()}"
-			html +=	' selected">'+platform+'</option>'  
+		 	html += '<option value="'+"${platformlist.getPlatformName()}"+'"'
+			html +=	' selected="selected">'+platform+'</option>'  
 			html += '<option value="naver">네이버</option>'
 			html += '<option value="kakaoWebtoon">카카오웹툰</option>'
 			html += '<option value="kakaoPage">카카오페이지</option>'
@@ -38,12 +38,14 @@
 			html += '<option value="ridibooks">리디북스</option>'
 			html += '</select> ';
 			html += '<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크" value="'+"${platformlist.getWebtoonLink()}"+'"> '
+			html += '<button type="button" onclick="del_link()">-</button>'
 			html += '<br>'
 			newP.innerHTML = html;
 			box.appendChild(newP); 
 			/* $('#platformName'+count).val('${platformlist.getPlatformName()}').prop("selected",true); */
 	</c:forEach>
-	
+	//$('#webtoonGenre').val('${webtoonList.webtoonGenre}').prop('checked',true)
+	$('input[name="webtoonGenre"][value="${webtoonList.webtoonGenre}"]').attr('checked','checked');
 	$('#originalPlatform').val('${webtoonList.originalPlatform}').prop("selected",true);
 	
 	});
@@ -119,6 +121,7 @@
 <body>
 	<h1>작품 수정</h1>
 	<form action="${contextPath}/webtoonModify" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="webtoonNum" value="${webtoonList.webtoonNum }">
 		<div style="display: flex;">
 			<div>
 			<c:choose>
@@ -133,50 +136,36 @@
 				
 			</div>
 			<div>
-				<input type="file" name="webtoonImage" onchange="readURL(this);" /> 
+				<input type="file" name="webtoon_Image" onchange="readURL(this);"/> 
+				<!-- file의 name과 dto의 변수명을 다르게 해야한다(400에러의 원인) -->
 			</div>
 		</div>
 		<br>
 		<div class="webtoonName_wrap">
 			<b>작품제목</b>
-			<textarea rows="1" cols="30" id="webtoonTitle" name="webtoonTitle">${webtoonList.webtoonTitle }</textarea>
+			<textarea rows="1" cols="30" id="webtoonTitle" name="webtoonTitle" >${webtoonList.webtoonTitle }</textarea>
 			<span id="webtoonTitle_cnt"></span>
 		</div>
 		<br> 
 		<b>작가명</b><input type="text" name="webtoonWriter" placeholder="글작가/그림작가" value="${webtoonList.webtoonWriter }"><br>
 		<b>링크</b> <button type="button" onclick="add_link()">+</button> <br>
-		<div id="box">
-			<%-- <c:forEach items="${linkList}" var="platformlist">
-			<select name="platformName" id="platformName">
-				<option value="naver">네이버</option>
-				<option value="kakaoWebtoon">카카오웹툰</option>
-				<option value="kakaoPage">카카오페이지</option>
-				<option value="bomtoon">봄툰</option>
-				<option value="lezhin">레진</option>
-				<option value="toptoon">탑툰</option>
-				<option value="mrblue">미스터블루</option>
-				<option value="ridibooks">리디북스</option>
-			</select> 
-			
-			<input type="text" id="webtoonLink" name="webtoonLink" placeholder="웹툰 링크" value="${platformlist.getWebtoonLink()}">  <br>
-		</c:forEach> --%>
-		</div>
+		<div id="box">		</div>
 		
 		<br>
 		<b>장르</b><br>
-			<input type="checkbox" name="webtoonGenre" value="g1">에피소드 &ensp; 
-			<input type="checkbox" name="webtoonGenre" value="g2">옴니버스 &ensp; 
-			<input type="checkbox" name="webtoonGenre" value="g3">스토리 &ensp; 
-			<input type="checkbox" name="webtoonGenre" value="g4">일상 &ensp; <br>
-			<input type="checkbox" name="webtoonGenre" value="g5">개그 &ensp; 
-			<input type="checkbox" name="webtoonGenre" value="g6">판타지 &ensp; 
-			<input type="checkbox" name="webtoonGenre" value="g7">액션 &ensp; 
-			<input type="checkbox" name="webtoonGenre" value="g8">드라마 &ensp; <br>
-			<input type="checkbox" name="webtoonGenre" value="g9">순정 &ensp; 
-			<input type="checkbox" name="webtoonGenre" value="g10">감성 &ensp; 
-			<input type="checkbox" name="webtoonGenre" value="g11">스릴러 &ensp; 
-			<input type="checkbox" name="webtoonGenre" value="g12">시대극 &ensp; <br>
-			<input type="checkbox" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g1">에피소드 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g2">옴니버스 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g3">스토리 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g4">일상 &ensp; <br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g5">개그 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g6">판타지 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g7">액션 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g8">드라마 &ensp; <br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g9">순정 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g10">감성 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g11">스릴러 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; <br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
 		
 		<b>원작 링크</b><br>
 		<select name="originalPlatform" id="originalPlatform">
@@ -187,10 +176,19 @@
 				<option value="bomtoon">봄툰</option>
 				<option value="lezhin">레진</option>
 				<option value="toptoon">탑툰</option>
-				<option value="mrblue">리디북스</option>
-				<option value="ridibooks">탑툰</option>
+				<option value="mrblue">미스터 블루</option>
+				<option value="ridibooks">리디북스</option>
 		</select> 
-		<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" value="${webtoonList.webtoonOriginalLink }" ><br> 
+		<c:choose>
+			<c:when test="${webtoonList.webtoonOriginalLink=='nan' }">
+				<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크"  >
+			</c:when>
+			<c:otherwise>
+				<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" value="${webtoonList.webtoonOriginalLink }" >
+			</c:otherwise>
+		</c:choose>
+		
+		<br> 
 				
 		<b>세부설명</b><br>
 		<div class="webtoonContent_wrap">
