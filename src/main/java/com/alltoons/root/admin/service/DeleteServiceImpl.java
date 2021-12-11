@@ -52,7 +52,7 @@ public class DeleteServiceImpl implements DeleteService{
 	public String deleteImage(int webtoonNum, String webtoonImage) {
 		File deleteImage = new File(IMAGE_REPO+"/"+webtoonImage);
 		deleteImage.delete();
-		String message = "삭제 성공";
+		String message = "파일 삭제 성공";
 		return message;
 	}
 	

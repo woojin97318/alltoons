@@ -17,7 +17,8 @@ public class DeleteController {
 	@Autowired DeleteService dele;
 	
 	@GetMapping("/delete")
-	public String delete() {
+	public String delete(Model model) {
+		dele.webtoonAllList(model);
 		return "admin/webtoonDelete";
 	}
 	@PostMapping("/delete")
@@ -30,9 +31,9 @@ public class DeleteController {
 	public String deleteWebtoon(@RequestParam("webtoonNum") int webtoonNum, 
 								@RequestParam("imageFileName") String webtoonImage,
 								HttpServletResponse response) {
-		String message = dele.deleteImage(webtoonNum, webtoonImage);
-		dele.deleteWebtoon(webtoonNum);
-		System.out.println(message);//삭제 성공
+		String message = dele.deleteImage(webtoonNum, webtoonImage);//파일 삭제
+		dele.deleteWebtoon(webtoonNum);//db삭제
+		System.out.println(message);//message="파일 삭제 성공"
 		return "admin/webtoonDelete";
 	}
 }
