@@ -135,5 +135,25 @@ public class MemberServiceImpl implements MemberService {
 			return 1;			
 		}
 	}
+	@Override
+	public String newPassword(String email) {
+	      Random ran = new Random();
+	      String str="";
+	      int num;
+	      while(str.length() != 8) {
+	         num = ran.nextInt(75)+48;
+	         if((num>=48 && num<=57)||(num>=65 && num<=90)||(num>=97 && num<=122)) {
+	            str+=(char)num;
+	         }else {
+	            continue;
+	         }
+	      }
+	      
+	      String codedStr = encoder.encode(str);
+	      System.out.println(codedStr);
+	      //mapper.updatePassword(email,codedStr);
+	      return str;
+
+	   }
 
 }

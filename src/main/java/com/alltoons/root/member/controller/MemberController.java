@@ -167,7 +167,7 @@ public class MemberController implements MemberSessionName {
 
 		System.out.println("전송된 인증키 : " + sysKey);
 		System.out.println("사용자 입력키 : " + key);
-		if (sysKey==key) {
+		if (sysKey == key) {
 			return true;
 		} else {
 			return false;
@@ -178,6 +178,21 @@ public class MemberController implements MemberSessionName {
 	@GetMapping("findpassword")
 	public String findPassword() {
 		return "member/findPassword";
+	}
+
+	@GetMapping(value = "findpwdmail", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public boolean sendMailPassword(HttpSession session, @RequestParam String email) {
+		String password = ms.newPassword(email);
+		System.out.println(email + "의 비밀번호: " + password);
+		session.setAttribute("joinCode", password);
+		String subject = email + "님의 비밀번호입니다.";
+		StringBuilder sb = new StringBuilder();
+		sb.append(email + "님의의 비밀번호는 " + password + " 입니다.");
+		sb.append("반드시 비밀번호를 변경해주세요!");
+		
+		return mailService.send(subject, sb.toString(), "alltoons2021@gmail.com", email, null);
+
 	}
 
 }

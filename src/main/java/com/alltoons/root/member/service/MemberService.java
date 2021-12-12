@@ -14,4 +14,5 @@ public interface MemberService {
 	public int signUpForm(MultipartHttpServletRequest mul);
 	public String rand();
 	public int emailChk(String email);
+	public String newPassword(String email);
 }

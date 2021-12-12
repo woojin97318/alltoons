@@ -12,4 +12,6 @@ public interface MemberMapper {
 	public int signUpForm(MemberDTO dto);
 
 	public MemberDTO emailChk(String email);
+	
+	public int updatePassword(String email,String codedStr);
 }
