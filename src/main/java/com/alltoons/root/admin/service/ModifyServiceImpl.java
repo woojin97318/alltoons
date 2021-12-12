@@ -26,7 +26,6 @@ public class ModifyServiceImpl implements ModifyService{
 	public WebtoonDTO list(String webtoonNum,Model model) {
 		WebtoonDTO wd = new WebtoonDTO();
 		wd = wm.selectList(webtoonNum);//기본 webtoonDTO
-		model.addAttribute("countLink",wm.countPlatfrom(webtoonNum));
 		return wd;
 	}
 	@Override
@@ -68,10 +67,17 @@ public class ModifyServiceImpl implements ModifyService{
 		System.out.println("webtoon_info 처리: "+result);
 		
 		System.out.println(wd.getWebtoonGenre());
-		result = wm.modifyGerne(wd);
-		System.out.println("gener 처리: "+result);
+		//장르
+		wm.delGenre(wd.getWebtoonNum());
+		String webtoonGenre[] = mul.getParameterValues("webtoonGenre");
+		GenreDTO gd= new GenreDTO();
+		for(int i=0;i<webtoonGenre.length;i++) {
+			gd.setWebtoonNum(wd.getWebtoonNum());
+			gd.setWebtoonGenre(webtoonGenre[i]);
+			result = wm.uploadGenre(gd);
+		}System.out.println("gener 처리: "+result);
 		
-		//result = wm.modifyOrigin(wd);
+		//원작
 		wm.delOrigin(wd.getWebtoonNum());
 		String origin_platform[] = mul.getParameterValues("originalPlatform");
 		String origin_link[] = mul.getParameterValues("webtoonOriginalLink");
@@ -85,8 +91,8 @@ public class ModifyServiceImpl implements ModifyService{
 		
 		System.out.println("origin 처리: "+result);
 		
+		//링크
 		wm.delLink(wd.getWebtoonNum());
-		
 		String platform[] = mul.getParameterValues("platformName");
 		String link[] = mul.getParameterValues("webtoonLink");
 		PlatformDTO pd = new PlatformDTO();

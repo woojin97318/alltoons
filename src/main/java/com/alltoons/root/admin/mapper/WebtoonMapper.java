@@ -13,8 +13,6 @@ public interface WebtoonMapper {
 
 	public WebtoonDTO selectNum(WebtoonDTO wd);
 
-	public int uploadGenre(WebtoonDTO wd);
-
 	public int uploadOriginal(OriginDTO od);
 
 	public WebtoonDTO selectTitle(String webtoonTitle);
@@ -25,17 +23,13 @@ public interface WebtoonMapper {
 
 	public ArrayList<PlatformDTO> selectLinks(String webtoonNum);
 
-	public int countPlatfrom(String webtoonNum);
-
-	//public OriginDTO selectOrigin(String webtoonNum);
-
 	public GenreDTO selectGenre(String webtoonNum);
 
 	public int modifyWebtoon(WebtoonDTO wd);
 
 	public int modifyGerne(WebtoonDTO wd);
 
-	public int modifyOrigin(WebtoonDTO wd);
+	public int modifyOrigin(GenreDTO gd);
 
 	public int modifyPlatform(PlatformDTO pd);
 
@@ -48,6 +42,8 @@ public interface WebtoonMapper {
 	public int uploadGenre(GenreDTO gd);
 
 	public ArrayList<GenreDTO> selectwebtoonGenre(String webtoonNum);
+
+	public void delGenre(int webtoonNum);
 
 
 }

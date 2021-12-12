@@ -44,9 +44,9 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		box.appendChild(newP); 
 	</c:forEach>
 	//$('#webtoonGenre').val('${webtoonList.webtoonGenre}').prop('checked',true)
-	
-	$('input[name="webtoonGenre"][value="${webtoonGenreList.webtoonGenre}"]').attr('checked','checked');
-	
+	<c:forEach  var="genre_all" items="${webtoonGenreList}">
+	$('input[name="webtoonGenre"][value="${genre_all.webtoonGenre}"]').attr('checked','checked');
+	</c:forEach>
 	
 	if(${originList[0].webtoonOriginalLink=='nan' }){
 		console.log("no")

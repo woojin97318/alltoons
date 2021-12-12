@@ -48,17 +48,12 @@
 		select * from origin_table where webtoon_num = #{webtoonNum}
 	</select>
 	
-	
-	<select id="countPlatfrom" resultType="int">
-		select count(WEBTOON_PLATFORM_NAME)from PLATFORM_TABLE where webtoon_num = #{webtoonNum}
-	</select>
-	
 	<select id="selectOriginLink" resultMap="origin">
 		select * from origin_table where webtoon_num = #{webtoonNum}
 		order by origin_platform_name
 	</select>
 	<select id="selectwebtoonGenre" resultMap="genre"> 
-		select * form genre_table where webtoon_num = #{webtoonNum}
+		select * from genre_table where webtoon_num = #{webtoonNum}
 	</select>
 	
 	
@@ -66,11 +61,6 @@
 		insert into
 		webtoon_info(webtoon_title,webtoon_num,webtoon_writer,webtoon_content,webtoon_image)
 		values(#{webtoonTitle},webtoon_num_seq.nextval,#{webtoonWriter},#{webtoonContent},#{webtoonImage})
-
-	</insert>
-	<insert id="uploadGenre">
-		insert into genre_table values(#{webtoonNum},#{webtoonGenre})
-		
 	</insert>
 	<insert id="uploadPlatform">
 		insert into platform_table values(#{webtoonNum},#{platformName},#{webtoonLink})
@@ -114,5 +104,7 @@
 	<delete id="delOrigin">
 		delete from origin_table where webtoon_num = #{webtoonNum}
 	</delete>
-	
+	<delete id="delGenre">
+		delete from genre_table where webtoon_num = #{webtoonNum}
+	</delete>
 </mapper>
