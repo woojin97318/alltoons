@@ -9,11 +9,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.alltoons.root.admin.dto.PlatformDTO;
 import com.alltoons.root.admin.dto.WebtoonDTO;
 
-
 public interface WebtoonService {
 	int upload(MultipartHttpServletRequest mul, WebtoonDTO wd);
-	
-
-	
-
 }

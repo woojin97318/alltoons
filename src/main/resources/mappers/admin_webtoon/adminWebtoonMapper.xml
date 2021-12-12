@@ -53,7 +53,10 @@
 		select count(WEBTOON_PLATFORM_NAME)from PLATFORM_TABLE where webtoon_num = #{webtoonNum}
 	</select>
 	
-	
+	<select id="selectOriginLink" resultMap="origin">
+		select * from origin_table where webtoon_num = #{webtoonNum}
+		order by origin_platform_name
+	</select>
 	
 	
 	
@@ -104,4 +107,8 @@
 	<delete id="delLink">
 		delete from platform_table where webtoon_num = #{webtoonNum}
 	</delete>
+	<delete id="delOrigin">
+		delete from origin_table where webtoon_num = #{webtoonNum}
+	</delete>
+	
 </mapper>

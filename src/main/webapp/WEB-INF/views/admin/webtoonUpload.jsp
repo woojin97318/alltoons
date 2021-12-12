@@ -68,20 +68,54 @@
 		html += '<option value="mrblue">미스터블루</option>'
 		html += '<option value="ridibooks">리디북스</option>'
 		html += '</select> ';
-		html += '<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크"> '
+		html += '<input type="text" name="webtoonLink" id="webtoonLink" placeholder="웹툰 링크" required> '
+			html += '<button type="button" onclick="del_link(this)">-</button>'
 		newP.innerHTML = html;
 		box.appendChild(newP);
 	}
+	 const del_link = (obj) => {
+         document.getElementById('box').removeChild(obj.parentNode);
+     }
+	 
+	 function add_origin_link(){
+			var newsp = document.createElement('span');
+			
+			var html = '';
+			cnt += 1;
+			html += '<br>'
+			html += '<select name="originalPlatform" id="originalPlatform">'
+			html += '<option value="naver">네이버</option>'
+			html += '<option value="kakaoWebtoon">카카오웹툰</option>'
+			html += '<option value="kakaoPage">카카오페이지</option>'
+			html += '<option value="bomtoon">봄툰</option>'
+			html += '<option value="lezhin">레진</option>'
+			html += '<option value="toptoon">탑툰</option>'
+			html += '<option value="mrblue">미스터블루</option>'
+			html += '<option value="ridibooks">리디북스</option>'
+			html += '</select> ';
+			html += '<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" required> '
+			html += '<button type="button" onclick="del_origin_link(this)">-</button>'
+			newsp.innerHTML = html;
+			origin_box.appendChild(newsp);
+		}
+	 const del_origin_link = (obj) => {
+         document.getElementById('origin_box').removeChild(obj.parentNode);
+     }
 </script>
 <link rel="stylesheet" href="resources/css/webtoonUpload.css">
 <title>작품 추가</title>
 </head>
 <body>
 	<h1>작품 추가</h1>
+   <%-- <header>
+      <c:import url="./adminHeader.jsp">
+         <c:param name="tag" value="신고 확인"></c:param>
+      </c:import>
+	</header> --%>
 	<form action="${contextPath}/webtoonUpload" method="post" enctype="multipart/form-data">
 		<div style="display: flex;">
 			<div>
-				<img id="webtoonImage" src="resources/resources/default_image.jpg" width=100 height=100 alt="선택된 이미지가 없습니다" />
+				<img id="webtoonImage" src="resources/resources/default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
 			</div>
 			<div>
 				<!-- <label id="image_name">default image</label><br> -->
@@ -130,18 +164,21 @@
 			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
 		
 		<b>원작 링크</b><br>
-		<select name="originalPlatform" id="originalPlatform">
-				<option value="nan" selected>없음</option>
-				<option value="naver">네이버</option>
-				<option value="kakaoWebtoon">카카오웹툰</option>
-				<option value="kakaoPage">카카오페이지</option>
-				<option value="bomtoon">봄툰</option>
-				<option value="lezhin">레진</option>
-				<option value="toptoon">탑툰</option>
-				<option value="mrblue">리디북스</option>
-				<option value="ridibooks">탑툰</option>
-		</select> 
-		<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" ><br> 
+		<button type="button" onclick="add_origin_link()">+</button>
+		<div id="origin_box">
+			<select name="originalPlatform" id="originalPlatform">
+					<option value="nan" selected>없음</option>
+					<option value="naver">네이버</option>
+					<option value="kakaoWebtoon">카카오웹툰</option>
+					<option value="kakaoPage">카카오페이지</option>
+					<option value="bomtoon">봄툰</option>
+					<option value="lezhin">레진</option>
+					<option value="toptoon">탑툰</option>
+					<option value="mrblue">리디북스</option>
+					<option value="ridibooks">탑툰</option>
+			</select> 
+			<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" >
+		</div>
 		<b>세부설명</b><br>
 		<div class="webtoonContent_wrap">
 			<textarea rows="5" cols="45" name="webtoonContent"id="webtoonContent" required></textarea> 

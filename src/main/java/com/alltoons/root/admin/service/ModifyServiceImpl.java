@@ -29,9 +29,6 @@ public class ModifyServiceImpl implements ModifyService{
 		GenreDTO gd =wm.selectGenre(webtoonNum);//장르 입력
 		wd.setWebtoonGenre(gd.getWebtoonGenre());
 		
-		OriginDTO od = wm.selectOrigin(webtoonNum);//원작 입력
-		wd.setOriginalPlatform(od.getOriginalPlatform());
-		wd.setWebtoonOriginalLink(od.getWebtoonOriginalLink());
 		model.addAttribute("countLink",wm.countPlatfrom(webtoonNum));
 		return wd;
 	}
@@ -39,6 +36,11 @@ public class ModifyServiceImpl implements ModifyService{
 	public ArrayList<PlatformDTO> selectLinks(String webtoonNum) {
 		ArrayList<PlatformDTO> list = wm.selectLinks(webtoonNum);
 		return list;
+	}
+	@Override
+	public ArrayList<OriginDTO> selectOriginLinks(String webtoonNum) {
+		ArrayList<OriginDTO> originList = wm.selectOriginLink(webtoonNum);
+		return originList;
 	}
 	@Override
 	public int modify(MultipartHttpServletRequest mul, WebtoonDTO wd) {
@@ -65,7 +67,19 @@ public class ModifyServiceImpl implements ModifyService{
 		System.out.println(wd.getWebtoonGenre());
 		result = wm.modifyGerne(wd);
 		System.out.println("gener 처리: "+result);
-		result = wm.modifyOrigin(wd);
+		
+		//result = wm.modifyOrigin(wd);
+		wm.delOrigin(wd.getWebtoonNum());
+		String origin_platform[] = mul.getParameterValues("originalPlatform");
+		String origin_link[] = mul.getParameterValues("webtoonOriginalLink");
+		OriginDTO od = new OriginDTO();
+		for(int i=0;i<origin_platform.length;i++) {
+			od.setWebtoonNum(wd.getWebtoonNum());
+			od.setOriginalPlatform(origin_platform[i]);
+			od.setWebtoonOriginalLink(origin_link[i]);
+			result = wm.uploadOriginal(od);
+		}
+		
 		System.out.println("origin 처리: "+result);
 		
 		wm.delLink(wd.getWebtoonNum());
@@ -90,4 +104,5 @@ public class ModifyServiceImpl implements ModifyService{
 		System.out.println("이미지 삭제"+deleteImg.getName());
 		deleteImg.delete();
 	}
+	
 }

@@ -31,8 +31,24 @@ public class WebtoonServiceImpl implements WebtoonService{
 		result = wm.uploadWetoon(wd);
 		wd.setWebtoonNum(wm.selectNum(wd).getWebtoonNum());
 		result = wm.uploadGenre(wd);
-		result = wm.uploadOriginal(wd);
-		
+		//result = wm.uploadOriginal(wd);
+		//원작
+		String origin_platform[] = mul.getParameterValues("originalPlatform");
+		String origin_link[] = mul.getParameterValues("webtoonOriginalLink");
+		OriginDTO od = new OriginDTO();
+		for(int i=0;i<origin_platform.length;i++) {
+			if(origin_platform[i].equals("nan")) {
+				System.out.println("원작 없음");
+				od.setWebtoonNum(wd.webtoonNum);
+				od.setOriginalPlatform("nan");
+				od.setWebtoonOriginalLink("nan");
+			}else {
+			od.setWebtoonNum(wd.getWebtoonNum());
+			od.setOriginalPlatform(origin_platform[i]);
+			od.setWebtoonOriginalLink(origin_link[i]);
+			}result = wm.uploadOriginal(od);
+		}
+		//웹툰
 		String platform[] = mul.getParameterValues("platformName");
 		String link[] = mul.getParameterValues("webtoonLink");
 		PlatformDTO pd = new PlatformDTO();
@@ -67,5 +83,6 @@ public class WebtoonServiceImpl implements WebtoonService{
 			wd.setWebtoonImage("default_image");
 		}
 	}
+
 	
 }

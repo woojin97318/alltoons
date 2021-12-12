@@ -19,7 +19,7 @@ public interface WebtoonMapper {
 
 	// public int uploadPlatform(WebtoonDTO wd);
 
-	public int uploadOriginal(WebtoonDTO wd);
+	public int uploadOriginal(OriginDTO od);
 
 	public WebtoonDTO selectTitle(String webtoonTitle);
 
@@ -46,5 +46,10 @@ public interface WebtoonMapper {
 	public int modifyPlatform(PlatformDTO pd);
 
 	public void delLink(int webtoonNum);
+
+	public ArrayList<OriginDTO> selectOriginLink(String webtoonNum);
+
+	public void delOrigin(int webtoonNum);
+
 
 }
