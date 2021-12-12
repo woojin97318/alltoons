@@ -52,14 +52,17 @@
 		<result property="reviewNum" column="review_num"/>
 		<result property="reviewContent" column="review_content"/>
 		<result property="reviewTime" column="review_time"/>
+		<result property="webtoonNum" column="webtoon_num"/>
 		<result property="webtoonImage" column="webtoon_image"/>
 		<result property="webtoonTitle" column="webtoon_title"/>
 	</resultMap>
 	
 	<select id="getMyReview" resultMap="myReview">
-		select review_num, review_content, review_time, webtoon_image, webtoon_title
+		select review_num, review_content, review_time, review_info.webtoon_num,
+			   webtoon_image, webtoon_title
 		from review_info, webtoon_info
-		where user_email = #{userEmail} and review_info.webtoon_num = webtoon_info.webtoon_num
+		where user_email = #{userEmail}
+			  and review_info.webtoon_num = webtoon_info.webtoon_num
 		order by review_num desc
 	</select>
 	
