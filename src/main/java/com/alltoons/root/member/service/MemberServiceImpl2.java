@@ -119,6 +119,11 @@ public class MemberServiceImpl2 implements MemberService2 {
 	public int myReviewDelete(String reviewNum) {
 		return mapper2.myReviewDelete(reviewNum);
 	}
+
+	@Override
+	public int userImageDefault(String userEmail) {
+		return mapper2.userImageDefault(userEmail);
+	}
 	
 	
 }

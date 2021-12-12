@@ -34,11 +34,8 @@ public class MemberController2 implements MemberSessionName {
 			Model model, HttpSession session) { //회원 탈퇴
 		String message = ms2.memberDeleteChk(userPw, session.getAttribute(LOGIN).toString());
 		String url = null;
-		if(message.equals("탈퇴가 완료되었습니다")) {
-			url = "index";
-		}else {
-			url = "member/memberDelete";
-		}
+		if(message.equals("탈퇴가 완료되었습니다")) url = "index";
+		else url = "member/memberDelete";
 		model.addAttribute("message", message);
 		model.addAttribute("url", url);
 		return "/common/alertHref";
@@ -74,23 +71,17 @@ public class MemberController2 implements MemberSessionName {
 		if(newUserPw.equals("") || newUserPwChk.equals("")) {
 			message = "비밀번호를 입력해주세요";
 			url = "member/newPassword";
-			model.addAttribute("message", message);
-			model.addAttribute("url", url);
-			return "/common/alertHref";
 		}else if(newUserPw.equals(newUserPwChk)) {
 			ms2.PasswordModify(newUserPw, session.getAttribute(LOGIN).toString());
 			message = "비밀번호가 변경되었습니다";
 			url = "member/myPage";
-			model.addAttribute("message", message);
-			model.addAttribute("url", url);
-			return "/common/alertHref";
 		}else {
 			message = "비밀번호가 일치하지 않습니다";
 			url = "member/newPassword";
-			model.addAttribute("message", message);
-			model.addAttribute("url", url);
-			return "/common/alertHref";
 		}
+		model.addAttribute("message", message);
+		model.addAttribute("url", url);
+		return "/common/alertHref";
 	}
 	
 	@GetMapping("myPage")
@@ -118,16 +109,22 @@ public class MemberController2 implements MemberSessionName {
 	}
 	@PostMapping("userImageModifyPage")
 	public String userImageModifyPage(MultipartHttpServletRequest mul,
-			Model model) {
+			Model model) { //이미지 변경후 수정하기 버튼 클릭할 때
 		int result = ms2.userImageModify(mul);
-		String message, url;
-		if(result == 1) {
-			message = "프로필 사진이 수정되었습니다";
-			url = "member/myPage";
-		}else {
-			message = "프로필 사진 수정 Error";
-			url = "member/userImageModify";
-		}
+		String message, url = "member/myPage";
+		if(result == 1) message = "프로필 사진이 수정되었습니다";
+		else message = "프로필 사진 수정 Error";
+		model.addAttribute("message", message);
+		model.addAttribute("url", url);
+		return "/common/alertHref";
+	}
+	@GetMapping("userImageDefault")
+	public String userImageDefault(@RequestParam String userEmail,
+			Model model) {
+		int result = ms2.userImageDefault(userEmail);
+		String message, url = "member/myPage";
+		if(result == 1) message = "수정이 완료되었습니다";
+		else message = "프로필 사진 수정 Error";
 		model.addAttribute("message", message);
 		model.addAttribute("url", url);
 		return "/common/alertHref";

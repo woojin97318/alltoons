@@ -4,14 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.alltoons.root.member.mapper.MemberMapper2">
-
-	<resultMap id="user" type="com.alltoons.root.member.dto.MemberDTO">
-		<result property="userEmail" column="user_email"/>
-		<result property="userPassword" column="user_password"/>
-		<result property="userNick" column="user_nick"/>
-		<result property="userImage" column="user_image"/>
-		<result property="division" column="division"/>
-	</resultMap>
 	
 	<delete id="memberDelete">
 		delete from user_info
@@ -71,5 +63,11 @@
 		from review_info
 		where review_num = #{reviewNum} 
 	</delete>
+	
+	<update id="userImageDefault">
+		update user_info
+		set user_image = 'default_image.png'
+		where user_email = #{userEmail}
+	</update>
 	
 </mapper>

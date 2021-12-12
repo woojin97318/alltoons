@@ -15,4 +15,5 @@ public interface MemberService2 {
 	public void myReviewCnt(Model model, String userEmail);
 	public void myReviewContent(Model model, String userEmail);
 	public int myReviewDelete(String reviewNum);
+	public int userImageDefault(String userEmail);
 }

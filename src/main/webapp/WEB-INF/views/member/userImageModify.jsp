@@ -10,12 +10,14 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	function readURL(input) {
-		if (input.files && input.files[0]) {
+		var file = input.files[0]
+		console.log(file)
+		if (file != '') {
 			var reader = new FileReader();
+			reader.readAsDataURL(file);
 			reader.onload = function(e) {
-				$('#img').attr('src', e.target.result);
+				$('#userImage').attr('src', e.target.result);
 			}
-			reader.readAsDataURL(input.files[0]);
 		}
 	}
 </script>
@@ -25,14 +27,15 @@
 		<h3>프로필 사진 수정</h3>
 		<form action="${contextPath }/member/userImageModifyPage" method="post"
 			enctype="multipart/form-data">
-			<img id="img" src="#" alt="your image" width="100px" height="100px" /><br>
+			<img id="userImage" width="100px" height="100px"
+				src="${contextPath }/member/userImageView?file=${userInfo.userImage}"/><br>
 			<input type="hidden" name="userEmail" value="${userInfo.userEmail}">
 			<input type="file" onchange="readURL(this);" name="file"><br>
+			<button type="button" onclick="location.href='${contextPath}/member/userImageDefault?userEmail=${userInfo.userEmail }'">
+				기본 이미지로 변경
+			</button><br>
 			<input type="submit" value="수정하기">
 		</form>
-		<hr>
-		프로필 사진 삭제 방법<br>
-		이미지 선택을 하지 않은 상태에서 수정하기 버튼을 클릭
 	</div>
 </body>
 </html>
