@@ -38,9 +38,9 @@
 		select * from user_info
 		where user_email = #{userEmail}
 	</select>
-	<update id="updatePassword">
+	<update id="updatePassword" parameterType="String">
 		update user_info
-		set user_password = #{codedStr},
+		set user_password = #{codedStr}
 		where user_email = #{email}
 	</update>
 </mapper>

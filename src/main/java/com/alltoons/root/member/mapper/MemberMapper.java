@@ -2,6 +2,8 @@ package com.alltoons.root.member.mapper;
 
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.alltoons.root.member.dto.MemberDTO;
 
 public interface MemberMapper {
@@ -13,5 +15,6 @@ public interface MemberMapper {
 
 	public MemberDTO emailChk(String email);
 	
-	public int updatePassword(String email,String codedStr);
+	//public int updatePassword(MemberDTO dto);
+	public int updatePassword(@Param("codedStr")String codedStr, @Param("email") String email);
 }

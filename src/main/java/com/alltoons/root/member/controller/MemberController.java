@@ -188,7 +188,7 @@ public class MemberController implements MemberSessionName {
 		session.setAttribute("joinCode", password);
 		String subject = email + "님의 비밀번호입니다.";
 		StringBuilder sb = new StringBuilder();
-		sb.append(email + "님의의 비밀번호는 " + password + " 입니다.");
+		sb.append(email + "님의 임시 비밀번호는 " + password + " 입니다.");
 		sb.append("반드시 비밀번호를 변경해주세요!");
 		
 		return mailService.send(subject, sb.toString(), "alltoons2021@gmail.com", email, null);

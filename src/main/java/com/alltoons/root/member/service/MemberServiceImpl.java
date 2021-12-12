@@ -31,6 +31,8 @@ public class MemberServiceImpl implements MemberService {
 
 	BCryptPasswordEncoder encoder;
 
+	private MemberDTO dto;
+
 	public MemberServiceImpl() {
 		encoder = new BCryptPasswordEncoder();
 	}
@@ -125,35 +127,41 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
-
 	@Override
 	public int emailChk(String email) {
 		MemberDTO dto = mapper.emailChk(email);
-		if(dto == null) {
+		if (dto == null) {
 			return 0;
-		}else {
-			return 1;			
+		} else {
+			return 1;
 		}
 	}
+
 	@Override
 	public String newPassword(String email) {
-	      Random ran = new Random();
-	      String str="";
-	      int num;
-	      while(str.length() != 8) {
-	         num = ran.nextInt(75)+48;
-	         if((num>=48 && num<=57)||(num>=65 && num<=90)||(num>=97 && num<=122)) {
-	            str+=(char)num;
-	         }else {
-	            continue;
-	         }
-	      }
-	      
-	      String codedStr = encoder.encode(str);
-	      System.out.println(codedStr);
-	      //mapper.updatePassword(email,codedStr);
-	      return str;
+		// MemberDTO dto = new MemberDTO();
+		Random ran = new Random();
+		String str = "";
+		int num;
+		while (str.length() != 8) {
+			num = ran.nextInt(75) + 48;
+			if ((num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)) {
+				str += (char) num;
+			} else {
+				continue;
+			}
+		}
 
-	   }
+		String codedStr = encoder.encode(str);
+		System.out.println(email);
+		System.out.println(str);
+		System.out.println("암호화된 임시비밀번호" + codedStr);
+		// dto.setUserEmail(email);
+		// dto.setUserPassword(codedStr);
+		// mapper.updatePassword(dto);
+		mapper.updatePassword(codedStr, email);
+		return str;
+
+	}
 
 }
