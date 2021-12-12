@@ -15,11 +15,6 @@
 	width: 30%;
 }
 </style>
-<script type="text/javascript">
-	function webtoonInfo() {
-		location.href="${contextPath}/index";
-	}
-</script>
 </head>
 <body>
 	<div align="center">
@@ -45,11 +40,13 @@
 				<tr>
 					<td class="td2">
 						<img src="${contextPath }/member/webtoonImageView?file=${myReview.webtoonImage}"
-							width="70px", height="70px" onclick="webtoonInfo()" style="cursor:pointer">
+							width="70px" height="70px" onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${myReview.webtoonNum }'"
+							style="cursor:pointer">
 					</td>
 					<td colspan="2">
-						<span onclick="webtoonInfo()" style="cursor:pointer">
-							${myReview.webtoonTitle }(링크연결필요)
+						<span onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${myReview.webtoonNum }'"
+							style="cursor:pointer">
+							${myReview.webtoonTitle }
 						</span>
 					</td>
 				</tr>

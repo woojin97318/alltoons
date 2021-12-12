@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alltoons.root.admin.mapper.ReportMapper">
+
+	<resultMap id="report" type="com.alltoons.root.admin.dto.ReportDTO">
+		<result property="reportNum" column="report_num"/>
+		<result property="reportUserEmail" column="report_user_email"/>
+		<result property="reportContent" column="report_content"/>
+		<result property="reportTime" column="report_time"/>
+		<result property="reviewNum" column="review_num"/>
+		<result property="reviewUserEmail" column="review_user_email"/>
+		<result property="reviewContent" column="review_content"/>
+		<result property="reviewTime" column="review_time"/>
+		<result property="webtoonNum" column="webtoon_num"/>
+		<result property="webtoonImage" column="webtoon_image"/>
+		<result property="webtoonTitle" column="webtoon_title"/>
+	</resultMap>
+
+	<select id="getReport" resultMap="report">
+		select report_num, report_info.user_email as report_user_email,
+			   report_content, report_time, report_info.review_num,
+			   review_info.user_email as review_user_email, review_content,
+			   review_time, review_info.webtoon_num, webtoon_image, webtoon_title
+		from report_info, review_info, webtoon_info
+		where report_info.review_num = review_info.review_num
+			  and review_info.webtoon_num = webtoon_info.webtoon_num
+		order by report_time asc
+	</select>
+	
+	<delete id="reportDelete">
+		delete
+		from report_info
+		where report_num = #{reportNum}
+	</delete>
+	
+	<delete id="reportReviewDel">
+		delete
+		from review_info
+		where review_num = #{reviewNum}
+	</delete>
+	
+</mapper>
