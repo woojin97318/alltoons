@@ -10,25 +10,48 @@
 <title>회원가입 페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	/* function sendmail() {
+	function sendmail() {
 		var userEmail = $("#emailText").val();
-		var form = {email : userEmail}
+		var form = {
+			email : userEmail
+		}
 		$.ajax({
 			url : "sendmail", //"ajax",
 			type : "GET",
-			data : JSON.stringify(form),
+			data : form,
 			dataType : "json",
 			contentType : "application/json; charset=utf-8",
 			success : function(result) {
-				$("#authTimer").text(result.email+"인증 타이머 시작")
+				$("#authTimer").text(result.email + "인증 타이머 시작")
 				console.log("메일 전송 성공")
-				
+				alert('메일함을 확인해주세요')
+
 			},
 			error : function() {
 				alert('메일 전송 실패')
 			}
 		})
-	} */
+	}
+
+	function authChk() {
+		var authKey = $("#authKey").val();
+		var authForm = {
+			key : authKey
+		}
+		$.ajax({
+			url : "chkKey",
+			type : "GET",
+			data : authForm,
+			contentType : "application/json; charset=utf-8",
+			success : function(result) {
+				console.log("인증 성공")
+				alert('인증에 성공했습니다.')
+			},
+			error : function() {
+				alert('인증키가 일치하지 않습니다.')
+			}
+		})
+	}
 
 	function readURL(input) {
 		if (input.files && input.files[0]) {
@@ -42,7 +65,7 @@
 </script>
 </head>
 <body>
-	<!-- <div align="center">
+	<div align="center">
 		<form action="signupform" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
@@ -55,25 +78,21 @@
 				</tr>
 				<tr>
 					<td>이메일*</td>
-					<td><input type="text" id="emailCheck" name="userEmail"
-						placeholder="이메일을 입력해주세요"></td>
+					<td><input type="text" id="emailText" name="email" autofocus
+						autocomplete="off" required placeholder="이메일을 입력해주세요" /></td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td><button type="button" onclick="sendmail()">이메일 전송</button></td>
+				</tr>
+				<tr>
+					<td colspan="2">인증번호 <input type="text" id="authKey">
+						<button type="button" onclick="authChk()">인증하기</button>
+					</td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" value="인증확인">
-						<button type="button" id="emailCheck" onclick="sendmail()">인증번호받기</button>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">인증번호 <input type="text"
-						id="certificationNumber">
-						<button id="certificationBtn" onclick="">인증하기</button>
-					</td>
-				</tr>
-				<tr>
-					<td>
-			
-					</td>
 				</tr>
 				<tr>
 					<td>비밀번호*</td>
@@ -85,20 +104,21 @@
 				</tr>
 			</table>
 		</form>
- -->
-	<form action="/sendMail/auth" id="joinForm" method="post">
-		<fieldset>
-			<legend class="screen_out"> 회원가입 폼</legend>
-			<div class="box email">
-				<label for="email">이메일</label> <input type="text" id="email"
-					name="email" autofocus autocomplete="off" required />
-			</div>
-			<div class="box btn">
-				<button type="submit" class="btn join">
-					<i class="fa fa-envelope"></i> 이메일 전송
-				</button>
-			</div>
-		</fieldset>
-	</form>
+		<!--
+		<form action="/sendMail/auth" id="joinForm" method="post">
+			<fieldset>
+				<legend class="screen_out"> 회원가입 폼</legend>
+				 				<div class="box email">
+					<label for="email">이메일</label> <input type="text" id="emailText"
+						name="email" autofocus autocomplete="off" required />
+				</div>
+				<div class="box btn">
+					<button type="button" onclick="sendmail()" class="btn join">
+						이메일 전송</button>
+				</div> 
+			</fieldset>
+		</form>
+		-->
+	</div>
 </body>
 </html>

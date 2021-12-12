@@ -125,4 +125,15 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+
+	@Override
+	public int emailChk(String email) {
+		MemberDTO dto = mapper.emailChk(email);
+		if(dto == null) {
+			return 0;
+		}else {
+			return 1;			
+		}
+	}
+
 }

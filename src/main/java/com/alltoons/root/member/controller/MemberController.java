@@ -37,12 +37,21 @@ public class MemberController implements MemberSessionName {
 	@Autowired
 	MailService mailService;
 
+	private String authKey;
 	/*
 	 * private MemberDTO dto;
 	 * 
 	 * public void setDTO(MemberDTO dto) { this.dto = dto; } public MemberDTO
 	 * getDTO() { return dto; }
 	 */
+
+	public String getAuthKey() {
+		return authKey;
+	}
+
+	public void setAuthKey(String authKey) {
+		this.authKey = authKey;
+	}
 
 	@GetMapping("login")
 	public String login() {
@@ -122,17 +131,52 @@ public class MemberController implements MemberSessionName {
 	 * 
 	 * }
 	 */
-	@PostMapping(value = "sendmail", produces = "application/json; charset=utf-8")
+	@GetMapping(value = "sendmail", produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public boolean sendMailAuth(HttpSession session, @RequestParam String email) {
+		System.out.println(email);
 		int ran = new Random().nextInt(100000) + 10000; // 10000~99999
 		String joinCode = String.valueOf(ran);
+		System.out.println("인증키 생성 : " + joinCode);
 		session.setAttribute("joinCode", joinCode);
-
 		String subject = "올툰즈 회원가입 인증 코드 발급 안내 입니다!";
 		StringBuilder sb = new StringBuilder();
 		sb.append("귀하의 인증 코드는 " + joinCode + " 입니다.");
-		return mailService.send(subject, sb.toString(), "tmd0915mp@naver.com", email, null);
+
+		setAuthKey(joinCode);
+
+		int result = ms.emailChk(email);
+
+		if (result == 0) {
+			System.out.println("메일 중복 확인 : " + email + "결과 확인 : " + result);
+			// 인증 메일 전송
+		} else {
+			System.out.println("메일 중복 확인 : " + email + "결과 확인 : " + result);
+			// 중복 메일 있음 메세지
+		}
+
+		return mailService.send(subject, sb.toString(), "alltoons2021@gmail.com", email, null);
+
+	}
+
+	@GetMapping(value = "chkKey", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public boolean chkKey(HttpSession session, @RequestParam String key) {
+		String sysKey = getAuthKey();
+
+		System.out.println("전송된 인증키 : " + sysKey);
+		System.out.println("사용자 입력키 : " + key);
+		if (sysKey.equals(key)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	@GetMapping("findpassword")
+	public String findPassword() {
+		return "member/findPassword";
 	}
 
 }

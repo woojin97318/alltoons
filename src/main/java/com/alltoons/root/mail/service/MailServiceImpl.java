@@ -5,17 +5,16 @@ import java.io.File;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MailServiceImpl implements MailService {
-	private JavaMailSender javaMailSender;
 
-	public void setJavaMailSender(JavaMailSender javaMailSender) {
-		this.javaMailSender = javaMailSender;
-	}
+	@Autowired
+	JavaMailSender javaMailSender;
 
 	@Override
 	public boolean send(String subject, String text, String from, String to, String filePath) {
@@ -42,6 +41,11 @@ public class MailServiceImpl implements MailService {
 		}
 
 		return false;
+	}
+
+	@Override
+	public int authChk() {
+		return 0;
 	}
 
 }

@@ -13,4 +13,5 @@ public interface MemberService {
 	public void keepLogin(String sessionId, Date limitDate, String userEmail);
 	public int signUpForm(MultipartHttpServletRequest mul);
 	public String rand();
+	public int emailChk(String email);
 }
