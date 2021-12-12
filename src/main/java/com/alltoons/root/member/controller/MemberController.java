@@ -98,6 +98,7 @@ public class MemberController implements MemberSessionName {
 	@PostMapping("signupform")
 	public String signupform(MultipartHttpServletRequest mul, Model model) {
 		int result = ms.signUpForm(mul);
+		System.out.println(mul);
 		String message, url;
 		if (result == 1) {
 			message = "Alltoons 회원가입이 완료되었습니다";
@@ -166,7 +167,7 @@ public class MemberController implements MemberSessionName {
 
 		System.out.println("전송된 인증키 : " + sysKey);
 		System.out.println("사용자 입력키 : " + key);
-		if (sysKey.equals(key)) {
+		if (sysKey==key) {
 			return true;
 		} else {
 			return false;

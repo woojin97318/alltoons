@@ -43,7 +43,7 @@
 			type : "GET",
 			data : authForm,
 			contentType : "application/json; charset=utf-8",
-			success : function(result) {
+			success : function() {
 				console.log("인증 성공")
 				alert('인증에 성공했습니다.')
 			},
@@ -74,7 +74,7 @@
 				</tr>
 				<tr>
 					<td>이미지</td>
-					<td><input type="file" onchange="readURL(this);" name="file"></td>
+					<td><input type="file" onchange="readURL(this);" name="userImage"></td>
 				</tr>
 				<tr>
 					<td>이메일*</td>
@@ -97,6 +97,11 @@
 				<tr>
 					<td>비밀번호*</td>
 					<td><input type="password" name="userPassword"
+						placeholder="비밀번호"></td>
+				</tr>
+				<tr>
+					<td>비밀번호확인</td>
+					<td><input type="password" name="chkPassword"
 						placeholder="비밀번호"></td>
 				</tr>
 				<tr>
