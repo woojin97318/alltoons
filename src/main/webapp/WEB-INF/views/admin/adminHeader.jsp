@@ -21,7 +21,10 @@
 
 </head>
 <body>
-	<div class="menu-title">작품 삭제</div>
+	<div class="menu-title">
+		<c:out value="${param.tag }"></c:out>
+	</div>
+	
 	<button id="backBtn" onclick="back()" type="button"></button><br>
 	<div class="scrollBtn">
 		<nav>

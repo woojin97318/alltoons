@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +24,12 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+	var page = 1;
+	
 	function change() {
+		
 		const btnName = document.getElementById('select');
-		const select = '선택';
+		const select = '삭제';
 		const cancel = '취소';
 		if (btnName.value == cancel) {
 			btnName.value = select;
@@ -39,10 +43,25 @@
 	function off() {
 		$().hide();
 	}
+	function btnActive()  {
+		const btn = document.getElementById('delete_btn');
+		btn.disabled = false;
+	}
+
+	function btnDisabled()  {
+		const btn = document.getElementById('delete_btn');
+		btn.disabled = true;
+	}
 </script>
 <title>작품 삭제</title>
 </head>
-<header><c:import url="./adminHeader.jsp" /></header>
+
+<header>
+		<c:import url="./adminHeader.jsp">
+			<c:param name="tag" value="작품 삭제"></c:param>
+		</c:import>
+</header>
+	
 <body>
 	
 	
@@ -52,10 +71,15 @@
 			<input type="submit" value="검색">
 		</form>
 	</div>
+	
 	<c:if test="${search != null }">
 		<label><b>" ${search } "</b>에 대한 검색 결과 입니다.</label><br>
 	</c:if>
-	
+	<!-- 
+	<button onclick="btnActive()">삭제</button>
+	<button onclick="btnDisabled()">취소</button>
+	<button id="delete_btn">테스트</button>
+	 -->
 	<hr>
 	<div>
 	<h2>제목명</h2>
@@ -88,7 +112,7 @@
 						<th>${dto.webtoonNum }</th>
 						<td>${dto.webtoonTitle }</td>
 						<td>${dto.webtoonWriter }</td>
-						<th><input type="button" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th><input type="button" name="delete_btn" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
@@ -127,7 +151,7 @@
 						<th>${dto.webtoonNum }</th>
 						<td>${dto.webtoonTitle }</td>
 						<td>${dto.webtoonWriter }</td>
-						<th><input type="button" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th><input type="button" name="delete_btn" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
@@ -165,7 +189,7 @@
 						<th>${dto.webtoonNum }</th>
 						<td>${dto.webtoonTitle }</td>
 						<td>${dto.webtoonWriter }</td>
-						<th><input type="button" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th><input type="button" name="delete_btn" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
