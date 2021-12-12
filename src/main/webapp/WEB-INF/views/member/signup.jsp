@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	function sendmail() {
-		var userEmail = $("#emailText").val();
+		var userEmail = $("#userEmail").val();
 		var form = {
 			email : userEmail
 		}
@@ -78,7 +78,7 @@
 				</tr>
 				<tr>
 					<td>이메일*</td>
-					<td><input type="text" id="emailText" name="email" autofocus
+					<td><input type="text" id="userEmail" name="userEmail" autofocus
 						autocomplete="off" required placeholder="이메일을 입력해주세요" /></td>
 				</tr>
 
