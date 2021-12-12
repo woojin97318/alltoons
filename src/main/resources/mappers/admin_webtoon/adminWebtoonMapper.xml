@@ -57,7 +57,9 @@
 		select * from origin_table where webtoon_num = #{webtoonNum}
 		order by origin_platform_name
 	</select>
-	
+	<select id="selectwebtoonGenre" resultMap="genre"> 
+		select * form genre_table where webtoon_num = #{webtoonNum}
+	</select>
 	
 	
 	<insert id="uploadWetoon">
@@ -76,7 +78,9 @@
 	<insert id="uploadOriginal">
 		insert into origin_table values(#{webtoonNum},#{originalPlatform},#{webtoonOriginalLink})
 	</insert>
-	
+	<insert id="uploadGenre">
+		insert into genre_table values(#{webtoonNum},#{webtoonGenre})
+	</insert>
 	
 	
 	<update id="modifyWebtoon">

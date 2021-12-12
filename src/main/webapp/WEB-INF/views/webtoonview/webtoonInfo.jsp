@@ -24,17 +24,25 @@
 		</c:choose>
 		<div>
 			${webtoonDate.webtoonTitle}<br>
+			<button type="button" name="interest">♡</button><label>0</label><br>
+			<button type="button" name="favorites">☆</button><br>
 			<b>작가명</b><br>
 			${webtoonDate.webtoonWriter }
 		</div>
 	</div>
 	<b>보러가기</b>
 	<c:forEach var="list" items="${platformList}">
-		<button type="button" onclick="" >${list.platformName }</button>
+		<button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button>
 	</c:forEach>
 	<br>
-	<c:if test="${webtoonDate.webtoonOriginalLink !='nan' }">
-		<b>이 작품은 소설이 존재해요!</b>
+	<c:if test="${originList[0].webtoonOriginalLink !='nan' }">
+		<b>이 작품은 소설이 존재해요!</b><br>
+		<c:forEach var="origin" items="${originList }">
+			<button type="button" onclick="location.href='${origin.webtoonOriginalLink}'" >${origin.originalPlatform}</button>
+		</c:forEach>
 	</c:if>
+	<br>
+	<b>작품 소개글</b><br>
+	<label>${webtoonDate.webtoonContent }</label>
 </body>
 </html>

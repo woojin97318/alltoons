@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import com.alltoons.root.admin.dto.PlatformDTO;
 import com.alltoons.root.admin.dto.WebtoonDTO;
 import com.alltoons.root.admin.mapper.WebtoonMapper;
+import com.alltoons.root.webtoon.dto.FavoritesDTO;
+import com.alltoons.root.webtoon.dto.WebtoonOriginDTO;
 import com.alltoons.root.webtoon.dto.WebtoonPlatformDTO;
 import com.alltoons.root.webtoon.dto.WebtoonViewDTO;
 import com.alltoons.root.webtoon.mapper.WebtoonViewMapper;
@@ -21,12 +23,18 @@ public class WebtoonViewServiceImpl implements WebtoonViewService{
 	public void webtoonData(String webtoonNum, WebtoonViewDTO wvd, Model model) {
 		wvd = wvm.webtoonData(webtoonNum);
 		model.addAttribute("webtoonDate",wvd);
+		
 		ArrayList<WebtoonPlatformDTO> platformList = wvm.platformList(webtoonNum);
-		/*for(int i=0;i<platformList.size();i++) {
-			System.out.println(platformList.get(i).getPlatformName());
-		}*/
 		model.addAttribute("platformList",platformList);
 		
+		ArrayList<WebtoonOriginDTO> originList = wvm.originList(webtoonNum);
+		model.addAttribute("originList",originList);
+	}
+
+	@Override
+	public void favorites(String webtoonNum, FavoritesDTO fd, Model model) {
+		int favoritesCount = wvm.favoritesCount(webtoonNum);
+		int intesrestCount = wvm.intesrestCount(webtoonNum);
 	}
 	
 	

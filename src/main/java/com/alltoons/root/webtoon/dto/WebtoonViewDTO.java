@@ -6,10 +6,7 @@ public class WebtoonViewDTO {
 	public String webtoonWriter;
 	public String webtoonContent;
 	public String webtoonImage;
-
 	public String webtoonGenre;
-	public String originalPlatform;
-	public String webtoonOriginalLink;
 	
 	public String getWebtoonTitle() {
 		return webtoonTitle;
@@ -47,18 +44,4 @@ public class WebtoonViewDTO {
 	public void setWebtoonGenre(String webtoonGenre) {
 		this.webtoonGenre = webtoonGenre;
 	}
-	public String getOriginalPlatform() {
-		return originalPlatform;
-	}
-	public void setOriginalPlatform(String originalPlatform) {
-		this.originalPlatform = originalPlatform;
-	}
-	public String getWebtoonOriginalLink() {
-		return webtoonOriginalLink;
-	}
-	public void setWebtoonOriginalLink(String webtoonOriginalLink) {
-		this.webtoonOriginalLink = webtoonOriginalLink;
-	}
-	
-	
 }

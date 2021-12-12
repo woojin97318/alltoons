@@ -30,7 +30,16 @@ public class WebtoonServiceImpl implements WebtoonService{
 		imgUpload(mul,wd);
 		result = wm.uploadWetoon(wd);
 		wd.setWebtoonNum(wm.selectNum(wd).getWebtoonNum());
-		result = wm.uploadGenre(wd);
+		//result = wm.uploadGenre(wd);
+		//장르
+		String webtoonGenre[] = mul.getParameterValues("webtoonGenre");
+		GenreDTO gd = new GenreDTO();
+		for(int i=0;i<webtoonGenre.length;i++) {
+			gd.setWebtoonNum(wd.webtoonNum);
+			gd.setWebtoonGenre(webtoonGenre[i]);
+			result = wm.uploadGenre(gd);	
+		}
+		
 		//result = wm.uploadOriginal(wd);
 		//원작
 		String origin_platform[] = mul.getParameterValues("originalPlatform");

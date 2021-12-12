@@ -26,12 +26,15 @@ public class ModifyServiceImpl implements ModifyService{
 	public WebtoonDTO list(String webtoonNum,Model model) {
 		WebtoonDTO wd = new WebtoonDTO();
 		wd = wm.selectList(webtoonNum);//기본 webtoonDTO
-		GenreDTO gd =wm.selectGenre(webtoonNum);//장르 입력
-		wd.setWebtoonGenre(gd.getWebtoonGenre());
-		
 		model.addAttribute("countLink",wm.countPlatfrom(webtoonNum));
 		return wd;
 	}
+	@Override
+	public ArrayList<GenreDTO> selectwebtoonGenre(String webtoonNum) {
+		ArrayList<GenreDTO> webtoonGenre = wm.selectwebtoonGenre(webtoonNum);
+		return webtoonGenre;
+	}
+	
 	@Override
 	public ArrayList<PlatformDTO> selectLinks(String webtoonNum) {
 		ArrayList<PlatformDTO> list = wm.selectLinks(webtoonNum);
@@ -104,5 +107,6 @@ public class ModifyServiceImpl implements ModifyService{
 		System.out.println("이미지 삭제"+deleteImg.getName());
 		deleteImg.delete();
 	}
+	
 	
 }

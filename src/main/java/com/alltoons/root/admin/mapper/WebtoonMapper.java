@@ -9,15 +9,11 @@ import com.alltoons.root.admin.dto.PlatformDTO;
 import com.alltoons.root.admin.dto.WebtoonDTO;
 
 public interface WebtoonMapper {
-	// public void upload(WebtoonDTO wd);
-
 	public int uploadWetoon(WebtoonDTO wd);
 
 	public WebtoonDTO selectNum(WebtoonDTO wd);
 
 	public int uploadGenre(WebtoonDTO wd);
-
-	// public int uploadPlatform(WebtoonDTO wd);
 
 	public int uploadOriginal(OriginDTO od);
 
@@ -27,13 +23,11 @@ public interface WebtoonMapper {
 
 	public WebtoonDTO selectList(String webtoonNum);
 
-	// public PlatformDTO selectLinks(String webtoonNum);
-
 	public ArrayList<PlatformDTO> selectLinks(String webtoonNum);
 
 	public int countPlatfrom(String webtoonNum);
 
-	public OriginDTO selectOrigin(String webtoonNum);
+	//public OriginDTO selectOrigin(String webtoonNum);
 
 	public GenreDTO selectGenre(String webtoonNum);
 
@@ -50,6 +44,10 @@ public interface WebtoonMapper {
 	public ArrayList<OriginDTO> selectOriginLink(String webtoonNum);
 
 	public void delOrigin(int webtoonNum);
+
+	public int uploadGenre(GenreDTO gd);
+
+	public ArrayList<GenreDTO> selectwebtoonGenre(String webtoonNum);
 
 
 }

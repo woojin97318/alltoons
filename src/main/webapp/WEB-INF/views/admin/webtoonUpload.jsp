@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-	/* webtoonTitle */
+<script type="text/javascript">/*글자수*/
+/* webtoonTitle */
 	$(function(){
 		$(document).on('keyup', '#webtoonTitle', function(e){
 		    var webtoonName = $(this).val();
@@ -51,6 +51,8 @@
 	          }
 	      }
 	  }  
+</script>
+<script type="text/javascript">/* +버튼 -버튼 */
 	var cnt=0;
 	function add_link(){
 		var newP = document.createElement('span');
@@ -92,6 +94,8 @@
 			html += '<option value="toptoon">탑툰</option>'
 			html += '<option value="mrblue">미스터블루</option>'
 			html += '<option value="ridibooks">리디북스</option>'
+			html += '<option value="naverSeries">네이버 시리즈</option>'
+			html += '<option value="munpia">문피아</option>'
 			html += '</select> ';
 			html += '<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" required> '
 			html += '<button type="button" onclick="del_origin_link(this)">-</button>'
@@ -149,19 +153,19 @@
 		</div>
 		<br>
 		<b>장르</b><br>
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g1">에피소드 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g2">옴니버스 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g3">스토리 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g4">일상 &ensp; <br>
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g5">개그 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g6">판타지 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g7">액션 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g8">드라마 &ensp; <br>
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g9">순정 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g10">감성 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g11">스릴러 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; <br>
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g1">에피소드 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g2">옴니버스 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g3">스토리 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g4">일상 &ensp; <br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g5">개그 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g6">판타지 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g7">액션 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g8">드라마 &ensp; <br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g9">순정 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g10">감성 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g11">스릴러 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; <br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
 		
 		<b>원작 링크</b><br>
 		<button type="button" onclick="add_origin_link()">+</button>
@@ -174,8 +178,10 @@
 					<option value="bomtoon">봄툰</option>
 					<option value="lezhin">레진</option>
 					<option value="toptoon">탑툰</option>
-					<option value="mrblue">리디북스</option>
-					<option value="ridibooks">탑툰</option>
+					<option value="mrblue">미스터 블루</option>
+					<option value="ridibooks">리디북스</option>
+					<option value="naverSeries">네이버 시리즈</option>
+					<option value="munpia">문피아</option>
 			</select> 
 			<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" >
 		</div>

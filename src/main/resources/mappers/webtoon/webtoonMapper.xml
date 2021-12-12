@@ -11,8 +11,6 @@
 		<result property="webtoonContent" column="webtoon_content" />
 		<result property="webtoonImage" column="webtoon_image" />
 		<result property="webtoonGenre" column="webtoon_genre" />
-		<result property="originalPlatform" column="origin_platform_name" />
-		<result property="webtoonOriginalLink" column="ORIGIN_WEBTOON_LINK" />
 	</resultMap>
 	<resultMap
 		type="com.alltoons.root.webtoon.dto.WebtoonPlatformDTO" id="platform">
@@ -20,18 +18,36 @@
 		<result property="platformName" column="WEBTOON_PLATFORM_NAME" />
 		<result property="webtoonLink" column="webtoon_link" />
 	</resultMap>
+	<resultMap type="com.alltoons.root.webtoon.dto.WebtoonOriginDTO" id="origin">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="originalPlatform" column="origin_platform_name" />
+		<result property="webtoonOriginalLink" column="ORIGIN_WEBTOON_LINK" />
+	</resultMap>
+	<resultMap type="com.alltoons.root.webtoon.dto.FavoritesDTO" id="favorites">
+		<result property="userEmail" column="user_email"/>
+		<result property="webtoonNum" column="webtoon_num"/>
+		<result property="favofites" column="favorties"/>
+		<result property="interest" column="intertest"/>
+	</resultMap>
+	
 	
 	<select id="webtoonData" resultMap="webtoon">
 		select webtoon_info.webtoon_num, webtoon_info.webtoon_title, webtoon_info.webtoon_writer,
-			webtoon_info.webtoon_content ,webtoon_info.webtoon_image ,genre_table.webtoon_genre ,
-			origin_table.origin_platform_name,origin_table.ORIGIN_WEBTOON_LINK
-		from webtoon_info, origin_table, genre_table 
+			webtoon_info.webtoon_content ,webtoon_info.webtoon_image ,genre_table.webtoon_genre
+		from webtoon_info, genre_table 
 		where webtoon_info.webtoon_num = #{webtoonNum}
-			and webtoon_info.webtoon_num =origin_table.webtoon_num 
 			and webtoon_info.webtoon_num =genre_table.webtoon_num
 	</select>
 	<select id="platformList" resultMap="platform">
 		select * from PLATFORM_TABLE where webtoon_num = #{webtoonNum}
 		order by WEBTOON_PLATFORM_NAME
+	</select>
+	<select id="originList" resultMap="origin">
+		select * from origin_table where webtoon_num = #{webtoonNum}
+		order by origin_platform_name
+	</select>
+	
+	<select id="favoritesCount" resultMap="favorites">
+		select count(user_email) from favorites_info where webtoon_num = #{webtoonNum} and favorties = "T"
 	</select>
 </mapper>

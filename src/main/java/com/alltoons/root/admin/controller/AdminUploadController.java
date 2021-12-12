@@ -30,25 +30,29 @@ public class AdminUploadController {
 
 	@PostMapping("/webtoonUpload")
 	public String postWebtoonUpload(MultipartHttpServletRequest mul, WebtoonDTO wd, Model model) {
-
-		// int cnt = ws.linkNum(mul);
-		String arry[] = mul.getParameterValues("platformName");
-		String arry2[] = mul.getParameterValues("webtoonLink");
-		for (int i = 0; i < arry.length; i++) {
-			System.out.println(arry[i]);
-			System.out.println(arry2[i]);
-		}
-
-		int result = ws.upload(mul, wd);
-		if (result == 1) {
-			model.addAttribute("message", "작품이 추가되었습니다");
+		if (mul.getParameter("webtoonGenre") == null) {
+			model.addAttribute("message", "장르를 선택해주세요.");
 			model.addAttribute("url", "webtoonUpload");
 			return "/common/alertHref";
 		} else {
-			model.addAttribute("message", "작품 추가에 실패하였습니다.");
-			model.addAttribute("url", "webtoonUpload");
-			return "/common/alertHref";
+			String arry[] = mul.getParameterValues("platformName");
+			String arry2[] = mul.getParameterValues("webtoonLink");
+			for (int i = 0; i < arry.length; i++) {
+				System.out.println(arry[i]);
+				System.out.println(arry2[i]);
+			}
 
+			int result = ws.upload(mul, wd);
+			if (result == 1) {
+				model.addAttribute("message", "작품이 추가되었습니다");
+				model.addAttribute("url", "webtoonUpload");
+				return "/common/alertHref";
+			} else {
+				model.addAttribute("message", "작품 추가에 실패하였습니다.");
+				model.addAttribute("url", "webtoonUpload");
+				return "/common/alertHref";
+
+			}
 		}
 	}
 

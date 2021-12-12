@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.alltoons.root.admin.dto.GenreDTO;
 import com.alltoons.root.admin.dto.OriginDTO;
 import com.alltoons.root.admin.dto.PlatformDTO;
 import com.alltoons.root.admin.dto.WebtoonDTO;
@@ -35,10 +36,11 @@ public class AdminModifyController {
 		wd = ms.list(request.getParameter("webtoonNum"), model);// 웹툰 정보
 		list = ms.selectLinks(request.getParameter("webtoonNum"));// 링크 주소들 들어있음
 		ArrayList<OriginDTO> originList = ms.selectOriginLinks(request.getParameter("webtoonNum"));// 원작 링크 주소들 들어있음
+		ArrayList<GenreDTO> webtoonGenre = ms.selectwebtoonGenre(request.getParameter("webtoonGenre"));// 웹툰 장르
 		model.addAttribute("webtoonList", wd);
 		model.addAttribute("linkList", list);
 		model.addAttribute("originList", originList);
-
+		model.addAttribute("webtoonGenreList",webtoonGenre);
 		return "admin/webtoonModify";
 	}
 

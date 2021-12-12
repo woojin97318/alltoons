@@ -44,8 +44,9 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		box.appendChild(newP); 
 	</c:forEach>
 	//$('#webtoonGenre').val('${webtoonList.webtoonGenre}').prop('checked',true)
-	$('input[name="webtoonGenre"][value="${webtoonList.webtoonGenre}"]').attr('checked','checked');
-	//$('#originalPlatform').val('${webtoonList.originalPlatform}').prop("selected",true);
+	
+	$('input[name="webtoonGenre"][value="${webtoonGenreList.webtoonGenre}"]').attr('checked','checked');
+	
 	
 	if(${originList[0].webtoonOriginalLink=='nan' }){
 		console.log("no")
@@ -96,6 +97,8 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		html += '<option value="toptoon">탑툰</option>'
 		html += '<option value="mrblue">미스터블루</option>'
 		html += '<option value="ridibooks">리디북스</option>'
+		html += '<option value="naverSeries">네이버 시리즈</option>'
+		html += '<option value="munpia">문피아</option>'
 		html += '</select> ';
 		html += '<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 링크" value="'+"${origin.getWebtoonOriginalLink()}"+'" required> '
 		html += '<button type="button" onclick="del_origin_link(this)">-</button>'
@@ -196,6 +199,8 @@ function add_link(){
 		html += '<option value="toptoon">탑툰</option>'
 		html += '<option value="mrblue">미스터블루</option>'
 		html += '<option value="ridibooks">리디북스</option>'
+		html += '<option value="naverSeries">네이버 시리즈</option>'
+		html += '<option value="munpia">문피아</option>'
 		html += '</select> ';
 		html += '<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" required> '
 		html += '<button type="button" onclick="del_origin_link(this)">-</button>'
@@ -245,19 +250,19 @@ function add_link(){
 		
 		<br>
 		<b>장르</b><br>
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g1">에피소드 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g2">옴니버스 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g3">스토리 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g4">일상 &ensp; <br>
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g5">개그 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g6">판타지 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g7">액션 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g8">드라마 &ensp; <br>
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g9">순정 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g10">감성 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g11">스릴러 &ensp; 
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; <br>
-			<input type="radio" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g1">에피소드 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g2">옴니버스 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g3">스토리 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g4">일상 &ensp; <br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g5">개그 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g6">판타지 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g7">액션 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g8">드라마 &ensp; <br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g9">순정 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g10">감성 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g11">스릴러 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; <br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
 		
 		<b>원작 링크</b><button type="button" onclick="add_origin_link()">+</button> <br>
 		<div id="origin_box"> </div>
