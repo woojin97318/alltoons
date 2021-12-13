@@ -58,7 +58,7 @@
 
 <header>
 		<c:import url="./adminHeader.jsp">
-			<c:param name="tag" value="작품 삭제"></c:param>
+			<c:param name="tag" value="신고 확인"></c:param>
 		</c:import>
 </header>
 	
