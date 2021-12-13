@@ -79,16 +79,23 @@ public class ModifyServiceImpl implements ModifyService{
 		
 		//원작
 		wm.delOrigin(wd.getWebtoonNum());
-		String origin_platform[] = mul.getParameterValues("originalPlatform");
-		String origin_link[] = mul.getParameterValues("webtoonOriginalLink");
 		OriginDTO od = new OriginDTO();
-		for(int i=0;i<origin_platform.length;i++) {
+		if(mul.getParameter("originalPlatform")==null) {
 			od.setWebtoonNum(wd.getWebtoonNum());
-			od.setOriginalPlatform(origin_platform[i]);
-			od.setWebtoonOriginalLink(origin_link[i]);
+			od.setOriginalPlatform("nan");
+			od.setWebtoonOriginalLink("nan");
 			result = wm.uploadOriginal(od);
+		}else {
+			String origin_platform[] = mul.getParameterValues("originalPlatform");
+			String origin_link[] = mul.getParameterValues("webtoonOriginalLink");
+			
+			for(int i=0;i<origin_platform.length;i++) {
+				od.setWebtoonNum(wd.getWebtoonNum());
+				od.setOriginalPlatform(origin_platform[i]);
+				od.setWebtoonOriginalLink(origin_link[i]);
+				result = wm.uploadOriginal(od);
+			}
 		}
-		
 		System.out.println("origin 처리: "+result);
 		
 		//링크

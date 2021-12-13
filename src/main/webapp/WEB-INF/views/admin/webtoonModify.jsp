@@ -48,7 +48,7 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 	$('input[name="webtoonGenre"][value="${genre_all.webtoonGenre}"]').attr('checked','checked');
 	</c:forEach>
 	
-	if(${originList[0].webtoonOriginalLink=='nan' }){
+	if(${originList[0].webtoonOriginalLink=='nan'}){
 		console.log("no")
 		var newspan = document.createElement('span');
 		var html = '';
@@ -63,6 +63,8 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		html += '<option value="toptoon">탑툰</option>'
 		html += '<option value="mrblue">미스터블루</option>'
 		html += '<option value="ridibooks">리디북스</option>'
+		html += '<option value="naverSeries">네이버 시리즈</option>'
+		html += '<option value="munpia">문피아</option>'
 		html += '</select> ';
 		html += '<input type="text" name="webtoonOriginalLink" id="webtoonOriginalLink" placeholder="웹툰 원작 링크" > '
 		html += '<button type="button" onclick="del_origin_link(this)">-</button>'
@@ -84,6 +86,8 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		case 'toptoon':platform='탑툰';break;
 		case 'mrblue':platform='미스터블루';break;
 		case 'ridibooks':platform='리디북스';break;
+		case 'naverSeries':platform='네이버 시리즈';break;
+		case 'munpia':platform='문피아';break;
 		}
 		html = '';
 		html += '<select name="originalPlatform" id="originalPlatform">'
@@ -226,7 +230,7 @@ function add_link(){
 		<div style="display: flex;">
 			<div>
 			<c:choose>
-				<c:when test="${webtoonList.webtoonImage=='default_image'}">
+				<c:when test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
 					<img id="webtoonImage" src="resources/resources/default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
 				</c:when>
 				<c:otherwise>
