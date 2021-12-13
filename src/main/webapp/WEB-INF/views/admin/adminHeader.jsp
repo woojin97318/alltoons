@@ -33,19 +33,19 @@
 				신고 확인</button></a></li>
 				<li><a href="${contextPath}/webtoonUpload"><button class="listBtn">
 				작품 업로드</button></a></li>
-				<li><a href="${contextPath}/delete"><button class="listBtn">
+				<li><a href="${contextPath}/webtoonDelete"><button class="listBtn">
 				작품 삭제</button></a></li>
-				<li><a href="${contextPath}/delete"><button class="listBtn">
+				<li><a href="${contextPath}/webtoonDelete"><button class="listBtn">
 				작품 삭제</button></a></li>
-				<li><a href="${contextPath}/delete"><button class="listBtn">
+				<li><a href="${contextPath}/webtoonDelete"><button class="listBtn">
 				작품 삭제</button></a></li>
-				<li><a href="${contextPath}/delete"><button class="listBtn">
+				<li><a href="${contextPath}/webtoonDelete"><button class="listBtn">
 				작품 삭제</button></a></li>
-				<li><a href="${contextPath}/delete"><button class="listBtn">
+				<li><a href="${contextPath}/webtoonDelete"><button class="listBtn">
 				작품 삭제</button></a></li>
 			</ul>
 		</nav>
 	</div>
-	<a href=""><input type="button" class="mainBtn"></a>
+	<a href="${contextPath}/main"><input type="button" class="mainBtn"></a>
 </body>
 </html>

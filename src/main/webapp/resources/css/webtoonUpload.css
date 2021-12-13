@@ -1,3 +1,8 @@
+body{
+		padding-top: 95px;
+	-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none 
+}
+
 .webtoonName_wrap {
     width: 300px;
     height: auto;

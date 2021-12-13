@@ -109,13 +109,12 @@
 <link rel="stylesheet" href="resources/css/webtoonUpload.css">
 <title>작품 추가</title>
 </head>
+<header><!-- 어드민 페이지 헤더 -->
+		<c:import url="./adminHeader.jsp">
+			<c:param name="tag" value="작품 추가"></c:param>
+		</c:import><!-- value에 카테고리명을 넣어주세요 -->
+</header>
 <body>
-	<h1>작품 추가</h1>
-   <%-- <header>
-      <c:import url="./adminHeader.jsp">
-         <c:param name="tag" value="신고 확인"></c:param>
-      </c:import>
-	</header> --%>
 	<form action="${contextPath}/webtoonUpload" method="post" enctype="multipart/form-data">
 		<div style="display: flex;">
 			<div>

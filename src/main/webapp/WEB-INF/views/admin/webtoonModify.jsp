@@ -215,8 +215,12 @@ function add_link(){
 <link rel="stylesheet" href="resources/css/webtoonUpload.css">
 <title>작품 수정</title>
 </head>
+<header>
+		<c:import url="./adminHeader.jsp">
+			<c:param name="tag" value="작품 수정"></c:param>
+		</c:import>
+</header>
 <body>
-	<h1>작품 수정</h1>
 	<form action="${contextPath}/webtoonModify" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="webtoonNum" value="${webtoonList.webtoonNum }">
 		<div style="display: flex;">

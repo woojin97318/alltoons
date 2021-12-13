@@ -55,10 +55,10 @@
 					</c:otherwise>
 				</c:choose>
 				 -->
-				 <li><a href="${contextPath}/">
+				 <li><a href="${contextPath}/member/login">
 				로그인</a></li>
 				
-				 <li><a href="${contextPath}/member/login">
+				 <li><a href="${contextPath}/member/logout">
 				로그아웃</a></li>
 			</ul>
 		</nav>
