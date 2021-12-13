@@ -64,11 +64,11 @@
 	
 	<insert id="insertInterest">
 		insert into favorites_info(user_email,webtoon_num,interest) 
-		values(#{webtoonNum}, #{userEmail},'T')
+		values( #{userEmail}, #{webtoonNum},'T')
 	</insert>
 	<insert id="insertFavorties">
 		insert into favorites_info(user_email,webtoon_num,FAVORITES) 
-		values(#{webtoonNum}, #{userEmail},'T')
+		values(#{userEmail}, #{webtoonNum},'T')
 	</insert>
 	
 	

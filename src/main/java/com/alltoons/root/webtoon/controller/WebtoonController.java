@@ -49,16 +49,12 @@ public class WebtoonController {
 	public String i_onOff(FavoritesDTO fd,@RequestParam("webtoonNum") String webtoonNum,@RequestParam("userEmail")String userEmail){
 		System.out.println("도착");
 		fd = ws.onOff(fd,webtoonNum,userEmail);//메소드만 재사용
-		System.out.println("here"+fd.getInterest());
-		System.out.println("here"+fd.getUserEmail());
-		System.out.println("here"+fd.getWebtoonNum());
 		return fd.getInterest()+"";
 	}
 	
 	@GetMapping("f_onOff")
 	@ResponseBody
 	public String f_onOff(FavoritesDTO fd,@RequestParam("webtoonNum") String webtoonNum,@RequestParam("userEmail")String userEmail){
-		System.out.println("도착");
 		fd = ws.onOff(fd,webtoonNum,userEmail);
 		return fd.getFavorites()+"";
 	}

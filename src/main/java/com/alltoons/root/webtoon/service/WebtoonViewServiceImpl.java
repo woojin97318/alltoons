@@ -35,7 +35,7 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	@Override
 	public void favorites(String webtoonNum, FavoritesDTO fd, Model model) {
 		System.out.println(webtoonNum);
-		fd = wvm.check(webtoonNum, "1111");// 세션 아이디값
+		fd = wvm.check(webtoonNum, "1234");// 세션 아이디값
 		model.addAttribute("favoritesDTO", fd);
 
 		// 숫자
@@ -47,15 +47,19 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 
 	@Override
 	public int interestClick(String webtoonNum, String userEmail) {
-		System.out.println("서비스 도착");
 		FavoritesDTO fd = wvm.check(webtoonNum, userEmail);
-		if (fd == null) {
+		if (fd == null) {//즐겨찾기 테이블 첫 사용
 			wvm.insertInterest(webtoonNum, userEmail);
-		} // 여기 검토해야함
-		if (fd.getInterest() == 'T') {
-			fd.setInterest('F');
-		} else {
+			fd = new FavoritesDTO();
+			fd.setUserEmail(userEmail);
+			fd.setWebtoonNum(Integer.parseInt(webtoonNum));
 			fd.setInterest('T');
+		}else {
+			if (fd.getInterest() == 'T') {
+				fd.setInterest('F');
+			} else {
+				fd.setInterest('T');
+			}
 		}
 		wvm.interestClick(fd);
 		int intesrestCount = wvm.intesrestCount(webtoonNum);
@@ -65,13 +69,18 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	@Override
 	public int favoritesClick(String webtoonNum, String userEmail) {
 		FavoritesDTO fd = wvm.check(webtoonNum, userEmail);
-		if (fd == null) {
+		if (fd == null) {//즐겨찾기 테이블 첫 사용
 			wvm.insertFavorties(webtoonNum, userEmail);
-		} // 여기 검토해야함
-		if (fd.getFavorites() == 'T') {
-			fd.setFavorites('F');
-		} else {
+			fd = new FavoritesDTO();
+			fd.setUserEmail(userEmail);
+			fd.setWebtoonNum(Integer.parseInt(webtoonNum));
 			fd.setFavorites('T');
+		} else {
+			if (fd.getFavorites() == 'T') {
+				fd.setFavorites('F');
+			} else {
+				fd.setFavorites('T');
+			}
 		}
 		wvm.favoritesClick(fd);
 		int favortiesCount = wvm.favortiesCount(webtoonNum);

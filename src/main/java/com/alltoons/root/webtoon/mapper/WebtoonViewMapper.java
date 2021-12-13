@@ -31,7 +31,7 @@ public interface WebtoonViewMapper {
 
 	FavoritesDTO firestInterest(FavoritesDTO fd);
 
-	void insertFavorties(String webtoonNum, String userEmail);
+	void insertFavorties(@Param("webtoonNum") String webtoonNum, @Param("userEmail") String userEmail);
 
 	void favoritesClick(FavoritesDTO fd);
 
