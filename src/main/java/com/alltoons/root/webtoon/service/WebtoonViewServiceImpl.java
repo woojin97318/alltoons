@@ -16,54 +16,75 @@ import com.alltoons.root.webtoon.dto.WebtoonViewDTO;
 import com.alltoons.root.webtoon.mapper.WebtoonViewMapper;
 
 @Service("webtoonViewService")
-public class WebtoonViewServiceImpl implements WebtoonViewService{
-	@Autowired WebtoonViewMapper wvm;
+public class WebtoonViewServiceImpl implements WebtoonViewService {
+	@Autowired
+	WebtoonViewMapper wvm;
 
 	@Override
 	public void webtoonData(String webtoonNum, WebtoonViewDTO wvd, Model model) {
 		wvd = wvm.webtoonData(webtoonNum);
-		model.addAttribute("webtoonDate",wvd);
-		
+		model.addAttribute("webtoonDate", wvd);
+
 		ArrayList<WebtoonPlatformDTO> platformList = wvm.platformList(webtoonNum);
-		model.addAttribute("platformList",platformList);
-		
+		model.addAttribute("platformList", platformList);
+
 		ArrayList<WebtoonOriginDTO> originList = wvm.originList(webtoonNum);
-		model.addAttribute("originList",originList);
+		model.addAttribute("originList", originList);
 	}
 
 	@Override
 	public void favorites(String webtoonNum, FavoritesDTO fd, Model model) {
-		//수정중
-		int favoritesCount = wvm.favoritesCount(webtoonNum);
+		System.out.println(webtoonNum);
+		fd = wvm.check(webtoonNum, "1111");// 세션 아이디값
+		model.addAttribute("favoritesDTO", fd);
+
+		// 숫자
+		int favoritesCount = wvm.favortiesCount(webtoonNum);
 		int intesrestCount = wvm.intesrestCount(webtoonNum);
-		model.addAttribute("favoritesCount",favoritesCount);
-		model.addAttribute("intesrestCount",intesrestCount);
+		model.addAttribute("favoritesCount", favoritesCount);
+		model.addAttribute("intesrestCount", intesrestCount);
 	}
 
 	@Override
 	public int interestClick(String webtoonNum, String userEmail) {
 		System.out.println("서비스 도착");
-		FavoritesDTO fd = wvm.check(webtoonNum,userEmail);//여기서 오류
-		if(fd==null) {wvm.insertInterest(webtoonNum,userEmail);}
-		System.out.println(fd.getFavofites());
-		System.out.println(fd.getWebtoonNum());
-		if(fd.getInterest()=='T') {
+		FavoritesDTO fd = wvm.check(webtoonNum, userEmail);
+		if (fd == null) {
+			wvm.insertInterest(webtoonNum, userEmail);
+		} // 여기 검토해야함
+		if (fd.getInterest() == 'T') {
 			fd.setInterest('F');
-		}else {
+		} else {
 			fd.setInterest('T');
 		}
 		wvm.interestClick(fd);
 		int intesrestCount = wvm.intesrestCount(webtoonNum);
-		System.out.println(intesrestCount);
 		return intesrestCount;
 	}
-
+	
 	@Override
-	public FavoritesDTO check(String webtoonNum, String userEmail, FavoritesDTO fd) {
-		fd = wvm.check(webtoonNum,userEmail);
+	public int favoritesClick(String webtoonNum, String userEmail) {
+		FavoritesDTO fd = wvm.check(webtoonNum, userEmail);
+		if (fd == null) {
+			wvm.insertFavorties(webtoonNum, userEmail);
+		} // 여기 검토해야함
+		if (fd.getFavorites() == 'T') {
+			fd.setFavorites('F');
+		} else {
+			fd.setFavorites('T');
+		}
+		wvm.favoritesClick(fd);
+		int favortiesCount = wvm.favortiesCount(webtoonNum);
+		return favortiesCount;
+	}
+
+
+	@Override//재 사용 가능 메소드
+	public FavoritesDTO onOff(FavoritesDTO fd, String webtoonNum, String userEmail) {
+		fd = wvm.check(webtoonNum, userEmail);
 		return fd;
 	}
-	
+
 	
 	
 }

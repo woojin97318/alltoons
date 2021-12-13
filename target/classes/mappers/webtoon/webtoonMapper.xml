@@ -26,7 +26,7 @@
 	<resultMap type="com.alltoons.root.webtoon.dto.FavoritesDTO" id="favorites">
 		<result property="userEmail" column="user_email"/>
 		<result property="webtoonNum" column="webtoon_num"/>
-		<result property="favofites" column="favorties"/>
+		<result property="favorites" column="FAVORITES"/>
 		<result property="interest" column="interest"/>
 	</resultMap>
 	
@@ -46,7 +46,7 @@
 		order by origin_platform_name
 	</select>
 	
-	<select id="favoritesCount" resultType="int">
+	<select id="favortiesCount" resultType="int">
 		select count(user_email) from favorites_info where webtoon_num = #{webtoonNum} and favorites = 'T'
 	</select>
 	<select id="intesrestCount" resultType="int">
@@ -56,12 +56,28 @@
 		select * from favorites_info where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
 	</select>
 	
+	
+	<select id="firestInterest" resultMap="favorites">
+		select * from favorites_info where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
+	</select>
+	
+	
 	<insert id="insertInterest">
 		insert into favorites_info(user_email,webtoon_num,interest) 
 		values(#{webtoonNum}, #{userEmail},'T')
 	</insert>
+	<insert id="insertFavorties">
+		insert into favorites_info(user_email,webtoon_num,FAVORITES) 
+		values(#{webtoonNum}, #{userEmail},'T')
+	</insert>
+	
+	
 	
 	<update id="interestClick">
 		update favorites_info set interest = #{interest} where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
+	</update>
+	
+	<update id="favoritesClick">
+		update favorites_info set FAVORITES = #{favorites} where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
 	</update>
 </mapper>

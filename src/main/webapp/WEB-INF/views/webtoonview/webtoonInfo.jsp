@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<%@  taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +12,39 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	if(${favorites.favofites =="T"}){
-		alert('T')
-	}else{alert('F')}
+	<c:choose>
+		<c:when test="${fn:contains(favoritesDTO.interest,'T')}">
+			interest_on();
+		</c:when>
+		<c:otherwise>
+			interest_off();
+		</c:otherwise>
+	</c:choose>
+	
+	<c:choose>
+	<c:when test="${fn:contains(favoritesDTO.favorites,'T')}">
+		favorties_on();
+	</c:when>
+	<c:otherwise>
+		favorties_off();
+	</c:otherwise>
+</c:choose>
+});
+
+function interest_on(){
+	document.getElementById("interest").src="resources/resources/interest_on.png";
+}
+function interest_off(){
+	document.getElementById("interest").src="resources/resources/interest_off.png";
+}
+function favorties_on(){
+	document.getElementById("favorites").src="resources/resources/favorties_on.png";
+}
+function favorties_off(){
+	document.getElementById("favorites").src="resources/resources/favorties_off.png";
 }
 </script>
-<script type="text/javascript">
+<script type="text/javascript">/* 관심 */
 	function interestClick(){
 		$.ajax({
 			url: "interestClick",
@@ -27,14 +55,71 @@ $(document).ready(function(){
 			},
 			success : function(cnt){
 				$("#icount").text(cnt)
-				
+				i_onOff()
 			},
 			error: function(){alert("실패")}
 		})
 	}
+	function i_onOff(){
+		$.ajax({
+			url: "i_onOff",
+			type: "GET",
+			data: {
+				webtoonNum: "${webtoonDate.webtoonNum}",
+				userEmail: "1111"
+			},
+			success : function(onoff){
+				if(onoff=="T"){
+					console.log(onoff);
+					interest_on()
+				}else{
+					console.log(onoff);
+					interest_off()
+				}
+			},error: function(){alert("하트 실패")}
+		})
+	}	
+</script>
+<script type="text/javascript">/* 즐겨찾기 */
+	function favoritesClick(){
+		$.ajax({
+			url: "favoritesClick",
+			type: "GET",
+			data: {
+				webtoonNum: "${webtoonDate.webtoonNum}",
+				userEmail: "1111"
+			},
+			success : function(cnt){
+				$("#fcount").text(cnt)
+				f_onOff()
+			},
+			error: function(){alert("실패")}
+		})
+	}
+	function f_onOff(){
+		$.ajax({
+			url: "f_onOff",
+			type: "GET",
+			data: {
+				webtoonNum: "${webtoonDate.webtoonNum}",
+				userEmail: "1111"
+			},
+			success : function(onoff){
+				if(onoff=="T"){
+					console.log(onoff);
+					favorties_on()
+				}else{
+					favorties_off()
+				}
+			},error: function(){alert("별 실패")}
+		})
+	}	
 </script>
 </head>
-<body>	<h1>작품 상세 페이지</h1>
+<body>	
+
+
+<h1>작품 상세 페이지</h1>
 	<div style="display: flex;">
 		<c:choose>
 			<c:when test="${webtoonList.webtoonImage=='default_image'}">
@@ -50,7 +135,7 @@ $(document).ready(function(){
 		<div>
 			${webtoonDate.webtoonTitle}<br>
 			<img src="" width="20"height="20" onclick="interestClick()" id="interest"><label id="icount">${intesrestCount }</label><br>
-			<button type="button" onclick="favoritesClick()">☆</button><label id="fcount">${favoritesCount }</label><br>
+			<img src="" width="20"height="20" onclick="favoritesClick()" id="favorites"><label id="fcount">${favoritesCount }</label><br>
 			<b>작가명</b><br>
 			${webtoonDate.webtoonWriter }
 		</div>

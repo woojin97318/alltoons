@@ -3,7 +3,7 @@ package com.alltoons.root.webtoon.dto;
 public class FavoritesDTO {
 	public String userEmail;
 	public int webtoonNum;
-	public char favofites;
+	public char favorites;
 	public char interest;
 	
 	public String getUserEmail() {
@@ -18,11 +18,12 @@ public class FavoritesDTO {
 	public void setWebtoonNum(int webtoonNum) {
 		this.webtoonNum = webtoonNum;
 	}
-	public char getFavofites() {
-		return favofites;
+	
+	public char getFavorites() {
+		return favorites;
 	}
-	public void setFavofites(char favofites) {
-		this.favofites = favofites;
+	public void setFavorites(char favorites) {
+		this.favorites = favorites;
 	}
 	public char getInterest() {
 		return interest;

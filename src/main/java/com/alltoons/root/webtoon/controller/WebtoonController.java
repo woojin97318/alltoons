@@ -19,7 +19,6 @@ public class WebtoonController {
 	
 	@GetMapping("webtooninfo")
 	public String webtooninfo(@RequestParam String webtoonNum,Model model,WebtoonViewDTO wvd,FavoritesDTO fd) {
-		//model.addAttribute("webtoonNum",webtoonNum);
 		//전체를 다 받아서 model로 넘기자 
 		ws.webtoonData(webtoonNum,wvd,model);
 		ws.favorites(webtoonNum,fd,model);
@@ -35,14 +34,32 @@ public class WebtoonController {
 		return cnt+"";
 	}
 	
-	@GetMapping("checkInterest")
+	@GetMapping("favoritesClick")
 	@ResponseBody
-	public String checkInterest(@RequestParam("webtoonNum") String webtoonNum,@RequestParam("userEmail") String userEmail,FavoritesDTO fd) {
+	public String favorites(@RequestParam("webtoonNum") String webtoonNum,@RequestParam("userEmail") String userEmail) {
 		System.out.println("웹툰 번호: "+webtoonNum);
 		System.out.println("이메일: "+userEmail);
-		fd = ws.check(webtoonNum,userEmail,fd);
-		char checkResult = fd.getInterest();
-		return checkResult+"" ;
+		int cnt = ws.favoritesClick(webtoonNum,userEmail);
+		return cnt+"";
 	}
 	
+	
+	@GetMapping("i_onOff")
+	@ResponseBody
+	public String i_onOff(FavoritesDTO fd,@RequestParam("webtoonNum") String webtoonNum,@RequestParam("userEmail")String userEmail){
+		System.out.println("도착");
+		fd = ws.onOff(fd,webtoonNum,userEmail);//메소드만 재사용
+		System.out.println("here"+fd.getInterest());
+		System.out.println("here"+fd.getUserEmail());
+		System.out.println("here"+fd.getWebtoonNum());
+		return fd.getInterest()+"";
+	}
+	
+	@GetMapping("f_onOff")
+	@ResponseBody
+	public String f_onOff(FavoritesDTO fd,@RequestParam("webtoonNum") String webtoonNum,@RequestParam("userEmail")String userEmail){
+		System.out.println("도착");
+		fd = ws.onOff(fd,webtoonNum,userEmail);
+		return fd.getFavorites()+"";
+	}
 }
