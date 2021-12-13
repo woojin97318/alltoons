@@ -106,7 +106,7 @@
 								<td><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></td>
 							</c:when>
 							<c:otherwise>
-								<td><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon_image/${dto.webtoonImage }"></div></td>
+								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
 						<th><button onclick="location.href='${contextPath }/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
@@ -146,7 +146,7 @@
 								<td><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></td>
 							</c:when>
 							<c:otherwise>
-								<td><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon_image/${dto.webtoonImage }"></div></td>
+								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
 						<th><button onclick="location.href='${contextPath }/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
@@ -186,7 +186,7 @@
 								<th><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>
-								<td><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon_image/${dto.webtoonImage }"></div></td>
+								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
 						<th><button onclick="location.href='${contextPath }/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
