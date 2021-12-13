@@ -3,8 +3,8 @@ package com.alltoons.root.webtoon.dto;
 public class FavoritesDTO {
 	public String userEmail;
 	public int webtoonNum;
-	public boolean favofites;
-	public boolean interest;
+	public char favofites;
+	public char interest;
 	
 	public String getUserEmail() {
 		return userEmail;
@@ -18,16 +18,17 @@ public class FavoritesDTO {
 	public void setWebtoonNum(int webtoonNum) {
 		this.webtoonNum = webtoonNum;
 	}
-	public boolean isFavofites() {
+	public char getFavofites() {
 		return favofites;
 	}
-	public void setFavofites(boolean favofites) {
+	public void setFavofites(char favofites) {
 		this.favofites = favofites;
 	}
-	public boolean isInterest() {
+	public char getInterest() {
 		return interest;
 	}
-	public void setInterest(boolean interest) {
+	public void setInterest(char interest) {
 		this.interest = interest;
 	}
+	
 }

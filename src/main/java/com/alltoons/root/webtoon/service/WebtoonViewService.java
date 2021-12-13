@@ -12,4 +12,9 @@ public interface WebtoonViewService {
 
 	void favorites(String webtoonNum, FavoritesDTO fd, Model model);
 
+	int interestClick(String webtoonNum, String userEmail);
+
+
+	FavoritesDTO check(String webtoonNum, String userEmail, FavoritesDTO fd);
+
 }

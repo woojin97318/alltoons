@@ -2,6 +2,8 @@ package com.alltoons.root.webtoon.mapper;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.alltoons.root.webtoon.dto.FavoritesDTO;
 import com.alltoons.root.webtoon.dto.WebtoonOriginDTO;
 import com.alltoons.root.webtoon.dto.WebtoonPlatformDTO;
@@ -18,5 +20,13 @@ public interface WebtoonViewMapper {
 	int favoritesCount(String webtoonNum);
 
 	int intesrestCount(String webtoonNum);
+
+
+	void interestClick(FavoritesDTO fd);
+
+	public FavoritesDTO check(@Param("webtoonNum") String webtoonNum, @Param("userEmail") String userEmail);
+
+	void insertInterest(@Param("webtoonNum") String webtoonNum, @Param("userEmail") String userEmail);
+
 
 }

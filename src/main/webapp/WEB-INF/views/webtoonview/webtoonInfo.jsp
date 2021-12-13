@@ -8,6 +8,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <title>작품 상세페이지</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	if(${favorites.favofites =="T"}){
+		alert('T')
+	}else{alert('F')}
+}
+</script>
+<script type="text/javascript">
+	function interestClick(){
+		$.ajax({
+			url: "interestClick",
+			type: "GET",
+			data: {
+				webtoonNum: "${webtoonDate.webtoonNum}",
+				userEmail: "1111"
+			},
+			success : function(cnt){
+				$("#icount").text(cnt)
+				
+			},
+			error: function(){alert("실패")}
+		})
+	}
+</script>
 </head>
 <body>	<h1>작품 상세 페이지</h1>
 	<div style="display: flex;">
@@ -24,8 +49,8 @@
 		</c:choose>
 		<div>
 			${webtoonDate.webtoonTitle}<br>
-			<button type="button" name="interest">♡</button><label>0</label><br>
-			<button type="button" name="favorites">☆</button><br>
+			<img src="" width="20"height="20" onclick="interestClick()" id="interest"><label id="icount">${intesrestCount }</label><br>
+			<button type="button" onclick="favoritesClick()">☆</button><label id="fcount">${favoritesCount }</label><br>
 			<b>작가명</b><br>
 			${webtoonDate.webtoonWriter }
 		</div>

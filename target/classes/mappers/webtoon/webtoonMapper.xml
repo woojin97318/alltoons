@@ -27,16 +27,15 @@
 		<result property="userEmail" column="user_email"/>
 		<result property="webtoonNum" column="webtoon_num"/>
 		<result property="favofites" column="favorties"/>
-		<result property="interest" column="intertest"/>
+		<result property="interest" column="interest"/>
 	</resultMap>
 	
 	
 	<select id="webtoonData" resultMap="webtoon">
 		select webtoon_info.webtoon_num, webtoon_info.webtoon_title, webtoon_info.webtoon_writer,
-			webtoon_info.webtoon_content ,webtoon_info.webtoon_image ,genre_table.webtoon_genre
-		from webtoon_info, genre_table 
+			webtoon_info.webtoon_content ,webtoon_info.webtoon_image 
+		from webtoon_info 
 		where webtoon_info.webtoon_num = #{webtoonNum}
-			and webtoon_info.webtoon_num =genre_table.webtoon_num
 	</select>
 	<select id="platformList" resultMap="platform">
 		select * from PLATFORM_TABLE where webtoon_num = #{webtoonNum}
@@ -47,7 +46,22 @@
 		order by origin_platform_name
 	</select>
 	
-	<select id="favoritesCount" resultMap="favorites">
-		select count(user_email) from favorites_info where webtoon_num = #{webtoonNum} and favorties = "T"
+	<select id="favoritesCount" resultType="int">
+		select count(user_email) from favorites_info where webtoon_num = #{webtoonNum} and favorites = 'T'
 	</select>
+	<select id="intesrestCount" resultType="int">
+		select count(user_email) from favorites_info where webtoon_num = #{webtoonNum} and interest = 'T'
+	</select>
+	<select id="check" resultMap="favorites">
+		select * from favorites_info where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
+	</select>
+	
+	<insert id="insertInterest">
+		insert into favorites_info(user_email,webtoon_num,interest) 
+		values(#{webtoonNum}, #{userEmail},'T')
+	</insert>
+	
+	<update id="interestClick">
+		update favorites_info set interest = #{interest} where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
+	</update>
 </mapper>
