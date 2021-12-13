@@ -38,13 +38,7 @@ public class MemberController implements MemberSessionName {
 	MailService mailService;
 
 	private String authKey;
-	/*
-	 * private MemberDTO dto;
-	 * 
-	 * public void setDTO(MemberDTO dto) { this.dto = dto; } public MemberDTO
-	 * getDTO() { return dto; }
-	 */
-
+	
 	public String getAuthKey() {
 		return authKey;
 	}
@@ -112,26 +106,7 @@ public class MemberController implements MemberSessionName {
 		return "/common/alertHref";
 	}
 
-	/*
-	 * @GetMapping(value= "sendmail", produces = "application/json; charset=utf-8")
-	 * 
-	 * @ResponseBody public void sendMail(HttpServletResponse response, @RequestBody
-	 * Map<String, Object> email) throws Exception {
-	 * System.out.println("사용자 입력 이메일 : " + email.get("email")); String userEmail =
-	 * (String)email.get("email"); String authKey = ms.rand(); StringBuffer sb = new
-	 * StringBuffer();// 일반 String 보다 처리속도가 빠르다
-	 * sb.append("<h1>올툰즈 이메일 인증입니다!</h1>");
-	 * sb.append("	<div>하단의 인증번호를 3분안에 입력해주세요!</div>\r\n");
-	 * 
-	 * sb.append("<h2>" + authKey + "</h2>\r\n"); sb.append("</a>"); String msg =
-	 * sb.toString(); ms.sendMail(userEmail, "(Alltoons) 이메일 인증번호입니다.", msg); //
-	 * ms.sendMail("tmd0915mp@naver.com", "(title)text mail ", "(content) Hello");
-	 * 
-	 * response.setContentType("text/html;charset=utf-8"); PrintWriter out =
-	 * response.getWriter(); out.print("메일 전송 완료");
-	 * 
-	 * }
-	 */
+	
 	@GetMapping(value = "sendmail", produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public boolean sendMailAuth(HttpSession session, @RequestParam String email) {
