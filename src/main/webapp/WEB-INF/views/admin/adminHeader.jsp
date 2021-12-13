@@ -29,7 +29,7 @@
 	<div class="scrollBtn">
 		<nav>
 			<ul>
-				<li><a href="${contextPath}/delete"><button class="listBtn">
+				<li><a href="${contextPath}/admin/report"><button class="listBtn">
 				신고 확인</button></a></li>
 				<li><a href="${contextPath}/delete"><button class="listBtn">
 				작품 업로드</button></a></li>

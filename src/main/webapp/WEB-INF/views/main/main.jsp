@@ -12,10 +12,10 @@
 <title>AllToons</title>
 </head>
 <body>
-	<c:import url="default/header.jsp"/>
+	<c:import url="../default/header.jsp"/>
 	
 	AllToons 메인
 	
-	<c:import url="default/footer.jsp"/>
+	<c:import url="../default/footer.jsp"/>
 </body>
 </html>

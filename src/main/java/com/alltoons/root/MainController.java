@@ -9,4 +9,8 @@ public class MainController {
 	public String index() {
 		return "common/alertHref";
 	}
+	@GetMapping("/main")
+	public String main() {
+		return "main/main";
+	}
 }
