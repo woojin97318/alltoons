@@ -58,4 +58,5 @@ public class WebtoonController {
 		fd = ws.onOff(fd,webtoonNum,userEmail);
 		return fd.getFavorites()+"";
 	}
+	
 }

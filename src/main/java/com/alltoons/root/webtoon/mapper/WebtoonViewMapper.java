@@ -37,5 +37,7 @@ public interface WebtoonViewMapper {
 
 	int favortiesCount(String webtoonNum);
 
+	int linkCount(String webtoonNum);
+
 
 }

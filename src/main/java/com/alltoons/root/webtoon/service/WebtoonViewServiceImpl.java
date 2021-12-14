@@ -30,11 +30,15 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 
 		ArrayList<WebtoonOriginDTO> originList = wvm.originList(webtoonNum);
 		model.addAttribute("originList", originList);
+		
+		//링크 수
+		int cnt = wvm.linkCount(webtoonNum);
+		System.out.println("링크수: "+cnt);
+		model.addAttribute("linkCount",cnt);
 	}
 
 	@Override
 	public void favorites(String webtoonNum, FavoritesDTO fd, Model model) {
-		System.out.println(webtoonNum);
 		fd = wvm.check(webtoonNum, "1234");// 세션 아이디값
 		model.addAttribute("favoritesDTO", fd);
 

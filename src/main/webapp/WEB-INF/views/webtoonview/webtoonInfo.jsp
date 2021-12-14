@@ -122,30 +122,45 @@ function favorties_off(){
 
 <h1>작품 상세 페이지</h1>
 	<div style="display: flex;">
-		<c:choose>
-			<c:when test="${webtoonList.webtoonImage=='default_image'}">
-				<img id="webtoonImage" src="resources/resources/default_image.jpg"
-					width=100 height=100 alt="선택된 이미지가 없습니다" />
-			</c:when>
-			<c:otherwise>
-				<img id="webtoonImage"
-					src="${contextPath }/thumbnail?webtoonImage=${webtoonDate.webtoonImage}"
-					width=100 height=100 alt="썸네일이 존재" />
-			</c:otherwise>
-		</c:choose>
+		<div >
+			<c:choose>
+				<c:when test="${webtoonList.webtoonImage=='default_image'}">
+					<img id="webtoonImage" src="resources/resources/default_image.jpg"
+						width=100 height=100 alt="선택된 이미지가 없습니다" />
+				</c:when>
+				<c:otherwise>
+					<img id="webtoonImage"
+						src="${contextPath }/thumbnail?webtoonImage=${webtoonDate.webtoonImage}"
+						width=100 height=100 alt="썸네일이 존재" />
+				</c:otherwise>
+			</c:choose>
+			<img src="" width="20"height="20" onclick="interestClick()" id="interest"><label id="icount">${intesrestCount }</label>
+			<img src="" width="20"height="20" onclick="favoritesClick()" id="favorites"><label id="fcount">${favoritesCount }</label>
+		</div>
 		<div>
 			${webtoonDate.webtoonTitle}<br>
-			<img src="" width="20"height="20" onclick="interestClick()" id="interest"><label id="icount">${intesrestCount }</label><br>
-			<img src="" width="20"height="20" onclick="favoritesClick()" id="favorites"><label id="fcount">${favoritesCount }</label><br>
+			
 			<b>작가명</b><br>
 			${webtoonDate.webtoonWriter }
-		</div>
-	</div>
-	<b>보러가기</b>
-	<c:forEach var="list" items="${platformList}">
-		<img src="resources/resources/logo/${list.platformName}.png" width="30" height="30" onclick="location.href='${list.webtoonLink}'">
-		<%-- <button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button> --%>
-	</c:forEach>
+		
+		<c:choose>
+			<c:when test="${linkCount == 1}">
+			<br>
+				<button type="button" onclick="location.href='${platformList[0].getWebtoonLink()}'">보 러 가 기</button>
+				</div>
+			</div>
+			</c:when>
+			<c:otherwise>
+				</div>
+				</div>
+					<b>보러가기</b>
+					<c:forEach var="list" items="${platformList}">
+						<img src="resources/resources/logo/${list.platformName}.png" width="30" height="30" onclick="location.href='${list.webtoonLink}'">
+						<%-- <button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button> --%>
+					</c:forEach>
+			</c:otherwise>
+		</c:choose>
+	
 	<br>
 	<c:if test="${originList[0].webtoonOriginalLink !='nan' }">
 		<b>이 작품은 소설이 존재해요!</b><br>

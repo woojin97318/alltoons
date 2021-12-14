@@ -56,6 +56,10 @@
 		select * from favorites_info where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
 	</select>
 	
+	<select id="linkCount" resultType="int">
+		select count(webtoon_link) from PLATFORM_TABLE where webtoon_num = #{webtoonNum}
+	</select>
+	
 	
 	<select id="firestInterest" resultMap="favorites">
 		select * from favorites_info where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
