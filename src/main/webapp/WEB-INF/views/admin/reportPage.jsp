@@ -15,6 +15,11 @@
 </head>
 <body>
 	<div align="center">
+		<header>
+			<c:import url="./adminHeader.jsp">
+				<c:param name="tag" value="신고 확인"></c:param>
+			</c:import>
+		</header>
 		<table>
 			<tr>
 				<td colspan="3">
