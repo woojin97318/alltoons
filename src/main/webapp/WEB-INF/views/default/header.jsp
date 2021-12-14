@@ -18,21 +18,20 @@
 
 </head>
 <body>
-	<div class="main-title">
+	<div id="main-title">
 		AllToons
-	</div>
-	
-	<div class="searchBar">
-		<form action="${contextPath }/webtoonSearch" method="POST">
-			<input type="text" name="search" size="20" placeholder="검색어 입력" required >
-			<input type="submit" value="검색">
-		</form>
+		<div class="searchBar">
+			<form action="${contextPath }/webtoonSearch" method="POST">
+				<input type="text" name="search" size="20" placeholder="검색어 입력" required >
+				<input type="submit" value="검색">
+			</form>
+		</div>
 	</div>
 	<button id="menuBtn"></button>
-	<div class="menuList">
+	<div class="main-menu">
 	<h3>메뉴</h3>
 		<nav>
-			<ul>
+			<ul id="menu1">
 				<li><a href="${contextPath}/">
 				플랫폼별 웹툰</a></li>
 				<li><a href="${contextPath}/">
@@ -45,6 +44,7 @@
 				관리자 페이지</a></li>
 				<li><a href="${contextPath}/member/myPage">
 				마이 페이지</a></li>
+			</ul>
 				<!-- 
 				<c:choose>
 					<c:when test="">
@@ -55,6 +55,7 @@
 					</c:otherwise>
 				</c:choose>
 				 -->
+			<ul id="menu2">
 				 <li><a href="${contextPath}/member/login">
 				로그인</a></li>
 				

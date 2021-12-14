@@ -9,13 +9,20 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=yes,
 			maximum-scale=1.0, minimum-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mainStyle.css">
 <title>AllToons</title>
 </head>
+
+<c:import url="../default/header.jsp"/>
+
 <body>
-	<c:import url="../default/header.jsp"/>
+	
 	
 	AllToons 메인
 	
-	<c:import url="../default/footer.jsp"/>
+	
 </body>
+
+<c:import url="../default/footer.jsp"/>
+
 </html>

@@ -8,7 +8,7 @@ font-family: 'Poor Story', cursive;
 font-family: 'Black Han Sans', sans-serif;
 font-family: 'Song Myung', serif;
 font-family: 'Gowun Dodum', sans-serif;
-버튼 컬러:70A9FF, 3665FF
+버튼 컬러:70A9FF, rgb(255, 191, 43)
 */
 body {
 	padding-top: 95px;
@@ -25,11 +25,16 @@ header {
     background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {/*스크롤 막대*/
-    background-color: #d1d1d1;
+    background-color: rgba(209, 209, 209, 0.3);
     border-radius: 10px;
     background-clip: padding-box;
-    border: 5px solid transparent;
+    border: 6px solid transparent;
   }
+::-webkit-scrollbar-thumb:hover{
+	background-color: rgba(191, 210, 255, 0.8);
+	border: 5.5px solid transparent;
+	transition: all 1s;
+}
 .menu-title {/*카테고리?*/
 	
 	font-weight: bold;
@@ -50,7 +55,7 @@ nav ul {/*횡스크롤 버튼*/
 	justify-content: flex-start;
 	overflow-x:scroll;
 	white-space:nowrap;
-	margin : 20px 0;
+	margin : 20px 0 0;
 }
 nav ul li {
 	margin : 0 5px;
@@ -129,11 +134,11 @@ td{
 	font-family: 'Poor Story', cursive;
 }
 .listBtn:hover {
-	background-color: #f3b201;
+	background-color: rgb(255, 191, 43);
 }
 .listBtn:active{
 	/*box-shadow:inset 0 0 20px #ca7a01;*/
-	background-color: #f3b201;
+	background-color: rgb(255, 191, 43);
 }
 
 .searchBar:focus{

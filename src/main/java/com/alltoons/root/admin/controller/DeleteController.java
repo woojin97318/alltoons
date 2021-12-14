@@ -46,7 +46,7 @@ public class DeleteController {
 		dele.deleteWebtoon(webtoonNum);//db삭제
 		
 		model.addAttribute("message", message);
-		model.addAttribute("url", "/delete");
+		model.addAttribute("url", "/webtoonDelete");
 		
 		dele.webtoonAllList(model);
 		//return "admin/webtoonDelete";

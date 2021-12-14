@@ -50,7 +50,7 @@ public class DeleteServiceImpl implements DeleteService{
 
 	@Override
 	public String deleteImage(int webtoonNum, String webtoonImage) {
-		File deleteImage = new File(IMAGE_REPO+"/"+webtoonImage);
+		File deleteImage = new File(ModifyService.WEBTOON_IMAGE+"/"+webtoonImage);
 		deleteImage.delete();
 		String message = Integer.toString(webtoonNum)+"번이 삭제되었습니다.";
 		return message;
