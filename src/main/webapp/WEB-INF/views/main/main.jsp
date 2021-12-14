@@ -11,11 +11,17 @@
 			maximum-scale=1.0, minimum-scale=1.0" />
 <title>AllToons</title>
 </head>
-<body>
+<header>
 	<c:import url="../default/header.jsp"/>
+</header>
+<body>
+	
 	
 	AllToons 메인
 	
-	<c:import url="../default/footer.jsp"/>
+	
 </body>
+<footer>
+	<c:import url="../default/footer.jsp"/>
+</footer>
 </html>
