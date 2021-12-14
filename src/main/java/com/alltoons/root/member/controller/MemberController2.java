@@ -3,6 +3,7 @@ package com.alltoons.root.member.controller;
 import java.io.File;
 import java.io.FileInputStream;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,7 @@ import com.alltoons.root.member.service.MemberService2;
 @Controller
 @RequestMapping("member")
 public class MemberController2 implements MemberSessionName {
+	@Autowired MemberService ms;
 	@Autowired MemberService2 ms2;
 	
 	@GetMapping("memberDelete")
@@ -158,5 +161,23 @@ public class MemberController2 implements MemberSessionName {
 		FileCopyUtils.copy(in, response.getOutputStream());
 		in.close();
 	}
-	
+	@GetMapping("logout")
+	public String logout(HttpSession session, HttpServletResponse response,
+			@CookieValue(value="loginCookie", required=false) Cookie loginCookie,
+			Model model) throws Exception {
+		if(session.getAttribute(LOGIN) != null) {
+			if(loginCookie != null) {
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(0);
+				response.addCookie(loginCookie);
+				ms.keepLogin("nan",
+						new java.sql.Date(System.currentTimeMillis()),
+						(String)session.getAttribute(LOGIN));
+			}
+		}
+		session.invalidate();
+		model.addAttribute("message", "로그아웃 되었습니다");
+		model.addAttribute("url", "main");
+		return "/common/alertHref";
+	}
 }
