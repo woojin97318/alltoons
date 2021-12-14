@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alltoons.root.webtoon.review.mapper.ReviewMapper">
+
+	<select id="getReviewCnt" resultType="int">
+		select count(*)
+		from review_info
+		where webtoon_num = #{webtoonNum}
+	</select>
+	
+	<resultMap id="review" type="com.alltoons.root.webtoon.review.dto.ReviewDTO">
+		<result property="userImage" column="webtoon_title" />
+		<result property="userEmail" column="webtoon_writer" />
+		<result property="reviewContent" column="webtoon_content" />
+		<result property="reviewTime" column="webtoon_image" />
+	</resultMap>
+	
+	<select id="getMyReview" resultMap="review">
+		select user_image, review_info.user_email, review_content, review_time
+		from review_info, user_info
+		where review_info.user_email = #{mail} and webtoon_num = #{wbnum}
+	</select>
+	
+	<select id="getAllReview" resultMap="review">
+		select user_image, review_info.user_email, review_content, review_time
+		from review_info, user_info
+		where webtoon_num = #{webtoonNum} and
+			  review_info.user_email = user_info.user_email
+		order by review_time desc
+	</select>
+</mapper>

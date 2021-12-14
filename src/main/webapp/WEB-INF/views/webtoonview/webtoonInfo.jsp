@@ -172,5 +172,107 @@ function favorties_off(){
 	<br>
 	<b>작품 소개글</b><br>
 	<label>${webtoonDate.webtoonContent }</label>
+	<hr>
+	<b>리뷰 ${reviewCnt }개</b>
+	<br>
+	<table>
+		<c:choose>
+			<c:when test="${myReview != null }">
+				<tr>
+					<td>
+						<img src="${contextPath }/member/userImageView?file=${myReview.userImage}"
+							width="100px" height="100px">
+					</td>
+					<th>
+						${myReview.userEmail }
+					</th>
+					<td>
+						<button type="button" onclick="location.href=''">
+							삭제
+						</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						${myReview.reviewContent }
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						작성 시간 : ${myReview.reviewTime }
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td>
+						<img src="${contextPath }/member/userImageView?file=${myReview.userImage}"
+							width="100px" height="100px">
+					</td>
+					<th colspan="2">
+						${user}
+					</th>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<form action="" method="post">
+							<input type="hidden" name="userEmail" value="${user }">
+							<input type="hidden" name="webtoonNum" value="webtoonDate.webtoonNum">
+							<textarea rows="5" cols="20" name="reviewContent"></textarea>
+						</form>
+					</td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
+		<tr>
+			<td colspan="3">
+				<hr>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<c:choose>
+			<c:when test="${reviewList == null }">
+				<tr>
+					<td colspan="3">
+						리뷰가 없습니다
+					</td>
+				</tr>
+			</c:when>
+			<c:choose>
+				<c:forEach var="review" items="${reviewList }">
+					<tr>
+						<td>
+							<img src="${contextPath }/member/userImageView?file=${review.userImage }"
+								width="100px" height="100px">
+						</td>
+						<td>
+							${review.userEmail }
+						</td>
+						<td>
+							<button type="button" onclick="location.href=''">
+								신고
+							</button>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							${review.reviewContent }
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							${review.reviewTime }
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<hr>
+						</td>
+					</tr>
+				</c:forEach>
+			</c:choose>
+		</c:choose>
+	</table>
 </body>
 </html>
