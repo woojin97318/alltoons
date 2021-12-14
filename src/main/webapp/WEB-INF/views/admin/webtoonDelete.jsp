@@ -66,7 +66,7 @@
 	
 	
 	<div class="searchBar">
-		<form action="${contextPath }/delete" method="POST">
+		<form action="${contextPath }/webtoonDelete" method="POST">
 			<input type="text" name="search" size="20" placeholder="검색어 입력" required >
 			<input type="submit" value="검색">
 		</form>
@@ -103,7 +103,7 @@
 					<tr>
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
-								<td><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></td>
+								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
@@ -143,7 +143,7 @@
 					<tr>
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
-								<td><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></td>
+								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
@@ -183,7 +183,7 @@
 					<tr>
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
-								<th><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></th>
+								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>

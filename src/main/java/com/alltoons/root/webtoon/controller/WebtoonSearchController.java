@@ -15,7 +15,7 @@ public class WebtoonSearchController {
 	
 	@PostMapping("/webtoonSearch")
 	public String webtoonSearch(HttpServletRequest request, Model model) {
-		SearchSvc.webtoonAllList(model);
+		//SearchSvc.webtoonAllList(model);
 		model.addAttribute(request.getParameter("search"), model);
 		return "main/webtoonSearch";
 	}
