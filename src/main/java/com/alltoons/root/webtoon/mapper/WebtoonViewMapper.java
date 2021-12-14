@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.alltoons.root.webtoon.dto.FavoritesDTO;
+import com.alltoons.root.favorites.dto.FavoritesDTO;
 import com.alltoons.root.webtoon.dto.WebtoonOriginDTO;
 import com.alltoons.root.webtoon.dto.WebtoonPlatformDTO;
 import com.alltoons.root.webtoon.dto.WebtoonViewDTO;

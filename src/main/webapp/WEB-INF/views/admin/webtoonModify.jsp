@@ -231,7 +231,7 @@ function add_link(){
 			<div>
 			<c:choose>
 				<c:when test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
-					<img id="webtoonImage" src="resources/resources/default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
+					<img id="webtoonImage" src="resources/img/webtoon/default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
 				</c:when>
 				<c:otherwise>
 					<img id="webtoonImage" src="${contextPath }/thumbnail?webtoonImage=${webtoonList.webtoonImage}" width=100 height=100 alt="썸네일이 존재" />

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alltoons.root.admin.dto.WebtoonDTO;
-import com.alltoons.root.webtoon.dto.FavoritesDTO;
+import com.alltoons.root.favorites.dto.FavoritesDTO;
 import com.alltoons.root.webtoon.dto.WebtoonViewDTO;
 import com.alltoons.root.webtoon.service.WebtoonViewService;
 

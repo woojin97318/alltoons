@@ -32,16 +32,16 @@ $(document).ready(function(){
 });
 
 function interest_on(){
-	document.getElementById("interest").src="resources/resources/interest_on.png";
+	document.getElementById("interest").src="resources/img/webtoon/interest_on.png";
 }
 function interest_off(){
-	document.getElementById("interest").src="resources/resources/interest_off.png";
+	document.getElementById("interest").src="resources/img/webtoon/interest_off.png";
 }
 function favorties_on(){
-	document.getElementById("favorites").src="resources/resources/favorties_on.png";
+	document.getElementById("favorites").src="resources/img/webtoon/favorties_on.png";
 }
 function favorties_off(){
-	document.getElementById("favorites").src="resources/resources/favorties_off.png";
+	document.getElementById("favorites").src="resources/img/webtoon/favorties_off.png";
 }
 </script>
 <script type="text/javascript">/* 관심 */
@@ -155,7 +155,7 @@ function favorties_off(){
 				</div>
 					<b>보러가기</b>
 					<c:forEach var="list" items="${platformList}">
-						<img src="resources/resources/logo/${list.platformName}.png" width="30" height="30" onclick="location.href='${list.webtoonLink}'">
+						<img src="resources/img/webtoon/logo/${list.platformName}.png" width="30" height="30" onclick="location.href='${list.webtoonLink}'">
 						<%-- <button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button> --%>
 					</c:forEach>
 			</c:otherwise>
@@ -165,7 +165,7 @@ function favorties_off(){
 	<c:if test="${originList[0].webtoonOriginalLink !='nan' }">
 		<b>이 작품은 소설이 존재해요!</b><br>
 		<c:forEach var="origin" items="${originList }">
-			<img src="resources/resources/logo/${origin.originalPlatform}.png" width="30" height="30" onclick="location.href='${origin.webtoonOriginalLink}'">
+			<img src="resources/img/webtoon/logo/${origin.originalPlatform}.png" width="30" height="30" onclick="location.href='${origin.webtoonOriginalLink}'">
 			<%-- <button type="button" onclick="location.href='${origin.webtoonOriginalLink}'" >${origin.originalPlatform}</button> --%>
 		</c:forEach>
 	</c:if>
