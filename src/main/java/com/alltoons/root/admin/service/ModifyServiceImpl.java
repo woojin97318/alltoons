@@ -19,7 +19,7 @@ import com.alltoons.root.admin.dto.PlatformDTO;
 import com.alltoons.root.admin.dto.WebtoonDTO;
 import com.alltoons.root.admin.mapper.WebtoonMapper;
 
-@Service("modifyService")
+@Service
 public class ModifyServiceImpl implements ModifyService{
 	@Autowired WebtoonMapper wm;
 	@Override

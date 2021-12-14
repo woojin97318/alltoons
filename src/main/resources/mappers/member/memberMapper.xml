@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alltoons.root.member.mapper.MemberMapper">
+
+	<resultMap id="user"
+		type="com.alltoons.root.member.dto.MemberDTO">
+		<result property="userEmail" column="user_email" />
+		<result property="userPassword" column="user_password" />
+		<result property="userNick" column="user_nick" />
+		<result property="userImage" column="user_image" />
+		<result property="division" column="division" />
+		<result property="sessionId" column="session_id" />
+		<result property="limitTime" column="limit_time" />
+		<result property="authKey" column="authkey" />
+	</resultMap>
+
+	<select id="userChk" resultMap="user">
+		select * from user_info
+		where user_email = #{userEmail}
+	</select>
+
+	<update id="keepLogin">
+		update user_info
+		set session_id = #{sessionId},
+		limit_time = #{limitDate}
+		where user_email = #{userEmail}
+	</update>
+
+	<insert id="signUpForm">
+		insert into user_info(user_email, user_password,
+		user_image)
+		values(#{userEmail}, #{userPassword}, #{userImage})
+	</insert>
+	<select id="emailChk" resultMap="user">
+		select * from user_info
+		where user_email = #{userEmail}
+	</select>
+	<update id="updatePassword" parameterType="String">
+		update user_info
+		set user_password = #{codedStr}
+		where user_email = #{email}
+	</update>
+</mapper>

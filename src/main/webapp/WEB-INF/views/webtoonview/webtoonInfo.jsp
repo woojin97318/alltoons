@@ -51,7 +51,7 @@ function favorties_off(){
 			type: "GET",
 			data: {
 				webtoonNum: "${webtoonDate.webtoonNum}",
-				userEmail: "1234"
+				userEmail: "${user}"
 			},
 			success : function(cnt){
 				$("#icount").text(cnt)
@@ -66,7 +66,7 @@ function favorties_off(){
 			type: "GET",
 			data: {
 				webtoonNum: "${webtoonDate.webtoonNum}",
-				userEmail: "1234"
+				userEmail: "${user}"
 			},
 			success : function(onoff){
 				if(onoff=="T"){
@@ -87,7 +87,7 @@ function favorties_off(){
 			type: "GET",
 			data: {
 				webtoonNum: "${webtoonDate.webtoonNum}",
-				userEmail: "1234"
+				userEmail: "${user}"
 			},
 			success : function(cnt){
 				$("#fcount").text(cnt)
@@ -102,7 +102,7 @@ function favorties_off(){
 			type: "GET",
 			data: {
 				webtoonNum: "${webtoonDate.webtoonNum}",
-				userEmail: "1234"
+				userEmail: "${user}"
 			},
 			success : function(onoff){
 				if(onoff=="T"){

@@ -9,10 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <script type="text/javascript">
-      alert("${message}")
-      //${contextPath}/${url} => localhost:8055/root/ + ${url}
-      location.href = "${contextPath}/${url}"
-   </script>
+	<script type="text/javascript">
+		alert("${message}")
+		//${contextPath}/${url} => localhost:8055/root/ + ${url}
+		location.href = "${contextPath}/${url}"
+	</script>
 </body>
 </html>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alltoons.root.member.mapper.MemberMapper2">
+	
+	<delete id="memberDelete">
+		delete from user_info
+		where user_email = #{userEmail}
+	</delete>
+	
+	<update id="PasswordModify">
+		update user_info
+		set user_password = #{pw}
+		where user_email = #{email}
+	</update>
+	
+	<update id="userImageModify">
+		update user_info
+		set user_image = #{image}
+		where user_email = #{email}
+	</update>
+	
+	<select id="getFavorites" resultType="int">
+		select count(*)
+		from favorites_info
+		where user_email = #{userEmail} and favorites = 'T'
+	</select>
+	
+	<select id="getInterest" resultType="int">
+		select count(*)
+		from favorites_info
+		where user_email = #{userEmail} and interest = 'T'
+	</select>
+	
+	<select id="myReviewCnt" resultType="int">
+		select count(*)
+		from review_info
+		where user_email = #{userEmail}
+	</select>
+	
+	<resultMap id="myReview" type="com.alltoons.root.review.dto.MyReviewDTO">
+		<result property="reviewNum" column="review_num"/>
+		<result property="reviewContent" column="review_content"/>
+		<result property="reviewTime" column="review_time"/>
+		<result property="webtoonNum" column="webtoon_num"/>
+		<result property="webtoonImage" column="webtoon_image"/>
+		<result property="webtoonTitle" column="webtoon_title"/>
+	</resultMap>
+	
+	<select id="getMyReview" resultMap="myReview">
+		select review_num, review_content, review_time, review_info.webtoon_num,
+			   webtoon_image, webtoon_title
+		from review_info, webtoon_info
+		where user_email = #{userEmail}
+			  and review_info.webtoon_num = webtoon_info.webtoon_num
+		order by review_num desc
+	</select>
+	
+	<delete id="myReviewDelete">
+		delete
+		from review_info
+		where review_num = #{reviewNum} 
+	</delete>
+	
+	<update id="userImageDefault">
+		update user_info
+		set user_image = 'default_image.png'
+		where user_email = #{userEmail}
+	</update>
+	
+</mapper>
