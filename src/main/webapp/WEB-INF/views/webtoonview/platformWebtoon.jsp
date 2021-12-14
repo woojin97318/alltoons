@@ -9,11 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>플랫폼 별 웹툰(헤더)</h1>
 	<header>
 		<!-- 어드민 페이지 헤더 -->
 		<c:import
-			url="./header/platformHeader.jsp?platformNameList=${platformNameList} }">
+			url="./header/platformHeader.jsp">
 			<c:param name="tag" value="플랫폼 별 웹툰"></c:param>
 		</c:import>
 		<!-- value에 카테고리명을 넣어주세요 -->

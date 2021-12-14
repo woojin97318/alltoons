@@ -34,7 +34,7 @@
          <ul id="menu1">
             <li><a href="${contextPath}/platformWebtoon?platformName=naver">
             플랫폼별 웹툰</a></li>
-            <li><a href="${contextPath}/">
+            <li><a href="${contextPath}/genreWebtoon?webtoonGenre=g1">
             장르별 웹툰</a></li>
             <li><a href="${contextPath}/">
             즐겨찾기</a></li>

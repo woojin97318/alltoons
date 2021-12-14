@@ -115,11 +115,12 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		ArrayList<WebtoonCategoryDTO> platformView = wvm.platformView(platformName);
 		model.addAttribute("platformView", platformView);
 
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		for (int i = 0; i < 10; i++) {
-			list.add(i);
-		}model.addAttribute(list);
+	}
 
+	@Override
+	public void genreView(Model model, String webtoonGenre) {
+		ArrayList<WebtoonCategoryDTO> genreView = wvm.genreView(webtoonGenre);
+		model.addAttribute("genreView", genreView);
 	}
 
 }

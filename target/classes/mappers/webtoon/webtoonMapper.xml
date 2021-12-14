@@ -40,9 +40,11 @@
 		select
 		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
 		webtoon_info.webtoon_writer,
-		webtoon_info.webtoon_content ,webtoon_info.webtoon_image
+		webtoon_info.webtoon_content
+		,webtoon_info.webtoon_image
 		from webtoon_info
-		where webtoon_info.webtoon_num = #{webtoonNum}
+		where
+		webtoon_info.webtoon_num = #{webtoonNum}
 	</select>
 	<select id="platformList" resultMap="platform">
 		select * from PLATFORM_TABLE
@@ -86,12 +88,14 @@
 	<insert id="insertInterest">
 		insert into
 		favorites_info(user_email,webtoon_num,interest)
-		values( #{userEmail}, #{webtoonNum},'T')
+		values( #{userEmail},
+		#{webtoonNum},'T')
 	</insert>
 	<insert id="insertFavorties">
 		insert into
 		favorites_info(user_email,webtoon_num,FAVORITES)
-		values(#{userEmail}, #{webtoonNum},'T')
+		values(#{userEmail},
+		#{webtoonNum},'T')
 	</insert>
 
 
@@ -107,7 +111,8 @@
 	</update>
 
 
-	<resultMap type="com.alltoons.root.webtoon.dto.WebtoonCategoryDTO" id="category">
+	<resultMap
+		type="com.alltoons.root.webtoon.dto.WebtoonCategoryDTO" id="category">
 		<result property="webtoonNum" column="webtoon_num" />
 		<result property="webtoonTitle" column="webtoon_title" />
 		<result property="webtoonWriter" column="webtoon_writer" />
@@ -117,13 +122,24 @@
 	</resultMap>
 
 	<select id="platformView" resultMap="category">
-		select webtoon_info.webtoon_num, webtoon_info.webtoon_title, webtoon_info.webtoon_writer, webtoon_info.webtoon_image, PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
+		select
+		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
+		webtoon_info.webtoon_writer, webtoon_info.webtoon_image,
+		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
 		from PLATFORM_TABLE,webtoon_info
-		where PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} and PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
+		where PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} and
+		PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
 	</select>
 
 
-
+	<select id="genreView" resultMap="category">
+		select
+		webtoon_info.webtoon_num,
+		webtoon_info.webtoon_title,webtoon_info.webtoon_writer,webtoon_info.webtoon_image,GENRE_TABLE.webtoon_genre
+		from GENRE_TABLE,webtoon_info
+		where GENRE_TABLE.webtoon_num=webtoon_info.webtoon_num
+		and GENRE_TABLE.webtoon_genre=#{webtoonGenre}
+	</select>
 
 
 

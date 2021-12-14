@@ -3,11 +3,12 @@ package com.alltoons.root.webtoon.review.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.alltoons.root.webtoon.review.dto.ReviewDTO;
 import com.alltoons.root.webtoon.review.mapper.ReviewMapper;
-
+@Service
 public class ReviewServiceImpl implements ReviewService {
 	@Autowired ReviewMapper mapper;
 	

@@ -21,4 +21,6 @@ public interface WebtoonViewService {
 
 	void platformView(Model model, String platformName);
 
+	void genreView(Model model, String webtoonGenre);
+
 }

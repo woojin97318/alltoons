@@ -42,6 +42,8 @@ public interface WebtoonViewMapper {
 
 	ArrayList<WebtoonCategoryDTO> platformView(String platformName);
 
+	ArrayList<WebtoonCategoryDTO> genreView(String webtoonGenre);
+
 
 
 }
