@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alltoons.root.admin.mapper.WebtoonMapper">
+	<resultMap
+		type="com.alltoons.root.admin.dto.WebtoonDTO" id="webtoon">
+		<id property="webtoonNum" column="webtoon_num" />
+		<result property="webtoonTitle" column="webtoon_title" />
+		<result property="webtoonWriter" column="webtoon_writer" />
+		<result property="webtoonContent" column="webtoon_content" />
+		<result property="webtoonImage" column="webtoon_image" />
+	</resultMap>
+	<resultMap
+		type="com.alltoons.root.admin.dto.GenreDTO" id="genre">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="webtoonGenre" column="webtoon_genre" />
+	</resultMap>
+	<resultMap
+		type="com.alltoons.root.admin.dto.PlatformDTO" id="platform">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="platformName" column="WEBTOON_PLATFORM_NAME" />
+		<result property="webtoonLink" column="webtoon_link" />
+	</resultMap>
+	<resultMap
+		type="com.alltoons.root.admin.dto.OriginDTO" id="origin">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="originalPlatform" column="origin_platform_name" />
+		<result property="webtoonOriginalLink" column="ORIGIN_WEBTOON_LINK" />
+	</resultMap>
+	
+	
+	<select id="selectNum" resultMap="webtoon">
+		select * from webtoon_info where
+		webtoon_title = #{webtoonTitle} and webtoon_writer = #{webtoonWriter}
+	</select>
+	<select id="selectList" resultMap="webtoon">
+		select * from webtoon_info where webtoon_num = #{webtoonNum}
+	</select>
+	<select id="selectLinks" resultMap="platform"><!-- 행 하나씩 dto형태로 넘어감 -->
+		select * from platform_table where webtoon_num = #{webtoonNum}
+		order by WEBTOON_PLATFORM_NAME
+	</select>
+	<select id="selectGenre" resultMap="genre">
+		select * from genre_table where webtoon_num = #{webtoonNum}
+	</select>
+	<select id="selectOrigin" resultMap="origin">
+		select * from origin_table where webtoon_num = #{webtoonNum}
+	</select>
+	
+	<select id="selectOriginLink" resultMap="origin">
+		select * from origin_table where webtoon_num = #{webtoonNum}
+		order by origin_platform_name
+	</select>
+	<select id="selectwebtoonGenre" resultMap="genre"> 
+		select * from genre_table where webtoon_num = #{webtoonNum}
+	</select>
+	
+	
+	<insert id="uploadWetoon">
+		insert into
+		webtoon_info(webtoon_title,webtoon_num,webtoon_writer,webtoon_content,webtoon_image)
+		values(#{webtoonTitle},webtoon_num_seq.nextval,#{webtoonWriter},#{webtoonContent},#{webtoonImage})
+	</insert>
+	<insert id="uploadPlatform">
+		insert into platform_table values(#{webtoonNum},#{platformName},#{webtoonLink})
+	</insert>
+	<insert id="uploadOriginal">
+		insert into origin_table values(#{webtoonNum},#{originalPlatform},#{webtoonOriginalLink})
+	</insert>
+	<insert id="uploadGenre">
+		insert into genre_table values(#{webtoonNum},#{webtoonGenre})
+	</insert>
+	
+	
+	<update id="modifyWebtoon">
+		update webtoon_info 
+		set webtoon_title = #{webtoonTitle},
+			webtoon_writer = #{webtoonWriter},
+			webtoon_content = #{webtoonContent},
+			webtoon_image = #{webtoonImage}
+		where webtoon_num = #{webtoonNum}
+	</update>
+	<update id="modifyGerne">
+		update genre_table 
+		set webtoon_genre = #{webtoonGenre}
+		where webtoon_num = #{webtoonNum}
+	</update>
+	<update id="modifyOrigin">
+		update origin_table 
+		set origin_platform_name = #{originalPlatform},
+			ORIGIN_WEBTOON_LINK = #{webtoonOriginalLink}
+		where webtoon_num = #{webtoonNum}
+	</update>
+	<update id="modifyPlatform">
+		update platform_table 
+		set webtoon_link = #{webtoonLink}
+		where webtoon_num = #{webtoonNum} and WEBTOON_PLATFORM_NAME = #{platformName}
+	</update>
+	
+	<delete id="delLink">
+		delete from platform_table where webtoon_num = #{webtoonNum}
+	</delete>
+	<delete id="delOrigin">
+		delete from origin_table where webtoon_num = #{webtoonNum}
+	</delete>
+	<delete id="delGenre">
+		delete from genre_table where webtoon_num = #{webtoonNum}
+	</delete>
+</mapper>

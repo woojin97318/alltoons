@@ -16,13 +16,18 @@ import com.alltoons.root.admin.service.DeleteService;
 public class DeleteController {
 	@Autowired DeleteService dele;
 	
-	@GetMapping("/delete")
+	@GetMapping("/admin")
+	public String admin() {
+		return "admin/adminPage";
+	}
+	
+	@GetMapping("/webtoonDelete")
 	public String delete(Model model) {
 		dele.webtoonAllList(model);
 		return "admin/webtoonDelete";
 	}
 	
-	@PostMapping("/delete")
+	@PostMapping("/webtoonDelete")
 	public String delete(HttpServletRequest request, Model model) {
 		dele.webtoonAllList(model);
 		dele.searchList(request.getParameter("search"), model);
@@ -41,7 +46,7 @@ public class DeleteController {
 		dele.deleteWebtoon(webtoonNum);//db삭제
 		
 		model.addAttribute("message", message);
-		model.addAttribute("url", "/delete");
+		model.addAttribute("url", "/webtoonDelete");
 		
 		dele.webtoonAllList(model);
 		//return "admin/webtoonDelete";

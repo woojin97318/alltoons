@@ -14,6 +14,6 @@
 		</c:import>
 </header>
 <body>
-
+관리자 페이지 메인
 </body>
 </html>
