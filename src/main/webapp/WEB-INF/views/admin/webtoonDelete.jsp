@@ -66,7 +66,7 @@
 	
 	
 	<div class="searchBar">
-		<form action="${contextPath }/delete" method="POST">
+		<form action="${contextPath }/webtoonDelete" method="POST">
 			<input type="text" name="search" size="20" placeholder="검색어 입력" required >
 			<input type="submit" value="검색">
 		</form>
@@ -102,8 +102,8 @@
 					<c:forEach var="dto" items="${titleList }">
 					<tr>
 						<c:choose>
-							<c:when test="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}">
-								<td><div class="webtoonImage"><img src="resources/img/webtoon/default_image.png"></div></td>
+							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
+								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
@@ -142,8 +142,8 @@
 					<c:forEach var="dto" items="${writerList }">
 					<tr>
 						<c:choose>
-							<c:when test="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}">
-								<td><div class="webtoonImage"><img src="resources/img/webtoon/default_image.png"></div></td>
+							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
+								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
@@ -182,8 +182,8 @@
 					<c:forEach var="dto" items="${webtoonAllList }">
 					<tr>
 						<c:choose>
-							<c:when test="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}">
-								<th><div class="webtoonImage"><img src="resources/img/webtoon/default_image.png"></div></th>
+							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
+								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>

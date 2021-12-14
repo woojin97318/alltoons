@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>admin page</title>
 </head>
 <header>
 		<c:import url="./adminHeader.jsp">

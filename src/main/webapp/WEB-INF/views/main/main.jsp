@@ -10,8 +10,19 @@
 <link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/mainStyle.css">
 <title>AllToons</title>
 </head>
-<c:import url="../default/header.jsp" />
-<body>AllToons 메인
+<header>
+	<c:import url="../default/header.jsp"/>
+</header>
+
+<body>
+	
+	
+	AllToons 메인
+	
+	
 </body>
-<c:import url="../default/footer.jsp" />
+<footer>
+	<c:import url="../default/footer.jsp"/>
+</footer>
+
 </html>

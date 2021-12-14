@@ -27,6 +27,14 @@ body{
 	
 	-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
 }
+header {
+	position: fixed;
+  	top: 0;
+ 	left: 0;
+ 	right: 0;
+	background: linear-gradient( to bottom, white 80%, transparent );
+ 	max-height:95px;
+}
 #menuBtn{
 	all: unset;
 	background:
@@ -50,7 +58,6 @@ body{
 
 #main-menu{
 	
-	background-color:#70A9FF;
 }
 
 #menu1{
