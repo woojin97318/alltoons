@@ -39,5 +39,7 @@ public interface WebtoonViewMapper {
 
 	int linkCount(String webtoonNum);
 
+	WebtoonPlatformDTO platformNameList();
+
 
 }

@@ -100,4 +100,14 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 
 	
 	
+	
+	@Override
+	public void platformView(Model model) {
+		//웹툰 명,작가,썸네일 & 플랫폼 명
+		//플랫폼 명
+		WebtoonPlatformDTO pd = wvm.platformNameList();
+	}
+
+	
+	
 }

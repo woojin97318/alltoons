@@ -14,20 +14,10 @@
 
 </script>
 
-<title>header</title>
+<title>platform_header</title>
 
 </head>
 <body>
-	<div id="main-title">
-		AllToons
-		<div class="searchBar">
-			<form action="${contextPath }/webtoonSearch" method="POST">
-				<input type="text" name="search" size="20" placeholder="검색어 입력" required >
-				<input type="submit" value="검색">
-			</form>
-		</div>
-	</div>
-	<button id="menuBtn"></button>
 	<div class="main-menu">
 	<h3>메뉴</h3>
 		<nav>
@@ -45,23 +35,8 @@
 				<li><a href="${contextPath}/member/myPage">
 				마이 페이지</a></li>
 			</ul>
-				<!-- 
-				<c:choose>
-					<c:when test="">
-						
-					</c:when>
-					<c:otherwise>
-						
-					</c:otherwise>
-				</c:choose>
-				 -->
-			<ul id="menu2">
-				 <li><a href="${contextPath}/member/login">
-				로그인</a></li>
 				
-				 <li><a href="${contextPath}/member/logout">
-				로그아웃</a></li>
-			</ul>
+			
 		</nav>
 	</div>
 </body>

@@ -59,4 +59,13 @@ public class WebtoonController {
 		return fd.getFavorites()+"";
 	}
 	
+	
+	
+	
+	//플랫폼 view
+	@GetMapping("platformWebtoon")
+	public String platformWebtoon(Model model) {
+		ws.platformView(model);
+		return "webtoonView/platformWebtoon";
+	}
 }

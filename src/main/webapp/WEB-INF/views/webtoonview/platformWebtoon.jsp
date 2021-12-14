@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h1>플랫폼 별 웹툰(헤더)</h1>
+<table>
+<tr>
+</table>
 </body>
 </html>
