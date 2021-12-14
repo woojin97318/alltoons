@@ -12,8 +12,8 @@ import com.alltoons.root.admin.dto.PlatformDTO;
 import com.alltoons.root.admin.dto.WebtoonDTO;
 import com.alltoons.root.admin.mapper.WebtoonMapper;
 import com.alltoons.root.common.MemberSessionName;
+import com.alltoons.root.favorites.dto.FavoritesDTO;
 import com.alltoons.root.member.service.MemberService;
-import com.alltoons.root.webtoon.dto.FavoritesDTO;
 import com.alltoons.root.webtoon.dto.WebtoonOriginDTO;
 import com.alltoons.root.webtoon.dto.WebtoonPlatformDTO;
 import com.alltoons.root.webtoon.dto.WebtoonViewDTO;
@@ -44,10 +44,13 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	@Override
 	public void favorites(String webtoonNum, FavoritesDTO fd, Model model,HttpSession session) {
 		String userEmail= (String) session.getAttribute(MemberSessionName.LOGIN);
-		fd = wvm.check(webtoonNum, userEmail);// 세션 아이디값
+		if(userEmail == null){ 
+			fd.setFavorites('F');
+			fd.setInterest('F');
+		}else {	fd = wvm.check(webtoonNum, userEmail);}// 세션 아이디값
 		System.out.println(MemberSessionName.LOGIN);
 		model.addAttribute("favoritesDTO", fd);
-
+		
 		// 숫자
 		int favoritesCount = wvm.favortiesCount(webtoonNum);
 		int intesrestCount = wvm.intesrestCount(webtoonNum);
@@ -102,6 +105,16 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	public FavoritesDTO onOff(FavoritesDTO fd, String webtoonNum, String userEmail) {
 		fd = wvm.check(webtoonNum, userEmail);
 		return fd;
+	}
+
+	
+	
+	
+	@Override
+	public void platformView(Model model) {
+		//웹툰 명,작가,썸네일 & 플랫폼 명
+		//플랫폼 명
+		WebtoonPlatformDTO pd = wvm.platformNameList();
 	}
 
 	
