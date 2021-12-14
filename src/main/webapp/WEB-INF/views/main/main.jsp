@@ -13,7 +13,9 @@
 <title>AllToons</title>
 </head>
 
-<c:import url="../default/header.jsp"/>
+<header>
+	<c:import url="../default/header.jsp"/>
+</header>
 
 <body>
 	

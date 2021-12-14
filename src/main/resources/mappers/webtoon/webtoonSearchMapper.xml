@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.alltoons.root.admin.mapper.DeleteMapper">
+<mapper namespace="com.alltoons.root.webtoon.mapper.WebtoonSearchMapper">
 	<resultMap type="com.alltoons.root.admin.dto.WebtoonDTO" id="wtnList">
 		<id property="webtoonNum" column="webtoon_num"/>
 		<result property="webtoonImage" column="webtoon_image"/>
@@ -27,8 +27,4 @@
 	<select id="getImageFileName" resultType="String">
 		select webtoon_image from webtoon_info where webtoon_num like webtoon_num=#{webtoonNum}
 	</select>
-	<delete id="deleteWebtoon" >
-		delete from webtoon_info where webtoon_num=#{webtoonNum}
-	</delete>
-	
 </mapper>

@@ -32,9 +32,11 @@
    
    <!-- 마이바티스 xml파일과 dao빈 연결 (dao, mapper의 패키지까지만 적어줘야함) -->
    <mybatis-spring:scan
-      base-package="com.alltoons.root" />
-   <mybatis-spring:scan
-      base-package="com.alltoons.root.member.mapper" />
-   <mybatis-spring:scan
-      base-package="com.alltoons.root.admin.mapper" />
+        base-package="com.alltoons.root.webtoon.mapper" />
+    <mybatis-spring:scan
+        base-package="com.alltoons.root.member.mapper" />
+    <mybatis-spring:scan
+        base-package="com.alltoons.root.admin.mapper" />
+    <mybatis-spring:scan
+        base-package="com.alltoons.root.webtoon.report.mapper" />
 </beans>

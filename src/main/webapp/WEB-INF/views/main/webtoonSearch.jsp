@@ -9,8 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/adminStyle.css">
+<!-- 
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mainStyle.css">
-
+ -->
 <style type="text/css">
 </style>
 
@@ -23,7 +24,7 @@
 </head>
 
 <header>
-		<c:import url="../default/header.jsp"/>
+	<c:import url="../default/header.jsp"/>
 </header>
 	
 <body>
@@ -38,7 +39,7 @@
 		<table border="1">
 			<tr class="table-top">
 				<th>썸네일</th>
-				<th>번호</th>
+				<th>플랫폼</th>
 				<th>제목</th>
 				<th>작가명</th>
 			</tr>
@@ -52,16 +53,16 @@
 					<c:forEach var="dto" items="${titleList }">
 					<tr>
 						<c:choose>
-							<c:when test="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}">
+							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
 								<td><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></td>
 							</c:when>
 							<c:otherwise>
-								<td><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon_image/${dto.webtoonImage }"></div></td>
+								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<td>${dto.webtoonTitle }</td>
-						<td>${dto.webtoonWriter }</td>
 						<th>${dto.platformName }</th>
+						<td><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<td>${dto.webtoonWriter }</td>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
@@ -74,7 +75,7 @@
 		<table border="1">
 			<tr class="table-top">
 				<th>썸네일</th>
-				<th>번호</th>
+				<th>플랫폼</th>
 				<th>제목</th>
 				<th>작가명</th>
 			</tr>
@@ -88,16 +89,16 @@
 					<c:forEach var="dto" items="${writerList }">
 					<tr>
 						<c:choose>
-							<c:when test="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}">
+							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
 								<td><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></td>
 							</c:when>
 							<c:otherwise>
-								<td><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon_image/${dto.webtoonImage }"></div></td>
+								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<td>${dto.webtoonTitle }</td>
-						<td>${dto.webtoonWriter }</td>
 						<th>${dto.platformName }</th>
+						<td><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<td>${dto.webtoonWriter }</td>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
