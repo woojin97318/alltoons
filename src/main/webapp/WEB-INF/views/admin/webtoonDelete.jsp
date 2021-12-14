@@ -103,7 +103,7 @@
 					<tr>
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}">
-								<td><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></td>
+								<td><div class="webtoonImage"><img src="resources/img/webtoon/default_image.png"></div></td>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
@@ -143,7 +143,7 @@
 					<tr>
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}">
-								<td><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></td>
+								<td><div class="webtoonImage"><img src="resources/img/webtoon/default_image.png"></div></td>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
@@ -183,7 +183,7 @@
 					<tr>
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}">
-								<th><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></th>
+								<th><div class="webtoonImage"><img src="resources/img/webtoon/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
