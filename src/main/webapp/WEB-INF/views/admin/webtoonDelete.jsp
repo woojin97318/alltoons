@@ -102,7 +102,7 @@
 					<c:forEach var="dto" items="${titleList }">
 					<tr>
 						<c:choose>
-							<c:when test="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}">
+							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
 								<td><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></td>
 							</c:when>
 							<c:otherwise>
@@ -142,7 +142,7 @@
 					<c:forEach var="dto" items="${writerList }">
 					<tr>
 						<c:choose>
-							<c:when test="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}">
+							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
 								<td><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></td>
 							</c:when>
 							<c:otherwise>
@@ -182,7 +182,7 @@
 					<c:forEach var="dto" items="${webtoonAllList }">
 					<tr>
 						<c:choose>
-							<c:when test="${dto.webtoonImage eq 'default_image' || dto.webtoonImage eq 'default_image.png'||dto.webtoonImage eq 'default_image.jpg'}">
+							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
 								<th><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>

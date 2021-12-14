@@ -10,10 +10,10 @@
 <link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/mainStyle.css">
 <title>AllToons</title>
 </head>
-<<<<<<< HEAD
 <header>
 	<c:import url="../default/header.jsp"/>
 </header>
+
 <body>
 	
 	
@@ -24,10 +24,5 @@
 <footer>
 	<c:import url="../default/footer.jsp"/>
 </footer>
-=======
-<c:import url="../default/header.jsp" />
-<body>AllToons 메인
-</body>
-<c:import url="../default/footer.jsp" />
->>>>>>> 1d17532c84dc8cf7190c0b3bef0542f3fba5cd1a
+
 </html>
