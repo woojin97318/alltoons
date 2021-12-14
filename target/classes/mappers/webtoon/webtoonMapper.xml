@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.alltoons.root.webtoon.mapper.WebtoonViewMapper">
+<mapper
+	namespace="com.alltoons.root.webtoon.mapper.WebtoonViewMapper">
 	<resultMap
 		type="com.alltoons.root.webtoon.dto.WebtoonViewDTO" id="webtoon">
 		<id property="webtoonNum" column="webtoon_num" />
@@ -18,70 +19,121 @@
 		<result property="platformName" column="WEBTOON_PLATFORM_NAME" />
 		<result property="webtoonLink" column="webtoon_link" />
 	</resultMap>
-	<resultMap type="com.alltoons.root.webtoon.dto.WebtoonOriginDTO" id="origin">
+	<resultMap
+		type="com.alltoons.root.webtoon.dto.WebtoonOriginDTO" id="origin">
 		<result property="webtoonNum" column="webtoon_num" />
-		<result property="originalPlatform" column="origin_platform_name" />
-		<result property="webtoonOriginalLink" column="ORIGIN_WEBTOON_LINK" />
+		<result property="originalPlatform"
+			column="origin_platform_name" />
+		<result property="webtoonOriginalLink"
+			column="ORIGIN_WEBTOON_LINK" />
 	</resultMap>
-	<resultMap type="com.alltoons.root.favorites.dto.FavoritesDTO" id="favorites">
-		<result property="userEmail" column="user_email"/>
-		<result property="webtoonNum" column="webtoon_num"/>
-		<result property="favorites" column="FAVORITES"/>
-		<result property="interest" column="interest"/>
+	<resultMap
+		type="com.alltoons.root.favorites.dto.FavoritesDTO" id="favorites">
+		<result property="userEmail" column="user_email" />
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="favorites" column="FAVORITES" />
+		<result property="interest" column="interest" />
 	</resultMap>
-	
-	
+
+
 	<select id="webtoonData" resultMap="webtoon">
-		select webtoon_info.webtoon_num, webtoon_info.webtoon_title, webtoon_info.webtoon_writer,
-			webtoon_info.webtoon_content ,webtoon_info.webtoon_image 
-		from webtoon_info 
+		select
+		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
+		webtoon_info.webtoon_writer,
+		webtoon_info.webtoon_content ,webtoon_info.webtoon_image
+		from webtoon_info
 		where webtoon_info.webtoon_num = #{webtoonNum}
 	</select>
 	<select id="platformList" resultMap="platform">
-		select * from PLATFORM_TABLE where webtoon_num = #{webtoonNum}
+		select * from PLATFORM_TABLE
+		where webtoon_num = #{webtoonNum}
 		order by WEBTOON_PLATFORM_NAME
 	</select>
 	<select id="originList" resultMap="origin">
-		select * from origin_table where webtoon_num = #{webtoonNum}
+		select * from origin_table
+		where webtoon_num = #{webtoonNum}
 		order by origin_platform_name
 	</select>
-	
+
 	<select id="favortiesCount" resultType="int">
-		select count(user_email) from favorites_info where webtoon_num = #{webtoonNum} and favorites = 'T'
+		select count(user_email)
+		from favorites_info where webtoon_num = #{webtoonNum} and favorites =
+		'T'
 	</select>
 	<select id="intesrestCount" resultType="int">
-		select count(user_email) from favorites_info where webtoon_num = #{webtoonNum} and interest = 'T'
+		select count(user_email)
+		from favorites_info where webtoon_num = #{webtoonNum} and interest =
+		'T'
 	</select>
 	<select id="check" resultMap="favorites">
-		select * from favorites_info where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
+		select * from favorites_info where
+		webtoon_num = #{webtoonNum} and user_email = #{userEmail}
 	</select>
-	
+
 	<select id="linkCount" resultType="int">
-		select count(webtoon_link) from PLATFORM_TABLE where webtoon_num = #{webtoonNum}
+		select count(webtoon_link)
+		from PLATFORM_TABLE where webtoon_num = #{webtoonNum}
 	</select>
-	
-	
+
+
 	<select id="firestInterest" resultMap="favorites">
-		select * from favorites_info where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
+		select * from
+		favorites_info where webtoon_num = #{webtoonNum} and user_email =
+		#{userEmail}
 	</select>
-	
-	
+
+
 	<insert id="insertInterest">
-		insert into favorites_info(user_email,webtoon_num,interest) 
+		insert into
+		favorites_info(user_email,webtoon_num,interest)
 		values( #{userEmail}, #{webtoonNum},'T')
 	</insert>
 	<insert id="insertFavorties">
-		insert into favorites_info(user_email,webtoon_num,FAVORITES) 
+		insert into
+		favorites_info(user_email,webtoon_num,FAVORITES)
 		values(#{userEmail}, #{webtoonNum},'T')
 	</insert>
-	
-	
-	
+
+
+
 	<update id="interestClick">
-		update favorites_info set interest = #{interest} where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
+		update favorites_info set interest = #{interest}
+		where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
 	</update>
-	
+
 	<update id="favoritesClick">
-		update favorites_info set FAVORITES = #{favorites} where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
+		update favorites_info set FAVORITES = #{favorites}
+		where webtoon_num = #{webtoonNum} and user_email = #{userEmail}
 	</update>
+
+
+	<resultMap type="com.alltoons.root.webtoon.dto.WebtoonCategoryDTO" id="category">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="webtoonTitle" column="webtoon_title" />
+		<result property="webtoonWriter" column="webtoon_writer" />
+		<result property="webtoonImage" column="webtoon_image" />
+		<result property="webtoonGenre" column="webtoon_genre" />
+		<result property="platformName" column="WEBTOON_PLATFORM_NAME" />
+	</resultMap>
+
+	<select id="platformView" resultMap="category">
+		select webtoon_info.webtoon_num, webtoon_info.webtoon_title, webtoon_info.webtoon_writer, webtoon_info.webtoon_image, PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
+		from PLATFORM_TABLE,webtoon_info
+		where PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} and PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>

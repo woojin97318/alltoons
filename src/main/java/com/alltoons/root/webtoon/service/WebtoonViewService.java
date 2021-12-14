@@ -19,6 +19,6 @@ public interface WebtoonViewService {
 
 	FavoritesDTO onOff(FavoritesDTO fd, String webtoonNum, String userEmail);
 
-	void platformView(Model model);
+	void platformView(Model model, String platformName);
 
 }

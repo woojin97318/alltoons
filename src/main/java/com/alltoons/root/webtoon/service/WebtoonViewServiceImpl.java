@@ -14,6 +14,7 @@ import com.alltoons.root.admin.mapper.WebtoonMapper;
 import com.alltoons.root.common.MemberSessionName;
 import com.alltoons.root.favorites.dto.FavoritesDTO;
 import com.alltoons.root.member.service.MemberService;
+import com.alltoons.root.webtoon.dto.WebtoonCategoryDTO;
 import com.alltoons.root.webtoon.dto.WebtoonOriginDTO;
 import com.alltoons.root.webtoon.dto.WebtoonPlatformDTO;
 import com.alltoons.root.webtoon.dto.WebtoonViewDTO;
@@ -34,23 +35,25 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 
 		ArrayList<WebtoonOriginDTO> originList = wvm.originList(webtoonNum);
 		model.addAttribute("originList", originList);
-		
-		//링크 수
+
+		// 링크 수
 		int cnt = wvm.linkCount(webtoonNum);
-		System.out.println("링크수: "+cnt);
-		model.addAttribute("linkCount",cnt);
+		System.out.println("링크수: " + cnt);
+		model.addAttribute("linkCount", cnt);
 	}
 
 	@Override
-	public void favorites(String webtoonNum, FavoritesDTO fd, Model model,HttpSession session) {
-		String userEmail= (String) session.getAttribute(MemberSessionName.LOGIN);
-		if(userEmail == null){ 
+	public void favorites(String webtoonNum, FavoritesDTO fd, Model model, HttpSession session) {
+		String userEmail = (String) session.getAttribute(MemberSessionName.LOGIN);
+		if (userEmail == null) {
 			fd.setFavorites('F');
 			fd.setInterest('F');
-		}else {	fd = wvm.check(webtoonNum, userEmail);}// 세션 아이디값
+		} else {
+			fd = wvm.check(webtoonNum, userEmail);
+		} // 세션 아이디값
 		System.out.println(MemberSessionName.LOGIN);
 		model.addAttribute("favoritesDTO", fd);
-		
+
 		// 숫자
 		int favoritesCount = wvm.favortiesCount(webtoonNum);
 		int intesrestCount = wvm.intesrestCount(webtoonNum);
@@ -61,13 +64,13 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	@Override
 	public int interestClick(String webtoonNum, String userEmail) {
 		FavoritesDTO fd = wvm.check(webtoonNum, userEmail);
-		if (fd == null) {//즐겨찾기 테이블 첫 사용
+		if (fd == null) {// 즐겨찾기 테이블 첫 사용
 			wvm.insertInterest(webtoonNum, userEmail);
 			fd = new FavoritesDTO();
 			fd.setUserEmail(userEmail);
 			fd.setWebtoonNum(Integer.parseInt(webtoonNum));
 			fd.setInterest('T');
-		}else {
+		} else {
 			if (fd.getInterest() == 'T') {
 				fd.setInterest('F');
 			} else {
@@ -78,11 +81,11 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		int intesrestCount = wvm.intesrestCount(webtoonNum);
 		return intesrestCount;
 	}
-	
+
 	@Override
 	public int favoritesClick(String webtoonNum, String userEmail) {
 		FavoritesDTO fd = wvm.check(webtoonNum, userEmail);
-		if (fd == null) {//즐겨찾기 테이블 첫 사용
+		if (fd == null) {// 즐겨찾기 테이블 첫 사용
 			wvm.insertFavorties(webtoonNum, userEmail);
 			fd = new FavoritesDTO();
 			fd.setUserEmail(userEmail);
@@ -100,23 +103,23 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		return favortiesCount;
 	}
 
-
-	@Override//재 사용 가능 메소드
+	@Override // 재 사용 가능 메소드
 	public FavoritesDTO onOff(FavoritesDTO fd, String webtoonNum, String userEmail) {
 		fd = wvm.check(webtoonNum, userEmail);
 		return fd;
 	}
 
-	
-	
-	
 	@Override
-	public void platformView(Model model) {
-		//웹툰 명,작가,썸네일 & 플랫폼 명
-		//플랫폼 명
-		WebtoonPlatformDTO pd = wvm.platformNameList();
+	public void platformView(Model model, String platformName) {
+		// 웹툰 명,작가,썸네일,플랫폼,웹툰 번호 ==>상세페이지로 웹툰 num만 넘겨줌
+		ArrayList<WebtoonCategoryDTO> platformView = wvm.platformView(platformName);
+		model.addAttribute("platformView", platformView);
+
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for (int i = 0; i < 10; i++) {
+			list.add(i);
+		}model.addAttribute(list);
+
 	}
 
-	
-	
 }

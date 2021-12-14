@@ -67,8 +67,11 @@ public class WebtoonController {
 	
 	//플랫폼 view
 	@GetMapping("platformWebtoon")
-	public String platformWebtoon(Model model) {
-		ws.platformView(model);
-		return "webtoonView/platformWebtoon";
+	public String platformWebtoon(Model model,@RequestParam(required = false)String platformName) {
+		if(platformName == null) {
+			platformName ="navar";//default값
+		}
+		ws.platformView(model,platformName);
+		return "webtoonview/platformWebtoon";
 	}
 }
