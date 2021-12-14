@@ -31,8 +31,6 @@ public class MemberServiceImpl implements MemberService {
 
 	BCryptPasswordEncoder encoder;
 
-	private MemberDTO dto;
-
 	public MemberServiceImpl() {
 		encoder = new BCryptPasswordEncoder();
 	}
@@ -139,7 +137,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public String newPassword(String email) {
-		// MemberDTO dto = new MemberDTO();
 		Random ran = new Random();
 		String str = "";
 		int num;
@@ -156,9 +153,6 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(email);
 		System.out.println(str);
 		System.out.println("암호화된 임시비밀번호" + codedStr);
-		// dto.setUserEmail(email);
-		// dto.setUserPassword(codedStr);
-		// mapper.updatePassword(dto);
 		mapper.updatePassword(codedStr, email);
 		return str;
 

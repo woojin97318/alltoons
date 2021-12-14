@@ -109,21 +109,6 @@
 				</tr>
 			</table>
 		</form>
-		<!--
-		<form action="/sendMail/auth" id="joinForm" method="post">
-			<fieldset>
-				<legend class="screen_out"> 회원가입 폼</legend>
-				 				<div class="box email">
-					<label for="email">이메일</label> <input type="text" id="emailText"
-						name="email" autofocus autocomplete="off" required />
-				</div>
-				<div class="box btn">
-					<button type="button" onclick="sendmail()" class="btn join">
-						이메일 전송</button>
-				</div> 
-			</fieldset>
-		</form>
-		-->
 	</div>
 </body>
 </html>

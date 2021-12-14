@@ -35,4 +35,6 @@
 		base-package="com.alltoons.root.member.mapper" />
 	<mybatis-spring:scan
 		base-package="com.alltoons.root.admin.mapper" />
+	<mybatis-spring:scan
+		base-package="com.alltoons.root.webtoon.report.mapper" />
 </beans>
