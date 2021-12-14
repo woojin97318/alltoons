@@ -74,7 +74,7 @@ public class MemberController implements MemberSessionName {
 				java.sql.Date limitDate = new java.sql.Date(cal.getTimeInMillis());
 				ms.keepLogin(session.getId(), limitDate, userEmail);
 			}
-			url = "index";
+			url = "main";
 		} else { // 가입된 사용자가 아닐경우 or 비밀번호가 틀릴경우 해당 메시지 출력
 			url = "member/login";
 		}
