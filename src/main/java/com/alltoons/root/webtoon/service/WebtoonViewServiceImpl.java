@@ -44,10 +44,13 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	@Override
 	public void favorites(String webtoonNum, FavoritesDTO fd, Model model,HttpSession session) {
 		String userEmail= (String) session.getAttribute(MemberSessionName.LOGIN);
-		fd = wvm.check(webtoonNum, userEmail);// 세션 아이디값
+		if(userEmail == null){ 
+			fd.setFavorites('F');
+			fd.setInterest('F');
+		}else {	fd = wvm.check(webtoonNum, userEmail);}// 세션 아이디값
 		System.out.println(MemberSessionName.LOGIN);
 		model.addAttribute("favoritesDTO", fd);
-
+		
 		// 숫자
 		int favoritesCount = wvm.favortiesCount(webtoonNum);
 		int intesrestCount = wvm.intesrestCount(webtoonNum);
