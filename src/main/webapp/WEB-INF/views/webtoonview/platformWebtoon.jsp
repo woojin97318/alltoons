@@ -26,21 +26,23 @@
       <tr>
      </c:if>
      <td>
-     <c:choose>
-			<c:when
-				test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
-				<img id="webtoonImage" src="resources/img/webtoon/default_image.png"
-					width=200 height=200 alt="선택된 이미지가 없습니다" />
-			</c:when>
-			<c:otherwise>
-				<img id="webtoonImage"
-					src="${contextPath }/thumbnail?webtoonImage=${webtoonList.webtoonImage}"
-					width=200 height=200 alt="썸네일이 존재" />
-			</c:otherwise>
-		</c:choose>
-		<br>
-	     <label>${webtoonList.webtoonTitle}</label><br>
-	     <label>${webtoonList.webtoonWriter}</label>
+     	<a href="${contextPath}/webtooninfo?webtoonNum=${webtoonList.webtoonNum}">
+	     <c:choose>
+				<c:when
+					test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
+					<img id="webtoonImage" src="resources/img/webtoon/default_image.png"
+						width=200 height=200 alt="선택된 이미지가 없습니다" />
+				</c:when>
+				<c:otherwise>
+					<img id="webtoonImage"
+						src="${contextPath }/thumbnail?webtoonImage=${webtoonList.webtoonImage}"
+						width=200 height=200 alt="썸네일이 존재" />
+				</c:otherwise>
+			</c:choose>
+			<br>
+		     <label>${webtoonList.webtoonTitle}</label><br>
+		     <label>${webtoonList.webtoonWriter}</label>
+		</a>
      </td>
     <c:if test="${i%j == j-1}">
      </tr>
