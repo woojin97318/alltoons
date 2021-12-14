@@ -16,13 +16,15 @@ public class ReviewServiceImpl implements ReviewService {
 	public void getReviewCnt(Model model, int webtoonNum) {
 		model.addAttribute("reviewCnt", mapper.getReviewCnt(webtoonNum));
 	}
-
 	@Override
 	public void getMyReview(Model model, int webtoonNum, String userEmail) {
-		ReviewDTO myReview = mapper.getMyReview(webtoonNum, userEmail);
-		model.addAttribute("myReview", myReview);
+		if(userEmail == null) {
+			model.addAttribute("myReview", "n");
+		}else {
+			ReviewDTO myReview = mapper.getMyReview(webtoonNum, userEmail);
+			model.addAttribute("myReview", myReview);
+		}
 	}
-
 	@Override
 	public void getAllReview(Model model, int webtoonNum) {
 		ArrayList<ReviewDTO> reviewList = mapper.getAllReview(webtoonNum);

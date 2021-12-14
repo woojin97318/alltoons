@@ -11,16 +11,17 @@
 	</select>
 	
 	<resultMap id="review" type="com.alltoons.root.webtoon.review.dto.ReviewDTO">
-		<result property="userImage" column="webtoon_title" />
-		<result property="userEmail" column="webtoon_writer" />
-		<result property="reviewContent" column="webtoon_content" />
-		<result property="reviewTime" column="webtoon_image" />
+		<result property="userImage" column="user_image" />
+		<result property="userEmail" column="user_email" />
+		<result property="reviewContent" column="review_content" />
+		<result property="reviewTime" column="review_time" />
 	</resultMap>
 	
 	<select id="getMyReview" resultMap="review">
 		select user_image, review_info.user_email, review_content, review_time
 		from review_info, user_info
-		where review_info.user_email = #{mail} and webtoon_num = #{wbnum}
+		where webtoon_num = #{wbnum} and review_info.user_email = #{mail}
+			  and review_info.user_email = user_info.user_email
 	</select>
 	
 	<select id="getAllReview" resultMap="review">

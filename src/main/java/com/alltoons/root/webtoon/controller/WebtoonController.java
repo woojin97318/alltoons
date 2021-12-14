@@ -2,16 +2,13 @@ package com.alltoons.root.webtoon.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alltoons.root.admin.dto.WebtoonDTO;
 import com.alltoons.root.common.MemberSessionName;
 import com.alltoons.root.favorites.dto.FavoritesDTO;
 import com.alltoons.root.webtoon.dto.WebtoonViewDTO;
@@ -34,7 +31,7 @@ public class WebtoonController {
 
 		// 리뷰
 		rs.getReviewCnt(model, Integer.parseInt(webtoonNum));
-		rs.getMyReview(model, Integer.parseInt(webtoonNum), (String) session.getAttribute(MemberSessionName.LOGIN));
+		rs.getMyReview(model, Integer.parseInt(webtoonNum), (String)session.getAttribute(MemberSessionName.LOGIN));
 		rs.getAllReview(model, Integer.parseInt(webtoonNum));
 		return "webtoonview/webtoonInfo";
 	}
@@ -85,12 +82,12 @@ public class WebtoonController {
 		return "webtoonview/platformWebtoon";
 	}
 	// 장르 view
-		@GetMapping("genreWebtoon")
-		public String genreWebtoon(Model model, @RequestParam(required = false) String webtoonGenre) {
-			if (webtoonGenre == null) {
-				webtoonGenre = "g1";// default값
-			}
-			ws.genreView(model, webtoonGenre);
-			return "webtoonview/genreWebtoon";
+	@GetMapping("genreWebtoon")
+	public String genreWebtoon(Model model, @RequestParam(required = false) String webtoonGenre) {
+		if (webtoonGenre == null) {
+			webtoonGenre = "g1";// default값
 		}
+		ws.genreView(model, webtoonGenre);
+		return "webtoonview/genreWebtoon";
+	}
 }
