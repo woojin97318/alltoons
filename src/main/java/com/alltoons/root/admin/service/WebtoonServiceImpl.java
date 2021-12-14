@@ -19,7 +19,7 @@ import com.alltoons.root.admin.dto.WebtoonDTO;
 import com.alltoons.root.admin.mapper.WebtoonMapper;
 
 
-@Service ("webtoonService")
+@Service 
 public class WebtoonServiceImpl implements WebtoonService{
 	@Autowired WebtoonMapper wm;
 

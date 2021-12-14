@@ -2,6 +2,8 @@ package com.alltoons.root.webtoon.service;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -9,13 +11,15 @@ import org.springframework.ui.Model;
 import com.alltoons.root.admin.dto.PlatformDTO;
 import com.alltoons.root.admin.dto.WebtoonDTO;
 import com.alltoons.root.admin.mapper.WebtoonMapper;
+import com.alltoons.root.common.MemberSessionName;
+import com.alltoons.root.member.service.MemberService;
 import com.alltoons.root.webtoon.dto.FavoritesDTO;
 import com.alltoons.root.webtoon.dto.WebtoonOriginDTO;
 import com.alltoons.root.webtoon.dto.WebtoonPlatformDTO;
 import com.alltoons.root.webtoon.dto.WebtoonViewDTO;
 import com.alltoons.root.webtoon.mapper.WebtoonViewMapper;
 
-@Service("webtoonViewService")
+@Service
 public class WebtoonViewServiceImpl implements WebtoonViewService {
 	@Autowired
 	WebtoonViewMapper wvm;
@@ -38,8 +42,10 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	}
 
 	@Override
-	public void favorites(String webtoonNum, FavoritesDTO fd, Model model) {
-		fd = wvm.check(webtoonNum, "1234");// 세션 아이디값
+	public void favorites(String webtoonNum, FavoritesDTO fd, Model model,HttpSession session) {
+		String userEmail= (String) session.getAttribute(MemberSessionName.LOGIN);
+		fd = wvm.check(webtoonNum, userEmail);// 세션 아이디값
+		System.out.println(MemberSessionName.LOGIN);
 		model.addAttribute("favoritesDTO", fd);
 
 		// 숫자

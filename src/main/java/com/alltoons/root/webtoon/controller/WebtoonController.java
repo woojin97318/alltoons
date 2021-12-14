@@ -1,7 +1,10 @@
 package com.alltoons.root.webtoon.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +21,10 @@ public class WebtoonController {
 	@Autowired WebtoonViewService ws;
 	
 	@GetMapping("webtooninfo")
-	public String webtooninfo(@RequestParam String webtoonNum,Model model,WebtoonViewDTO wvd,FavoritesDTO fd) {
+	public String webtooninfo(HttpSession session,@RequestParam String webtoonNum,Model model,WebtoonViewDTO wvd,FavoritesDTO fd) {
 		//전체를 다 받아서 model로 넘기자 
 		ws.webtoonData(webtoonNum,wvd,model);
-		ws.favorites(webtoonNum,fd,model);
+		ws.favorites(webtoonNum,fd,model,session);
 		return "webtoonview/webtoonInfo";
 	}
 	
