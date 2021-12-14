@@ -1,4 +1,4 @@
-package com.alltoons.root.member.config;
+package com.alltoons.root.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

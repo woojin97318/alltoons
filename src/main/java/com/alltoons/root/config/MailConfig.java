@@ -1,4 +1,4 @@
-package com.alltoons.root.member.config;
+package com.alltoons.root.config;
 
 import java.util.Properties;
 
