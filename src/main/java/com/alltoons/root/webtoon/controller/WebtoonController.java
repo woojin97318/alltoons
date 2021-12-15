@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,9 +36,9 @@ public class WebtoonController {
       // 리뷰
       rs.getReviewCnt(model, Integer.parseInt(webtoonNum));
       rs.getMyReview(model, Integer.parseInt(webtoonNum), (String)session.getAttribute(MemberSessionName.LOGIN));
-      //rs.getAllReview(model, Integer.parseInt(webtoonNum), (String)session.getAttribute(MemberSessionName.LOGIN));
+      rs.getAllReview(model, Integer.parseInt(webtoonNum), (String)session.getAttribute(MemberSessionName.LOGIN));
       return "webtoonview/webtoonInfo";
-   }/*
+   }
    @GetMapping("myReviewDel")
    public String myReviewDel(@RequestParam("reviewNum") int reviewNum,
          @RequestParam("webtoonNum") int webtoonNum, Model model) {
@@ -65,7 +66,7 @@ public class WebtoonController {
       model.addAttribute("message", message);
       model.addAttribute("url", "webtooninfo?webtoonNum=" + webtoonNum);
       return "/common/alertHref";
-   }*/
+   }
 
    @GetMapping("interestClick")
 	@ResponseBody

@@ -116,7 +116,7 @@ public class MemberServiceImpl2 implements MemberService2 {
 	}
 
 	@Override
-	public int myReviewDelete(String reviewNum) {
+	public int myReviewDelete(int reviewNum) {
 		return mapper2.myReviewDelete(reviewNum);
 	}
 

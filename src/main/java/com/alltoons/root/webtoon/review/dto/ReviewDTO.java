@@ -4,11 +4,18 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 public class ReviewDTO {
+	private int reviewNum;
 	private String userImage;
 	private String userEmail;
 	private String reviewContent;
 	private String reviewTime;
 	
+	public int getReviewNum() {
+		return reviewNum;
+	}
+	public void setReviewNum(int reviewNum) {
+		this.reviewNum = reviewNum;
+	}
 	public String getUserImage() {
 		return userImage;
 	}

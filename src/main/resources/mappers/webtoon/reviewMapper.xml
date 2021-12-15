@@ -11,6 +11,7 @@
 	</select>
 	
 	<resultMap id="review" type="com.alltoons.root.webtoon.review.dto.ReviewDTO">
+		<result property="reviewNum" column="review_num" />
 		<result property="userImage" column="user_image" />
 		<result property="userEmail" column="user_email" />
 		<result property="reviewContent" column="review_content" />
@@ -18,7 +19,7 @@
 	</resultMap>
 	
 	<select id="getMyReview" resultMap="review">
-		select user_image, review_info.user_email, review_content, review_time
+		select review_num, user_image, review_info.user_email, review_content, review_time
 		from review_info, user_info
 		where webtoon_num = #{wbnum} and review_info.user_email = #{mail}
 			  and review_info.user_email = user_info.user_email
@@ -27,8 +28,13 @@
 	<select id="getAllReview" resultMap="review">
 		select user_image, review_info.user_email, review_content, review_time
 		from review_info, user_info
-		where webtoon_num = #{webtoonNum} and
-			  review_info.user_email = user_info.user_email
+		where webtoon_num = #{wtnum} and not review_info.user_email in(#{mail})
+			  and review_info.user_email = user_info.user_email
 		order by review_time desc
 	</select>
+	
+	<insert id="setReview">
+		insert into review_info(review_num, webtoon_num, user_email, review_content)
+		values(review_num_seq.nextval, #{wtnum}, #{mail}, #{content})
+	</insert>
 </mapper>

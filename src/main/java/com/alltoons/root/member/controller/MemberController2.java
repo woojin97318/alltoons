@@ -140,7 +140,7 @@ public class MemberController2 implements MemberSessionName {
 		return "member/myReview";
 	}
 	@GetMapping("myReviewDelete")
-	public String myReviewDelete(@RequestParam String reviewNum, Model model) {
+	public String myReviewDelete(@RequestParam int reviewNum, Model model) {
 		int result = ms2.myReviewDelete(reviewNum);
 		String message;
 		if(result == 1) {
