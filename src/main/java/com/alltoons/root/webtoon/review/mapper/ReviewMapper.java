@@ -11,5 +11,9 @@ public interface ReviewMapper {
 	public ReviewDTO getMyReview(
 			@Param("wbnum") int webtoonNum,
 			@Param("mail") String userEmail);
-	public ArrayList<ReviewDTO> getAllReview(int webtoonNum);
+	public ArrayList<ReviewDTO> getAllReview(
+			@Param("wtnum") int webtoonNum, @Param("mail") String userEmail);
+	public int setReview(
+			@Param("wtnum") int webtoonNum, @Param("mail") String userEmail,
+			@Param("content") String reviewContent);
 }

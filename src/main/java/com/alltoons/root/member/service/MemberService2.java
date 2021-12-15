@@ -14,6 +14,6 @@ public interface MemberService2 {
 	public void getFavoritesInterest(Model model, String userEmail);
 	public void myReviewCnt(Model model, String userEmail);
 	public void myReviewContent(Model model, String userEmail);
-	public int myReviewDelete(String reviewNum);
+	public int myReviewDelete(int reviewNum);
 	public int userImageDefault(String userEmail);
 }

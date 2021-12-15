@@ -194,9 +194,9 @@ function favorties_off(){
 						</tr>
 						<tr>
 							<td colspan="2">
-								<form action="" method="post">
+								<form action="reviewInsert" method="post">
+									<input type="hidden" name="webtoonNum" value="${webtoonDate.webtoonNum }">
 									<input type="hidden" name="userEmail" value="${user }">
-									<input type="hidden" name="webtoonNum" value="webtoonDate.webtoonNum">
 									<textarea rows="5" cols="20" name="reviewContent"></textarea>
 							</td>
 							<td>
@@ -211,7 +211,7 @@ function favorties_off(){
 								내가 작성한 리뷰
 							</th>
 							<td>
-								<button type="button" onclick="location.href=''">
+								<button type="button" onclick="location.href='${contextPath}/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
 									삭제
 								</button>
 							</td>
@@ -232,8 +232,8 @@ function favorties_off(){
 		</c:choose>
 		<tr><td colspan="3"><hr></td></tr>
 		<c:choose>
-			<c:when test="${reviewList == null }">
-				<tr><th>작성된 리뷰가 없습니다</th></tr>
+			<c:when test="${reviewList.isEmpty() }">
+				<tr><th colspan="3">작성된 리뷰가 없습니다</th></tr>
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="review" items="${reviewList }">
@@ -244,9 +244,11 @@ function favorties_off(){
 						</td>
 						<th>${review.userEmail }</th>
 						<td class="td">
-							<button type="button" onclick="location.href='${contextPath}/'">
-								신고
-							</button>
+							<c:if test="${user != null }">
+								<button type="button" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${myReview.reviewNum }'">
+									신고
+								</button>
+							</c:if>
 						</td>
 					</tr>
 					<tr>

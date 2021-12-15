@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alltoons.root.common.MemberSessionName;
 import com.alltoons.root.favorites.dto.FavoritesDTO;
+import com.alltoons.root.member.service.MemberService2;
 import com.alltoons.root.webtoon.dto.WebtoonViewDTO;
 import com.alltoons.root.webtoon.review.service.ReviewService;
 import com.alltoons.root.webtoon.service.WebtoonViewService;
@@ -21,6 +23,8 @@ public class WebtoonController {
 	WebtoonViewService ws;
 	@Autowired
 	ReviewService rs;
+	@Autowired
+	MemberService2 ms2;
 
 	@GetMapping("webtooninfo")
 	public String webtooninfo(HttpSession session, @RequestParam String webtoonNum, Model model, WebtoonViewDTO wvd,
@@ -32,8 +36,36 @@ public class WebtoonController {
 		// 리뷰
 		rs.getReviewCnt(model, Integer.parseInt(webtoonNum));
 		rs.getMyReview(model, Integer.parseInt(webtoonNum), (String)session.getAttribute(MemberSessionName.LOGIN));
-		rs.getAllReview(model, Integer.parseInt(webtoonNum));
+		rs.getAllReview(model, Integer.parseInt(webtoonNum), (String)session.getAttribute(MemberSessionName.LOGIN));
 		return "webtoonview/webtoonInfo";
+	}
+	@GetMapping("myReviewDel")
+	public String myReviewDel(@RequestParam("reviewNum") int reviewNum,
+			@RequestParam("webtoonNum") int webtoonNum, Model model) {
+		int result = ms2.myReviewDelete(reviewNum);
+		String message;
+		if(result == 1) {
+			message = "삭제가 완료되었습니다";
+		}else {
+			message = "삭제 Error";
+		}
+		model.addAttribute("message", message);
+		model.addAttribute("url", "webtooninfo?webtoonNum=" + webtoonNum);
+		return "/common/alertHref";
+	}
+	@PostMapping("reviewInsert")
+	public String reviewInsert(@RequestParam("webtoonNum") int webtoonNum,
+			@RequestParam("userEmail") String userEmail,
+			@RequestParam("reviewContent") String reviewContent, Model model) {
+		String message;
+		if(rs.setReview(webtoonNum, userEmail, reviewContent) == 1) {
+			message = "리뷰가 작성되었습니다";
+		}else {
+			message = "리뷰 작성 Error";
+		}
+		model.addAttribute("message", message);
+		model.addAttribute("url", "webtooninfo?webtoonNum=" + webtoonNum);
+		return "/common/alertHref";
 	}
 
 	@GetMapping("interestClick")
