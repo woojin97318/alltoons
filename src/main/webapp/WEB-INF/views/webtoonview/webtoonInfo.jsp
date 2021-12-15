@@ -12,109 +12,109 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-   <c:choose>
-      <c:when test="${fn:contains(favoritesDTO.interest,'T')}">
-         interest_on();
-      </c:when>
-      <c:otherwise>
-         interest_off();
-      </c:otherwise>
-   </c:choose>
-   
-   <c:choose>
-   <c:when test="${fn:contains(favoritesDTO.favorites,'T')}">
-      favorties_on();
-   </c:when>
-   <c:otherwise>
-      favorties_off();
-   </c:otherwise>
+	<c:choose>
+		<c:when test="${fn:contains(favoritesDTO.interest,'T')}">
+			interest_on();
+		</c:when>
+		<c:otherwise>
+			interest_off();
+		</c:otherwise>
+	</c:choose>
+	
+	<c:choose>
+	<c:when test="${fn:contains(favoritesDTO.favorites,'T')}">
+		favorties_on();
+	</c:when>
+	<c:otherwise>
+		favorties_off();
+	</c:otherwise>
 </c:choose>
 });
 
 function interest_on(){
-   document.getElementById("interest").src="resources/img/webtoon/interest_on.png";
+	document.getElementById("interest").src="resources/img/webtoon/interest_on.png";
 }
 function interest_off(){
-   document.getElementById("interest").src="resources/img/webtoon/interest_off.png";
+	document.getElementById("interest").src="resources/img/webtoon/interest_off.png";
 }
 function favorties_on(){
-   document.getElementById("favorites").src="resources/img/webtoon/favorties_on.png";
+	document.getElementById("favorites").src="resources/img/webtoon/favorties_on.png";
 }
 function favorties_off(){
-   document.getElementById("favorites").src="resources/img/webtoon/favorties_off.png";
+	document.getElementById("favorites").src="resources/img/webtoon/favorties_off.png";
 }
 </script>
 <script type="text/javascript">/* 관심 */
-   function interestClick(){
-      $.ajax({
-         url: "interestClick",
-         type: "GET",
-         data: {
-            webtoonNum: "${webtoonDate.webtoonNum}",
-            userEmail: "${user}"
-         },
-         success : function(cnt){
-            $("#icount").text(cnt)
-            i_onOff()
-         },
-         error: function(){alert("실패")}
-      })
-   }
-   function i_onOff(){
-      $.ajax({
-         url: "i_onOff",
-         type: "GET",
-         data: {
-            webtoonNum: "${webtoonDate.webtoonNum}",
-            userEmail: "${user}"
-         },
-         success : function(onoff){
-            if(onoff=="T"){
-               console.log(onoff);
-               interest_on()
-            }else{
-               console.log(onoff);
-               interest_off()
-            }
-         },error: function(){alert("하트 실패")}
-      })
-   }   
+	function interestClick(){
+		$.ajax({
+			url: "interestClick",
+			type: "GET",
+			data: {
+				webtoonNum: "${webtoonDate.webtoonNum}",
+				userEmail: "${user}"
+			},
+			success : function(cnt){
+				$("#icount").text(cnt)
+				i_onOff()
+			},
+			error: function(){alert("실패")}
+		})
+	}
+	function i_onOff(){
+		$.ajax({
+			url: "i_onOff",
+			type: "GET",
+			data: {
+				webtoonNum: "${webtoonDate.webtoonNum}",
+				userEmail: "${user}"
+			},
+			success : function(onoff){
+				if(onoff=="T"){
+					console.log(onoff);
+					interest_on()
+				}else{
+					console.log(onoff);
+					interest_off()
+				}
+			},error: function(){alert("하트 실패")}
+		})
+	}	
 </script>
 <script type="text/javascript">/* 즐겨찾기 */
-   function favoritesClick(){
-      $.ajax({
-         url: "favoritesClick",
-         type: "GET",
-         data: {
-            webtoonNum: "${webtoonDate.webtoonNum}",
-            userEmail: "${user}"
-         },
-         success : function(cnt){
-            $("#fcount").text(cnt)
-            f_onOff()
-         },
-         error: function(){alert("실패")}
-      })
-   }
-   function f_onOff(){
-      $.ajax({
-         url: "f_onOff",
-         type: "GET",
-         data: {
-            webtoonNum: "${webtoonDate.webtoonNum}",
-            userEmail: "${user}"
-         },
-         success : function(onoff){
-            if(onoff=="T"){
-               console.log(onoff);
-               favorties_on()
-            }else{
-               console.log(onoff);
-               favorties_off()
-            }
-         },error: function(){alert("별 실패")}
-      })
-   }   
+	function favoritesClick(){
+		$.ajax({
+			url: "favoritesClick",
+			type: "GET",
+			data: {
+				webtoonNum: "${webtoonDate.webtoonNum}",
+				userEmail: "${user}"
+			},
+			success : function(cnt){
+				$("#fcount").text(cnt)
+				f_onOff()
+			},
+			error: function(){alert("실패")}
+		})
+	}
+	function f_onOff(){
+		$.ajax({
+			url: "f_onOff",
+			type: "GET",
+			data: {
+				webtoonNum: "${webtoonDate.webtoonNum}",
+				userEmail: "${user}"
+			},
+			success : function(onoff){
+				if(onoff=="T"){
+					console.log(onoff);
+					favorties_on()
+				}else{
+					console.log(onoff);
+					favorties_off()
+				}
+			},error: function(){alert("별 실패")}
+		})
+	}	
 </script>
 <style type="text/css">
 .td {

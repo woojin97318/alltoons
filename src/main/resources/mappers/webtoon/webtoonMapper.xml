@@ -148,12 +148,13 @@
 		select DISTINCT
 			webtoon_info.webtoon_num, webtoon_info.webtoon_title, webtoon_info.webtoon_writer,
 			webtoon_info.webtoon_image
-		from user_info,webtoon_info, FAVORITES_INFO,PLATFORM_TABLE,KOR_PLATFORM
+		from user_info,webtoon_info, FAVORITES_INFO,PLATFORM_TABLE
 		where user_info.user_email = #{userEmail}
-			and	FAVORITES_INFO.webtoon_num=webtoon_info.webtoon_num
-	  	  	and PLATFORM_TABLE.WEBTOON_NUM = webtoon_info.webtoon_num
-			and FAVORITES_INFO.favorites = 'T'
-	    	and KOR_PLATFORM.ENG = PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
+			and	FAVORITES_INFO.favorites = 'T'
+			and user_info.user_email=FAVORITES_INFO.user_email
+			and FAVORITES_INFO.webtoon_num=webtoon_info.webtoon_num
+	  	  	and webtoon_info.webtoon_num =PLATFORM_TABLE.WEBTOON_NUM 
+			and FAVORITES_INFO.webtoon_num =  PLATFORM_TABLE.WEBTOON_NUM
     	order by webtoon_info.webtoon_title 
 	</select>
 

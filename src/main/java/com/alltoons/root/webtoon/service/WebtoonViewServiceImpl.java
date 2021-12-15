@@ -128,6 +128,7 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		ArrayList<WebtoonCategoryDTO> favortiesPage = wvm.favortiesPage(userEmail);
 		
 		for(int i=0;i<favortiesPage.size();i++) {
+			System.out.println("즐찾 번호:"+favortiesPage.get(i).getWebtoonNum());
 			ArrayList<String> onlyPlatform = wvm.onlyPlatform(favortiesPage.get(i).getWebtoonNum());
 			int platformCount = onlyPlatform.size();
 			if(platformCount>1) {
@@ -139,24 +140,5 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 			}
 		}model.addAttribute("favortiesPage", favortiesPage);
 		
-		/*
-		for(WebtoonCategoryDTO list : favortiesPage) {
-			System.out.println("반복문 구동");
-			//int platformCount = wvm.platformCount(userEmail,list.getWebtoonNum());
-			
-			//해당 웹툰 번호의 플랫폼 명만 가져옴
-			ArrayList<String> onlyPlatform = wvm.onlyPlatform(list.getWebtoonNum());
-			
-			int platformCount = onlyPlatform.size();
-			System.out.println("플랫폼 카운트: "+platformCount);
-			if(platformCount<1) {
-				list.setPlatformName(onlyPlatform.get(0));//0번째 플랫폼만 넣어줌
-				model.addAttribute("otherCount",platformCount-1);
-			}
-			model.addAttribute("favortiesPage",list);
-		}
-		model.addAttribute("favortiesPage", favortiesPage);
-		
-	}*/
 	}
 }

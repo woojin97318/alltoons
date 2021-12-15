@@ -70,12 +70,19 @@ public class WebtoonController {
 
    @GetMapping("interestClick")
 	@ResponseBody
-	public String favorites(@RequestParam("webtoonNum") String webtoonNum,
-			@RequestParam("userEmail") String userEmail) {
-		System.out.println("웹툰 번호: " + webtoonNum);
-		System.out.println("이메일: " + userEmail);
-		int cnt = ws.favoritesClick(webtoonNum, userEmail);
-		return cnt + "";
+	public String interest(@RequestParam("webtoonNum") String webtoonNum,@RequestParam("userEmail") String userEmail) {
+		System.out.println("웹툰 번호: "+webtoonNum);
+		System.out.println("이메일: "+userEmail);
+		int cnt = ws.interestClick(webtoonNum,userEmail);
+		return cnt+"";
+	}
+   @GetMapping("favoritesClick")
+	@ResponseBody
+	public String favorites(@RequestParam("webtoonNum") String webtoonNum,@RequestParam("userEmail") String userEmail) {
+		System.out.println("웹툰 번호: "+webtoonNum);
+		System.out.println("이메일: "+userEmail);
+		int cnt = ws.favoritesClick(webtoonNum,userEmail);
+		return cnt+"";
 	}
 
 	@GetMapping("i_onOff")
