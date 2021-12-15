@@ -123,7 +123,12 @@ function favorties_off(){
 </style>
 </head>
 <body>
-<h1>작품 상세 페이지</h1>
+<header>
+		<c:import url="./header/pageHeader.jsp">
+			<c:param name="tag" value="작품 상세 페이지"></c:param>
+		</c:import>
+	</header>
+<h1></h1>
    <div style="display: flex;">
       <div >
          <c:choose>

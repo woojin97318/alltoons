@@ -27,7 +27,11 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	@Override
 	public void getAllReview(Model model, int webtoonNum, String userEmail) {
-		ArrayList<ReviewDTO> reviewList = mapper.getAllReview(webtoonNum, userEmail);
+		ArrayList<ReviewDTO> reviewList;
+		if(userEmail != null)
+			reviewList = mapper.getAllReview(webtoonNum, userEmail);
+		else
+			reviewList = mapper.getAllReview(webtoonNum, "로그인안함");
 		model.addAttribute("reviewList", reviewList);
 	}
 	@Override
