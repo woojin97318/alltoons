@@ -23,4 +23,6 @@ public interface WebtoonViewService {
 
 	void genreView(Model model, String webtoonGenre);
 
+	void favortiesPage(Model model, String userEmail);
+
 }

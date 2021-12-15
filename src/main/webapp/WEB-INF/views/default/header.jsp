@@ -36,7 +36,7 @@
             플랫폼별 웹툰</a></li>
             <li><a href="${contextPath}/genreWebtoon?webtoonGenre=g1">
             장르별 웹툰</a></li>
-            <li><a href="${contextPath}/">
+            <li><a href="${contextPath}/memeber/favorties">
             즐겨찾기</a></li>
             <li><a href="${contextPath}/">
             관심목록</a></li>

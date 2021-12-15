@@ -44,6 +44,12 @@ public interface WebtoonViewMapper {
 
 	ArrayList<WebtoonCategoryDTO> genreView(String webtoonGenre);
 
+	ArrayList<WebtoonCategoryDTO> favortiesPage(String userEmail);
+
+	int platformCount(@Param("userEmail") String userEmail,@Param("webtoonNum") int webtoonNum);
+
+	ArrayList<String> onlyPlatform(int webtoonNum);
+
 
 
 }

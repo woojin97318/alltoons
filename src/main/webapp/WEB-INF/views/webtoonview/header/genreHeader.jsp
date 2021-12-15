@@ -12,10 +12,7 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	function back(){
-		document.getElementById('backBtn').addEventListener('click', () => {
-			  window.history.back();
-	});
+	function back(){window.history.back();};
 </script>
 <title>admin header</title>
 </head>
