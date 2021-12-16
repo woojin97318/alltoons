@@ -6,8 +6,8 @@
 <mapper namespace="com.alltoons.root.webtoon.report.mapper.ReviewReportMapper">
 	
 	<insert id="setReport">
-		insert into report_info(user_email, report_content, review_num)
-		values(#{dto.reportUserEmail}, #{dto.reportContent}, #{dto.reviewNum})
+		insert into report_info(report_num, user_email, report_content, review_num)
+		values(review_num_seq.nextval, #{reportUserEmail}, #{reportContent}, #{reviewNum})
 	</insert>
 	
 </mapper>

@@ -13,6 +13,11 @@ public class ReviewReportServiceImpl implements ReviewReportService {
 	
 	@Override
 	public int setReport(ReviewReportDTO dto) {
+		//System.out.println("Service");
+		//System.out.print(dto.getReportContent());
+		//System.out.print(dto.getReportUserEmail());
+		//System.out.print(dto.getReviewNum());
+		
 		return mapper.setReport(dto);
 	}
 }
