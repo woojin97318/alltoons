@@ -116,6 +116,13 @@ function favorties_off(){
 		})
 	}	
 </script>
+<script>
+window.onpageshow = function(event) {
+    if (event.persisted) {
+        document.location.reload();
+    }
+};
+</script>
 <style type="text/css">
 .td {
 	width: 50px;

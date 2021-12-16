@@ -126,19 +126,35 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	@Override
 	public void favortiesPage(Model model, String userEmail) {
 		ArrayList<WebtoonCategoryDTO> favortiesPage = wvm.favortiesPage(userEmail);
-		
-		for(int i=0;i<favortiesPage.size();i++) {
-			System.out.println("즐찾 번호:"+favortiesPage.get(i).getWebtoonNum());
-			ArrayList<String> onlyPlatform = wvm.onlyPlatform(favortiesPage.get(i).getWebtoonNum());
+		favortiesPage = onlyPlatform(favortiesPage);
+		model.addAttribute("favortiesPage", favortiesPage);
+	}
+
+	@Override
+	public void interestPage(Model model, String userEmail) {
+		ArrayList<WebtoonCategoryDTO> interestPage = wvm.interestPage(userEmail);
+		interestPage = onlyPlatform(interestPage);
+		model.addAttribute("interestPage", interestPage);
+	}
+	
+	@Override
+	public void popularWebtoon(Model model) {
+		ArrayList<WebtoonCategoryDTO> popularPage = wvm.popularPage();
+		popularPage = onlyPlatform(popularPage);
+		model.addAttribute("popularPage", popularPage);
+	}
+	
+	//플랫폼 외 n개를 작업해주는 메소드(재사용)
+	private ArrayList<WebtoonCategoryDTO> onlyPlatform(ArrayList<WebtoonCategoryDTO> pageName) {
+		for(int i=0;i<pageName.size();i++) {
+			ArrayList<String> onlyPlatform = wvm.onlyPlatform(pageName.get(i).getWebtoonNum());
 			int platformCount = onlyPlatform.size();
 			if(platformCount>1) {
-				System.out.println("플랫폼이 2개 이상");
-				favortiesPage.get(i).setPlatformName(onlyPlatform.get(0));
-				System.out.println(favortiesPage.get(i).getPlatformName());
-				favortiesPage.get(i).setPlatformNum(platformCount-1);//외 n으로 쓰임
-				System.out.println(favortiesPage.get(i).getPlatformNum());
+				pageName.get(i).setPlatformName(onlyPlatform.get(0));
+				pageName.get(i).setPlatformNum(platformCount-1);//외 n으로 쓰임
 			}
-		}model.addAttribute("favortiesPage", favortiesPage);
-		
+		}return pageName;
 	}
+
+	
 }

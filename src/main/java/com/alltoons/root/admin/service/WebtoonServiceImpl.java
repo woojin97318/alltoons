@@ -46,7 +46,7 @@ public class WebtoonServiceImpl implements WebtoonService{
 		String origin_link[] = mul.getParameterValues("webtoonOriginalLink");
 		OriginDTO od = new OriginDTO();
 		for(int i=0;i<origin_platform.length;i++) {
-			if(origin_platform[i].equals("nan")) {
+			if(origin_platform[0].equals("nan")) {
 				System.out.println("원작 없음");
 				od.setWebtoonNum(wd.webtoonNum);
 				od.setOriginalPlatform("nan");
@@ -89,7 +89,7 @@ public class WebtoonServiceImpl implements WebtoonService{
 				e.printStackTrace();
 			}
 		}else {
-			wd.setWebtoonImage("default_image");
+			wd.setWebtoonImage("default_image.png");
 		}
 	}
 

@@ -25,4 +25,8 @@ public interface WebtoonViewService {
 
 	void favortiesPage(Model model, String userEmail);
 
+	void interestPage(Model model, String userEmail);
+
+	public void popularWebtoon(Model model);
+
 }

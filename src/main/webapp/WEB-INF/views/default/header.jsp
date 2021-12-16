@@ -38,7 +38,7 @@
             장르별 웹툰</a></li>
             <li><a href="${contextPath}/memeber/favorties">
             즐겨찾기</a></li>
-            <li><a href="${contextPath}/">
+            <li><a href="${contextPath}/memeber/interest">
             관심목록</a></li>
             <li><a href="${contextPath}/admin">
             관리자 페이지</a></li>

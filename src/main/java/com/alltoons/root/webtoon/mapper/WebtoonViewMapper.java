@@ -50,6 +50,10 @@ public interface WebtoonViewMapper {
 
 	ArrayList<String> onlyPlatform(int webtoonNum);
 
+	ArrayList<WebtoonCategoryDTO> interestPage(String userEmail);
+
+	ArrayList<WebtoonCategoryDTO> popularPage();
+
 
 
 }

@@ -12,7 +12,7 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	function back(){window.history.back();};
+function back(){location.href="${contextPath}/main";};
 </script>
 <title>admin header</title>
 </head>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>favorites Page</title>
 </head>
 <body>
 	<header>
@@ -27,7 +27,7 @@
 	     <c:choose>
 				<c:when
 					test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
-					<img id="webtoonImage" src="resources/img/webtoon/default_image.png"
+					<img id="webtoonImage" src="${contextPath }/resources/img/webtoon/default_image.png"
 						width=200 height=200 alt="선택된 이미지가 없습니다" />
 				</c:when>
 				<c:otherwise>
