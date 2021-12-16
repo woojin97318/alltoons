@@ -10,7 +10,9 @@ public interface WebtoonSearchService {
 
 	public void searchList(String search, Model model);
 	
-	public String getplatformName(int webtoonNum);
+	public String getplatformAll(int webtoonNum);
 	
 	public void setArr(ArrayList<WebtoonDTO> arr, Model model, String name);
+	
+	public String getplatFirst(int webtoonNum);
 }

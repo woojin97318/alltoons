@@ -60,8 +60,8 @@
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<th class="platform">${ dto.platformName}</th>
-						<td><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<td class="platform">${ dto.platformName}</td>
+						<th><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></th>
 						<td>${dto.webtoonWriter }</td>
 					</tr>
 				</c:forEach>
@@ -96,8 +96,8 @@
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<th class="platform">${ dto.platformName}</th>
-						<td><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<td class="platform">${ dto.platformName}</td>
+						<th><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></th>
 						<td>${dto.webtoonWriter }</td>
 					</tr>
 				</c:forEach>

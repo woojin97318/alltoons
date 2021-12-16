@@ -28,10 +28,17 @@
 	<select id="getImageFileName" resultType="String">
 		select webtoon_image from webtoon_info where webtoon_num=#{webtoonNum}
 	</select>
-	<select id="platformAll" resultType="string">
+	
+	<select id="getplatFirst" resultType="string">
+		select webtoon_platform_name from PLATFORM_TABLE where webtoon_num=#{webtoonNum} and ROWNUM=1 order by webtoon_platform_name
+	</select>
+	<select id="getplatformAll" resultType="string">
+		select LISTAGG(webtoon_platform_name, '/') WITHIN GROUP (ORDER BY webtoon_platform_name) FROM PLATFORM_TABLE where webtoon_num=#{webtoonNum}
+	</select>
+	<select id="platformlist" resultType="string">
 		select webtoon_platform_name from PLATFORM_TABLE where webtoon_num=#{webtoonNum} order by webtoon_platform_name
 	</select>
-	<select id="getplatformName" resultType="string">
-		select LISTAGG(webtoon_platform_name, '/') WITHIN GROUP (ORDER BY webtoon_platform_name) FROM PLATFORM_TABLE where webtoon_num=#{webtoonNum}
+	<select id="platCnt" resultType="int">
+		select count(webtoon_platform_name) from PLATFORM_TABLE where webtoon_num=#{webtoonNum} order by webtoon_platform_name
 	</select>
 </mapper>

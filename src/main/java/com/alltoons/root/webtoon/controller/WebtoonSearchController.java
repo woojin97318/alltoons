@@ -20,7 +20,6 @@ public class WebtoonSearchController {
 	public String webtoonSearch(@RequestParam("search") String search,
 								HttpServletRequest request,
 								Model model) {
-		System.out.println(search);
 		model.addAttribute("search", search);
 		SearchSvc.searchList(search, model);
 		System.out.println("검색어: "+search);
