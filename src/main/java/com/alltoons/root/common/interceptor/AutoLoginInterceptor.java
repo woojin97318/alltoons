@@ -5,23 +5,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
 import com.alltoons.root.common.MemberSessionName;
+import com.alltoons.root.common.interceptor.service.InterceptorService;
 import com.alltoons.root.member.dto.MemberDTO;
 import com.alltoons.root.member.service.MemberService2;
 
 public class AutoLoginInterceptor extends HandlerInterceptorAdapter implements MemberSessionName {
-	@Autowired MemberService2 ms2;
+	@Autowired InterceptorService is;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 		if(loginCookie != null) {
-			MemberDTO dto = ms2.getUserSessionId(loginCookie.getValue());
+			MemberDTO dto = is.getUserSessionId(loginCookie.getValue());
 			if(dto != null)
 				request.getSession().setAttribute(LOGIN, dto.getUserEmail());
 		}

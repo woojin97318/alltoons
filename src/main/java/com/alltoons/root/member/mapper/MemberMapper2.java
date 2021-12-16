@@ -19,5 +19,4 @@ public interface MemberMapper2 {
 	public ArrayList<MyReviewDTO> getMyReview(String userEmail);
 	public int myReviewDelete(int reviewNum);
 	public int userImageDefault(String userEmail);
-	public MemberDTO getUserSessionId(String sessionId);
 }

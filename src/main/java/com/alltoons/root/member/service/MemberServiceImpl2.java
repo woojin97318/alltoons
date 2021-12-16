@@ -124,9 +124,4 @@ public class MemberServiceImpl2 implements MemberService2 {
 	public int userImageDefault(String userEmail) {
 		return mapper2.userImageDefault(userEmail);
 	}
-
-	@Override
-	public MemberDTO getUserSessionId(String sessionId) {
-		return mapper2.getUserSessionId(sessionId);
-	}
 }

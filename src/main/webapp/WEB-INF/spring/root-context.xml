@@ -41,4 +41,6 @@
 		base-package="com.alltoons.root.webtoon.report.mapper" />
 	<mybatis-spring:scan
 		base-package="com.alltoons.root.webtoon.review.mapper" />
+	<mybatis-spring:scan
+		base-package="com.alltoons.root.common.interceptor.mapper" />
 </beans>

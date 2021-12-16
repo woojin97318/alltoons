@@ -18,5 +18,4 @@ public interface MemberService2 {
 	public void myReviewContent(Model model, String userEmail);
 	public int myReviewDelete(int reviewNum);
 	public int userImageDefault(String userEmail);
-	public MemberDTO getUserSessionId(String sessionId);
 }
