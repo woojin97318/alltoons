@@ -10,40 +10,45 @@
 <title>회원가입 페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-var authResult = false;
+	var authResult = false;
 
 	function chkInfo() {
 
 		var authKey = $("#authKey").val();
-
+		var join = document.join;
 		//비밀번호 유효성 검사
 		var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 		var pw = $("#userPassword").val();
 		var pwChk = $("#chkPassword").val();
 
 		var email = $("#userEmail").val();
-		if (email == "") {
-			alert("이메일을 입력해주세요!");
+		if (authResult == false) {
+			alert("인증을 진행해주세요");
 		} else {
-			if (authKey == "") {
-				alert("인증번호를 입력해주세요!");
+			if (email == "") {
+				alert("이메일을 입력해주세요!");
 			} else {
-				if (pwChk == "") {
-					alert('비밀번호 확인란을 입력해 주세요!');
+				if (pw == "") {
+					alert("비밀번호를 입력해주세요!");
 				} else {
-					if (pw != pwChk) {
-						alert('비밀번호가 일치하지 않습니다!');
+					if (pwChk == "") {
+						alert('비밀번호 확인란을 입력해 주세요!');
 					} else {
 						if (false === reg.test(pw)) {
 							alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
 						} else {
-							console.log('성공');
+							if (pw != pwChk) {
+								alert('비밀번호가 일치하지 않습니다!');
+							} else {
+								console.log("성공");
+								join.submit();
+							}
 						}
+
 					}
-
 				}
-			}
 
+			}
 		}
 
 	}
@@ -90,11 +95,11 @@ var authResult = false;
 			dataType : "json",
 			contentType : "application/json; charset=utf-8",
 			success : function(result) {
-				if(result == true){
+				if (result == true) {
 					authResult = result;
 					console.log(authResult);
 					alert('인증 성공');
-				}else{
+				} else {
 					alert('인증 실패');
 				}
 			},
@@ -122,7 +127,8 @@ var authResult = false;
 </head>
 <body>
 	<div align="center">
-		<form action="signupform" method="post" enctype="multipart/form-data">
+		<form name="join" action="signupform" method="post"
+			enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td colspan="2"><img id="img" src="#" alt="your image"
@@ -144,7 +150,7 @@ var authResult = false;
 					<td><button type="button" onclick="sendmail()">이메일 전송</button></td>
 				</tr>
 				<tr>
-					<td colspan="2">인증번호 <input type="text" id="authKey" autofocus
+					<td colspan="2">인증번호 <input type="text" id="authKey" placeholder="인증번호" autofocus
 						autocomplete="off" required>
 						<button type="button" onclick="authChk()">인증하기</button>
 					</td>
@@ -161,11 +167,12 @@ var authResult = false;
 				<tr>
 					<td>비밀번호확인</td>
 					<td><input type="password" name="chkPassword" id="chkPassword"
-						placeholder="비밀번호" autofocus autocomplete="off" required></td>
+						placeholder="비밀번호 확인" autofocus autocomplete="off" required></td>
 				</tr>
 				<tr>
-					<td><input type="submit" onclick="chkInfo()" value="가입하기"></td>
+					<td colspan="2"><input type="button" onclick="chkInfo()" value="가입하기"></td>
 				</tr>
+				
 			</table>
 		</form>
 	</div>
