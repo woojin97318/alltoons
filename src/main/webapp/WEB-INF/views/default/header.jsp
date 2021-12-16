@@ -17,12 +17,13 @@
 <title>header</title>
 
 </head>
+
 <body>
    <div id="main-title">
       AllToons
       <div class="searchBar">
          <form action="${contextPath }/webtoonSearch" method="POST">
-            <input type="text" name="search" size="20" placeholder="검색어 입력" required >
+            <input type="text" name="search" size="20" placeholder="검색어 입력" value="${search}" required >
             <input type="submit" value="검색">
          </form>
       </div>

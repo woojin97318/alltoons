@@ -11,10 +11,11 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	function back(){
-		document.getElementById('backBtn').addEventListener('click', () => {
-			  window.history.back();
-	});
+	function back(){ 
+		IF( document.referrer ){
+			location.href = document.referrer;
+		}
+	};
 </script>
 
 <title>admin header</title>
