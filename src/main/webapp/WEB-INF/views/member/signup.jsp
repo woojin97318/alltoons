@@ -10,27 +10,66 @@
 <title>회원가입 페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+	function chkInfo() {
+
+		var email = $("#userEmail").val();
+		if(email === null){
+			alert("이메일을 입력해주세요!");
+		}
+		
+		var authKey = $("#authKey").val();
+		if(authKey === null){
+			alert("인증번호를 입력해주세요!");
+		}
+		
+		//비밀번호 유효성 검사
+		var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		var pw = $("#userPassword").val();
+		var pwChk = $("#chkPassword").val();
+		if(pwChk === null){
+			alert('비밀번호 확인란을 입력해 주세요!');
+		}
+		if(pw != pwChk){
+			alert('비밀번호가 일치하지 않습니다!');			
+		}else{
+			if (false === reg.test(pw)) {
+				alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+			} else {
+				console.log('성공');
+			}			
+		}
+		
+
+	}
+
 	function sendmail() {
 		var userEmail = $("#userEmail").val();
 		var form = {
 			email : userEmail
 		}
-		$.ajax({
-			url : "sendmail", //"ajax",
-			type : "GET",
-			data : form,
-			dataType : "json",
-			contentType : "application/json; charset=utf-8",
-			success : function(result) {
-				$("#authTimer").text(result.email + "인증 타이머 시작")
-				console.log("메일 전송 성공")
-				alert('메일함을 확인해주세요')
 
-			},
-			error : function() {
-				alert('메일 전송 실패')
-			}
-		})
+		//이메일 유효성 검사
+		var chkForm = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		if (false === chkForm.test(userEmail)) {
+			alert('이메일 형식이 아닙니다!');
+			//이메일 전송 시도 X
+		}else{
+			$.ajax({
+				url : "sendmail", //"ajax",
+				type : "GET",
+				data : form,
+				dataType : "json",
+				contentType : "application/json; charset=utf-8",
+				success : function(result) {
+					console.log("메일 전송 성공")
+					alert('메일함을 확인해주세요')
+
+				},
+				error : function() {
+					alert('메일 전송 실패')
+				}
+			})
+		}
 	}
 
 	function authChk() {
@@ -74,12 +113,13 @@
 				</tr>
 				<tr>
 					<td>이미지</td>
-					<td><input type="file" onchange="readURL(this);" name="userImage"></td>
+					<td><input type="file" onchange="readURL(this);"
+						name="userImage"></td>
 				</tr>
 				<tr>
 					<td>이메일*</td>
-					<td><input type="text" id="userEmail" name="userEmail" autofocus
-						autocomplete="off" required placeholder="이메일을 입력해주세요" /></td>
+					<td><input type="text" id="userEmail" name="userEmail"
+						autofocus autocomplete="off" required placeholder="이메일을 입력해주세요" /></td>
 				</tr>
 
 				<tr>
@@ -97,15 +137,15 @@
 				<tr>
 					<td>비밀번호*</td>
 					<td><input type="password" name="userPassword"
-						placeholder="비밀번호"></td>
+						id="userPassword" placeholder="비밀번호"></td>
 				</tr>
 				<tr>
 					<td>비밀번호확인</td>
-					<td><input type="password" name="chkPassword"
+					<td><input type="password" name="chkPassword" id="chkPassword"
 						placeholder="비밀번호"></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="가입하기"></td>
+					<td><input type="submit" onclick="chkInfo()" value="가입하기"></td>
 				</tr>
 			</table>
 		</form>
