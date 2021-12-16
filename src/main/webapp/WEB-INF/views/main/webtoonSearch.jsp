@@ -18,7 +18,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	var page = 1;
-
+	
 </script>
 <title>작품 검색</title>
 </head>
@@ -27,7 +27,7 @@
 	<c:import url="../default/header.jsp"/>
 </header>
 	
-<body>
+<body onload="" style="padding-top: 200px;">
 	<c:if test="${search != null }">
 		<label><b>" ${search } "</b>에 대한 검색 결과 입니다.</label><br>
 	</c:if>
@@ -54,13 +54,13 @@
 					<tr>
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
-								<td><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></td>
+								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<th>${dto.platformName }</th>
+						<th class="platform">${ dto.platformName}</th>
 						<td><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
 						<td>${dto.webtoonWriter }</td>
 					</tr>
@@ -90,13 +90,13 @@
 					<tr>
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
-								<td><div class="webtoonImage"><img src="${contextPath }/resources/default_image.png"></div></td>
+								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<th>${dto.platformName }</th>
+						<th class="platform">${ dto.platformName}</th>
 						<td><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
 						<td>${dto.webtoonWriter }</td>
 					</tr>
