@@ -10,6 +10,8 @@
 <title>회원가입 페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+var authResult = false;
+
 	function chkInfo() {
 
 		var authKey = $("#authKey").val();
@@ -89,6 +91,8 @@
 			contentType : "application/json; charset=utf-8",
 			success : function(result) {
 				if(result == true){
+					authResult = result;
+					console.log(authResult);
 					alert('인증 성공');
 				}else{
 					alert('인증 실패');
