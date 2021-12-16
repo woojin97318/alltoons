@@ -12,33 +12,37 @@
 <script type="text/javascript">
 	function chkInfo() {
 
-		var email = $("#userEmail").val();
-		if(email === null){
-			alert("이메일을 입력해주세요!");
-		}
-		
 		var authKey = $("#authKey").val();
-		if(authKey === null){
-			alert("인증번호를 입력해주세요!");
-		}
-		
+
 		//비밀번호 유효성 검사
 		var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 		var pw = $("#userPassword").val();
 		var pwChk = $("#chkPassword").val();
-		if(pwChk === null){
-			alert('비밀번호 확인란을 입력해 주세요!');
-		}
-		if(pw != pwChk){
-			alert('비밀번호가 일치하지 않습니다!');			
-		}else{
-			if (false === reg.test(pw)) {
-				alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+
+		var email = $("#userEmail").val();
+		if (email == "") {
+			alert("이메일을 입력해주세요!");
+		} else {
+			if (authKey == "") {
+				alert("인증번호를 입력해주세요!");
 			} else {
-				console.log('성공');
-			}			
+				if (pwChk == "") {
+					alert('비밀번호 확인란을 입력해 주세요!');
+				} else {
+					if (pw != pwChk) {
+						alert('비밀번호가 일치하지 않습니다!');
+					} else {
+						if (false === reg.test(pw)) {
+							alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+						} else {
+							console.log('성공');
+						}
+					}
+
+				}
+			}
+
 		}
-		
 
 	}
 
@@ -53,7 +57,7 @@
 		if (false === chkForm.test(userEmail)) {
 			alert('이메일 형식이 아닙니다!');
 			//이메일 전송 시도 X
-		}else{
+		} else {
 			$.ajax({
 				url : "sendmail", //"ajax",
 				type : "GET",
@@ -81,15 +85,20 @@
 			url : "chkKey",
 			type : "GET",
 			data : authForm,
+			dataType : "json",
 			contentType : "application/json; charset=utf-8",
-			success : function() {
-				console.log("인증 성공")
-				alert('인증에 성공했습니다.')
+			success : function(result) {
+				if(result == true){
+					alert('인증 성공');
+				}else{
+					alert('인증 실패');
+				}
 			},
 			error : function() {
-				alert('인증키가 일치하지 않습니다.')
+				alert("통신 실패")
 			}
 		})
+
 	}
 
 	function readURL(input) {
@@ -100,6 +109,10 @@
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
+	}
+
+	function join() {
+
 	}
 </script>
 </head>
@@ -127,7 +140,8 @@
 					<td><button type="button" onclick="sendmail()">이메일 전송</button></td>
 				</tr>
 				<tr>
-					<td colspan="2">인증번호 <input type="text" id="authKey">
+					<td colspan="2">인증번호 <input type="text" id="authKey" autofocus
+						autocomplete="off" required>
 						<button type="button" onclick="authChk()">인증하기</button>
 					</td>
 				</tr>
@@ -137,12 +151,13 @@
 				<tr>
 					<td>비밀번호*</td>
 					<td><input type="password" name="userPassword"
-						id="userPassword" placeholder="비밀번호"></td>
+						id="userPassword" placeholder="비밀번호" autofocus autocomplete="off"
+						required></td>
 				</tr>
 				<tr>
 					<td>비밀번호확인</td>
 					<td><input type="password" name="chkPassword" id="chkPassword"
-						placeholder="비밀번호"></td>
+						placeholder="비밀번호" autofocus autocomplete="off" required></td>
 				</tr>
 				<tr>
 					<td><input type="submit" onclick="chkInfo()" value="가입하기"></td>
