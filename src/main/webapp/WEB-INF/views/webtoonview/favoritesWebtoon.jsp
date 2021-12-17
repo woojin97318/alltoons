@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>favorites Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 </head>
 <body>
 	<header>

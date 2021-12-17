@@ -32,9 +32,9 @@
    <h3>메뉴</h3>
       <nav>
          <ul id="menu1">
-            <li><a href="${contextPath}/platformWebtoon?platformName=naver">
+            <li><a href="${contextPath}/webtoon/platformWebtoon?platformName=naver">
             플랫폼별 웹툰</a></li>
-            <li><a href="${contextPath}/genreWebtoon?webtoonGenre=g1">
+            <li><a href="${contextPath}/webtoon/genreWebtoon?webtoonGenre=g1">
             장르별 웹툰</a></li>
             <li><a href="${contextPath}/memeber/favorties">
             즐겨찾기</a></li>

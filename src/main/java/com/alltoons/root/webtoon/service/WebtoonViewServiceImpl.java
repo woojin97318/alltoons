@@ -41,11 +41,12 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		System.out.println("링크수: " + cnt);
 		model.addAttribute("linkCount", cnt);
 	}
-
+	
+	//첫 화면 관심,즐겨찾기 버튼 onoff여부 
 	@Override
 	public void favorites(String webtoonNum, FavoritesDTO fd, Model model, HttpSession session) {
 		String userEmail = (String) session.getAttribute(MemberSessionName.LOGIN);
-		if (userEmail == null) {
+		if (userEmail == null) {//로그인 X 인 고객
 			fd.setFavorites('F');
 			fd.setInterest('F');
 		} else {
@@ -70,7 +71,7 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 			fd.setUserEmail(userEmail);
 			fd.setWebtoonNum(Integer.parseInt(webtoonNum));
 			fd.setInterest('T');
-		} else {
+		} else {//기존 이력있을시 변경만
 			if (fd.getInterest() == 'T') {
 				fd.setInterest('F');
 			} else {
@@ -91,7 +92,7 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 			fd.setUserEmail(userEmail);
 			fd.setWebtoonNum(Integer.parseInt(webtoonNum));
 			fd.setFavorites('T');
-		} else {
+		} else {//기존 이력있을시 변경만
 			if (fd.getFavorites() == 'T') {
 				fd.setFavorites('F');
 			} else {
@@ -111,10 +112,10 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 
 	@Override
 	public void platformView(Model model, String platformName) {
+		System.out.println("platformName이름"+platformName);
 		// 웹툰 명,작가,썸네일,플랫폼,웹툰 번호 ==>상세페이지로 웹툰 num만 넘겨줌
 		ArrayList<WebtoonCategoryDTO> platformView = wvm.platformView(platformName);
 		model.addAttribute("platformView", platformView);
-
 	}
 
 	@Override
@@ -137,7 +138,7 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		model.addAttribute("interestPage", interestPage);
 	}
 	
-	@Override
+	@Override	//인기페이지 작업 service
 	public void popularWebtoon(Model model) {
 		ArrayList<WebtoonCategoryDTO> popularPage = wvm.popularPage();
 		popularPage = onlyPlatform(popularPage);
@@ -156,5 +157,15 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		}return pageName;
 	}
 
-	
+	@Override //플랫폼 ajax처리
+	public ArrayList<WebtoonCategoryDTO> platformAjax(Model model, String platformName) {
+		ArrayList<WebtoonCategoryDTO> platformAjax = wvm.platformView(platformName);
+		return platformAjax;
+	}
+
+	@Override //장르 ajax처리
+	public ArrayList<WebtoonCategoryDTO> genreAjax(Model model, String webtoonGenre) {
+		ArrayList<WebtoonCategoryDTO> genreAjax = wvm.genreView(webtoonGenre);
+		return genreAjax;
+	}
 }
