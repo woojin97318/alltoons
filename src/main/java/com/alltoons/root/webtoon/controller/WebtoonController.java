@@ -29,7 +29,7 @@ public class WebtoonController {
 	@Autowired
 	MemberService2 ms2;
 
-	@GetMapping("webtooninfo")
+	@GetMapping("webtoon/webtooninfo")
 	public String webtooninfo(HttpSession session, @RequestParam String webtoonNum, Model model, WebtoonViewDTO wvd,
 			FavoritesDTO fd) {
 		// 전체를 다 받아서 model로 넘기자
@@ -43,7 +43,7 @@ public class WebtoonController {
 		return "webtoonview/webtoonInfo";
 	}
 
-	@GetMapping("myReviewDel")
+	@GetMapping("webtoon/myReviewDel")
 	public String myReviewDel(@RequestParam("reviewNum") int reviewNum, @RequestParam("webtoonNum") int webtoonNum,
 			Model model) {
 		int result = ms2.myReviewDelete(reviewNum);
@@ -58,7 +58,7 @@ public class WebtoonController {
 		return "/common/alertHref";
 	}
 
-	@PostMapping("reviewInsert")
+	@PostMapping("webtoon/reviewInsert")
 	public String reviewInsert(@RequestParam("webtoonNum") int webtoonNum, @RequestParam("userEmail") String userEmail,
 			@RequestParam("reviewContent") String reviewContent, Model model) {
 		String message;
@@ -73,7 +73,7 @@ public class WebtoonController {
 	}
 
 	//관심 클릭시 수 변경
-	@GetMapping("interestClick")
+	@GetMapping("webtoon/interestClick")
 	@ResponseBody
 	public String interest(@RequestParam("webtoonNum") String webtoonNum, @RequestParam("userEmail") String userEmail) {
 		System.out.println("웹툰 번호: " + webtoonNum);
@@ -83,7 +83,7 @@ public class WebtoonController {
 	}
 	
 	//즐겨찾기 클릭시 수 변경
-	@GetMapping("favoritesClick")
+	@GetMapping("webtoon/favoritesClick")
 	@ResponseBody
 	public String favorites(@RequestParam("webtoonNum") String webtoonNum,
 			@RequestParam("userEmail") String userEmail) {
@@ -94,7 +94,7 @@ public class WebtoonController {
 	}
 	
 	//관심버튼 T,F값을 jsp에 넘김 -> 하트 꺼짐 켜짐
-	@GetMapping("i_onOff")
+	@GetMapping("webtoon/i_onOff")
 	@ResponseBody
 	public String i_onOff(FavoritesDTO fd, @RequestParam("webtoonNum") String webtoonNum,
 			@RequestParam("userEmail") String userEmail) {
@@ -103,7 +103,7 @@ public class WebtoonController {
 	}
 	
 	//즐겨찾기버튼 T,F값을 jsp에 넘김 -> 별 꺼짐 켜짐
-	@GetMapping("f_onOff")
+	@GetMapping("webtoon/f_onOff")
 	@ResponseBody
 	public String f_onOff(FavoritesDTO fd, @RequestParam("webtoonNum") String webtoonNum,
 			@RequestParam("userEmail") String userEmail) {

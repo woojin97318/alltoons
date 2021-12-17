@@ -17,5 +17,4 @@ public class MainController {
 		ws.popularWebtoon(model);
 		return "main/main";
 	}
-
 }

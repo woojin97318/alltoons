@@ -10,27 +10,77 @@
 <title>회원가입 페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+	var authResult = false;
+
+	function chkInfo() {
+
+		var authKey = $("#authKey").val();
+		var join = document.join;
+		//비밀번호 유효성 검사
+		var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		var pw = $("#userPassword").val();
+		var pwChk = $("#chkPassword").val();
+
+		var email = $("#userEmail").val();
+		if (authResult == false) {
+			alert("인증을 진행해주세요");
+		} else {
+			if (email == "") {
+				alert("이메일을 입력해주세요!");
+			} else {
+				if (pw == "") {
+					alert("비밀번호를 입력해주세요!");
+				} else {
+					if (pwChk == "") {
+						alert('비밀번호 확인란을 입력해 주세요!');
+					} else {
+						if (false === reg.test(pw)) {
+							alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+						} else {
+							if (pw != pwChk) {
+								alert('비밀번호가 일치하지 않습니다!');
+							} else {
+								console.log("성공");
+								join.submit();
+							}
+						}
+
+					}
+				}
+
+			}
+		}
+
+	}
+
 	function sendmail() {
 		var userEmail = $("#userEmail").val();
 		var form = {
 			email : userEmail
 		}
-		$.ajax({
-			url : "sendmail", //"ajax",
-			type : "GET",
-			data : form,
-			dataType : "json",
-			contentType : "application/json; charset=utf-8",
-			success : function(result) {
-				$("#authTimer").text(result.email + "인증 타이머 시작")
-				console.log("메일 전송 성공")
-				alert('메일함을 확인해주세요')
 
-			},
-			error : function() {
-				alert('메일 전송 실패')
-			}
-		})
+		//이메일 유효성 검사
+		var chkForm = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		if (false === chkForm.test(userEmail)) {
+			alert('이메일 형식이 아닙니다!');
+			//이메일 전송 시도 X
+		} else {
+			$.ajax({
+				url : "sendmail", //"ajax",
+				type : "GET",
+				data : form,
+				dataType : "json",
+				contentType : "application/json; charset=utf-8",
+				success : function(result) {
+					console.log("메일 전송 성공")
+					alert('메일함을 확인해주세요')
+
+				},
+				error : function() {
+					alert('메일 전송 실패')
+				}
+			})
+		}
 	}
 
 	function authChk() {
@@ -42,15 +92,22 @@
 			url : "chkKey",
 			type : "GET",
 			data : authForm,
+			dataType : "json",
 			contentType : "application/json; charset=utf-8",
-			success : function() {
-				console.log("인증 성공")
-				alert('인증에 성공했습니다.')
+			success : function(result) {
+				if (result == true) {
+					authResult = result;
+					console.log(authResult);
+					alert('인증 성공');
+				} else {
+					alert('인증 실패');
+				}
 			},
 			error : function() {
-				alert('인증키가 일치하지 않습니다.')
+				alert("통신 실패")
 			}
 		})
+
 	}
 
 	function readURL(input) {
@@ -62,11 +119,16 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+
+	function join() {
+
+	}
 </script>
 </head>
 <body>
 	<div align="center">
-		<form action="signupform" method="post" enctype="multipart/form-data">
+		<form name="join" action="signupform" method="post"
+			enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td colspan="2"><img id="img" src="#" alt="your image"
@@ -74,12 +136,13 @@
 				</tr>
 				<tr>
 					<td>이미지</td>
-					<td><input type="file" onchange="readURL(this);" name="userImage"></td>
+					<td><input type="file" onchange="readURL(this);"
+						name="userImage"></td>
 				</tr>
 				<tr>
 					<td>이메일*</td>
-					<td><input type="text" id="userEmail" name="userEmail" autofocus
-						autocomplete="off" required placeholder="이메일을 입력해주세요" /></td>
+					<td><input type="text" id="userEmail" name="userEmail"
+						autofocus autocomplete="off" required placeholder="이메일을 입력해주세요" /></td>
 				</tr>
 
 				<tr>
@@ -87,7 +150,8 @@
 					<td><button type="button" onclick="sendmail()">이메일 전송</button></td>
 				</tr>
 				<tr>
-					<td colspan="2">인증번호 <input type="text" id="authKey">
+					<td colspan="2">인증번호 <input type="text" id="authKey" placeholder="인증번호" autofocus
+						autocomplete="off" required>
 						<button type="button" onclick="authChk()">인증하기</button>
 					</td>
 				</tr>
@@ -97,16 +161,18 @@
 				<tr>
 					<td>비밀번호*</td>
 					<td><input type="password" name="userPassword"
-						placeholder="비밀번호"></td>
+						id="userPassword" placeholder="비밀번호" autofocus autocomplete="off"
+						required></td>
 				</tr>
 				<tr>
 					<td>비밀번호확인</td>
-					<td><input type="password" name="chkPassword"
-						placeholder="비밀번호"></td>
+					<td><input type="password" name="chkPassword" id="chkPassword"
+						placeholder="비밀번호 확인" autofocus autocomplete="off" required></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="가입하기"></td>
+					<td colspan="2"><input type="button" onclick="chkInfo()" value="가입하기"></td>
 				</tr>
+				
 			</table>
 		</form>
 	</div>

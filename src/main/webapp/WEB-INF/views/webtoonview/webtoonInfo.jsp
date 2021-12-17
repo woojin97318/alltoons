@@ -32,53 +32,59 @@ $(document).ready(function(){
 });
 
 function interest_on(){
-	document.getElementById("interest").src="resources/img/webtoon/interest_on.png";
+	document.getElementById("interest").src="${contextPath}/resources/img/webtoon/interest_on.png";
 }
 function interest_off(){
-	document.getElementById("interest").src="resources/img/webtoon/interest_off.png";
+	document.getElementById("interest").src="${contextPath}/resources/img/webtoon/interest_off.png";
 }
 function favorties_on(){
-	document.getElementById("favorites").src="resources/img/webtoon/favorties_on.png";
+	document.getElementById("favorites").src="${contextPath}/resources/img/webtoon/favorties_on.png";
 }
 function favorties_off(){
-	document.getElementById("favorites").src="resources/img/webtoon/favorties_off.png";
+	document.getElementById("favorites").src="${contextPath}/resources/img/webtoon/favorties_off.png";
 }
 </script>
 <script type="text/javascript">/* 관심 */
 	function interestClick(){
-		$.ajax({
-			url: "interestClick",
-			type: "GET",
-			data: {
-				webtoonNum: "${webtoonDate.webtoonNum}",
-				userEmail: "${user}"
-			},
-			success : function(cnt){
-				$("#icount").text(cnt)
-				i_onOff()
-			},
-			error: function(){alert("실패")}
-		})
-	}
-	function i_onOff(){
-		$.ajax({
-			url: "i_onOff",
-			type: "GET",
-			data: {
-				webtoonNum: "${webtoonDate.webtoonNum}",
-				userEmail: "${user}"
-			},
-			success : function(onoff){
-				if(onoff=="T"){
-					console.log(onoff);
-					interest_on()
-				}else{
-					console.log(onoff);
-					interest_off()
+		
+			$.ajax({
+				url: "interestClick",
+				type: "GET",
+				data: {
+					webtoonNum: "${webtoonDate.webtoonNum}",
+					userEmail: "${user}"
+				},
+				success : function(cnt){
+					$("#icount").text(cnt)
+					i_onOff()
+				},
+				error: function(){
+					if(confirm("로그인시 이용가능합니다. 로그인하시겠습니까?")){
+						location.href='../member/login';
+					}
 				}
-			},error: function(){alert("하트 실패")}
-		})
-	}	
+			})
+		}
+		function i_onOff(){
+			$.ajax({
+				url: "i_onOff",
+				type: "GET",
+				data: {
+					webtoonNum: "${webtoonDate.webtoonNum}",
+					userEmail: "${user}"
+				},
+				success : function(onoff){
+					if(onoff=="T"){
+						console.log(onoff);
+						interest_on()
+					}else{
+						console.log(onoff);
+						interest_off()
+					}
+				},error: function(){alert("하트 실패")}
+			})
+		}
+	
 </script>
 <script type="text/javascript">/* 즐겨찾기 */
 	function favoritesClick(){
@@ -92,8 +98,11 @@ function favorties_off(){
 			success : function(cnt){
 				$("#fcount").text(cnt)
 				f_onOff()
-			},
-			error: function(){alert("실패")}
+			},error: function(){
+				if(confirm("로그인시 이용가능합니다. 로그인하시겠습니까?")){
+					location.href='../member/login';
+				}
+			}
 		})
 	}
 	function f_onOff(){
@@ -139,8 +148,8 @@ window.onpageshow = function(event) {
    <div style="display: flex;">
       <div >
          <c:choose>
-            <c:when test="${webtoonList.webtoonImage=='default_image'}">
-               <img id="webtoonImage" src="resources/resources/default_image.jpg"
+            <c:when test="${webtoonDate.webtoonImage=='default_image.png'}">
+               <img id="webtoonImage" src="${contextPath}/resources/img/webtoon/default_image.png"
                   width=100 height=100 alt="선택된 이미지가 없습니다" />
             </c:when>
             <c:otherwise>
@@ -170,7 +179,7 @@ window.onpageshow = function(event) {
             </div>
                <b>보러가기</b>
                <c:forEach var="list" items="${platformList}">
-                  <img src="resources/img/webtoon/logo/${list.platformName}.png" width="30" height="30" onclick="location.href='${list.webtoonLink}'">
+                  <img src="${contextPath}/resources/img/webtoon/logo/${list.platformName}.png" width="30" height="30" onclick="location.href='${list.webtoonLink}'">
                   <%-- <button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button> --%>
                </c:forEach>
          </c:otherwise>
@@ -180,7 +189,7 @@ window.onpageshow = function(event) {
    <c:if test="${originList[0].webtoonOriginalLink !='nan' }">
       <b>이 작품은 소설이 존재해요!</b><br>
       <c:forEach var="origin" items="${originList }">
-         <img src="resources/img/webtoon/logo/${origin.originalPlatform}.png" width="30" height="30" onclick="location.href='${origin.webtoonOriginalLink}'">
+         <img src="${contextPath}/resources/img/webtoon/logo/${origin.originalPlatform}.png" width="30" height="30" onclick="location.href='${origin.webtoonOriginalLink}'">
          <%-- <button type="button" onclick="location.href='${origin.webtoonOriginalLink}'" >${origin.originalPlatform}</button> --%>
       </c:forEach>
    </c:if>
@@ -257,7 +266,7 @@ window.onpageshow = function(event) {
 						<th>${review.userEmail }</th>
 						<td class="td">
 							<c:if test="${user != null }">
-								<button type="button" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${myReview.reviewNum }'">
+								<button type="button" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }'">
 									신고
 								</button>
 							</c:if>

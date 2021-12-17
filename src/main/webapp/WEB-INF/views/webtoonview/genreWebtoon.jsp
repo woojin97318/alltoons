@@ -27,7 +27,7 @@ function genreChange(genre) {
 				if(i%j ==0){
 					html += "<tr>"
 				}
-				html += "<td><a href='${contextPath}/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
+				html += "<td><a href='${contextPath}webtoon//webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
 				if(webtoonList.webtoonImage == 'default_image.png'){
 					html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
 				}else{
@@ -89,7 +89,7 @@ function genreChange(genre) {
 							<c:when
 								test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
 								<img id="webtoonImage"
-									src="${contextPath }/resources/img/webtoon/default_image.png"
+									src="${contextPath }/webtoon/resources/img/webtoon/default_image.png"
 									width=200 height=200 alt="선택된 이미지가 없습니다" />
 							</c:when>
 							<c:otherwise>

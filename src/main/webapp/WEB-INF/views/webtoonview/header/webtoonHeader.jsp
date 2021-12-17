@@ -14,7 +14,7 @@
 <script type="text/javascript">
 function back(){location.href="${contextPath}/main";};
 </script>
-<title>admin header</title>
+<title>webtoon header</title>
 </head>
 <body>
 	<div class="menu-title">

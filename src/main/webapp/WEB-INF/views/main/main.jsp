@@ -26,7 +26,7 @@
       <tr>
      </c:if>
      <td>
-     	<a href="${contextPath}/webtooninfo?webtoonNum=${webtoonList.webtoonNum}">
+     	<a href="${contextPath}/webtoon/webtooninfo?webtoonNum=${webtoonList.webtoonNum}">
 	     <c:choose>
 				<c:when
 					test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">

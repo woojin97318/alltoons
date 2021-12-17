@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.alltoons.root.member.dto.MemberDTO;
 import com.alltoons.root.review.dto.MyReviewDTO;
 
 public interface MemberMapper2 {

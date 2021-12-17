@@ -3,6 +3,8 @@ package com.alltoons.root.member.service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.alltoons.root.member.dto.MemberDTO;
+
 public interface MemberService2 {
 	public static final String MEMBER_IMAGE_REPO = "C:/alltoonsImage/member";
 	public static final String WEBTOON_IMAGE_REPO = "C:/alltoonsImage/webtoon";

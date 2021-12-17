@@ -137,17 +137,12 @@ public class MemberController implements MemberSessionName {
 
 	@GetMapping(value = "chkKey", produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public boolean chkKey(HttpSession session, @RequestParam String key) {
+	public boolean chkKey(@RequestParam String key) {
 		String sysKey = getAuthKey();
 
 		System.out.println("전송된 인증키 : " + sysKey);
 		System.out.println("사용자 입력키 : " + key);
-		if (sysKey == key) {
-			return true;
-		} else {
-			return false;
-		}
-
+		return sysKey.equals(key);
 	}
 
 	@GetMapping("findpassword")
