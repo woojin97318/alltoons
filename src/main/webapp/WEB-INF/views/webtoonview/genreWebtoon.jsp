@@ -27,7 +27,7 @@ function genreChange(genre) {
 				if(i%j ==0){
 					html += "<tr>"
 				}
-				html += "<td><a href='${contextPath}webtoon//webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
+				html += "<td><a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
 				if(webtoonList.webtoonImage == 'default_image.png'){
 					html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
 				}else{
@@ -84,7 +84,7 @@ function genreChange(genre) {
 					<tr>
 				</c:if>
 				<td><a
-					href="${contextPath}/webtooninfo?webtoonNum=${webtoonList.webtoonNum}">
+					href="${contextPath}/webtoon/webtooninfo?webtoonNum=${webtoonList.webtoonNum}">
 						<c:choose>
 							<c:when
 								test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">

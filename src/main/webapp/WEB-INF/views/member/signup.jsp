@@ -119,10 +119,6 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-
-	function join() {
-
-	}
 </script>
 </head>
 <body>

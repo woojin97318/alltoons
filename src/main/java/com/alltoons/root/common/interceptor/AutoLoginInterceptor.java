@@ -11,7 +11,6 @@ import org.springframework.web.util.WebUtils;
 import com.alltoons.root.common.MemberSessionName;
 import com.alltoons.root.common.interceptor.service.InterceptorService;
 import com.alltoons.root.member.dto.MemberDTO;
-import com.alltoons.root.member.service.MemberService2;
 
 public class AutoLoginInterceptor extends HandlerInterceptorAdapter implements MemberSessionName {
 	@Autowired InterceptorService is;

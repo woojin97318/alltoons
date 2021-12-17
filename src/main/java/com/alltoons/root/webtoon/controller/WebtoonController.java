@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alltoons.root.common.MemberSessionName;
 import com.alltoons.root.favorites.dto.FavoritesDTO;
-import com.alltoons.root.member.service.MemberService2;
+import com.alltoons.root.member.service.MemberService;
 import com.alltoons.root.webtoon.dto.WebtoonCategoryDTO;
 import com.alltoons.root.webtoon.dto.WebtoonViewDTO;
 import com.alltoons.root.webtoon.review.service.ReviewService;
@@ -27,7 +27,7 @@ public class WebtoonController {
 	@Autowired
 	ReviewService rs;
 	@Autowired
-	MemberService2 ms2;
+	MemberService ms;
 
 	@GetMapping("webtoon/webtooninfo")
 	public String webtooninfo(HttpSession session, @RequestParam String webtoonNum, Model model, WebtoonViewDTO wvd,
@@ -46,7 +46,7 @@ public class WebtoonController {
 	@GetMapping("webtoon/myReviewDel")
 	public String myReviewDel(@RequestParam("reviewNum") int reviewNum, @RequestParam("webtoonNum") int webtoonNum,
 			Model model) {
-		int result = ms2.myReviewDelete(reviewNum);
+		int result = ms.myReviewDelete(reviewNum);
 		String message;
 		if (result == 1) {
 			message = "삭제가 완료되었습니다";
