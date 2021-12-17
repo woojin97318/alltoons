@@ -65,7 +65,6 @@ function hideId(id){
    </div>
    <button onclick="" id="menuBtn"></button>
    <div class="main-menu">
-   	
       <nav>
          <ul id="menu1">
          	<li><h3>메뉴</h3></li>
@@ -82,8 +81,6 @@ function hideId(id){
 		        <li id="mypg"><a myPage="onclick=myPage" href="javascript:TOmyPage(this, '${myPage }');">
 		        마이 페이지</a></li>
 	        </c:if>
-         </ul>
-         
          <ul id="menu2">
          	<c:if test="${sessionScope.user eq 'admin'}">
 			   <li><a id="admin" href="'${admin }'">

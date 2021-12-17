@@ -1,4 +1,4 @@
-package com.alltoons.root.review.dto;
+package com.alltoons.root.member.dto;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;

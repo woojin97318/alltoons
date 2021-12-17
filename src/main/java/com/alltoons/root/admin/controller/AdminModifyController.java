@@ -59,17 +59,12 @@ public class AdminModifyController {
 		int result = ms.modify(mul, wd);
 		if(result==1) {
 			model.addAttribute("message", "작품이 수정되었습니다");
-			model.addAttribute("url","test");//후에 합친 후에는 삭제list페이지로 이동
+			model.addAttribute("url","webtoonDelete");//후에 합친 후에는 삭제list페이지로 이동
 			return "/common/alertHref";
 		}
 		model.addAttribute("message", "작품 수정에 실패하였습니다");
 		model.addAttribute("url", "webtoonModify?webtoonNm="+wd.getWebtoonNum());
 		return "/common/alertHref";
-	}
-
-	@RequestMapping("test")
-	public String test() {
-		return "test";
 	}
 
 }

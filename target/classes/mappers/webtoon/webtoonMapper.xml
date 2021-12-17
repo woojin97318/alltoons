@@ -119,6 +119,7 @@
 		<result property="webtoonImage" column="webtoon_image" />
 		<result property="webtoonGenre" column="webtoon_genre" />
 		<result property="platformName" column="WEBTOON_PLATFORM_NAME" />
+		<result property="platformNum" column="p_num" />
 	</resultMap>
 
 	<select id="platformView" resultMap="category">
@@ -137,19 +138,76 @@
 		webtoon_info.webtoon_num,
 		webtoon_info.webtoon_title,webtoon_info.webtoon_writer,webtoon_info.webtoon_image,GENRE_TABLE.webtoon_genre
 		from GENRE_TABLE,webtoon_info
-		where GENRE_TABLE.webtoon_num=webtoon_info.webtoon_num
-		and GENRE_TABLE.webtoon_genre=#{webtoonGenre}
+		where
+		GENRE_TABLE.webtoon_num=webtoon_info.webtoon_num
+		and
+		GENRE_TABLE.webtoon_genre=#{webtoonGenre}
+	</select>
+
+	<select id="favortiesPage" resultMap="category">
+		select DISTINCT
+		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
+		webtoon_info.webtoon_writer,
+		webtoon_info.webtoon_image
+		from user_info,webtoon_info, FAVORITES_INFO,PLATFORM_TABLE
+		where
+		user_info.user_email = #{userEmail}
+		and FAVORITES_INFO.favorites = 'T'
+		and user_info.user_email=FAVORITES_INFO.user_email
+		and FAVORITES_INFO.webtoon_num=webtoon_info.webtoon_num
+		and webtoon_info.webtoon_num =PLATFORM_TABLE.WEBTOON_NUM
+		and FAVORITES_INFO.webtoon_num = PLATFORM_TABLE.WEBTOON_NUM
+		order by webtoon_info.webtoon_title
+	</select>
+
+	<select id="onlyPlatform" resultType="string">
+		select KOR_PLATFORM.eng
+		from PLATFORM_TABLE,KOR_PLATFORM
+		where
+		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = KOR_PLATFORM.eng
+		and
+		PLATFORM_TABLE.WEBTOON_NUM =#{webtoonNum}
+	</select>
+
+	<select id="interestPage" resultMap="category">
+		select DISTINCT
+		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
+		webtoon_info.webtoon_writer,
+		webtoon_info.webtoon_image
+		from user_info,webtoon_info, FAVORITES_INFO,PLATFORM_TABLE
+		where
+		user_info.user_email = #{userEmail}
+		and FAVORITES_INFO.INTEREST = 'T'
+		and user_info.user_email=FAVORITES_INFO.user_email
+		and FAVORITES_INFO.webtoon_num=webtoon_info.webtoon_num
+		and webtoon_info.webtoon_num =PLATFORM_TABLE.WEBTOON_NUM
+		and FAVORITES_INFO.webtoon_num = PLATFORM_TABLE.WEBTOON_NUM
+		order by webtoon_info.webtoon_title
 	</select>
 
 
-
-
-
-
-
-
-
-
+	<resultMap
+		type="com.alltoons.root.webtoon.dto.WebtoonCategoryDTO" id="category2">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="webtoonTitle" column="webtoon_title" />
+		<result property="webtoonWriter" column="webtoon_writer" />
+		<result property="webtoonImage" column="webtoon_image" />
+		<result property="webtoonGenre" column="webtoon_genre" />
+		<result property="platformName" column="WEBTOON_PLATFORM_NAME" />
+		<result property="platformNum" column="count" />
+	</resultMap>
+	<select id="popularPage" resultMap="category2">
+		select DISTINCT
+		webtoon_info.webtoon_num, webtoon_info.webtoon_title, webtoon_info.webtoon_writer,
+		webtoon_info.webtoon_image,(
+			select count(favorites) 
+			from FAVORITES_INFO 
+			where FAVORITES_INFO.webtoon_num =PLATFORM_TABLE.WEBTOON_NUM 
+			and FAVORITES_INFO.favorites = 'T')as count
+		from webtoon_info, FAVORITES_INFO,PLATFORM_TABLE
+		where webtoon_info.webtoon_num =PLATFORM_TABLE.WEBTOON_NUM
+		order by count desc, webtoon_info.webtoon_title asc
+	</select>
 
 
 </mapper>
