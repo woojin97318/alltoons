@@ -245,7 +245,7 @@ function favorties_off(){
 						<th>${review.userEmail }</th>
 						<td class="td">
 							<c:if test="${user != null }">
-								<button type="button" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum}'">
+								<button type="button" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }&webtoonNum=${webtoonDate.webtoonNum}'">
 									신고
 								</button>
 							</c:if>
