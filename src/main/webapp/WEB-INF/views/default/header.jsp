@@ -18,6 +18,7 @@
 	}else{
 		console.log('login');
 		console.log('${sessionScope.user}');
+		console.log('${sessionScope.admin}');
 	}
 }());
 
@@ -68,38 +69,29 @@ function hideId(id){
       <nav>
          <ul id="menu1">
          	<li><h3>메뉴</h3></li>
-            <li><a href="${contextPath}/platformWebtoon">
-            플랫폼별 웹툰</a></li>
-            <li><a href="${contextPath}/genreWebtoon">
-            장르별 웹툰</a></li>
+            <li><a href="${contextPath}/platformWebtoon">플랫폼별 웹툰</a></li>
+            <li><a href="${contextPath}/genreWebtoon">장르별 웹툰</a></li>
             
-            <li id="inter"><a interest="onclick=interest" href="javascript:TOmyPage(this, '${interest }');">
-	        관심목록</a></li>
-	        <li id="fav"><a favorties="onclick=favorties" href="javascript:TOmyPage(this, '${favorties }');">
-	        즐겨찾기</a></li>
+            <li id="inter"><a interest="onclick=interest" href="javascript:TOmyPage(this, '${interest }');">관심목록</a></li>
+	        <li id="fav"><a favorties="onclick=favorties" href="javascript:TOmyPage(this, '${favorties }');">즐겨찾기</a></li>
 	        <c:if test="${sessionScope.user != null}">
-		        <li id="mypg"><a myPage="onclick=myPage" href="javascript:TOmyPage(this, '${myPage }');">
-		        마이 페이지</a></li>
+		        <li id="mypg"><a myPage="onclick=myPage" href="javascript:TOmyPage(this, '${myPage }');">마이 페이지</a></li>
 	        </c:if>
+	     </ul>
          <ul id="menu2">
-         	<c:if test="${sessionScope.user eq 'admin'}">
-			   <li><a id="admin" href="'${admin }'">
-		       관리자 페이지</a></li>
+         	<c:if test="${sessionScope.admin != null}">
+			   <li><a id="admin" href="'${admin }'">관리자 페이지</a></li>
 	        </c:if>
             <c:choose>
                <c:when test="${sessionScope.user != null}">
-                   <li><a href="${contextPath}/member/logout">
-            		로그아웃</a></li>
+                   <li><a href="${contextPath}/member/logout">로그아웃</a></li>
                </c:when>
                <c:otherwise>
-                  <li><a href="${contextPath}/member/login">
-            		로그인</a></li>
+                  <li><a href="${contextPath}/member/login">로그인</a></li>
                </c:otherwise>
             </c:choose>
          </ul>
       </nav>
    </div>
-   <button onclick="hideId('btn')">hide</button>
-   <button onclick="showId('btn')">show</button>
 </body>
 </html>
