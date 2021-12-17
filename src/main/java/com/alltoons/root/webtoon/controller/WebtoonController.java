@@ -132,7 +132,7 @@ public class WebtoonController {
 	}
 
 	// 즐겨찾기
-	@GetMapping("/memeber/favorties")
+	@GetMapping("/member/favorites")
 	public String favorties(Model model, HttpSession session) {
 		if ((String) session.getAttribute(MemberSessionName.LOGIN) == null) {
 			model.addAttribute("message", "로그인이 필요한 기능입니다");
@@ -145,7 +145,7 @@ public class WebtoonController {
 	}
 
 	// 관심
-	@GetMapping("/memeber/interest")
+	@GetMapping("/member/interest")
 	public String interest(Model model, HttpSession session) {
 		if ((String) session.getAttribute(MemberSessionName.LOGIN) == null) {
 			model.addAttribute("message", "로그인이 필요한 기능입니다");
