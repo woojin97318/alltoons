@@ -26,7 +26,11 @@
 <header>
 	<c:import url="../default/header.jsp"/>
 </header>
-	
+
+<c:set var="defaultImg" value='${contextPath }/resources/img/webtoon/default_image.png'/>
+<c:set var="thumbnail" value='${contextPath }/webtoon/thumbnail?webtoonImage='/>
+<c:set var="webtooninfo" value='${contextPath }/webtoon/webtooninfo?webtoonNum='/>
+
 <body onload="" style="padding-top: 200px;">
 	<c:if test="${search != null }">
 		<label><b>" ${search } "</b>에 대한 검색 결과 입니다.</label><br>
@@ -54,14 +58,14 @@
 					<tr>
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
-								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
+								<th><div class="webtoonImage"><img src="${defaultImg}"></div></th>
 							</c:when>
 							<c:otherwise>
-								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
+								<td><div class="webtoonImage"><img src="${thumbnail}${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
 						<td class="platform">${ dto.platformName}</td>
-						<th><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></th>
+						<th><a href="#" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">${dto.webtoonTitle }</a></th>
 						<td>${dto.webtoonWriter }</td>
 					</tr>
 				</c:forEach>
