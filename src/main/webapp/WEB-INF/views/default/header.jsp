@@ -79,8 +79,11 @@ function hideId(id){
 	        </c:if>
 	     </ul>
          <ul id="menu2">
+          	<c:if test="${sessionScope.user != null}">
+			   <li><a id="admin" href="${admin }">관리자 페이지</a></li>
+	        </c:if>
          	<c:if test="${sessionScope.admin != null}">
-			   <li><a id="admin" href="'${admin }'">관리자 페이지</a></li>
+			   <li><a id="admin" href="${admin }">관리자 페이지</a></li>
 	        </c:if>
             <c:choose>
                <c:when test="${sessionScope.user != null}">
