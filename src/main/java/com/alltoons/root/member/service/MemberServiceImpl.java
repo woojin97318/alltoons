@@ -74,7 +74,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String userChk(String userEmail, String userPw) {
+	public String userChk(String userEmail, String userPw, Model model) {
 		MemberDTO dto = mapper.userChk(userEmail);
 		if (dto == null) //이메일 없음
 			return "가입된 사용자가 아닙니다";

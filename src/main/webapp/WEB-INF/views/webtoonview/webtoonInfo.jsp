@@ -215,7 +215,7 @@ window.onpageshow = function(event) {
 						</tr>
 						<tr>
 							<td colspan="2">
-								<form action="${contextPath}/webtoon/reviewInsert" method="post">
+								<form action="${contextPath }/webtoon/review/reviewInsert" method="post">
 									<input type="hidden" name="webtoonNum" value="${webtoonDate.webtoonNum }">
 									<input type="hidden" name="userEmail" value="${user }">
 									<textarea rows="5" cols="20" name="reviewContent"></textarea>
@@ -231,8 +231,7 @@ window.onpageshow = function(event) {
 							<th colspan="2">
 								내가 작성한 리뷰
 							</th>
-							<td>
-								<button type="button" onclick="location.href='${contextPath}/webtoon/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
+								<button type="button" onclick="location.href='${contextPath}/webtoon/review/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
 									삭제
 								</button>
 							</td>

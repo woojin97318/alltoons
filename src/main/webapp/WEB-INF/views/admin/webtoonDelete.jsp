@@ -104,11 +104,11 @@
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<th><button onclick="location.href='${contextPath }/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
 						<th>${dto.webtoonNum }</th>
-						<td><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
 						<td>${dto.webtoonWriter }</td>
-						<th><input type="button" name="delete_btn" onclick="location.href='admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
@@ -144,11 +144,11 @@
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<th><button onclick="location.href='${contextPath }/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
 						<th>${dto.webtoonNum }</th>
-						<td><a href="#" onclick="location.href='${contextPath }/admin/webtooninfo?webtoonNum=${dto.webtoonNum}'"> ${dto.webtoonTitle }</a></td>
+						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'"> ${dto.webtoonTitle }</a></td>
 						<td>${dto.webtoonWriter }</td>
-						<th><input type="button" name="delete_btn" onclick="location.href='admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
@@ -184,11 +184,11 @@
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<th><button onclick="location.href='${contextPath }/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
 						<th>${dto.webtoonNum }</th>
-						<td><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
 						<td>${dto.webtoonWriter }</td>
-						<th><input type="button" name="delete_btn" onclick="location.href='admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
