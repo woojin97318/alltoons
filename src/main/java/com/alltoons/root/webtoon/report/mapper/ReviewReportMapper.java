@@ -7,5 +7,5 @@ import com.alltoons.root.webtoon.report.dto.ReviewReportDTO;
 public interface ReviewReportMapper {
 	public int setReport(ReviewReportDTO dto);
 	public ReviewReportDTO getMyreportChk(
-			@Param("mail") String userEmail, @Param("rn") int reviewNum);
+			@Param("userEmail") String userEmail, @Param("reviewNum") int reviewNum);
 }

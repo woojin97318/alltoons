@@ -41,6 +41,6 @@
 	<select id="getMyreportChk" resultMap="review">
 		select *
 		from report_info
-		where #{rn} #{mail}
+		where review_num = #{reviewNum} and user_email = #{userEmail}
 	</select>
 </mapper>
