@@ -11,7 +11,7 @@ font-family: 'Gowun Dodum', sans-serif;
 버튼 컬러:70A9FF, rgb(255, 191, 43)
 */
 body {
-	padding-top: 95px;
+	padding-top: 100px;
 	-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none }
 header {
 	position: fixed;

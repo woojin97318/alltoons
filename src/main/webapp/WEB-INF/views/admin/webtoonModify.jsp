@@ -12,7 +12,7 @@
 $(document).ready(function(){//페이지 들어왔을때 작동
 	<c:forEach items="${linkList}" var="platformlist">
 		
-		 var newP = document.createElement('span');
+		var newP = document.createElement('span');
 		var platform='';
 		switch('${platformlist.getPlatformName()}'){
 		case 'naver':platform='네이버';break;
@@ -225,13 +225,13 @@ function add_link(){
 		</c:import>
 </header>
 <body>
-	<form action="${contextPath}/webtoonModify" method="post" enctype="multipart/form-data">
+	<form action="${contextPath}/admin/webtoonModify" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="webtoonNum" value="${webtoonList.webtoonNum }">
 		<div style="display: flex;">
 			<div>
 			<c:choose>
 				<c:when test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
-					<img id="webtoonImage" src="resources/img/webtoon/default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
+					<img id="webtoonImage" src="${contextPath }/resources/img/webtoon/default_image.png" width=100 height=100 alt="선택된 이미지가 없습니다" />
 				</c:when>
 				<c:otherwise>
 					<img id="webtoonImage" src="${contextPath }/thumbnail?webtoonImage=${webtoonList.webtoonImage}" width=100 height=100 alt="썸네일이 존재" />

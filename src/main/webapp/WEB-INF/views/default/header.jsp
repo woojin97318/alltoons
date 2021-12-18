@@ -12,55 +12,87 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 
-</script>
+(function(){
+	if (${sessionScope.user == null}) {
+		console.log('null');
+	}else{
+		console.log('login');
+		console.log('${sessionScope.user}');
+		console.log('${sessionScope.admin}');
+	}
+}());
 
+function TOmyPage(obj, page) {
+	if(${sessionScope.user != null}){
+		window.location.href=page;
+	}else{
+		login();
+	}
+}
+
+function login(){
+	alert("로그인 후 이용 가능합니다.");
+	window.location.href = 'member/login';
+}
+
+function showId(id){
+	document.getElementById(id).style.display ='block';
+}
+
+function hideId(id){
+	document.getElementById(id).style.display ='none';
+}
+
+</script>
 <title>header</title>
 
 </head>
+<c:set var="cookie" value='${cookie.logincookie.value}'/>
+<c:url var="interest" value='member/myPage/interest'/>
+<c:url var="favorties" value='member/myPage/favorties'/>
+<c:url var="myPage" value='member/myPage'/>
+<c:url var="admin" value='admin/adminPage'/>
+<c:url var="login" value='member/login'/>
+
 <body>
    <div id="main-title">
       AllToons
-      <div class="searchBar">
+      <div id="searchBar">
          <form action="${contextPath }/webtoonSearch" method="POST">
-            <input type="text" name="search" size="20" placeholder="검색어 입력" required >
+            <input type="text" name="search" size="20" placeholder="검색어 입력" value="${search}" required >
             <input type="submit" value="검색">
          </form>
       </div>
    </div>
-   <button id="menuBtn"></button>
+   <button onclick="" id="menuBtn"></button>
    <div class="main-menu">
-   <h3>메뉴</h3>
       <nav>
          <ul id="menu1">
-            <li><a href="${contextPath}/webtoon/platformWebtoon?platformName=naver">
-            플랫폼별 웹툰</a></li>
-            <li><a href="${contextPath}/webtoon/genreWebtoon?webtoonGenre=g1">
-            장르별 웹툰</a></li>
-            <li><a href="${contextPath}/memeber/favorties">
-            즐겨찾기</a></li>
-            <li><a href="${contextPath}/memeber/interest">
-            관심목록</a></li>
-            <li><a href="${contextPath}/admin">
-            관리자 페이지</a></li>
-            <li><a href="${contextPath}/member/myPage">
-            마이 페이지</a></li>
-         </ul>
-            <!-- 
+         	<li><h3>메뉴</h3></li>
+            <li><a href="${contextPath}/platformWebtoon">플랫폼별 웹툰</a></li>
+            <li><a href="${contextPath}/genreWebtoon">장르별 웹툰</a></li>
+            
+            <li id="inter"><a interest="onclick=interest" href="javascript:TOmyPage(this, '${interest }');">관심목록</a></li>
+	        <li id="fav"><a favorties="onclick=favorties" href="javascript:TOmyPage(this, '${favorties }');">즐겨찾기</a></li>
+	        <c:if test="${sessionScope.user != null}">
+		        <li id="mypg"><a myPage="onclick=myPage" href="javascript:TOmyPage(this, '${myPage }');">마이 페이지</a></li>
+	        </c:if>
+	     </ul>
+         <ul id="menu2">
+          	<c:if test="${sessionScope.user != null}">
+			   <li><a id="admin" href="${admin }">관리자 페이지</a></li>
+	        </c:if>
+         	<c:if test="${sessionScope.admin != null}">
+			   <li><a id="admin" href="${admin }">관리자 페이지</a></li>
+	        </c:if>
             <c:choose>
-               <c:when test="">
-                  
+               <c:when test="${sessionScope.user != null}">
+                   <li><a href="${contextPath}/member/logout">로그아웃</a></li>
                </c:when>
                <c:otherwise>
-                  
+                  <li><a href="${contextPath}/member/login">로그인</a></li>
                </c:otherwise>
             </c:choose>
-             -->
-         <ul id="menu2">
-             <li><a href="${contextPath}/member/login">
-            로그인</a></li>
-            
-             <li><a href="${contextPath}/member/logout">
-            로그아웃</a></li>
          </ul>
       </nav>
    </div>
