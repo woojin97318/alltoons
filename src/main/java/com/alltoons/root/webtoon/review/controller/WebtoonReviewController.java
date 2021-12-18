@@ -27,7 +27,7 @@ public class WebtoonReviewController {
 	         message = "삭제 Error";
 	      }
 	      model.addAttribute("message", message);
-	      model.addAttribute("url", "webtooninfo?webtoonNum=" + webtoonNum);
+	      model.addAttribute("url", "webtoon/webtooninfo?webtoonNum=" + webtoonNum);
 	      return "/common/alertHref";
 	   }
 	   @PostMapping("reviewInsert")
@@ -41,7 +41,7 @@ public class WebtoonReviewController {
 	         message = "리뷰 작성 Error";
 	      }
 	      model.addAttribute("message", message);
-	      model.addAttribute("url", "webtooninfo?webtoonNum=" + webtoonNum);
+	      model.addAttribute("url", "webtoon/webtooninfo?webtoonNum=" + webtoonNum);
 	      return "/common/alertHref";
 	   }
 }
