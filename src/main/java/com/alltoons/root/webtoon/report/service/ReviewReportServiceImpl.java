@@ -17,9 +17,17 @@ public class ReviewReportServiceImpl implements ReviewReportService {
 	}
 
 	@Override
-	public int getMyreportChk(String userEmail, int reviewNum) {
+	public int getMyreportChk(String userEmail, int reviewNum) {	
+		
 		ReviewReportDTO dto = mapper.getMyreportChk(userEmail, reviewNum);
-		if(dto != null) return 0;
-		else return 1;
+	
+		if(dto != null) {
+			//System.out.println("aa");
+			return 0;
+		}
+		else {
+			//System.out.println("bb");
+			return 1;
+		}
 	}
 }

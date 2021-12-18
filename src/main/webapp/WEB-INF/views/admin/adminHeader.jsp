@@ -11,10 +11,11 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	function back(){
-		document.getElementById('backBtn').addEventListener('click', () => {
-			  window.history.back();
-	});
+	function back(){ 
+		IF( document.referrer ){
+			location.href = document.referrer;
+		}
+	};
 </script>
 
 <title>admin header</title>
@@ -31,18 +32,10 @@
 			<ul>
 				<li><a href="${contextPath}/admin/report"><button class="listBtn">
 				신고 확인</button></a></li>
-				<li><a href="${contextPath}/webtoonUpload"><button class="listBtn">
+				<li><a href="${contextPath}/admin/webtoonUpload"><button class="listBtn">
 				작품 업로드</button></a></li>
-				<li><a href="${contextPath}/webtoonDelete"><button class="listBtn">
+				<li><a href="${contextPath}/admin/webtoonDelete"><button class="listBtn">
 				작품 수정 및 삭제</button></a></li>
-				<li><a href="${contextPath}/webtoonDelete"><button class="listBtn">
-				작품 삭제</button></a></li>
-				<li><a href="${contextPath}/webtoonDelete"><button class="listBtn">
-				작품 삭제</button></a></li>
-				<li><a href="${contextPath}/webtoonDelete"><button class="listBtn">
-				작품 삭제</button></a></li>
-				<li><a href="${contextPath}/webtoonDelete"><button class="listBtn">
-				작품 삭제</button></a></li>
 			</ul>
 		</nav>
 	</div>

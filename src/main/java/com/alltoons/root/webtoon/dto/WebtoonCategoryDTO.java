@@ -7,6 +7,15 @@ public class WebtoonCategoryDTO {
 	public String webtoonImage;
 	public String webtoonGenre;
 	public String platformName;
+	public int platformNum;
+
+	public int getPlatformNum() {
+		return platformNum;
+	}
+
+	public void setPlatformNum(int platformNum) {
+		this.platformNum = platformNum;
+	}
 
 	public int getWebtoonNum() {
 		return webtoonNum;

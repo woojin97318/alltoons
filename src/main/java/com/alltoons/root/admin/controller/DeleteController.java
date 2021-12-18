@@ -13,28 +13,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alltoons.root.admin.service.DeleteService;
 @Controller
+@RequestMapping("admin")
 public class DeleteController {
 	@Autowired DeleteService dele;
 	
-	@GetMapping("/admin")
-	public String admin() {
-		return "admin/adminPage";
-	}
-	
-	@GetMapping("/webtoonDelete")
+	@GetMapping("webtoonDelete")
 	public String delete(Model model) {
 		dele.webtoonAllList(model);
 		return "admin/webtoonDelete";
 	}
 	
-	@PostMapping("/webtoonDelete")
+	@PostMapping("webtoonDelete")
 	public String delete(HttpServletRequest request, Model model) {
 		dele.webtoonAllList(model);
 		dele.searchList(request.getParameter("search"), model);
 		return "admin/webtoonDelete";
 	}
 	
-	@GetMapping("/deleteWebtoon")
+	@GetMapping("deleteWebtoon")
 	public String deleteWebtoon(@RequestParam("webtoonNum") int webtoonNum, 
 								@RequestParam("imageFileName") String webtoonImage,
 								HttpServletResponse response,
@@ -46,7 +42,7 @@ public class DeleteController {
 		dele.deleteWebtoon(webtoonNum);//db삭제
 		
 		model.addAttribute("message", message);
-		model.addAttribute("url", "/webtoonDelete");
+		model.addAttribute("url", "/admin/webtoonDelete");
 		
 		dele.webtoonAllList(model);
 		//return "admin/webtoonDelete";

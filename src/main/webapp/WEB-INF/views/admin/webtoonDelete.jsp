@@ -66,7 +66,7 @@
 	
 	
 	<div class="searchBar">
-		<form action="${contextPath }/webtoonDelete" method="POST">
+		<form action="${contextPath }/admin/webtoonDelete" method="POST">
 			<input type="text" name="search" size="20" placeholder="검색어 입력" required >
 			<input type="submit" value="검색">
 		</form>
@@ -75,11 +75,6 @@
 	<c:if test="${search != null }">
 		<label><b>" ${search } "</b>에 대한 검색 결과 입니다.</label><br>
 	</c:if>
-	<!-- 
-	<button onclick="btnActive()">삭제</button>
-	<button onclick="btnDisabled()">취소</button>
-	<button id="delete_btn">테스트</button>
-	 -->
 	<hr>
 	<div>
 	<h2>제목명</h2>
@@ -109,11 +104,11 @@
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<th><button onclick="location.href='${contextPath }/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
 						<th>${dto.webtoonNum }</th>
-						<td><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
 						<td>${dto.webtoonWriter }</td>
-						<th><input type="button" name="delete_btn" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
@@ -149,11 +144,11 @@
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<th><button onclick="location.href='${contextPath }/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
 						<th>${dto.webtoonNum }</th>
-						<td><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'"> ${dto.webtoonTitle }</a></td>
+						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'"> ${dto.webtoonTitle }</a></td>
 						<td>${dto.webtoonWriter }</td>
-						<th><input type="button" name="delete_btn" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
@@ -189,11 +184,11 @@
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<th><button onclick="location.href='${contextPath }/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
 						<th>${dto.webtoonNum }</th>
-						<td><a href="#" onclick="location.href='${contextPath }/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
 						<td>${dto.webtoonWriter }</td>
-						<th><input type="button" name="delete_btn" onclick="location.href='deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>

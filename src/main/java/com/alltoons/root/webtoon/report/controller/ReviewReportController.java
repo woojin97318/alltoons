@@ -22,10 +22,14 @@ public class ReviewReportController implements MemberSessionName {
 	@GetMapping("report")
 	public String report(Model model, @RequestParam int reviewNum,
 			@RequestParam("webtoonNum") int webtoonNum, HttpSession session) {
+		
 		int result = rrs.getMyreportChk((String)session.getAttribute(LOGIN), reviewNum);
-		if(result == 1) {
+
+		//if(result == 0) {
+		if(result == 1) { //For debug 
 			model.addAttribute("message", "이미 신고하신 리뷰입니다");
-			model.addAttribute("url", "/webtooninfo?webtoonNum=\" + webtoonNum");
+			//model.addAttribute("url", "/webtooninfo?webtoonNum=\" + webtoonNum");
+			model.addAttribute("webtoonNum",webtoonNum);
 			return "/common/alertHref";
 		}else {
 			model.addAttribute("reviewNum", reviewNum);

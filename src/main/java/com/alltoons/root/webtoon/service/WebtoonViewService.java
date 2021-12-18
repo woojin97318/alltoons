@@ -1,26 +1,40 @@
 package com.alltoons.root.webtoon.service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
 import com.alltoons.root.admin.dto.WebtoonDTO;
 import com.alltoons.root.favorites.dto.FavoritesDTO;
+import com.alltoons.root.webtoon.dto.WebtoonCategoryDTO;
 import com.alltoons.root.webtoon.dto.WebtoonViewDTO;
 
 public interface WebtoonViewService {
 
-	void webtoonData(String webtoonNum, WebtoonViewDTO wvd, Model model);
+	public void webtoonData(String webtoonNum, WebtoonViewDTO wvd, Model model);
 
-	void favorites(String webtoonNum, FavoritesDTO fd, Model model, HttpSession session);
+	public void favorites(String webtoonNum, FavoritesDTO fd, Model model, HttpSession session);
 
-	int interestClick(String webtoonNum, String userEmail);
-	int favoritesClick(String webtoonNum, String userEmail);
+	public int interestClick(String webtoonNum, String userEmail);
 
-	FavoritesDTO onOff(FavoritesDTO fd, String webtoonNum, String userEmail);
+	public int favoritesClick(String webtoonNum, String userEmail);
 
-	void platformView(Model model, String platformName);
+	public FavoritesDTO onOff(FavoritesDTO fd, String webtoonNum, String userEmail);
 
-	void genreView(Model model, String webtoonGenre);
+	public void platformView(Model model, String platformName);
+
+	public void genreView(Model model, String webtoonGenre);
+
+	public void favortiesPage(Model model, String userEmail);
+
+	public void interestPage(Model model, String userEmail);
+
+	public void popularWebtoon(Model model);
+
+	public ArrayList<WebtoonCategoryDTO> platformAjax(Model model, String platformName);
+
+	public ArrayList<WebtoonCategoryDTO> genreAjax(Model model, String webtoonGenre);
 
 }

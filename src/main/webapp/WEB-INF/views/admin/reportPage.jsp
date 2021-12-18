@@ -21,67 +21,70 @@
 			</c:import>
 		</header>
 		<table>
-			<tr>
-				<td colspan="3">
-					<hr>
-				</td>
-			</tr>
-			<c:forEach var="reportList" items="${reportList }">
-				<tr>
-					<th>신고자</th>
-					<td>${reportList.reportUserEmail }</td>
-					<td class="td">
-						<button type="button"
-							onclick="location.href='${contextPath}/admin/reportDel?reportNum=${reportList.reportNum }'">
-							신고내용 삭제
-						</button>
-					</td>
-				</tr>
-				<tr>
-					<th>신고 내용</th>
-					<td>${reportList.reportContent }</td>
-					<td class="td">
-						<button type="button"
-							onclick="location.href='${contextPath}/admin/reportReviewDel?reviewNum=${reportList.reviewNum }'">
-							해당리뷰 삭제
-						</button>
-					</td>
-				</tr>
-				<tr>
-					<th>신고 시간</th>
-					<td colspan="2">${reportList.reportTime }</td>
-				</tr>
-				<tr>
-					<th>리뷰 작성자</th>
-					<td colspan="2">${reportList.reviewUserEmail }</td>
-				</tr>
-				<tr>
-					<th>리뷰 내용</th>
-					<td colspan="2">${reportList.reviewContent }</td>
-				</tr>
-				<tr>
-					<th>리뷰 작성시간</th>
-					<td colspan="2">${reportList.reviewTime }</td>
-				</tr>
-				<tr>
-					<td>
-						<img src="${contextPath }/member/webtoonImageView?file=${reportList.webtoonImage }"
-							width="70px" height="70px" onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${reportList.webtoonNum}'"
-							style="cursor:pointer">
-					</td>
-					<td colspan="2">
-						<span onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${reportList.webtoonNum }'"
-							style="cursor:pointer">
-							${reportList.webtoonTitle }
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<hr>
-					</td>
-				</tr>
-			</c:forEach>
+			<tr><td colspan="3"><hr></td></tr>
+			<c:choose>
+				<c:when test="${reportList.isEmpty() }">
+					<tr><th colspan="3">신고 테이터가 없습니다</th></tr>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="report" items="${reportList }">
+						<tr>
+							<th>신고자</th>
+							<td>${report.reportUserEmail }</td>
+							<td class="td">
+								<button type="button"
+									onclick="location.href='${contextPath}/admin/reportDel?reportNum=${report.reportNum }'">
+									신고내용 삭제
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<th>신고 내용</th>
+							<td>${report.reportContent }</td>
+							<td class="td">
+								<button type="button"
+									onclick="location.href='${contextPath}/admin/reportReviewDel?reviewNum=${report.reviewNum }'">
+									해당리뷰 삭제
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<th>신고 시간</th>
+							<td colspan="2">${report.reportTime }</td>
+						</tr>
+						<tr>
+							<th>리뷰 작성자</th>
+							<td colspan="2">${report.reviewUserEmail }</td>
+						</tr>
+						<tr>
+							<th>리뷰 내용</th>
+							<td colspan="2">${report.reviewContent }</td>
+						</tr>
+						<tr>
+							<th>리뷰 작성시간</th>
+							<td colspan="2">${report.reviewTime }</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="${contextPath }/member/webtoonImageView?file=${report.webtoonImage }"
+									width="70px" height="70px" onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${report.webtoonNum}'"
+									style="cursor:pointer">
+							</td>
+							<td colspan="2">
+								<span onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${report.webtoonNum }'"
+									style="cursor:pointer">
+									${report.webtoonTitle }
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<hr>
+							</td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</table>
 	</div>
 </body>

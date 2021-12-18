@@ -9,6 +9,20 @@ font-family: 'Song Myung', serif;
 font-family: 'Gowun Dodum', sans-serif;
 버튼 컬러:70A9FF, rgb(255, 191, 43)
 */
+@media all and (min-width:320px){ 
+
+   
+}
+
+@media all and (min-width:768px){ 
+
+    
+}
+@media all and (min-width:1024px){ 
+
+    
+}
+
 ::-webkit-scrollbar {/*스크롤바 전체*/
     background-color: transparent;
 }

@@ -38,9 +38,4 @@
 		values(review_num_seq.nextval, #{wtnum}, #{mail}, #{content})
 	</insert>
 	
-	<select id="getMyreportChk" resultMap="review">
-		select *
-		from report_info
-		where review_num = #{reviewNum} and user_email = #{userEmail}
-	</select>
 </mapper>

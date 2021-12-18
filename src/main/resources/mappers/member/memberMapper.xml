@@ -5,8 +5,12 @@
 
 <mapper namespace="com.alltoons.root.member.mapper.MemberMapper">
 
-	<resultMap id="user"
-		type="com.alltoons.root.member.dto.MemberDTO">
+	<insert id="signUpForm">
+		insert into user_info(user_email, user_password, user_image)
+		values(#{userEmail}, #{userPassword}, #{userImage})
+	</insert>
+
+	<resultMap id="user" type="com.alltoons.root.member.dto.MemberDTO">
 		<result property="userEmail" column="user_email" />
 		<result property="userPassword" column="user_password" />
 		<result property="userNick" column="user_nick" />
@@ -14,33 +18,96 @@
 		<result property="division" column="division" />
 		<result property="sessionId" column="session_id" />
 		<result property="limitTime" column="limit_time" />
-		<result property="authKey" column="authkey" />
 	</resultMap>
 
 	<select id="userChk" resultMap="user">
-		select * from user_info
+		select *
+		from user_info
 		where user_email = #{userEmail}
 	</select>
 
 	<update id="keepLogin">
 		update user_info
-		set session_id = #{sessionId},
-		limit_time = #{limitDate}
+		set session_id = #{sessionId}, limit_time = #{limitDate}
 		where user_email = #{userEmail}
 	</update>
 
-	<insert id="signUpForm">
-		insert into user_info(user_email, user_password,
-		user_image)
-		values(#{userEmail}, #{userPassword}, #{userImage})
-	</insert>
-	<select id="emailChk" resultMap="user">
-		select * from user_info
+	<select id="getFavorites" resultType="int">
+		select count(*)
+		from favorites_info
+		where user_email = #{userEmail} and favorites = 'T'
+	</select>
+
+	<select id="getInterest" resultType="int">
+		select count(*)
+		from favorites_info
+		where user_email = #{userEmail} and interest = 'T'
+	</select>
+
+	<update id="userImageModify">
+		update user_info
+		set user_image = #{image}
+		where user_email = #{email}
+	</update>
+
+	<update id="userImageDefault">
+		update user_info
+		set user_image = 'default_image.png'
+		where user_email = #{userEmail}
+	</update>
+
+	<update id="PasswordModify">
+		update user_info
+		set user_password = #{pw}
+		where user_email = #{email}
+	</update>
+
+	<delete id="memberDelete">
+		delete
+		from user_info
+		where user_email = #{userEmail}
+	</delete>
+
+	<select id="myReviewCnt" resultType="int">
+		select count(*)
+		from review_info
 		where user_email = #{userEmail}
 	</select>
+
+	<resultMap id="myReview"
+		type="com.alltoons.root.member.dto.MyReviewDTO">
+		<result property="reviewNum" column="review_num" />
+		<result property="reviewContent" column="review_content" />
+		<result property="reviewTime" column="review_time" />
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="webtoonImage" column="webtoon_image" />
+		<result property="webtoonTitle" column="webtoon_title" />
+	</resultMap>
+
+	<select id="getMyReview" resultMap="myReview">
+		select review_num, review_content, review_time, review_info.webtoon_num,
+			   webtoon_image, webtoon_title
+		from review_info, webtoon_info
+		where user_email = #{userEmail} and
+			  review_info.webtoon_num = webtoon_info.webtoon_num
+		order by review_num desc
+	</select>
+
+	<delete id="myReviewDelete">
+		delete
+		from review_info
+		where review_num = #{reviewNum}
+	</delete>
+
 	<update id="updatePassword" parameterType="String">
 		update user_info
 		set user_password = #{codedStr}
 		where user_email = #{email}
 	</update>
+
+	<select id="emailChk" resultMap="user">
+		select *
+		from user_info
+		where user_email = #{userEmail}
+	</select>
 </mapper>
