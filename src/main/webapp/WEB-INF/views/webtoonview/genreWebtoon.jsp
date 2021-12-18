@@ -71,6 +71,9 @@ function genreChange(genre) {
 					<li><button	class="listBtn" onclick="genreChange('g11')">스릴러</button></li>
 					<li><button	class="listBtn" onclick="genreChange('g12')">시대극</button></li>
 					<li><button	class="listBtn" onclick="genreChange('g13')">스포츠</button></li>
+					<li><button	class="listBtn" onclick="genreChange('g14')">로맨스</button></li>
+					<li><button	class="listBtn" onclick="genreChange('g15')">무협</button></li>
+					<li><button	class="listBtn" onclick="genreChange('g16')">소년</button></li>
 				</ul>
 			</nav>
 		</div>

@@ -80,7 +80,7 @@ public class ModifyServiceImpl implements ModifyService{
 		//원작
 		wm.delOrigin(wd.getWebtoonNum());
 		OriginDTO od = new OriginDTO();
-		if(mul.getParameter("originalPlatform")==null) {
+		if(mul.getParameter("originalPlatform").equals("nan")||mul.getParameter("originalPlatform")==null) {
 			od.setWebtoonNum(wd.getWebtoonNum());
 			od.setOriginalPlatform("nan");
 			od.setWebtoonOriginalLink("nan");

@@ -48,8 +48,9 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 	$('input[name="webtoonGenre"][value="${genre_all.webtoonGenre}"]').attr('checked','checked');
 	</c:forEach>
 	
-	if(${originList[0].webtoonOriginalLink=='nan'}){
+	if(${originList[0].webtoonOriginalLink=='nan'||originList[0].webtoonOriginalLink.isBlank()}){
 		console.log("no")
+		console.log("${originList[0].webtoonOriginalLink}")
 		var newspan = document.createElement('span');
 		var html = '';
 		
@@ -73,6 +74,7 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		origin_box.appendChild(newspan);
 	}else{
 		console.log("yes")
+		console.log("${originList[0].webtoonOriginalLink}")
 		<c:forEach var="origin" items="${originList}" >
 		
 		var newspan = document.createElement('span');
@@ -270,7 +272,10 @@ function add_link(){
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g10">감성 &ensp; 
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g11">스릴러 &ensp; 
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; <br>
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g14">로맨스 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g15">무협 &ensp; 	
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g16">소년 &ensp; 	<br>
 		
 		<b>원작 링크</b><button type="button" onclick="add_origin_link()">+</button> <br>
 		<div id="origin_box"> </div>

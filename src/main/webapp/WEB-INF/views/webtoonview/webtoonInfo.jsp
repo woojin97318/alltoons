@@ -162,36 +162,29 @@ window.onpageshow = function(event) {
          <img src="" width="20"height="20" onclick="favoritesClick()" id="favorites"><label id="fcount">${favoritesCount }</label>
       </div>
       <div>
-         ${webtoonDate.webtoonTitle}<br>
-         
-         <b>작가명</b><br>
-         ${webtoonDate.webtoonWriter }
-      
-      <c:choose>
-         <c:when test="${linkCount == 1}">
-         <br>
-            <button type="button" onclick="location.href='${platformList[0].getWebtoonLink()}'">보 러 가 기</button>
-            </div>
-         </div>
-         </c:when>
-         <c:otherwise>
-            </div>
-            </div>
-               <b>보러가기</b>
-               <c:forEach var="list" items="${platformList}">
-                  <img src="${contextPath}/resources/img/webtoon/logo/${list.platformName}.png" width="30" height="30" onclick="location.href='${list.webtoonLink}'">
-                  <%-- <button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button> --%>
-               </c:forEach>
-         </c:otherwise>
-      </c:choose>
-   
-   <br>
-   <c:if test="${originList[0].webtoonOriginalLink !='nan' }">
-      <b>이 작품은 소설이 존재해요!</b><br>
-      <c:forEach var="origin" items="${originList }">
-         <img src="${contextPath}/resources/img/webtoon/logo/${origin.originalPlatform}.png" width="30" height="30" onclick="location.href='${origin.webtoonOriginalLink}'">
-         <%-- <button type="button" onclick="location.href='${origin.webtoonOriginalLink}'" >${origin.originalPlatform}</button> --%>
-      </c:forEach>
+			${webtoonDate.webtoonTitle}<br> 
+			<b>작가명</b><br>
+			${webtoonDate.webtoonWriter }
+		</div>
+	</div>
+	<b>보러가기</b>
+	<c:forEach var="list" items="${platformList}">
+		<img
+			src="${contextPath}/resources/img/webtoon/logo/${list.platformName}.png"
+			width="30" height="30" onclick="location.href='${list.webtoonLink}'">
+		<%-- <button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button> --%>
+	</c:forEach>
+	<br>
+	<c:if test="${originList[0].webtoonOriginalLink !='nan' }">
+		<b>이 작품은 소설이 존재해요!</b>
+		<br>
+		<c:forEach var="origin" items="${originList }">
+			<img
+				src="${contextPath}/resources/img/webtoon/logo/${origin.originalPlatform}.png"
+				width="30" height="30"
+				onclick="location.href='${origin.webtoonOriginalLink}'">
+			<%-- <button type="button" onclick="location.href='${origin.webtoonOriginalLink}'" >${origin.originalPlatform}</button> --%>
+		</c:forEach>
    </c:if>
    <br>
    <b>작품 소개글</b><br>

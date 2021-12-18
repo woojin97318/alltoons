@@ -54,16 +54,20 @@ public class AdminModifyController {
 
 	@PostMapping("admin/webtoonModify")
 	public String postWebtoonModify(MultipartHttpServletRequest mul, WebtoonDTO wd,Model model) {
-		System.out.println("수정 컨트롤러");
-		int result = ms.modify(mul, wd);
-		if(result==1) {
-			model.addAttribute("message", "작품이 수정되었습니다");
-			model.addAttribute("url","admin/webtoonDelete");//후에 합친 후에는 삭제list페이지로 이동
+		if (mul.getParameter("webtoonGenre") == null) {
+			model.addAttribute("message", "장르를 선택해주세요.");
+			model.addAttribute("url", "admin/webtoonUpload");
+			return "/common/alertHref";
+		}else {
+			int result = ms.modify(mul, wd);
+			if(result==1) {
+				model.addAttribute("message", "작품이 수정되었습니다");
+				model.addAttribute("url","admin/webtoonDelete");//후에 합친 후에는 삭제list페이지로 이동
+				return "/common/alertHref";
+			}
+			model.addAttribute("message", "작품 수정에 실패하였습니다");
+			model.addAttribute("url", "admin/webtoonModify?webtoonNm="+wd.getWebtoonNum());
 			return "/common/alertHref";
 		}
-		model.addAttribute("message", "작품 수정에 실패하였습니다");
-		model.addAttribute("url", "admin/webtoonModify?webtoonNm="+wd.getWebtoonNum());
-		return "/common/alertHref";
 	}
-
 }

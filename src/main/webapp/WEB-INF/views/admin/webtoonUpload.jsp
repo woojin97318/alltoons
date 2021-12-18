@@ -164,7 +164,10 @@
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g10">감성 &ensp; 
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g11">스릴러 &ensp; 
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; <br>
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g14">로맨스 &ensp; 	
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g15">무협 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g16">소년 &ensp; 	<br>
 		
 		<b>원작 링크</b><br>
 		<button type="button" onclick="add_origin_link()">+</button>
