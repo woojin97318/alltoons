@@ -47,7 +47,26 @@
 			<beans:ref bean="admin" />
 		</interceptor>
 		<interceptor>
-			<mapping path="" />
+			<mapping path="/member/logout" />
+			<mapping path="/member/myPage" />
+			<mapping path="/member/userImageModify" />
+			<mapping path="/member/userImageModifyPage" />
+			<mapping path="/member/userImageDefault" />
+			<mapping path="/member/pwModify" />
+			<mapping path="/member/pwModifyChk" />
+			<mapping path="/member/newPasswordChk" />
+			<mapping path="/member/memberDelete" />
+			<mapping path="/member/memberDeleteChk" />
+			<mapping path="/member/myReview" />
+			<mapping path="/member/myReviewDelete" />
+			<mapping path="/webtoon/review/myReviewDel" />
+			<mapping path="/webtoon/review/reviewInsert" />
+			<mapping path="/webtoon/report" />
+			<mapping path="/webtoon/reportinsert" />
+			<mapping path="/webtoon/myReviewDel" />
+			<mapping path="/webtoon/reviewInsert" />
+			<mapping path="/member/favorites" />
+			<mapping path="/member/interest" />
 			<beans:ref bean="login" />
 		</interceptor>
 	</interceptors>

@@ -134,12 +134,6 @@ public class WebtoonController {
 	// 즐겨찾기
 	@GetMapping("/member/favorites")
 	public String favorties(Model model, HttpSession session) {
-		if ((String) session.getAttribute(MemberSessionName.LOGIN) == null) {
-			model.addAttribute("message", "로그인이 필요한 기능입니다");
-			model.addAttribute("url", "/member/login");
-			return "common/alertHref"; // 임시 ->후에 인터셉터 필요
-		}
-
 		ws.favortiesPage(model, (String) session.getAttribute(MemberSessionName.LOGIN));
 		return "webtoonview/favoritesWebtoon";
 	}
@@ -147,12 +141,6 @@ public class WebtoonController {
 	// 관심
 	@GetMapping("/member/interest")
 	public String interest(Model model, HttpSession session) {
-		if ((String) session.getAttribute(MemberSessionName.LOGIN) == null) {
-			model.addAttribute("message", "로그인이 필요한 기능입니다");
-			model.addAttribute("url", "/member/login");
-			return "common/alertHref"; // 임시 ->후에 인터셉터 필요
-		}
-
 		ws.interestPage(model, (String) session.getAttribute(MemberSessionName.LOGIN));
 		return "webtoonview/interestWebtoon";
 	}
