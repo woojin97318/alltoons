@@ -2,7 +2,6 @@ package com.alltoons.root.admin.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -30,7 +29,7 @@ public class AdminModifyController {
 	@Autowired
 	ModifyService ms;
 
-	@GetMapping("webtoonModify")
+	@GetMapping("admin/webtoonModify")
 	public String webtoonModify(Model model, WebtoonDTO wd, HttpServletRequest request) {
 		ArrayList<PlatformDTO> list = new ArrayList<PlatformDTO>();
 		wd = ms.list(request.getParameter("webtoonNum"), model);// 웹툰 정보
@@ -59,11 +58,11 @@ public class AdminModifyController {
 		int result = ms.modify(mul, wd);
 		if(result==1) {
 			model.addAttribute("message", "작품이 수정되었습니다");
-			model.addAttribute("url","webtoonDelete");//후에 합친 후에는 삭제list페이지로 이동
+			model.addAttribute("url","admin/webtoonDelete");//후에 합친 후에는 삭제list페이지로 이동
 			return "/common/alertHref";
 		}
 		model.addAttribute("message", "작품 수정에 실패하였습니다");
-		model.addAttribute("url", "webtoonModify?webtoonNm="+wd.getWebtoonNum());
+		model.addAttribute("url", "admin/webtoonModify?webtoonNm="+wd.getWebtoonNum());
 		return "/common/alertHref";
 	}
 
