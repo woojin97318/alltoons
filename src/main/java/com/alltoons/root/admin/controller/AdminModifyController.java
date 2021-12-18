@@ -52,7 +52,7 @@ public class AdminModifyController {
 		in.close();
 	}
 
-	@PostMapping("webtoonModify")
+	@PostMapping("admin/webtoonModify")
 	public String postWebtoonModify(MultipartHttpServletRequest mul, WebtoonDTO wd,Model model) {
 		System.out.println("수정 컨트롤러");
 		int result = ms.modify(mul, wd);

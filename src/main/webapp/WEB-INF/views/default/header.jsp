@@ -48,8 +48,8 @@ function hideId(id){
 
 </head>
 <c:set var="cookie" value='${cookie.logincookie.value}'/>
-<c:url var="interest" value='member/myPage/interest'/>
-<c:url var="favorties" value='member/myPage/favorties'/>
+<c:url var="interest" value='member/interest'/>
+<c:url var="favorties" value='member/favorites'/>
 <c:url var="myPage" value='member/myPage'/>
 <c:url var="admin" value='admin/adminPage'/>
 <c:url var="login" value='member/login'/>
@@ -69,8 +69,8 @@ function hideId(id){
       <nav>
          <ul id="menu1">
          	<li><h3>메뉴</h3></li>
-            <li><a href="${contextPath}/platformWebtoon">플랫폼별 웹툰</a></li>
-            <li><a href="${contextPath}/genreWebtoon">장르별 웹툰</a></li>
+            <li><a href="${contextPath}/webtoon/platformWebtoon?platformName=naver">플랫폼별 웹툰</a></li>
+            <li><a href="${contextPath}/webtoon/genreWebtoon?webtoonGenre=g1">장르별 웹툰</a></li>
             
             <li id="inter"><a interest="onclick=interest" href="javascript:TOmyPage(this, '${interest }');">관심목록</a></li>
 	        <li id="fav"><a favorties="onclick=favorties" href="javascript:TOmyPage(this, '${favorties }');">즐겨찾기</a></li>
@@ -79,11 +79,8 @@ function hideId(id){
 	        </c:if>
 	     </ul>
          <ul id="menu2">
-          	<c:if test="${sessionScope.user != null}">
-			   <li><a id="admin" href="${admin }">관리자 페이지</a></li>
-	        </c:if>
-         	<c:if test="${sessionScope.admin != null}">
-			   <li><a id="admin" href="${admin }">관리자 페이지</a></li>
+          	<c:if test="${division == 'admin'}">
+			   <li><a id="admin" href="${contextPath }/admin/report">관리자 페이지</a></li>
 	        </c:if>
             <c:choose>
                <c:when test="${sessionScope.user != null}">

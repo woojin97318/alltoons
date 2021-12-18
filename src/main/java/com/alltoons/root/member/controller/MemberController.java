@@ -86,7 +86,7 @@ public class MemberController implements MemberSessionName {
 			@RequestParam("userPw") String userPw,
 			@RequestParam(required = false) String autoLogin,
 			HttpServletResponse response, HttpSession session, Model model) {
-		String message = ms.userChk(userEmail, userPw);
+		String message = ms.userChk(userEmail, userPw, model);
 		String url = null;
 		if (message.equals("로그인 성공")) {
 			session.setAttribute(LOGIN, userEmail);

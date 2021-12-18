@@ -11,7 +11,7 @@ public interface MemberService {
 
 	public int signUpForm(MultipartHttpServletRequest mul);
 
-	public String userChk(String userEmail, String userPw);
+	public String userChk(String userEmail, String userPw, Model model);
 	public void keepLogin(String sessionId, Date limitDate, String userEmail);
 
 	public void getUserInfo(Model model, String userEmail);
