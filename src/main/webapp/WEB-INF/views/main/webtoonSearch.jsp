@@ -31,7 +31,7 @@
 <c:set var="thumbnail" value='${contextPath }/thumbnail?webtoonImage='/>
 <c:set var="webtooninfo" value='${contextPath }/webtoon/webtooninfo?webtoonNum='/>
 
-<body onload="" style="padding-top: 200px;">
+<body onload="" style="padding-top: 100px;">
 	<c:if test="${search != null }">
 		<label><b>" ${search } "</b>에 대한 검색 결과 입니다.</label><br>
 	</c:if>

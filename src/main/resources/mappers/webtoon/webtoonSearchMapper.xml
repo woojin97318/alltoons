@@ -25,7 +25,7 @@
 	<select id="titleList" resultMap="wtnList">
 		select * from webtoon_info where webtoon_title like '%'||#{search}||'%' order by webtoon_num ASC
 	</select>
-	<select id="getImageFileName" resultType="String">
+	<select id="getImageFileName" resultType="string">
 		select webtoon_image from webtoon_info where webtoon_num=#{webtoonNum}
 	</select>
 	

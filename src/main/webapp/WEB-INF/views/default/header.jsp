@@ -80,11 +80,13 @@ box-shadow:0px 0px 5px 2px rgb(0,119,255);}
 
 }
 #menu1{
+list-style: none;
 position:relative;
 top:-50px;
 left: 90px;
 }
 #menu2{
+list-style: none;
 position:relative;
 
 left: 90px;
@@ -94,7 +96,7 @@ left: 90px;
 	width: 300px;
 	height: 100%;
 	position:relative;
-	top:-100px;
+	top:0px;
 	left: 0;
 	border-radius: 10px;
 	background-color:rgb(174, 209, 255);
@@ -126,14 +128,15 @@ input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:tra
 <c:url var="interest" value='member/interest'/>
 <c:url var="favorties" value='member/favorites'/>
 <c:url var="myPage" value='member/myPage'/>
-<c:url var="admin" value='admin/adminPage'/>
+<c:url var="admin" value='admin/report'/>
 <c:url var="login" value='member/login'/>
+<c:url var="main" value='main'/>
 
 <body>
 <div>
 
    <div id="main-title"><!-- 검색창&로고 -->
-   <span id="logo" class="center">AllToons</span>
+   <span id="logo" class="center"><a href="${main }">AllToons</a></span>
       <div id="searchBar" class="center" class="wrap">
          <form action="${contextPath }/webtoonSearch" method="POST">
             <input type="text" name="search" class="searchIn" size="40" placeholder="원하는 웹툰을 찾아보세요 :)" value="${search}" required >

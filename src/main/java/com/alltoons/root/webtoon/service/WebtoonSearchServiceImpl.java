@@ -32,24 +32,27 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 	
 	public void setArr(ArrayList<WebtoonDTO> arr,
 						Model model, 
-						String name) {
+						String name) {//검색 결과 list에 플랫폼 값도 추가
 		int webtoonNum; 
 		String platFirst;
 		int platCnt;
-		String platform; //result 형태 : 플랫폼1/플랫폼2/플랫폼3
+		String platform; //플랫폼 result
 		if(arr.size()!=0) {
 			for(int i=0; i<arr.size(); i++ ) {
 				webtoonNum = arr.get(i).getWebtoonNum();
-				System.out.println("num: "+webtoonNum);
+				System.out.println("webtoonNum: "+webtoonNum);
 				platFirst = getplatFirst(webtoonNum);
 				
 				if(platFirst == null) {
 					platform = "없음";
 				}else {
+					platform = platFirst;
 					platCnt = platCnt(webtoonNum);
-					platform = platFirst +" 외 " + platCnt+"곳";
-				}
-				//platform = getplatformAll(webtoonNum); // 플랫폼1/플랫폼2/플랫폼3...
+					if(platCnt>=2) {
+						platform += " 외 " + (platCnt-1)+"곳";//플랫폼 외 n곳
+					}
+				}System.out.println(platform);
+				//platform = getplatformAll(webtoonNum); //플랫폼1/플랫폼2/플랫폼3...
 				
 				 arr.get(i).platformName = platform;
 			}
