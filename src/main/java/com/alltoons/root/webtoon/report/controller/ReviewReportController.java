@@ -34,12 +34,12 @@ public class ReviewReportController implements MemberSessionName {
 			return "report";
 		}
 	}
-	
+
 	@PostMapping("reportinsert")
 	public String reportinsert(@RequestParam("webtoonNum") String webtoonNum,
 			ReviewReportDTO dto, Model model) {		
 		int result = rrs.setReport(dto);
-		
+
 		String message, url = "webtoon/webtooninfo?webtoonNum=" + webtoonNum;
 		if(result == 1) message = "신고가 완료되었습니다";
 		else message = "신고하기 Error";

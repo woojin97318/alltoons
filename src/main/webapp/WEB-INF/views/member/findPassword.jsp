@@ -26,7 +26,7 @@
 			success : function(result) {
 				console.log("메일 전송 성공")
 				alert('메일로 임시비밀번호가 전송 되었습니다.')
-
+				location.href="/member/login"
 			},
 			error : function() {
 				alert('메일 전송 실패')

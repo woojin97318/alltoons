@@ -68,11 +68,11 @@
 						<tr>
 							<td>
 								<img src="${contextPath }/member/webtoonImageView?file=${report.webtoonImage }"
-									width="70px" height="70px" onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${report.webtoonNum}'"
+									width="70px" height="70px" onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${report.webtoonNum}'"
 									style="cursor:pointer">
 							</td>
 							<td colspan="2">
-								<span onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${report.webtoonNum }'"
+								<span onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${report.webtoonNum }'"
 									style="cursor:pointer">
 									${report.webtoonTitle }
 								</span>
