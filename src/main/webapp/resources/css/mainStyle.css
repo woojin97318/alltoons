@@ -39,35 +39,26 @@ font-family: 'Gowun Dodum', sans-serif;
 }
 body{
 	
-	-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
+	/*-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none;*/
 }
 header {
 	position: fixed;
   	top: 0;
  	left: 0;
  	right: 0;
-	background: linear-gradient( to bottom, white 80%, transparent );
  	max-height:95px;
 }
+#main-title{
+	height:100px;
+	background-color:rgba(111, 173, 255, 0.56);
+	backdrop-filter: blur(8px);
+}
 #menuBtn{
-	all: unset;
-	background:
-		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2013/png/iconmonstr-menu-2.png&r=255&g=255&b=255')
-		no-repeat;
-		/*white : 
-		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2013/png/iconmonstr-menu-2.png&r=255&g=255&b=255')
-		no-repeat;
-		*/
-	width: 40px;
-	height: 40px;
-	background-color: #70A9FF;
-	border-radius:75px;
-	background-position: center;
-	background-size: contain;
-	border: none;
-	position : fixed;
-	top:20px;
-	right :20px;
+
+	
+}
+#menuBtn:hover{
+	background:rgba(0, 0, 0, 0.1);
 }
 
 #main-menu{
@@ -80,10 +71,9 @@ header {
 #menu2{
 	
 }
-#main-title{
-	height:100px;
-	background-color:#70A9FF;
+#wrap{
+	max-width:768px;
 }
-nav ul {
+#main-menu > nav ul {
 	list-style: none;
 }
