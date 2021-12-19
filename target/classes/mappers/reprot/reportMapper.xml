@@ -5,23 +5,22 @@
 
 <mapper namespace="com.alltoons.root.webtoon.report.mapper.ReviewReportMapper">
 		
-	<resultMap id="review" type="com.alltoons.root.webtoon.review.dto.ReviewDTO">
-		<result property="reviewNum" column="review_num" />
-		<result property="userImage" column="user_image" />
-		<result property="userEmail" column="user_email" />
-		<result property="reviewContent" column="review_content" />
-		<result property="reviewTime" column="review_time" />
-	</resultMap>
-	
-	
 	<insert id="setReport">
 		insert into report_info(report_num, user_email, report_content, review_num)
-		values(review_num_seq.nextval, #{reportUserEmail}, #{reportContent}, #{reviewNum})
+		values(report_num_seq.nextval, #{reportUserEmail}, #{reportContent}, #{reviewNum})
 	</insert>
 	
+	<resultMap id="review" type="com.alltoons.root.webtoon.report.dto.ReviewReportDTO">
+		<result property="reportNum" column="report_num" />
+		<result property="reportUserEmail" column="user_email" />
+		<result property="reportContent" column="report_content" />
+		<result property="reportTime" column="review_time" />
+		<result property="reviewNum" column="review_num" />
+	</resultMap>
+
 	<select id="getMyreportChk" resultMap="review">
 		select *
 		from report_info
-		where review_num = #{reviewNum} and user_email like #{userEmail}
+		where review_num = #{reviewNum} and user_email = #{userEmail}
 	</select>
 </mapper>

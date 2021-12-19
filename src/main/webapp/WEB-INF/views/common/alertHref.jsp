@@ -12,8 +12,7 @@
 	<script type="text/javascript">
 		alert("${message}");
 		//${contextPath}/${url} => localhost:8055/root/ + ${url}
-		//location.href = "${contextPath}/${url}";
-		location.href = "${contextPath}/webtoon/webtooninfo?webtoonNum=${webtoonNum}";
+		location.href = "${contextPath}/${url}";
 	</script>
 </body>
 </html>

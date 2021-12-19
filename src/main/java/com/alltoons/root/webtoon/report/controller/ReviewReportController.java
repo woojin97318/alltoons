@@ -20,30 +20,35 @@ public class ReviewReportController implements MemberSessionName {
 	@Autowired ReviewReportService rrs;
 
 	@GetMapping("report")
-	public String report(Model model, @RequestParam int reviewNum,
+	public String report(Model model, @RequestParam("reviewNum") int reviewNum,
 			@RequestParam("webtoonNum") int webtoonNum, HttpSession session) {
-		
 		int result = rrs.getMyreportChk((String)session.getAttribute(LOGIN), reviewNum);
 
-		//if(result == 0) {
-		if(result == 1) { //For debug 
+		if(result == 1) {
 			model.addAttribute("message", "이미 신고하신 리뷰입니다");
-			//model.addAttribute("url", "/webtooninfo?webtoonNum=\" + webtoonNum");
-			model.addAttribute("webtoonNum",webtoonNum);
+			model.addAttribute("url", "webtoon/webtooninfo?webtoonNum=" + webtoonNum);
 			return "/common/alertHref";
 		}else {
-			model.addAttribute("reviewNum", reviewNum);
-			model.addAttribute("webtoonNum", webtoonNum);
 			return "report";
 		}
 	}
 	
 	@PostMapping("reportinsert")
-	public String reportinsert(@RequestParam("webtoonNum") int webtoonNum,
-			ReviewReportDTO dto, Model model) {
+	public String reportinsert(Model model,
+			@RequestParam("reportUserEmail") String reportUserEmail,
+			@RequestParam("reportContent") String reportContent,
+			@RequestParam("reviewNum") String reviewNum,
+			@RequestParam("webtoonNum") String webtoonNum) {
+		ReviewReportDTO dto = new ReviewReportDTO();
+		dto.setReportUserEmail(reportUserEmail);
+		dto.setReportContent(reportContent);
+		dto.setReviewNum(Integer.parseInt(reviewNum));
+		
+		System.out.println("dddddddddddd");
+		
 		int result = rrs.setReport(dto);
-		System.out.println(webtoonNum);
-		String message, url = "/webtooninfo?webtoonNum=" + webtoonNum;
+		
+		String message, url = "webtoon/webtooninfo?webtoonNum=" + webtoonNum;
 		if(result == 1) message = "신고가 완료되었습니다";
 		else message = "신고하기 Error";
 		model.addAttribute("message", message);
