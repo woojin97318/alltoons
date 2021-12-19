@@ -38,4 +38,4 @@ public class ReviewServiceImpl implements ReviewService {
 	public int setReview(int webtoonNum, String userEmail, String reviewContent) {
 		return mapper.setReview(webtoonNum, userEmail, reviewContent);
 	}
-}
+} 

@@ -30,7 +30,6 @@ $(document).ready(function(){
 	</c:otherwise>
 </c:choose>
 });
-
 function interest_on(){
 	document.getElementById("interest").src="${contextPath}/resources/img/webtoon/interest_on.png";
 }
@@ -258,7 +257,7 @@ window.onpageshow = function(event) {
 						<th>${review.userEmail }</th>
 						<td class="td">
 							<c:if test="${user != null }">
-								<button type="button" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }'">
+								<button type="button" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
 									신고
 								</button>
 							</c:if>
