@@ -135,6 +135,9 @@ window.onpageshow = function(event) {
 .td {
 	width: 50px;
 }
+#platform{
+ display: flex;
+}
 </style>
 </head>
 <body>
@@ -167,23 +170,33 @@ window.onpageshow = function(event) {
 		</div>
 	</div>
 	<b>보러가기</b>
+	<div id="platform">
 	<c:forEach var="list" items="${platformList}">
-		<img
-			src="${contextPath}/resources/img/webtoon/logo/${list.platformName}.png"
-			width="30" height="30" onclick="location.href='${list.webtoonLink}'">
-		<%-- <button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button> --%>
+		<div>
+			<img
+				src="${contextPath}/resources/img/webtoon/logo/${list.platformName}.png"
+				width="30" height="30" onclick="location.href='${list.webtoonLink}'"><br>
+				${list.platformNameKor }
+			<%-- <button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button> --%>
+		</div>
 	</c:forEach>
+	</div>
 	<br>
 	<c:if test="${originList[0].webtoonOriginalLink !='nan' }">
 		<b>이 작품은 소설이 존재해요!</b>
 		<br>
-		<c:forEach var="origin" items="${originList }">
-			<img
-				src="${contextPath}/resources/img/webtoon/logo/${origin.originalPlatform}.png"
-				width="30" height="30"
-				onclick="location.href='${origin.webtoonOriginalLink}'">
-			<%-- <button type="button" onclick="location.href='${origin.webtoonOriginalLink}'" >${origin.originalPlatform}</button> --%>
-		</c:forEach>
+		<div id="platform">
+			<c:forEach var="origin" items="${originList }">
+				<div>
+					<img
+						src="${contextPath}/resources/img/webtoon/logo/${origin.originalPlatform}.png"
+						width="30" height="30"
+						onclick="location.href='${origin.webtoonOriginalLink}'"><br>
+						${origin.originalPlatformKor }
+					<%-- <button type="button" onclick="location.href='${origin.webtoonOriginalLink}'" >${origin.originalPlatform}</button> --%>
+				</div>
+			</c:forEach>
+		</div>
    </c:if>
    <br>
    <b>작품 소개글</b><br>

@@ -17,6 +17,7 @@
 		type="com.alltoons.root.webtoon.dto.WebtoonPlatformDTO" id="platform">
 		<result property="webtoonNum" column="webtoon_num" />
 		<result property="platformName" column="WEBTOON_PLATFORM_NAME" />
+		<result property="platformNameKor" column="kor" />
 		<result property="webtoonLink" column="webtoon_link" />
 	</resultMap>
 	<resultMap
@@ -26,6 +27,7 @@
 			column="origin_platform_name" />
 		<result property="webtoonOriginalLink"
 			column="ORIGIN_WEBTOON_LINK" />
+		<result property="originalPlatformKor" column="kor" />
 	</resultMap>
 	<resultMap
 		type="com.alltoons.root.favorites.dto.FavoritesDTO" id="favorites">
@@ -47,13 +49,17 @@
 		webtoon_info.webtoon_num = #{webtoonNum}
 	</select>
 	<select id="platformList" resultMap="platform">
-		select * from PLATFORM_TABLE
+		select PLATFORM_TABLE.webtoon_num,PLATFORM_TABLE.WEBTOON_PLATFORM_NAME,kor_platform.kor,PLATFORM_TABLE.webtoon_link
+		from PLATFORM_TABLE,KOR_PLATFORM
 		where webtoon_num = #{webtoonNum}
+		and PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = kor_platform.eng
 		order by WEBTOON_PLATFORM_NAME
 	</select>
 	<select id="originList" resultMap="origin">
-		select * from origin_table
+		select origin_table.webtoon_num, origin_table.origin_platform_name, KOR_PLATFORM.kor,origin_table.ORIGIN_WEBTOON_LINK
+		from origin_table,KOR_PLATFORM
 		where webtoon_num = #{webtoonNum}
+		and origin_table.origin_platform_name = KOR_PLATFORM.eng
 		order by origin_platform_name
 	</select>
 
@@ -161,7 +167,7 @@
 	</select>
 
 	<select id="onlyPlatform" resultType="string">
-		select KOR_PLATFORM.eng
+		select KOR_PLATFORM.kor
 		from PLATFORM_TABLE,KOR_PLATFORM
 		where
 		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = KOR_PLATFORM.eng
