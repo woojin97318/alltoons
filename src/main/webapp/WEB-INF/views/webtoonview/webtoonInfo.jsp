@@ -164,7 +164,7 @@ window.onpageshow = function(event) {
          <img src="" width="20"height="20" onclick="favoritesClick()" id="favorites"><label id="fcount">${favoritesCount }</label>
       </div>
       <div>
-			${webtoonDate.webtoonTitle}<br> 
+			${webtoonDate.webtoonTitle}<br>
 			<b>작가명</b><br>
 			${webtoonDate.webtoonWriter }
 		</div>
@@ -236,6 +236,7 @@ window.onpageshow = function(event) {
 							<th colspan="2">
 								내가 작성한 리뷰
 							</th>
+							<td>
 								<button type="button" onclick="location.href='${contextPath}/webtoon/review/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
 									삭제
 								</button>
