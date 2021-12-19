@@ -29,23 +29,15 @@ public class ReviewReportController implements MemberSessionName {
 			model.addAttribute("url", "webtoon/webtooninfo?webtoonNum=" + webtoonNum);
 			return "/common/alertHref";
 		}else {
+			model.addAttribute("reviewNum", reviewNum);
+			model.addAttribute("webtoonNum", webtoonNum);
 			return "report";
 		}
 	}
 	
 	@PostMapping("reportinsert")
-	public String reportinsert(Model model,
-			@RequestParam("reportUserEmail") String reportUserEmail,
-			@RequestParam("reportContent") String reportContent,
-			@RequestParam("reviewNum") String reviewNum,
-			@RequestParam("webtoonNum") String webtoonNum) {
-		ReviewReportDTO dto = new ReviewReportDTO();
-		dto.setReportUserEmail(reportUserEmail);
-		dto.setReportContent(reportContent);
-		dto.setReviewNum(Integer.parseInt(reviewNum));
-		
-		System.out.println("dddddddddddd");
-		
+	public String reportinsert(@RequestParam("webtoonNum") String webtoonNum,
+			ReviewReportDTO dto, Model model) {		
 		int result = rrs.setReport(dto);
 		
 		String message, url = "webtoon/webtooninfo?webtoonNum=" + webtoonNum;
