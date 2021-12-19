@@ -149,10 +149,8 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	private ArrayList<WebtoonCategoryDTO> onlyPlatform(ArrayList<WebtoonCategoryDTO> pageName) {
 		for(int i=0;i<pageName.size();i++) {
 			ArrayList<String> onlyPlatform = wvm.onlyPlatform(pageName.get(i).getWebtoonNum());
-			int platformCount = onlyPlatform.size();
-			if(platformCount>1) {
-				pageName.get(i).setPlatformName(onlyPlatform.get(0));
-			}int count =platformCount-1;
+			int count  = onlyPlatform.size()-1;
+			pageName.get(i).setPlatformName(onlyPlatform.get(0));
 			pageName.get(i).setPlatformNum(count);//외 n으로 쓰임
 		}return pageName;
 	}
