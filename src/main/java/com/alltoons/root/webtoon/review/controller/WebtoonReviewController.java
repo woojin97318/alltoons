@@ -37,11 +37,10 @@ public class WebtoonReviewController {
 			@RequestParam("userEmail") String userEmail,
 			@RequestParam("reviewContent") String reviewContent, Model model) {
 		String message;
-		if(rs.setReview(webtoonNum, userEmail, reviewContent) == 1) {
+		if(rs.setReview(webtoonNum, userEmail, reviewContent) == 1)
 			message = "리뷰가 작성되었습니다";
-		}else {
+		else
 			message = "리뷰 작성 Error";
-		}
 		model.addAttribute("message", message);
 		model.addAttribute("url", "webtoon/webtooninfo?webtoonNum=" + webtoonNum);
 		return "/common/alertHref";
