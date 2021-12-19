@@ -16,8 +16,9 @@
 			url="../default/header.jsp">
 		</c:import>
 	</header> 
-	<h3>인기 웹툰</h3>
+	
 	<div  style="padding-top: 500px;">
+	<h3>인기 웹툰</h3>
  <c:set var="i" value="0" />
  <c:set var="j" value="3" /><!-- 가로 n개씩 -->
  <table border=1>
