@@ -181,8 +181,8 @@ window.onpageshow = function(event) {
 		</div>
 	</c:forEach>
 	</div>
-	<br>
-	<c:if test="${originList[0].webtoonOriginalLink !='nan' }">
+
+	<c:if test="${originList[0].webtoonOriginalLink !='nan'}">
 		<b>이 작품은 소설이 존재해요!</b>
 		<br>
 		<div id="platform">
@@ -198,7 +198,7 @@ window.onpageshow = function(event) {
 			</c:forEach>
 		</div>
    </c:if>
-   <br>
+ 
    <b>작품 소개글</b><br>
    <label>${webtoonDate.webtoonContent }</label>
 

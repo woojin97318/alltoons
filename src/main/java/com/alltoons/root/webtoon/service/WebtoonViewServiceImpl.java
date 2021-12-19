@@ -34,6 +34,12 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		model.addAttribute("platformList", platformList);
 
 		ArrayList<WebtoonOriginDTO> originList = wvm.originList(webtoonNum);
+		System.out.println("링크확인"+originList.isEmpty());
+		if(originList.isEmpty()) {
+			WebtoonOriginDTO originDTO=new WebtoonOriginDTO();
+			originDTO.setWebtoonOriginalLink("nan");
+			originList.add(originDTO);
+		}
 		model.addAttribute("originList", originList);
 
 		// 링크 수
