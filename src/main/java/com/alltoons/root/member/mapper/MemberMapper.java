@@ -30,4 +30,5 @@ public interface MemberMapper {
 
 	public int updatePassword(@Param("codedStr")String codedStr, @Param("email") String email);
 	public MemberDTO emailChk(String email);
+	public MemberDTO userFindChk(String email);
 }

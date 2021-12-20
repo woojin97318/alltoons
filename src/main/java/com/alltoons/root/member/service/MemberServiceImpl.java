@@ -26,8 +26,10 @@ import com.alltoons.root.member.mapper.MemberMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	@Autowired MemberMapper mapper;
-	@Autowired JavaMailSender mailSender;
+	@Autowired
+	MemberMapper mapper;
+	@Autowired
+	JavaMailSender mailSender;
 
 	BCryptPasswordEncoder encoder;
 
@@ -76,14 +78,14 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String userChk(String userEmail, String userPw, Model model) {
 		MemberDTO dto = mapper.userChk(userEmail);
-		if (dto == null) //이메일 없음
+		if (dto == null) // 이메일 없음
 			return "가입된 사용자가 아닙니다";
-		else if (userEmail.equals(dto.getUserEmail()) &&
-				encoder.matches(userPw, dto.getUserPassword())) //로그인 성공
+		else if (userEmail.equals(dto.getUserEmail()) && encoder.matches(userPw, dto.getUserPassword())) // 로그인 성공
 			return "로그인 성공";
-		else //비밀번호 틀림
+		else // 비밀번호 틀림
 			return "비밀번호가 틀립니다";
 	}
+
 	@Override
 	public void keepLogin(String sessionId, Date limitDate, String userEmail) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -97,6 +99,7 @@ public class MemberServiceImpl implements MemberService {
 	public void getUserInfo(Model model, String userEmail) {
 		model.addAttribute("userInfo", mapper.userChk(userEmail));
 	}
+
 	@Override
 	public void getFavoritesInterest(Model model, String userEmail) {
 		int favorites = mapper.getFavorites(userEmail);
@@ -104,6 +107,7 @@ public class MemberServiceImpl implements MemberService {
 		model.addAttribute("favorites", favorites);
 		model.addAttribute("interest", interest);
 	}
+
 	@Override
 	public int userImageModify(MultipartHttpServletRequest mul) {
 		int result = 0;
@@ -139,6 +143,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return result;
 	}
+
 	@Override
 	public int userImageDefault(String userEmail) {
 		return mapper.userImageDefault(userEmail);
@@ -147,23 +152,25 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String pwModifyChk(String userPw, String userEmail) {
 		MemberDTO dto = mapper.userChk(userEmail);
-		if(encoder.matches(userPw, dto.getUserPassword()))
+		if (encoder.matches(userPw, dto.getUserPassword()))
 			return "비밀번호확인";
 		else
 			return "비밀번호가 일치하지 않습니다";
 	}
+
 	@Override
 	public void PasswordModify(String newUserPw, String userEmail) {
 		newUserPw = encoder.encode(newUserPw);
 		mapper.PasswordModify(newUserPw, userEmail);
 	}
+
 	@Override
 	public String memberDeleteChk(String userPw, String userEmail) {
 		MemberDTO dto = mapper.userChk(userEmail);
-		if(encoder.matches(userPw, dto.getUserPassword())) {
-			mapper.memberDelete(userEmail);//회원정보 삭제
+		if (encoder.matches(userPw, dto.getUserPassword())) {
+			mapper.memberDelete(userEmail);// 회원정보 삭제
 			return "탈퇴가 완료되었습니다";
-		}else {
+		} else {
 			return "비밀번호가 일치하지 않습니다";
 		}
 	}
@@ -173,11 +180,13 @@ public class MemberServiceImpl implements MemberService {
 		int myReviewCnt = mapper.myReviewCnt(userEmail);
 		model.addAttribute("myReviewCnt", myReviewCnt);
 	}
+
 	@Override
 	public void myReviewContent(Model model, String userEmail) {
 		ArrayList<MyReviewDTO> list = mapper.getMyReview(userEmail);
 		model.addAttribute("myReview", list);
 	}
+
 	@Override
 	public int myReviewDelete(int reviewNum) {
 		return mapper.myReviewDelete(reviewNum);
@@ -190,8 +199,7 @@ public class MemberServiceImpl implements MemberService {
 		int num;
 		while (str.length() != 8) {
 			num = ran.nextInt(75) + 48;
-			if ((num >= 48 && num <= 57) || (num >= 65 && num <= 90) ||
-					(num >= 97 && num <= 122)) {
+			if ((num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)) {
 				str += (char) num;
 			} else {
 				continue;
@@ -218,6 +226,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return str;
 	}
+
 	@Override
 	public void sendMail(String to, String subject, String body) {
 
@@ -234,10 +243,31 @@ public class MemberServiceImpl implements MemberService {
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public int emailChk(String email) {
 		MemberDTO dto = mapper.emailChk(email);
-		if (dto == null) return 0;
-		else return 1;
+		if (dto == null)
+			return 0;
+		else
+			return 1;
+	}
+
+	@Override
+	public int userFindChk(String email) {
+		MemberDTO dto = new MemberDTO();
+		dto = mapper.userFindChk(email);
+		String chkEmail = dto.getUserEmail();
+		System.out.println(chkEmail);
+		int result;
+		if (chkEmail != "") {
+			System.out.println(!chkEmail.isEmpty());
+			;
+			result = 1;
+		} else {
+			result = 0;
+		}
+
+		return result;
 	}
 }

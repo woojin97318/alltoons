@@ -289,15 +289,24 @@ public class MemberController implements MemberSessionName {
 
 	@ResponseBody
 	@GetMapping(value = "findpwdmail", produces = "application/json; charset=utf-8")
-	public boolean sendMailPassword(HttpSession session, @RequestParam String email, Model model) {
-		int chkResult = ms.emailChk(email);
+	public boolean sendMailPassword(HttpSession session, @RequestParam String email) {
 		String password = ms.newPassword(email);
 		session.setAttribute("joinCode", password);
 		String subject = email + "님의 비밀번호입니다.";
 		StringBuilder sb = new StringBuilder();
 		sb.append(email + "님의 임시 비밀번호는 " + password + " 입니다.");
 		sb.append("반드시 비밀번호를 변경해주세요!");
-		model.addAttribute("chkResult",chkResult);
 		return mailService.send(subject, sb.toString(), "alltoons2021@gmail.com", email, null);
 	}
+
+	@GetMapping(value = "userfindchk", produces = "application/json; charset=utf-8")
+	public boolean sendMailPassword(@RequestParam String email) {
+		int result = ms.userFindChk(email);
+		if (result == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
