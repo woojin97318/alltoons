@@ -60,6 +60,8 @@ public interface WebtoonViewMapper {
 
 	ArrayList<WebtoonCategoryDTO> platformPopularPage(String platformName);
 
+	public void upHit(String webtoonNum);
+
 
 
 }

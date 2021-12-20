@@ -154,6 +154,9 @@
 		<if test="sort.equals('nameDesc')">
 			order by webtoon_info.webtoon_title desc
 		</if>
+		<if test="sort.equals('viewCount')">
+			order by webtoon_info.webtoon_hit desc , webtoon_info.webtoon_title asc
+		</if>
 	</select>
 	
 	<!-- 플랫폼별 인기순 정렬 -->
@@ -248,5 +251,8 @@
 		order by count desc, webtoon_info.webtoon_title asc
 	</select>
 
-
+	<!-- 조회수 업 -->
+	<update id="upHit">
+		update webtoon_info set webtoon_hit = webtoon_hit +1 where webtoon_num = #{webtoonNum}
+	</update>
 </mapper>

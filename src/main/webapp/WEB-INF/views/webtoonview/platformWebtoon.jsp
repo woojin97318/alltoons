@@ -15,20 +15,20 @@ $(document).ready(function(){
 		if(location.hash){ 
 			var data = history.state; 
 			if(data){ 
-				$('#platformChang').append(data.list); 
+				$('#platformChang').html(data.list); 
+				nowPlatform = data.platform;
+				console.log("ready플랫폼"+nowPlatform)
 		}
-		
 	}
 });
 </script>
 <script type="text/javascript">
 	var total_list =""; 
-	nowPlatform="naver";//플랫폼 버튼 미선택시
+	nowPlatform=null;//플랫폼 버튼 미선택시
 	/* 플랫폼 선택시 ajax로 데이터변경 *//* 플랫폼 선택시 결과물을 받아오는 메소드 */
 	function platformChange(platform) {
 		var sort = document.getElementById("webtoonSort");
 		var sortValue = sort.options[sort.selectedIndex].value;
-		console.log(sortValue)
 		$.ajax({
 			url : "${contextPath}/webtoon/sort",
 			type : "POST",
@@ -38,12 +38,13 @@ $(document).ready(function(){
 			},
 			success : function(platformView) {
 				nowPlatform=platform;
+				console.log("정렬성공한 버튼 클릭"+nowPlatform)
 				insertPlatform(platformView);
 			},error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
 		})
 	};
-	function insertPlatform(platformView){
+	function insertPlatform(platformView){//출력문
 		let html="";
 		html += "<table border=1>";
 		var i=0; var j=3;
@@ -67,7 +68,8 @@ $(document).ready(function(){
 		});html += "</table>"
 		$("#platformChang").html(html)
 		total_list +=html;
-		history.replaceState({list:total_list},'', '${contextPath}/webtoon/platformWebtoon##');
+		console.log("insert 플랫폼:"+nowPlatform)
+		history.replaceState({list:total_list,platform: nowPlatform},'', '${contextPath}/webtoon/platformWebtoon##');
 	}
 	
 </script>
@@ -75,17 +77,15 @@ $(document).ready(function(){
 function sort(){
 	var sort = document.getElementById("webtoonSort");
 	var sortValue = sort.options[sort.selectedIndex].value;
-	console.log(nowPlatform)
-	console.log(sortValue)
 	if(nowPlatform == null){
 		nowPlatform="naver";
 	}
-	console.log(nowPlatform);
 	$.ajax({
 		url: "${contextPath}/webtoon/sort",
 		type: "POST",
 		data: {sort: sortValue, platformName: nowPlatform},
 		success : function(platformView){
+			console.log("sort플랫폼"+nowPlatform)
 			insertPlatform(platformView);
 		},
 		error:function(request,status,error){
@@ -121,7 +121,7 @@ function sort(){
 	<select name="webtoonSort" id="webtoonSort" onchange="sort()" >
 		<option value="nameAsc">제목 오름차순</option>
 		<option value="nameDesc">제목 내림차순</option>
-		<option value="views">조회수 순</option>
+		<option value="viewCount">조회수 순</option>
 		<option value="popularity">인기순</option>
 	</select>
 	

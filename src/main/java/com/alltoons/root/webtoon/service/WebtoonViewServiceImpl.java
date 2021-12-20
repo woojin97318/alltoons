@@ -46,8 +46,16 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		int cnt = wvm.linkCount(webtoonNum);
 		System.out.println("링크수: " + cnt);
 		model.addAttribute("linkCount", cnt);
+		
+		//조회수 증가
+		upHit(webtoonNum);
 	}
 	
+	private void upHit(String webtoonNum) {
+		wvm.upHit(webtoonNum);
+		
+	}
+
 	//첫 화면 관심,즐겨찾기 버튼 onoff여부 
 	@Override
 	public void favorites(String webtoonNum, FavoritesDTO fd, Model model, HttpSession session) {
@@ -178,8 +186,10 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		ArrayList<WebtoonCategoryDTO> platformAjax = null;
 		if(sort.equals("popularity")) {
 			platformAjax = wvm.platformPopularPage(platformName);
-		}else if(sort.equals("nameDesc")||sort.equals("nameAsc")) {
+		}else if(sort.equals("nameDesc")||sort.equals("nameAsc")||sort.equals("viewCount")) {
 			platformAjax = wvm.sortNameAjax(platformName,sort);
+		}else if(sort.equals("viewCount")) {
+			
 		}
 		return platformAjax;
 	}
