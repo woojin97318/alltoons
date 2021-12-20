@@ -42,11 +42,12 @@
 						<tr>
 							<td class="td2">
 								<img src="${contextPath }/member/webtoonImageView?file=${myReview.webtoonImage}"
-									width="70px" height="70px" onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${myReview.webtoonNum }'"
+									width="70px" height="70px" onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${myReview.webtoonNum }'"
 									style="cursor:pointer">
 							</td>
 							<td colspan="2">
-								<span onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${myReview.webtoonNum }'" style="cursor:pointer">
+								<span onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${myReview.webtoonNum }'"
+									style="cursor:pointer">
 									${myReview.webtoonTitle }
 								</span>
 							</td>
