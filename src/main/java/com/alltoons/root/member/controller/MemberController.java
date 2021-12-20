@@ -29,19 +29,27 @@ import com.alltoons.root.member.service.MemberService;
 @Controller
 @RequestMapping("member")
 public class MemberController implements MemberSessionName {
-	@Autowired MemberService ms;
-	@Autowired MailService mailService;
+	@Autowired
+	MemberService ms;
+	@Autowired
+	MailService mailService;
 
 	private String authKey;
 
-	public String getAuthKey() { return authKey; }
-	public void setAuthKey(String authKey) { this.authKey = authKey; }
+	public String getAuthKey() {
+		return authKey;
+	}
+
+	public void setAuthKey(String authKey) {
+		this.authKey = authKey;
+	}
 
 	@GetMapping("signup")
 	public String signup() {
 		return "member/signup";
 	}
-	@PostMapping("signupform") //회원정보 입력 후 '가입하기'버튼 클릭시 동작
+
+	@PostMapping("signupform") // 회원정보 입력 후 '가입하기'버튼 클릭시 동작
 	public String signupform(MultipartHttpServletRequest mul, Model model) {
 		int result = ms.signUpForm(mul);
 		String message, url;
@@ -56,6 +64,7 @@ public class MemberController implements MemberSessionName {
 		model.addAttribute("url", url);
 		return "/common/alertHref";
 	}
+
 	@ResponseBody
 	@GetMapping(value = "sendmail", produces = "application/json; charset=utf-8")
 	public boolean sendMailAuth(HttpSession session, @RequestParam String email) {
@@ -70,6 +79,7 @@ public class MemberController implements MemberSessionName {
 
 		return mailService.send(subject, sb.toString(), "alltoons2021@gmail.com", email, null);
 	}
+
 	@ResponseBody
 	@GetMapping(value = "chkKey", produces = "application/json; charset=utf-8")
 	public boolean chkKey(@RequestParam String key) {
@@ -81,11 +91,11 @@ public class MemberController implements MemberSessionName {
 	public String login() {
 		return "member/login";
 	}
-	@PostMapping("userChk") //로그인 사용자 확인
-	public String userChk(@RequestParam("userEmail") String userEmail,
-			@RequestParam("userPw") String userPw,
-			@RequestParam(required = false) String autoLogin,
-			HttpServletResponse response, HttpSession session, Model model) {
+
+	@PostMapping("userChk") // 로그인 사용자 확인
+	public String userChk(@RequestParam("userEmail") String userEmail, @RequestParam("userPw") String userPw,
+			@RequestParam(required = false) String autoLogin, HttpServletResponse response, HttpSession session,
+			Model model) {
 		String message = ms.userChk(userEmail, userPw, model);
 		String url = null;
 		if (message.equals("로그인 성공")) {
@@ -112,18 +122,17 @@ public class MemberController implements MemberSessionName {
 		model.addAttribute("url", url);
 		return "/common/alertHref";
 	}
+
 	@GetMapping("logout")
 	public String logout(HttpSession session, HttpServletResponse response,
-			@CookieValue(value="loginCookie", required=false) Cookie loginCookie,
-			Model model) throws Exception {
-		if(session.getAttribute(LOGIN) != null) {
-			if(loginCookie != null) {
+			@CookieValue(value = "loginCookie", required = false) Cookie loginCookie, Model model) throws Exception {
+		if (session.getAttribute(LOGIN) != null) {
+			if (loginCookie != null) {
 				loginCookie.setPath("/");
 				loginCookie.setMaxAge(0);
 				response.addCookie(loginCookie);
-				ms.keepLogin("nan",
-						new java.sql.Date(System.currentTimeMillis()),
-						(String)session.getAttribute(LOGIN));
+				ms.keepLogin("nan", new java.sql.Date(System.currentTimeMillis()),
+						(String) session.getAttribute(LOGIN));
 			}
 		}
 		session.invalidate();
@@ -138,9 +147,9 @@ public class MemberController implements MemberSessionName {
 		ms.getFavoritesInterest(model, session.getAttribute(LOGIN).toString());
 		return "member/myPage";
 	}
+
 	@GetMapping("userImageView")
-	public void userImageView(@RequestParam("file") String fileName,
-			HttpServletResponse response) throws Exception {
+	public void userImageView(@RequestParam("file") String fileName, HttpServletResponse response) throws Exception {
 		response.addHeader("Content-disposition", "attachment; fileName=" + fileName);
 		File file = new File(MemberService.MEMBER_IMAGE_REPO + "/" + fileName);
 		FileInputStream in = new FileInputStream(file);
@@ -153,63 +162,70 @@ public class MemberController implements MemberSessionName {
 		ms.getUserInfo(model, session.getAttribute(LOGIN).toString());
 		return "member/userImageModify";
 	}
+
 	@PostMapping("userImageModifyPage")
-	public String userImageModifyPage(MultipartHttpServletRequest mul,
-			Model model) { //이미지 변경후 수정하기 버튼 클릭할 때
+	public String userImageModifyPage(MultipartHttpServletRequest mul, Model model) { // 이미지 변경후 수정하기 버튼 클릭할 때
 		int result = ms.userImageModify(mul);
 		String message, url = "member/myPage";
-		if(result == 1) message = "프로필 사진이 수정되었습니다";
-		else message = "프로필 사진 수정 Error";
-		model.addAttribute("message", message);
-		model.addAttribute("url", url);
-		return "/common/alertHref";
-	}
-	@GetMapping("userImageDefault")
-	public String userImageDefault(@RequestParam String userEmail, Model model) {
-		int result = ms.userImageDefault(userEmail);
-		String message, url = "member/myPage";
-		if(result == 1) message = "수정이 완료되었습니다";
-		else message = "프로필 사진 수정 Error";
+		if (result == 1)
+			message = "프로필 사진이 수정되었습니다";
+		else
+			message = "프로필 사진 수정 Error";
 		model.addAttribute("message", message);
 		model.addAttribute("url", url);
 		return "/common/alertHref";
 	}
 
-	@GetMapping("pwModify") //비밀번호 변경전 현재 비밀번호 확인 페이지
+	@GetMapping("userImageDefault")
+	public String userImageDefault(@RequestParam String userEmail, Model model) {
+		int result = ms.userImageDefault(userEmail);
+		String message, url = "member/myPage";
+		if (result == 1)
+			message = "수정이 완료되었습니다";
+		else
+			message = "프로필 사진 수정 Error";
+		model.addAttribute("message", message);
+		model.addAttribute("url", url);
+		return "/common/alertHref";
+	}
+
+	@GetMapping("pwModify") // 비밀번호 변경전 현재 비밀번호 확인 페이지
 	public String pwModify() {
 		return "member/pwModify";
 	}
+
 	@PostMapping("pwModifyChk")
-	public String pwModifyChk(@RequestParam String userPw, HttpSession session,
-			Model model) {
+	public String pwModifyChk(@RequestParam String userPw, HttpSession session, Model model) {
 		String message = ms.pwModifyChk(userPw, session.getAttribute(LOGIN).toString());
 		String url = null;
-		if(message.equals("비밀번호확인")) {
+		if (message.equals("비밀번호확인")) {
 			return "redirect:newPassword";
-		}else {
+		} else {
 			url = "member/pwModify";
 			model.addAttribute("message", message);
 			model.addAttribute("url", url);
 			return "/common/alertHref";
 		}
 	}
-	@GetMapping("newPassword") //새 비밀번호 입력 페이지
+
+	@GetMapping("newPassword") // 새 비밀번호 입력 페이지
 	public String newPassword() {
 		return "member/newPassword";
 	}
+
 	@PostMapping("newPasswordChk")
-	public String newPasswordChk(Model model, HttpSession session,
-			@RequestParam String newUserPw, @RequestParam String newUserPwChk) {
+	public String newPasswordChk(Model model, HttpSession session, @RequestParam String newUserPw,
+			@RequestParam String newUserPwChk) {
 		String message = null;
 		String url = null;
-		if(newUserPw.equals("") || newUserPwChk.equals("")) {
+		if (newUserPw.equals("") || newUserPwChk.equals("")) {
 			message = "비밀번호를 입력해주세요";
 			url = "member/newPassword";
-		}else if(newUserPw.equals(newUserPwChk)) {
+		} else if (newUserPw.equals(newUserPwChk)) {
 			ms.PasswordModify(newUserPw, session.getAttribute(LOGIN).toString());
 			message = "비밀번호가 변경되었습니다";
 			url = "member/myPage";
-		}else {
+		} else {
 			message = "비밀번호가 일치하지 않습니다";
 			url = "member/newPassword";
 		}
@@ -222,13 +238,15 @@ public class MemberController implements MemberSessionName {
 	public String memberDelete() {
 		return "member/memberDelete";
 	}
+
 	@PostMapping("memberDeleteChk") // 회원 탈퇴
-	public String memberDeleteChk(Model model, @RequestParam String userPw,
-			HttpSession session) {
+	public String memberDeleteChk(Model model, @RequestParam String userPw, HttpSession session) {
 		String message = ms.memberDeleteChk(userPw, session.getAttribute(LOGIN).toString());
 		String url = null;
-		if(message.equals("탈퇴가 완료되었습니다")) url = "index";
-		else url = "member/memberDelete";
+		if (message.equals("탈퇴가 완료되었습니다"))
+			url = "index";
+		else
+			url = "member/memberDelete";
 		model.addAttribute("message", message);
 		model.addAttribute("url", url);
 		return "/common/alertHref";
@@ -240,22 +258,23 @@ public class MemberController implements MemberSessionName {
 		ms.myReviewContent(model, session.getAttribute(LOGIN).toString());
 		return "member/myReview";
 	}
+
 	@GetMapping("myReviewDelete")
 	public String myReviewDelete(@RequestParam int reviewNum, Model model) {
 		int result = ms.myReviewDelete(reviewNum);
 		String message;
-		if(result == 1) {
+		if (result == 1) {
 			message = "삭제가 완료되었습니다";
-		}else {
+		} else {
 			message = "삭제 Error";
 		}
 		model.addAttribute("message", message);
 		model.addAttribute("url", "member/myReview");
 		return "/common/alertHref";
 	}
+
 	@GetMapping("webtoonImageView")
-	public void webtoonImageView(@RequestParam("file") String fileName,
-			HttpServletResponse response) throws Exception {
+	public void webtoonImageView(@RequestParam("file") String fileName, HttpServletResponse response) throws Exception {
 		response.addHeader("Content-disposition", "attachment; fileName=" + fileName);
 		File file = new File(MemberService.WEBTOON_IMAGE_REPO + "/" + fileName);
 		FileInputStream in = new FileInputStream(file);
@@ -267,16 +286,18 @@ public class MemberController implements MemberSessionName {
 	public String findPassword() {
 		return "member/findPassword";
 	}
+
 	@ResponseBody
 	@GetMapping(value = "findpwdmail", produces = "application/json; charset=utf-8")
-	public boolean sendMailPassword(HttpSession session, @RequestParam String email) {
+	public boolean sendMailPassword(HttpSession session, @RequestParam String email, Model model) {
+		int chkResult = ms.emailChk(email);
 		String password = ms.newPassword(email);
 		session.setAttribute("joinCode", password);
 		String subject = email + "님의 비밀번호입니다.";
 		StringBuilder sb = new StringBuilder();
 		sb.append(email + "님의 임시 비밀번호는 " + password + " 입니다.");
 		sb.append("반드시 비밀번호를 변경해주세요!");
-
+		model.addAttribute("chkResult",chkResult);
 		return mailService.send(subject, sb.toString(), "alltoons2021@gmail.com", email, null);
 	}
 }
