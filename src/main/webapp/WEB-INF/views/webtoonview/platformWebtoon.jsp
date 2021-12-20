@@ -11,6 +11,18 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <script type="text/javascript">
+$(document).ready(function(){
+		if(location.hash){ 
+			var data = history.state; 
+			if(data){ 
+				$('#platformChang').append(data.list); 
+		}
+		
+	}
+});
+</script>
+<script type="text/javascript">
+	var total_list =""; 
 	nowPlatform="naver";//플랫폼 버튼 미선택시
 	/* 플랫폼 선택시 ajax로 데이터변경 *//* 플랫폼 선택시 결과물을 받아오는 메소드 */
 	function platformChange(platform) {
@@ -54,6 +66,8 @@
 			i += 1;
 		});html += "</table>"
 		$("#platformChang").html(html)
+		total_list +=html;
+		history.replaceState({list:total_list},'', '${contextPath}/webtoon/platformWebtoon##');
 	}
 	
 </script>
