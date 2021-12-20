@@ -11,44 +11,75 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <script type="text/javascript">
-	/* 플랫폼 선택시 ajax로 데이터변경 */
+	nowPlatform="naver";//플랫폼 버튼 미선택시
+	/* 플랫폼 선택시 ajax로 데이터변경 *//* 플랫폼 선택시 결과물을 받아오는 메소드 */
 	function platformChange(platform) {
-		console.log(platform)
+		var sort = document.getElementById("webtoonSort");
+		var sortValue = sort.options[sort.selectedIndex].value;
+		console.log(sortValue)
 		$.ajax({
-			url : "${contextPath}/webtoon/platformWebtoon",
+			url : "${contextPath}/webtoon/sort",
 			type : "POST",
 			dataType : "json",
 			data : {
-				platformName : platform
+				platformName : platform,sort: sortValue
 			},
 			success : function(platformView) {
-				console.log(platformView);
-				let html="";
-				html += "<table border=1>";
-				var i=0; var j=3;
-				$.each(platformView,function(index,webtoonList){
-					if(i%j ==0){
-						html += "<tr>"
-					}
-					html += "<td><a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
-					if(webtoonList.webtoonImage == 'default_image.png'){
-						html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
-					}else{
-						html += "<img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"'width=200 height=200 alt='this has image' />"
-					}
-					html += "<br>"
-					html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
-					html += "<label>"+webtoonList.webtoonWriter+"</label>	</a></td>"
-					if(i%j == j-1){
-						html += "</tr>"	
-					}
-					i += 1;
-				});html += "</table>"
-				$("#platformChang").html(html)
+				nowPlatform=platform;
+				insertPlatform(platformView);
 			},error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
 		})
 	};
+	function insertPlatform(platformView){
+		let html="";
+		html += "<table border=1>";
+		var i=0; var j=3;
+		$.each(platformView,function(index,webtoonList){
+			if(i%j ==0){
+				html += "<tr>"
+			}
+			html += "<td><a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
+			if(webtoonList.webtoonImage == 'default_image.png'){
+				html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
+			}else{
+				html += "<img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"'width=200 height=200 alt='this has image' />"
+			}
+			html += "<br>"
+			html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
+			html += "<label>"+webtoonList.webtoonWriter+"</label>	</a></td>"
+			if(i%j == j-1){
+				html += "</tr>"	
+			}
+			i += 1;
+		});html += "</table>"
+		$("#platformChang").html(html)
+	}
+	
+</script>
+<script type="text/javascript">/* 정렬ajax *//* 지속유지필요 */
+function sort(){
+	var sort = document.getElementById("webtoonSort");
+	var sortValue = sort.options[sort.selectedIndex].value;
+	console.log(nowPlatform)
+	console.log(sortValue)
+	if(nowPlatform == null){
+		nowPlatform="naver";
+	}
+	console.log(nowPlatform);
+	$.ajax({
+		url: "${contextPath}/webtoon/sort",
+		type: "POST",
+		data: {sort: sortValue, platformName: nowPlatform},
+		success : function(platformView){
+			insertPlatform(platformView);
+		},
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    }
+			
+	})  
+}
 </script>
 </head>
 <body>
@@ -72,6 +103,14 @@
 			</nav>
 		</div>
 	</header>
+	
+	<select name="webtoonSort" id="webtoonSort" onchange="sort()" >
+		<option value="nameAsc">제목 오름차순</option>
+		<option value="nameDesc">제목 내림차순</option>
+		<option value="views">조회수 순</option>
+		<option value="popularity">인기순</option>
+	</select>
+	
 	<c:set var="i" value="0" />
 	<c:set var="j" value="3" />
 	<!-- 가로 n개씩 -->

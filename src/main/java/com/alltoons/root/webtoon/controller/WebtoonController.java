@@ -72,7 +72,7 @@ public class WebtoonController {
 		return "/common/alertHref";
 	}
 
-	//관심 클릭시 수 변경
+	// 관심 클릭시 수 변경
 	@GetMapping("webtoon/interestClick")
 	@ResponseBody
 	public String interest(@RequestParam("webtoonNum") String webtoonNum, @RequestParam("userEmail") String userEmail) {
@@ -81,8 +81,8 @@ public class WebtoonController {
 		int cnt = ws.interestClick(webtoonNum, userEmail);
 		return cnt + "";
 	}
-	
-	//즐겨찾기 클릭시 수 변경
+
+	// 즐겨찾기 클릭시 수 변경
 	@GetMapping("webtoon/favoritesClick")
 	@ResponseBody
 	public String favorites(@RequestParam("webtoonNum") String webtoonNum,
@@ -92,8 +92,8 @@ public class WebtoonController {
 		int cnt = ws.favoritesClick(webtoonNum, userEmail);
 		return cnt + "";
 	}
-	
-	//관심버튼 T,F값을 jsp에 넘김 -> 하트 꺼짐 켜짐
+
+	// 관심버튼 T,F값을 jsp에 넘김 -> 하트 꺼짐 켜짐
 	@GetMapping("webtoon/i_onOff")
 	@ResponseBody
 	public String i_onOff(FavoritesDTO fd, @RequestParam("webtoonNum") String webtoonNum,
@@ -101,8 +101,8 @@ public class WebtoonController {
 		fd = ws.onOff(fd, webtoonNum, userEmail);// 메소드만 재사용
 		return fd.getInterest() + "";
 	}
-	
-	//즐겨찾기버튼 T,F값을 jsp에 넘김 -> 별 꺼짐 켜짐
+
+	// 즐겨찾기버튼 T,F값을 jsp에 넘김 -> 별 꺼짐 켜짐
 	@GetMapping("webtoon/f_onOff")
 	@ResponseBody
 	public String f_onOff(FavoritesDTO fd, @RequestParam("webtoonNum") String webtoonNum,
@@ -144,21 +144,32 @@ public class WebtoonController {
 		ws.interestPage(model, (String) session.getAttribute(MemberSessionName.LOGIN));
 		return "webtoonview/interestWebtoon";
 	}
-	
+
 	// 플랫폼 ajax
 	@PostMapping("/webtoon/platformWebtoon")
 	@ResponseBody
-	public ArrayList<WebtoonCategoryDTO> platformAjax(Model model, @RequestParam(required = false) String platformName) {
+	public ArrayList<WebtoonCategoryDTO> platformAjax(Model model,
+			@RequestParam(required = false) String platformName) {
 		System.out.println("controller platformAjax:" + platformName);
 		ArrayList<WebtoonCategoryDTO> platformAjax = ws.platformAjax(model, platformName);
 		return platformAjax;
 	}
-	
+
 	// 장르 ajax
 	@PostMapping("/webtoon/genreWebtoon")
 	@ResponseBody
 	public ArrayList<WebtoonCategoryDTO> genreAjax(Model model, @RequestParam(required = false) String webtoonGenre) {
 		ArrayList<WebtoonCategoryDTO> platformAjax = ws.genreAjax(model, webtoonGenre);
+		return platformAjax;
+	}
+
+	// 정렬 ajax
+	@PostMapping("/webtoon/sort")
+	@ResponseBody
+	public ArrayList<WebtoonCategoryDTO> sortAjax(@RequestParam("platformName")String platformName,@RequestParam(required = false) String sort) {
+		System.out.println("sort");
+		ArrayList<WebtoonCategoryDTO> platformAjax= ws.sortNameAjax(sort,platformName);
+		System.out.println(platformAjax.get(0).getWebtoonNum());
 		return platformAjax;
 	}
 
