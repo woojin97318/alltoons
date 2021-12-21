@@ -68,6 +68,7 @@ function insertGenre(genreView){
 	$("#platformChange").html(html)
 	total_list +=html;
 	history.replaceState({list:total_list,genre: nowGenre},'', '${contextPath}/webtoon/genreWebtoon##');
+	total_list="";
 }
 </script>
 <script type="text/javascript">/* 정렬ajax */

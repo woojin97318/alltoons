@@ -29,7 +29,7 @@
 	$(function(){
 		$(document).on('keyup', '#webtoonContent', function(e){
 		    var webtoonContent = $(this).val();
-		    $('#webtoonContent_cnt').text(getBytes(webtoonContent)+'/500');    
+		    $('#webtoonContent_cnt').text(getBytes(webtoonContent)+'/1000');    
 		});$('#webtoonContent').keyup();
 	});
 	
@@ -66,7 +66,6 @@
 		html += '<option value="kakaoPage">카카오페이지</option>'
 		html += '<option value="bomtoon">봄툰</option>'
 		html += '<option value="lezhin">레진</option>'
-		html += '<option value="toptoon">탑툰</option>'
 		html += '<option value="mrblue">미스터블루</option>'
 		html += '<option value="ridibooks">리디북스</option>'
 		html += '</select> ';
@@ -91,7 +90,6 @@
 			html += '<option value="kakaoPage">카카오페이지</option>'
 			html += '<option value="bomtoon">봄툰</option>'
 			html += '<option value="lezhin">레진</option>'
-			html += '<option value="toptoon">탑툰</option>'
 			html += '<option value="mrblue">미스터블루</option>'
 			html += '<option value="ridibooks">리디북스</option>'
 			html += '<option value="naverSeries">네이버 시리즈</option>'
@@ -143,7 +141,6 @@
 				<option value="kakaoPage">카카오페이지</option>
 				<option value="bomtoon">봄툰</option>
 				<option value="lezhin">레진</option>
-				<option value="toptoon">탑툰</option>
 				<option value="mrblue">미스터블루</option>
 				<option value="ridibooks">리디북스</option>
 			</select> 
@@ -179,7 +176,6 @@
 					<option value="kakaoPage">카카오페이지</option>
 					<option value="bomtoon">봄툰</option>
 					<option value="lezhin">레진</option>
-					<option value="toptoon">탑툰</option>
 					<option value="mrblue">미스터 블루</option>
 					<option value="ridibooks">리디북스</option>
 					<option value="naverSeries">네이버 시리즈</option>

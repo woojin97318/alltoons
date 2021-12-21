@@ -45,6 +45,7 @@ $(document).ready(function(){
 		})
 	};
 	function insertPlatform(platformView){//출력문
+		$("#platformChange").html("")
 		let html="";
 		html += "<table border=1>";
 		var i=0; var j=3;
@@ -70,6 +71,7 @@ $(document).ready(function(){
 		total_list +=html;
 		console.log("insert 플랫폼:"+nowPlatform)
 		history.replaceState({list:total_list,platform: nowPlatform},'', '${contextPath}/webtoon/platformWebtoon##');
+		total_list="";
 	}
 	
 </script>
@@ -110,7 +112,6 @@ function sort(){
 					<li><button class="listBtn" id="kakaoPage" onclick="platformChange('kakaoPage')">카카오페이지</button>	</li>
 					<li><button class="listBtn" id="bomtoon" onclick="platformChange('bomtoon')">봄툰</button>	</li>
 					<li><button class="listBtn" id="lezhin" onclick="platformChange('lezhin')">레진코믹스</button></li>
-					<li><button class="listBtn" id="toptoon" onclick="platformChange('toptoon')">탑툰</button>	</li>
 					<li><button class="listBtn" id="mrblue" onclick="platformChange('mrblue')">미스터블루</button>	</li>
 					<li><button class="listBtn" id="ridibooks" onclick="platformChange('ridibooks')">리디북스</button></li>
 				</ul>
