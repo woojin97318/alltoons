@@ -299,6 +299,7 @@ public class MemberController implements MemberSessionName {
 		return mailService.send(subject, sb.toString(), "alltoons2021@gmail.com", email, null);
 	}
 
+	@ResponseBody
 	@GetMapping(value = "userfindchk", produces = "application/json; charset=utf-8")
 	public boolean sendMailPassword(@RequestParam String email) {
 		int result = ms.userFindChk(email);

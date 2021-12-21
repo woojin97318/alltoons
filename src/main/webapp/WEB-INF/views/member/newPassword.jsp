@@ -31,7 +31,7 @@
 			console.log(userPw);
 			console.log(chkPw);
 			
-			alert('비밀번호가 일치하지 않습니다')
+			alert('비밀번호가 일치하지 않습니다');
 		}
 	}
 </script>
