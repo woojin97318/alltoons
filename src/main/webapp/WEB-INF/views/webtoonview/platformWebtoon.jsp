@@ -117,7 +117,7 @@ function sort(){
 			</nav>
 		</div>
 	</header>
-	
+	<c:import url="../default/moveTopBtn.jsp"/>
 	<select name="webtoonSort" id="webtoonSort" onchange="sort()" >
 		<option value="nameAsc">제목 오름차순</option>
 		<option value="nameDesc">제목 내림차순</option>

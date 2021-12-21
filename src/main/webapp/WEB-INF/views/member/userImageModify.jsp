@@ -26,8 +26,7 @@
 <body>
 	<div align="center">
 		<h3>프로필 사진 수정</h3>
-		<form action="${contextPath }/member/userImageModifyPage" method="post"
-			enctype="multipart/form-data">
+		<form action="${contextPath }/member/userImageModifyPage" method="post" enctype="multipart/form-data">
 			<img id="userImage" width="100px" height="100px"
 				src="${contextPath }/member/userImageView?file=${userInfo.userImage}"/><br>
 			<input type="hidden" name="userEmail" value="${userInfo.userEmail}">

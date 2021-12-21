@@ -131,24 +131,29 @@ window.onpageshow = function(event) {
     }
 };
 </script>
+<script>/*리뷰 작성자 이메일 모자이크*/
+function mailCut(mail) {
+	const str = mail;
+	document.write(str.substring(0, 5) + '****');
+};
+</script>
 <style type="text/css">
 .td {
 	width: 50px;
 }
 #platform{
- display: flex;
+	display: flex;
 }
 </style>
 </head>
 <body>
 <header>
-		<c:import url="./header/pageHeader.jsp">
-			<c:param name="tag" value="작품 상세 페이지"></c:param>
-		</c:import>
+	<c:import url="./header/pageHeader.jsp">
+		<c:param name="tag" value="작품 상세 페이지"></c:param>
+	</c:import>
 	</header>
-<h1></h1>
-   <div style="display: flex;">
-      <div >
+	<div style="display: flex;">
+		<div>
          <c:choose>
             <c:when test="${webtoonDate.webtoonImage=='default_image.png'}">
                <img id="webtoonImage" src="${contextPath}/resources/img/webtoon/default_image.png"
@@ -198,7 +203,6 @@ window.onpageshow = function(event) {
 			</c:forEach>
 		</div>
    </c:if>
- 
    <b>작품 소개글</b><br>
    <label>${webtoonDate.webtoonContent }</label>
 
@@ -213,11 +217,7 @@ window.onpageshow = function(event) {
 			<c:otherwise>
 				<c:choose>
 					<c:when test="${myReview == null }">
-						<tr>
-							<th colspan="3">
-								리뷰 작성
-							</th>
-						</tr>
+						<tr><th colspan="3">리뷰 작성</th></tr>
 						<tr>
 							<td colspan="2">
 								<form action="${contextPath }/webtoon/review/reviewInsert" method="post">
@@ -233,25 +233,15 @@ window.onpageshow = function(event) {
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<th colspan="2">
-								내가 작성한 리뷰
-							</th>
+							<th colspan="2">내가 작성한 리뷰</th>
 							<td>
 								<button type="button" onclick="location.href='${contextPath}/webtoon/review/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
 									삭제
 								</button>
 							</td>
 						</tr>
-						<tr>
-							<td colspan="3">
-								${myReview.reviewContent }
-							</td>
-						</tr>
-						<tr>
-							<td colspan="3">
-								작성 시간 : ${myReview.reviewTime }
-							</td>
-						</tr>
+						<tr><td colspan="3">${myReview.reviewContent }</td></tr>
+						<tr><td colspan="3">작성 시간 : ${myReview.reviewTime }</td></tr>
 					</c:otherwise>
 				</c:choose>
 			</c:otherwise>
@@ -268,7 +258,7 @@ window.onpageshow = function(event) {
 							<img src="${contextPath }/member/userImageView?file=${review.userImage }"
 								width="50px" height="50px">
 						</td>
-						<th>${review.userEmail }</th>
+						<th><script>mailCut('${review.userEmail }')</script></th>
 						<td class="td">
 							<c:if test="${user != null }">
 								<button type="button" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
@@ -277,9 +267,7 @@ window.onpageshow = function(event) {
 							</c:if>
 						</td>
 					</tr>
-					<tr>
-						<td colspan="3">${review.reviewContent }</td>
-					</tr>
+					<tr><td colspan="3">${review.reviewContent }</td></tr>
 					<tr><td colspan="3">${review.reviewTime }</td></tr>
 					<tr><td colspan="3"><hr></td></tr>
 				</c:forEach>

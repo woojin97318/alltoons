@@ -22,41 +22,40 @@
 		<h3>내가 작성한 리뷰</h3>
 		<p>총 댓글 수<br>${myReviewCnt } 개</p>
 		<table>
-			<c:forEach var="myReview" items="${myReview }">
-				<tr>
-					<td colspan="2">
-						작성 내용 : ${myReview.reviewContent }<br>	
-					</td>
-					<td class="td1">
-						<button type="button" onclick="location.href='${contextPath}/member/myReviewDelete?reviewNum=${myReview.reviewNum }'">
-							리뷰 삭제
-						</button>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						작성시간 : ${myReview.reviewTime }<br>
-					</td>
-				</tr>
-				<tr>
-					<td class="td2">
-						<img src="${contextPath }/member/webtoonImageView?file=${myReview.webtoonImage}"
-							width="70px" height="70px" onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${myReview.webtoonNum }'"
-							style="cursor:pointer">
-					</td>
-					<td colspan="2">
-						<span onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${myReview.webtoonNum }'"
-							style="cursor:pointer">
-							${myReview.webtoonTitle }
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<hr>
-					</td>
-				</tr>
-			</c:forEach>
+			<c:choose>
+				<c:when test="${myReview.isEmpty() }">
+					<tr><th colspan="3">작성한 리뷰가 없습니다</th></tr>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="myReview" items="${myReview }">
+						<tr>
+							<td colspan="2">작성 내용 : ${myReview.reviewContent }</td>
+							<td class="td1">
+								<button type="button" onclick="location.href='${contextPath}/member/myReviewDelete?reviewNum=${myReview.reviewNum }'">
+									리뷰 삭제
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">작성시간 : ${myReview.reviewTime }</td>
+						</tr>
+						<tr>
+							<td class="td2">
+								<img src="${contextPath }/member/webtoonImageView?file=${myReview.webtoonImage}"
+									width="70px" height="70px" onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${myReview.webtoonNum }'"
+									style="cursor:pointer">
+							</td>
+							<td colspan="2">
+								<span onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${myReview.webtoonNum }'"
+									style="cursor:pointer">
+									${myReview.webtoonTitle }
+								</span>
+							</td>
+						</tr>
+						<tr><td colspan="3"><hr></td></tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</table>
 	</div>
 </body>
