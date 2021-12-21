@@ -34,7 +34,6 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		model.addAttribute("platformList", platformList);
 
 		ArrayList<WebtoonOriginDTO> originList = wvm.originList(webtoonNum);
-		System.out.println("링크확인"+originList.isEmpty());
 		if(originList.isEmpty()) {
 			WebtoonOriginDTO originDTO=new WebtoonOriginDTO();
 			originDTO.setWebtoonOriginalLink("nan");
@@ -44,7 +43,6 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 
 		// 링크 수
 		int cnt = wvm.linkCount(webtoonNum);
-		System.out.println("링크수: " + cnt);
 		model.addAttribute("linkCount", cnt);
 		
 		//조회수 증가
@@ -66,7 +64,6 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		} else {
 			fd = wvm.check(webtoonNum, userEmail);
 		} // 세션 아이디값
-		System.out.println(MemberSessionName.LOGIN);
 		model.addAttribute("favoritesDTO", fd);
 
 		// 숫자
@@ -126,7 +123,6 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 
 	@Override
 	public void platformView(Model model, String platformName) {
-		System.out.println("platformName이름"+platformName);
 		// 웹툰 명,작가,썸네일,플랫폼,웹툰 번호 ==>상세페이지로 웹툰 num만 넘겨줌
 		ArrayList<WebtoonCategoryDTO> platformView = wvm.platformView(platformName);
 		model.addAttribute("platformView", platformView);
@@ -169,18 +165,6 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		}return pageName;
 	}
 
-	@Override //플랫폼 ajax처리
-	public ArrayList<WebtoonCategoryDTO> platformAjax(Model model, String platformName) {
-		ArrayList<WebtoonCategoryDTO> platformAjax = wvm.platformView(platformName);
-		return platformAjax;
-	}
-
-	@Override //장르 ajax처리
-	public ArrayList<WebtoonCategoryDTO> genreAjax(Model model, String webtoonGenre) {
-		ArrayList<WebtoonCategoryDTO> genreAjax = wvm.genreView(webtoonGenre);
-		return genreAjax;
-	}
-	
 	@Override //플랫폼정렬 ajax처리
 	public ArrayList<WebtoonCategoryDTO> sortNameAjax(String sort,String platformName) {
 		ArrayList<WebtoonCategoryDTO> platformAjax = null;
@@ -195,7 +179,6 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	@Override //장르정렬 ajax처리
 	public ArrayList<WebtoonCategoryDTO> genreSortAjax(String sort, String webtoonGenre) {
 		ArrayList<WebtoonCategoryDTO> platformAjax = null;
-		System.out.println("정렬방법 "+sort);
 		if(sort.equals("popularity")) {
 			platformAjax = wvm.genrePopularPage(webtoonGenre);
 		}else if(sort.equals("nameDesc")||sort.equals("nameAsc")||sort.equals("viewCount")) {

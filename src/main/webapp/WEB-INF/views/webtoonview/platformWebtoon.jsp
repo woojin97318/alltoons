@@ -38,7 +38,6 @@ $(document).ready(function(){
 			},
 			success : function(platformView) {
 				nowPlatform=platform;
-				console.log("정렬성공한 버튼 클릭"+nowPlatform)
 				insertPlatform(platformView);
 			},error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
@@ -47,9 +46,12 @@ $(document).ready(function(){
 	function insertPlatform(platformView){//출력문
 		$("#platformChange").html("")
 		let html="";
+		let p_name=null;
 		html += "<table border=1>";
 		var i=0; var j=3;
 		$.each(platformView,function(index,webtoonList){
+			p_name =webtoonList.platformNameKor;
+			console.log(webtoonList.platformNameKor)
 			if(i%j ==0){
 				html += "<tr>"
 			}
@@ -61,7 +63,7 @@ $(document).ready(function(){
 			}
 			html += "<br>"
 			html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
-			html += "<label>"+webtoonList.webtoonWriter+"</label>	</a></td>"
+			html += "<label>"+webtoonList.webtoonWriter+"</label><br><label>platform : "+webtoonList.platformNameKor+"</label>	</a></td>"
 			if(i%j == j-1){
 				html += "</tr>"	
 			}
@@ -69,7 +71,8 @@ $(document).ready(function(){
 		});html += "</table>"
 		$("#platformChange").html(html)
 		total_list +=html;
-		console.log("insert 플랫폼:"+nowPlatform)
+		$("#platformNameKor").html(p_name);
+		
 		history.replaceState({list:total_list,platform: nowPlatform},'', '${contextPath}/webtoon/platformWebtoon##');
 		total_list="";
 	}
@@ -87,13 +90,11 @@ function sort(){
 		type: "POST",
 		data: {sort: sortValue, platformName: nowPlatform},
 		success : function(platformView){
-			console.log("sort플랫폼"+nowPlatform)
 			insertPlatform(platformView);
 		},
 		error:function(request,status,error){
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		    }
-			
 	})  
 }
 </script>
@@ -119,13 +120,13 @@ function sort(){
 		</div>
 	</header>
 	<c:import url="../default/moveTopBtn.jsp"/>
+	<label id="platformNameKor">${platformView[0].platformNameKor }</label><!-- 플랫폼 명 뜸 -->
 	<select name="webtoonSort" id="webtoonSort" onchange="sort()" >
 		<option value="nameAsc">제목 오름차순</option>
 		<option value="nameDesc">제목 내림차순</option>
 		<option value="viewCount">조회수 순</option>
 		<option value="popularity">인기순</option>
 	</select>
-	
 	<c:set var="i" value="0" />
 	<c:set var="j" value="3" />
 	<!-- 가로 n개씩 -->

@@ -76,8 +76,6 @@ public class WebtoonController {
 	@GetMapping("webtoon/interestClick")
 	@ResponseBody
 	public String interest(@RequestParam("webtoonNum") String webtoonNum, @RequestParam("userEmail") String userEmail) {
-		System.out.println("웹툰 번호: " + webtoonNum);
-		System.out.println("이메일: " + userEmail);
 		int cnt = ws.interestClick(webtoonNum, userEmail);
 		return cnt + "";
 	}
@@ -87,8 +85,6 @@ public class WebtoonController {
 	@ResponseBody
 	public String favorites(@RequestParam("webtoonNum") String webtoonNum,
 			@RequestParam("userEmail") String userEmail) {
-		System.out.println("웹툰 번호: " + webtoonNum);
-		System.out.println("이메일: " + userEmail);
 		int cnt = ws.favoritesClick(webtoonNum, userEmail);
 		return cnt + "";
 	}
@@ -150,7 +146,6 @@ public class WebtoonController {
 	@ResponseBody
 	public ArrayList<WebtoonCategoryDTO> platformAjax(Model model,
 			@RequestParam(required = false) String platformName) {
-		System.out.println("controller platformAjax:" + platformName);
 		ArrayList<WebtoonCategoryDTO> platformAjax = ws.platformAjax(model, platformName);
 		return platformAjax;
 	}
@@ -168,7 +163,6 @@ public class WebtoonController {
 	@ResponseBody
 	public ArrayList<WebtoonCategoryDTO> sortAjax(@RequestParam("platformName")String platformName,@RequestParam(required = false) String sort) {
 		ArrayList<WebtoonCategoryDTO> platformAjax= ws.sortNameAjax(sort,platformName);
-		System.out.println(platformAjax.get(0).getWebtoonNum());
 		return platformAjax;
 	}
 	

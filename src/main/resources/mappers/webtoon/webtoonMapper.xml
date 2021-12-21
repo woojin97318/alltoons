@@ -125,6 +125,7 @@
 		<result property="webtoonImage" column="webtoon_image" />
 		<result property="webtoonGenre" column="webtoon_genre" />
 		<result property="platformName" column="WEBTOON_PLATFORM_NAME" />
+		<result property="platformNameKor" column="kor" />
 		<result property="platformNum" column="p_num" />
 	</resultMap>
 
@@ -134,8 +135,8 @@
 		webtoon_info.webtoon_writer, webtoon_info.webtoon_image,
 		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
 		from PLATFORM_TABLE,webtoon_info
-		where PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} and
-		PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
+		where PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} 
+		and	PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
 		order by  webtoon_info.webtoon_title asc
 	</select>
 	
@@ -144,10 +145,11 @@
 		select
 		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
 		webtoon_info.webtoon_writer, webtoon_info.webtoon_image,
-		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
-		from PLATFORM_TABLE,webtoon_info
-		where PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} and
-		PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
+		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME,KOR_PLATFORM.kor
+		from PLATFORM_TABLE,webtoon_info,KOR_PLATFORM
+		where PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} 
+		and PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
+		and KOR_PLATFORM.eng = PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
 		<if test="sort.equals('nameAsc') ">
 		 	order by webtoon_info.webtoon_title asc
 		</if>
