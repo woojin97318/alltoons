@@ -8,11 +8,13 @@ import com.alltoons.root.admin.dto.WebtoonDTO;
 
 public interface WebtoonSearchService {
 
-	public void searchList(String search, Model model);
+	public ArrayList<WebtoonDTO> searchList(String search, Model model, String view);
 	
 	public String getplatformAll(int webtoonNum);
 	
-	public void setArr(ArrayList<WebtoonDTO> arr, Model model, String name);
+	public void setModel(ArrayList<WebtoonDTO> arr, Model model, String name);
 	
 	public String getplatFirst(int webtoonNum);
+
+	
 }

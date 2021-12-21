@@ -18,7 +18,7 @@ public class MainController implements MemberSessionName {
 	@Autowired
 	InterceptorService is;
 
-	@GetMapping("/main")
+	@GetMapping("main")
 	public String main(Model model, HttpSession session) {
 		ws.popularWebtoon(model);
 		

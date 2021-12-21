@@ -18,7 +18,59 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	var page = 1;
+	var btn = [{name : '제목명', value:'titleList'},{name : '작가명', value:'writerList'}];
+	$.each(btn, function(index, el){
+		console.log('el:', index, el);
+		console.log('name:', el.name,'/value:',el.value);
+		
+	});
 	
+	function searchResult(view, name, search){
+		search = search.trim();
+		console.log(view);
+		$("#result").html(name);
+		$.ajax({
+			url : '${contextPath}/main/webtoonSearch/result?search='+search+'&view='+view,
+			type : "POST",
+			dataType : "json",
+			success : function(webtoonList) {
+					console.log(webtoonList);
+					let html="";
+					html +='<div id="changeList">'
+					+'<table border="1">'
+					+'<tr class="table-top">'
+					+'<th>썸네일</th>'
+					+'<th>장르</th>'
+					+'<th>제목</th>'
+					+'<th>작가명</th>'
+					+'<th>플랫폼</th>'
+					+'</tr>';
+					$.each(webtoonList,function(index, list){
+					if(!webtoonList){
+						console.log('비어있음');
+						html += '<tr><td colspan="5">데이터가 없습니다.</td></tr>';
+					}else{
+						html += '<tr>';
+						if(list.webtoonImage == 'default_image.png'){
+							html += '<td><div class="webtoonImage"><img src="${defaultImg}"></div></td>';
+						}else{
+							html += '<td><div class="webtoonImage"><img src="${thumbnail}'+list.webtoonImage+'"></div></td>';
+						}
+						html += '<td>'+list.webtoonGenre+'</td>';
+						html += '<th><a href="#" onclick="location.href='+'${webtooninfo}'+list.webtoonNum+'">'
+									+list.webtoonTitle+'</a></th>';
+						html += '<td>'+list.webtoonWriter+'</td>';
+						html += '<td class="platform">'+list.platformName+'</td>';
+						html += '</tr>';
+					}
+				});
+				$("#changeList").html(html);
+				console.log('ajax성공');
+			},
+			error:function(request,request,error){
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+		});
+	};
 </script>
 <title>작품 검색</title>
 </head>
@@ -31,7 +83,17 @@
 <c:set var="thumbnail" value='${contextPath }/thumbnail?webtoonImage='/>
 <c:set var="webtooninfo" value='${contextPath }/webtoon/webtooninfo?webtoonNum='/>
 
-<body onload="" style="padding-top: 100px;">
+<body style="padding-top: 100px;">
+<div class="scrollBtn">
+	<nav>
+		<ul>
+			<li><button class="listBtn" id="title" onclick="searchResult('titleList', '제목명','${search }')">제목</button></li>
+			<li><button class="listBtn" id="writer" onclick="searchResult('writerList','작가명','${search }')">작가</button></li>
+		</ul>
+	</nav>
+</div>
+<input id="top" type="hidden" value="top">
+
 	<c:if test="${search != null }">
 		<label><b>" ${search } "</b>에 대한 검색 결과 입니다.</label><br>
 	</c:if>
@@ -39,19 +101,19 @@
 	<hr>
 	
 	<div>
-	<h2>제목명</h2>
+	<h2 id="result">제목명</h2>
+		<div id="changeList">
 		<table border="1">
 			<tr class="table-top">
 				<th>썸네일</th>
-				<th>플랫폼</th>
+				<th>장르</th>
 				<th>제목</th>
 				<th>작가명</th>
+				<th>플랫폼</th>
 			</tr>
 			<c:choose>
 				<c:when test="${titleList == null }">
-					<tr>
-						<td colspan="4">데이터가 없습니다.</td>
-					</tr>
+						<tr><td colspan="5">데이터가 없습니다.</td></tr>
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="dto" items="${titleList }">
@@ -64,50 +126,20 @@
 								<td><div class="webtoonImage"><img src="${thumbnail}${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
-						<td class="platform">${ dto.platformName}</td>
+						<td>${dto.webtoonGenre }</td>
 						<th><a href="#" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">${dto.webtoonTitle }</a></th>
 						<td>${dto.webtoonWriter }</td>
-					</tr>
-				</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</table>
-		
-		
-		
-		<h2>작가명</h2>
-		<table border="1">
-			<tr class="table-top">
-				<th>썸네일</th>
-				<th>플랫폼</th>
-				<th>제목</th>
-				<th>작가명</th>
-			</tr>
-			<c:choose>
-				<c:when test="${writerList == null }">
-					<tr>
-						<td colspan="4">데이터가 없습니다.</td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="dto" items="${writerList }">
-					<tr>
-						<c:choose>
-							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
-								<th><div class="webtoonImage"><img src="${defaultImg}"></div></th>
-							</c:when>
-							<c:otherwise>
-								<td><div class="webtoonImage"><img src="${thumbnail}${dto.webtoonImage }"></div></td>
-							</c:otherwise>
-						</c:choose>
 						<td class="platform">${ dto.platformName}</td>
-						<th><a href="#" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">${dto.webtoonTitle }</a></th>
-						<td>${dto.webtoonWriter }</td>
 					</tr>
-				</c:forEach>
+					</c:forEach>
 				</c:otherwise>
 			</c:choose>
+		</div>
 		</table>
 	</div>
+	
+	<section class="center1">더 이상 데이터가 없습니다.</section>
+	<a href="#top" class="center1"><button>top</button></a>
+	
 </body>
 </html>

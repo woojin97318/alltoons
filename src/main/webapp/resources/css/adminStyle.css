@@ -12,14 +12,14 @@ font-family: 'Gowun Dodum', sans-serif;
 */
 body {
 	padding-top: 100px;
-	-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none }
+	/*-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none; */ }
 header {
 	position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background: linear-gradient( to bottom, white 80%, transparent );
-  max-height:95px;
+  max-height:100px;
 }
 ::-webkit-scrollbar {/*스크롤바 전체*/
     background-color: transparent;
@@ -49,7 +49,7 @@ label{
 }
 
 
-nav ul {/*횡스크롤 버튼*/
+.scrollBtn > nav ul {/*횡스크롤 버튼*/
 	list-style: none;
 	display: flex;
 	justify-content: flex-start;
@@ -57,8 +57,8 @@ nav ul {/*횡스크롤 버튼*/
 	white-space:nowrap;
 	margin : 20px 0 0;
 }
-nav ul li {
-	margin : 0 5px;
+a {
+	cursor: pointer;
 }
 table{
 	padding : 10px;
@@ -124,13 +124,19 @@ td{
 #border1px{
 	border: 1px solid;
 }
-
+.scrollBtn > nav ul li {
+	margin : 0 5px;
+}
 .listBtn {
+	cursor: pointer;
 	border: none;
 	background-color: #70A9FF;
+	padding : 2px 15px;
+	height: 40px;
 	color: white;
-	border-radius: 12px;
+	border-radius: 40px;
 	text-align: center;
+	font-size: 17px;
 	font-family: 'Poor Story', cursive;
 }
 .listBtn:hover {

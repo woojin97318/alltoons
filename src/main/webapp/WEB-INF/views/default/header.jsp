@@ -13,6 +13,7 @@
 <script type="text/javascript">
 
 (function(){
+	$('#main-menu').hide();
 	if (${sessionScope.user == null}) {
 		console.log('null');
 	}else{
@@ -21,6 +22,15 @@
 		console.log('${sessionScope.admin}');
 	}
 }());
+function menuOpen(){
+	if($('#menuicon').prop("checked")){
+		$('#main-menu').css({"transform":"translateX(-70px)"});
+		$('#main-menu').css({"transition":"all .4s"});
+	}else{
+		$('#main-menu').css({"transform":"translateX(-300px)"});
+		$('#main-menu').css({"transition":"all .4s"});
+	}
+};
 
 function TOmyPage(obj, page) {
 	if(${sessionScope.user != null}){
@@ -92,6 +102,7 @@ position:relative;
 left: 90px;
 }
 #main-menu{
+overflow: hidden;
 	padding: 10% 0;
 	width: 300px;
 	height: 100%;
@@ -136,18 +147,18 @@ input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:tra
 <div>
 
    <div id="main-title"><!-- 검색창&로고 -->
-   <span id="logo" class="center"><a href="${main }">AllToons</a></span>
+   <span id="logo" class="center"><a href="${contextPath}/main">AllToons</a></span>
       <div id="searchBar" class="center" class="wrap">
-         <form action="${contextPath }/webtoonSearch" method="POST">
+         <form action="${contextPath }/main/webtoonSearch" method="POST">
             <input type="text" name="search" class="searchIn" size="40" placeholder="원하는 웹툰을 찾아보세요 :)" value="${search}" required >
             <input type="submit" class="searchBtn" value="검색">
          </form>
       </div>
    </div>
 	
-
-   <div id="main-menu"><!-- 메뉴창 -->
-      
+ 
+   <!-- <div id="main-menu"> 메뉴창 -->
+    <!--  
          <ul id="menu1">
          	<li><h3>메뉴</h3></li>
             <li><a href="${contextPath}/webtoon/platformWebtoon?platformName=naver">플랫폼별 웹툰</a></li>
@@ -172,10 +183,10 @@ input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:tra
                </c:otherwise>
             </c:choose>
          </ul>
-      
+  -->     
    </div>
 
-	<div id="menuBtn"><!-- 메뉴버튼 -->
+	<div id="menuBtn" onclick="menuOpen()"><!-- 메뉴버튼 -->
 	   <div class="center">
 		   <input type="checkbox" id="menuicon">
 		   <label for="menuicon">
@@ -187,28 +198,5 @@ input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:tra
 	</div>
 </div>
 
-<script type="text/javascript">
-
-$('#menuBtn').click(function(){
-	if($('#menuicon').prop("checked")){
-		$('#main-menu').css({"transform":"translateX(-70px)"});
-		$('#main-menu').css({"transition":"all .4s"});
-	}else{
-		$('#main-menu').css({"transform":"translateX(-300px)"});
-		$('#main-menu').css({"transition":"all .4s"});
-	}
-})
-
-<!-- $('#main-menu').hide(); 
-$('#menuBtn').click(function(){
-	if($('#menuicon').prop("checked")){
-		$('#main-menu').slideDown();
-	}else{
-		$('#main-menu').slideUp();
-	}
-})
-
--->
-</script>
 </body>
 </html>

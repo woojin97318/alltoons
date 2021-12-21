@@ -18,30 +18,32 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 	WebtoonPlatformKor kor = new WebtoonPlatformKor();
 	
 	@Override
-	public void searchList(String search, Model model) {
-		ArrayList<WebtoonDTO> titleList = mapper.titleList(search); //제목별 검색
-		ArrayList<WebtoonDTO> writerList = mapper.writerList(search); //작가명 검색
-		
-		if(titleList.size()!=0) {
-			setArr(titleList, model, "titleList"); //플랫폼 추가 및 모델 추가
+	public ArrayList<WebtoonDTO> searchList(String search, Model model, String view) {//모델에 들어있는 특정 값 가져오기
+		ArrayList<WebtoonDTO> webtoonList = new ArrayList<WebtoonDTO>();
+		if(view.equals("titleList")) {
+			webtoonList = mapper.titleList(search);	//제목별 검색
+			
+		}else if(view.equals("writerList")) {
+			webtoonList = mapper.writerList(search);//작가명 검색
 		}
-		if(writerList.size()!=0) {
-			setArr(writerList, model, "writerList"); //플랫폼 추가 및 모델 추가
+		if(webtoonList.size()!=0) {
+			webtoonList = getPlatformResult(webtoonList, model, view);
+			setModel(webtoonList, model, view);
 		}
+		return webtoonList;
 	}
-	
-	public void setArr(ArrayList<WebtoonDTO> arr,
-						Model model, 
-						String name) {//검색 결과 list에 플랫폼 값도 추가
+	public ArrayList<WebtoonDTO> getPlatformResult(ArrayList<WebtoonDTO> arr,
+											Model model, String name){
 		int webtoonNum; 
 		String platFirst;
 		int platCnt;
-		String platform; //플랫폼 result
+		String platform;//플랫폼 결과값
+		
 		if(arr.size()!=0) {
 			for(int i=0; i<arr.size(); i++ ) {
-				webtoonNum = arr.get(i).getWebtoonNum();
+				webtoonNum = arr.get(i).getWebtoonNum(); //웹툰식별번호
 				System.out.println("webtoonNum: "+webtoonNum);
-				platFirst = getplatFirst(webtoonNum);
+				platFirst = getplatFirst(webtoonNum);//첫번째 플랫폼
 				
 				if(platFirst == null) {
 					platform = "없음";
@@ -54,10 +56,14 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 				}System.out.println(platform);
 				//platform = getplatformAll(webtoonNum); //플랫폼1/플랫폼2/플랫폼3...
 				
-				 arr.get(i).platformName = platform;
+				arr.get(i).platformName = platform; //검색 결과에 플랫폼 값도 추가
 			}
-			model.addAttribute(name, arr); //제목별 검색 arr
-		}
+		}return arr;
+	}
+		
+	public void setModel(ArrayList<WebtoonDTO> arr,
+						Model model, String name) {
+		model.addAttribute(name, arr);
 	}
 	
 	public String getplatformAll(int webtoonNum) {//플랫폼 이름들
@@ -96,5 +102,9 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 	public int platCnt(int webtoonNum) {//플랫폼 수
 		int platCnt = mapper.platCnt(webtoonNum);
 		return platCnt;
-	};
+	}
+
+	
+
+	
 }
