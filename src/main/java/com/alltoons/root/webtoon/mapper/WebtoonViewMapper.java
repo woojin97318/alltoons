@@ -62,6 +62,10 @@ public interface WebtoonViewMapper {
 
 	public void upHit(String webtoonNum);
 
+	ArrayList<WebtoonCategoryDTO> genreSortAjax(@Param("webtoonGenre") String webtoonGenre, @Param("sort") String sort);
+
+	ArrayList<WebtoonCategoryDTO> genrePopularPage(String webtoonGenre);
+
 
 
 }

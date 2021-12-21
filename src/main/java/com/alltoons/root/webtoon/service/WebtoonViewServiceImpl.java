@@ -181,15 +181,25 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		return genreAjax;
 	}
 	
-	@Override //플랫폼 ajax처리
+	@Override //플랫폼정렬 ajax처리
 	public ArrayList<WebtoonCategoryDTO> sortNameAjax(String sort,String platformName) {
 		ArrayList<WebtoonCategoryDTO> platformAjax = null;
 		if(sort.equals("popularity")) {
 			platformAjax = wvm.platformPopularPage(platformName);
 		}else if(sort.equals("nameDesc")||sort.equals("nameAsc")||sort.equals("viewCount")) {
 			platformAjax = wvm.sortNameAjax(platformName,sort);
-		}else if(sort.equals("viewCount")) {
-			
+		}
+		return platformAjax;
+	}
+
+	@Override //장르정렬 ajax처리
+	public ArrayList<WebtoonCategoryDTO> genreSortAjax(String sort, String webtoonGenre) {
+		ArrayList<WebtoonCategoryDTO> platformAjax = null;
+		System.out.println("정렬방법 "+sort);
+		if(sort.equals("popularity")) {
+			platformAjax = wvm.genrePopularPage(webtoonGenre);
+		}else if(sort.equals("nameDesc")||sort.equals("nameAsc")||sort.equals("viewCount")) {
+			platformAjax = wvm.genreSortAjax(webtoonGenre,sort);
 		}
 		return platformAjax;
 	}

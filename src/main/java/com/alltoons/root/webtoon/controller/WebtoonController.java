@@ -167,9 +167,16 @@ public class WebtoonController {
 	@PostMapping("/webtoon/sort")
 	@ResponseBody
 	public ArrayList<WebtoonCategoryDTO> sortAjax(@RequestParam("platformName")String platformName,@RequestParam(required = false) String sort) {
-		System.out.println("sort");
 		ArrayList<WebtoonCategoryDTO> platformAjax= ws.sortNameAjax(sort,platformName);
 		System.out.println(platformAjax.get(0).getWebtoonNum());
+		return platformAjax;
+	}
+	
+	// 장르정렬 ajax
+	@PostMapping("/webtoon/genreSort")
+	@ResponseBody
+	public ArrayList<WebtoonCategoryDTO> genreSortAjax(@RequestParam(required = false) String sort,@RequestParam(required = false) String webtoonGenre) {
+		ArrayList<WebtoonCategoryDTO> platformAjax= ws.genreSortAjax(sort,webtoonGenre);
 		return platformAjax;
 	}
 

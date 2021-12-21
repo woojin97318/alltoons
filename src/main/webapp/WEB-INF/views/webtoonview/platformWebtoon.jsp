@@ -15,7 +15,7 @@ $(document).ready(function(){
 		if(location.hash){ 
 			var data = history.state; 
 			if(data){ 
-				$('#platformChang').html(data.list); 
+				$('#platformChange').html(data.list); 
 				nowPlatform = data.platform;
 				console.log("ready플랫폼"+nowPlatform)
 		}
@@ -66,7 +66,7 @@ $(document).ready(function(){
 			}
 			i += 1;
 		});html += "</table>"
-		$("#platformChang").html(html)
+		$("#platformChange").html(html)
 		total_list +=html;
 		console.log("insert 플랫폼:"+nowPlatform)
 		history.replaceState({list:total_list,platform: nowPlatform},'', '${contextPath}/webtoon/platformWebtoon##');
@@ -128,7 +128,7 @@ function sort(){
 	<c:set var="i" value="0" />
 	<c:set var="j" value="3" />
 	<!-- 가로 n개씩 -->
-	<div id="platformChang">
+	<div id="platformChange">
 		<table border=1>
 			<c:forEach items="${platformView }" var="webtoonList">
 				<c:if test="{i%j == 0}">

@@ -8,44 +8,88 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+		if(location.hash){ 
+			var data = history.state; 
+			if(data){ 
+				$('#platformChange').html(data.list); 
+				nowGenre = data.genre;
+				console.log(nowGenre)
+		}
+	}
+});
+</script>
+<script type="text/javascript">
+var total_list =""; 
+nowGenre=null;
 function genreChange(genre) {
+	var sort = document.getElementById("webtoonSort");
+	var sortValue = sort.options[sort.selectedIndex].value;
 	console.log(genre)
 	$.ajax({
-		url : "${contextPath}/webtoon/genreWebtoon",
+		url : "${contextPath}/webtoon/genreSort",
 		type : "POST",
 		dataType : "json",
 		data : {
-			webtoonGenre : genre
+			webtoonGenre : genre,sort: sortValue
 		},
-		success : function(platformView) {
-			console.log(platformView);
-			let html="";
-			html += "<table border=1>";
-			var i=0; var j=3;
-			$.each(platformView,function(index,webtoonList){
-				if(i%j ==0){
-					html += "<tr>"
-				}
-				html += "<td><a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
-				if(webtoonList.webtoonImage == 'default_image.png'){
-					html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
-				}else{
-					html += "<img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"'width=200 height=200 alt='this has image' />"
-				}
-				html += "<br>"
-				html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
-				html += "<label>"+webtoonList.webtoonWriter+"</label>	</a></td>"
-				if(i%j == j-1){
-					html += "</tr>"	
-				}
-				i += 1;
-			});html += "</table>"
-			$("#platformChang").html(html)
+		success : function(genreView) {
+			nowGenre=genre;
+			console.log(genreView);
+			insertGenre(genreView);
 		},error:function(request,status,error){
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
 	})
 };
+function insertGenre(genreView){
+	let html="";
+	html += "<table border=1>";
+	var i=0; var j=3;
+	$.each(genreView,function(index,webtoonList){
+		if(i%j ==0){
+			html += "<tr>"
+		}
+		html += "<td><a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
+		if(webtoonList.webtoonImage == 'default_image.png'){
+			html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
+		}else{
+			html += "<img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"'width=200 height=200 alt='this has image' />"
+		}
+		html += "<br>"
+		html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
+		html += "<label>"+webtoonList.webtoonWriter+"</label>	</a></td>"
+		if(i%j == j-1){
+			html += "</tr>"	
+		}
+		i += 1;
+	});html += "</table>"
+	$("#platformChange").html(html)
+	total_list +=html;
+	history.replaceState({list:total_list,genre: nowGenre},'', '${contextPath}/webtoon/genreWebtoon##');
+}
+</script>
+<script type="text/javascript">/* 정렬ajax */
+function sort(){
+	var sort = document.getElementById("webtoonSort");
+	var sortValue = sort.options[sort.selectedIndex].value;
+	if(nowGenre == null){
+		nowGenre="g1";
+	}
+	$.ajax({
+		url: "${contextPath}/webtoon/genreSort",
+		type: "POST",
+		data: {sort: sortValue, webtoonGenre: nowGenre},
+		success : function(genreView){
+			insertGenre(genreView);
+		},
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    }
+			
+	})  
+}
 </script>
 </head>
 <body>
@@ -78,9 +122,17 @@ function genreChange(genre) {
 			</nav>
 		</div>
 	</header>
+	
+	<select name="webtoonSort" id="webtoonSort" onchange="sort()" >
+		<option value="nameAsc">제목 오름차순</option>
+		<option value="nameDesc">제목 내림차순</option>
+		<option value="viewCount">조회수 순</option>
+		<option value="popularity">인기순</option>
+	</select>
+	
  <c:set var="i" value="0" />
  <c:set var="j" value="3" /><!-- 가로 n개씩 -->
- <div id="platformChang">
+ <div id="platformChange">
 		<table border=1>
 			<c:forEach items="${genreView }" var="webtoonList">
 				<c:if test="{i%j == 0}">

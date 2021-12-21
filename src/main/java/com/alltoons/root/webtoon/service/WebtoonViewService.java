@@ -39,4 +39,6 @@ public interface WebtoonViewService {
 
 	public ArrayList<WebtoonCategoryDTO> sortNameAjax(String sort, String platformName);
 
+	public ArrayList<WebtoonCategoryDTO> genreSortAjax(String sort, String webtoonGenre);
+
 }
