@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alltoons.root.common.MemberSessionName;
+import com.alltoons.root.common.interceptor.service.InterceptorService;
 import com.alltoons.root.member.mail.service.MailService;
 import com.alltoons.root.member.service.MemberService;
 

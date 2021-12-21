@@ -10,6 +10,7 @@
 <meta name="viewport"content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 </head>
 <body>
+	<c:import url="../default/menu.jsp"/>
 	<div align="center">
 		<h3>마이페이지</h3>
 		<img src="${contextPath }/member/userImageView?file=${userInfo.userImage}"
