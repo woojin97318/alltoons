@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <style type="text/css">
 	img#MOVE_TOP_BTN {
@@ -14,6 +15,8 @@
 		bottom: 50px;
 		display: none;
 		z-index: 999;
+		width: 50px; height: 50px;
+		cursor: pointer;
 	}
 </style>
 <script type="text/javascript">
@@ -36,6 +39,6 @@
 </script>
 </head>
 <body>
-	<img src="${contextPath}/resources/img/moveTopBtn.png" id="MOVE_TOP_BTN" style="width:50px; height:50px; cursor: pointer;">
+	<img id="MOVE_TOP_BTN" src="${contextPath}/resources/img/moveTopBtn.png">
 </body>
 </html>
