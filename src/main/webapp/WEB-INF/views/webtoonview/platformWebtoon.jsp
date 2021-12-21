@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>AllToons platform</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
@@ -104,15 +104,15 @@ function sort(){
 		</c:import>
 		<div class="scrollBtn">
 			<nav>
-				<ul>
-					<li><button class="listBtn" onclick="platformChange('naver')">네이버</button>	</li>
-					<li><button class="listBtn" onclick="platformChange('kakaoWebtoon')">카카오웹툰</button></li>
-					<li><button class="listBtn" onclick="platformChange('kakaoPage')">카카오페이지</button>	</li>
-					<li><button class="listBtn" onclick="platformChange('bomtoon')">봄툰</button>	</li>
-					<li><button class="listBtn" onclick="platformChange('lezhin')">레진코믹스</button></li>
-					<li><button class="listBtn" onclick="platformChange('toptoon')">탑툰</button>	</li>
-					<li><button class="listBtn" onclick="platformChange('mrblue')">미스터블루</button>	</li>
-					<li><button class="listBtn" onclick="platformChange('ridibooks')">리디북스</button></li>
+				<ul id="platform">
+					<li><button class="listBtn" id="naver" onclick="platformChange('naver')">네이버</button>	</li>
+					<li><button class="listBtn" id="kakaoWebtoon" onclick="platformChange('kakaoWebtoon')">카카오웹툰</button></li>
+					<li><button class="listBtn" id="kakaoPage" onclick="platformChange('kakaoPage')">카카오페이지</button>	</li>
+					<li><button class="listBtn" id="bomtoon" onclick="platformChange('bomtoon')">봄툰</button>	</li>
+					<li><button class="listBtn" id="lezhin" onclick="platformChange('lezhin')">레진코믹스</button></li>
+					<li><button class="listBtn" id="toptoon" onclick="platformChange('toptoon')">탑툰</button>	</li>
+					<li><button class="listBtn" id="mrblue" onclick="platformChange('mrblue')">미스터블루</button>	</li>
+					<li><button class="listBtn" id="ridibooks" onclick="platformChange('ridibooks')">리디북스</button></li>
 				</ul>
 			</nav>
 		</div>
