@@ -9,28 +9,54 @@
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	function sendmail() {
 		var userEmail = $("#userEmail").val();
+		var chkForm = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 		var form = {
 			email : userEmail
 		}
-		$.ajax({
-			url : "findpwdmail", //"ajax",
-			type : "GET",
-			data : form,
-			dataType : "json",
-			contentType : "application/json; charset=utf-8",
-			success : function(result) {
-				console.log("메일 전송 성공")
-				alert('메일로 임시비밀번호가 전송 되었습니다.')
+		if (false === chkForm.test(userEmail)) {
+			alert('이메일 형식이 아닙니다!')
+		} else {
 
-			},
-			error : function() {
-				alert('메일 전송 실패')
-			}
-		})
+			$.ajax({
+				url : "userfindchk",
+				data : form,
+				dataType : "json",
+				contentType : "application/json; charset=utf-8",
+				success : function(result) {
+					console.log(result);
+					if (result == false) {
+						alert('존재하지 않는 이메일입니다.');
+					} else {
+						$.ajax({
+							url : "findpwdmail", //"ajax",
+							type : "GET",
+							data : form,
+							dataType : "json",
+							contentType : "application/json; charset=utf-8",
+							success : function(result01) {
+								console.log(userEmail)
+								console.log("메일 전송 성공")
+								alert('메일로 임시비밀번호가 전송 되었습니다.')
+								location.href = "${contextPath}/member/login"
+							},
+							error : function() {
+								alert('메일 전송 실패')
+							}
+						})
+					}
+				},
+				error : function() {
+					alert('존재하지 않는 이메일입니다.');
+				}
+			})
+
+		}
 	}
 </script>
 </head>

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>프로필 사진 수정</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	function readURL(input) {
@@ -25,8 +26,7 @@
 <body>
 	<div align="center">
 		<h3>프로필 사진 수정</h3>
-		<form action="${contextPath }/member/userImageModifyPage" method="post"
-			enctype="multipart/form-data">
+		<form action="${contextPath }/member/userImageModifyPage" method="post" enctype="multipart/form-data">
 			<img id="userImage" width="100px" height="100px"
 				src="${contextPath }/member/userImageView?file=${userInfo.userImage}"/><br>
 			<input type="hidden" name="userEmail" value="${userInfo.userEmail}">

@@ -45,6 +45,7 @@ public class WebtoonServiceImpl implements WebtoonService{
 		String origin_platform[] = mul.getParameterValues("originalPlatform");
 		String origin_link[] = mul.getParameterValues("webtoonOriginalLink");
 		OriginDTO od = new OriginDTO();
+		System.out.println("원작 플랫폼 수: "+origin_platform.length);
 		for(int i=0;i<origin_platform.length;i++) {
 			if(origin_platform[0].equals("nan")) {
 				System.out.println("원작 없음");

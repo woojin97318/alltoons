@@ -20,7 +20,6 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		case 'kakaoPage':platform='카카오페이지';break;
 		case 'bomtoon':platform='봄툰';break;
 		case 'lezhin':platform='레진';break;
-		case 'toptoon':platform='탑툰';break;
 		case 'mrblue':platform='미스터블루';break;
 		case 'ridibooks':platform='리디북스';break;
 		}
@@ -33,7 +32,6 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		html += '<option value="kakaoPage">카카오페이지</option>'
 		html += '<option value="bomtoon">봄툰</option>'
 		html += '<option value="lezhin">레진</option>'
-		html += '<option value="toptoon">탑툰</option>'
 		html += '<option value="mrblue">미스터블루</option>'
 		html += '<option value="ridibooks">리디북스</option>'
 		html += '</select> ';
@@ -48,8 +46,9 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 	$('input[name="webtoonGenre"][value="${genre_all.webtoonGenre}"]').attr('checked','checked');
 	</c:forEach>
 	
-	if(${originList[0].webtoonOriginalLink=='nan'}){
+	if(${originList[0].webtoonOriginalLink=='nan'||originList[0].webtoonOriginalLink.isBlank()}){
 		console.log("no")
+		console.log("${originList[0].webtoonOriginalLink}")
 		var newspan = document.createElement('span');
 		var html = '';
 		
@@ -60,7 +59,6 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		html += '<option value="kakaoPage">카카오페이지</option>'
 		html += '<option value="bomtoon">봄툰</option>'
 		html += '<option value="lezhin">레진</option>'
-		html += '<option value="toptoon">탑툰</option>'
 		html += '<option value="mrblue">미스터블루</option>'
 		html += '<option value="ridibooks">리디북스</option>'
 		html += '<option value="naverSeries">네이버 시리즈</option>'
@@ -73,6 +71,7 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		origin_box.appendChild(newspan);
 	}else{
 		console.log("yes")
+		console.log("${originList[0].webtoonOriginalLink}")
 		<c:forEach var="origin" items="${originList}" >
 		
 		var newspan = document.createElement('span');
@@ -83,7 +82,6 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		case 'kakaoPage':platform='카카오페이지';break;
 		case 'bomtoon':platform='봄툰';break;
 		case 'lezhin':platform='레진';break;
-		case 'toptoon':platform='탑툰';break;
 		case 'mrblue':platform='미스터블루';break;
 		case 'ridibooks':platform='리디북스';break;
 		case 'naverSeries':platform='네이버 시리즈';break;
@@ -98,7 +96,6 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 		html += '<option value="kakaoPage">카카오페이지</option>'
 		html += '<option value="bomtoon">봄툰</option>'
 		html += '<option value="lezhin">레진</option>'
-		html += '<option value="toptoon">탑툰</option>'
 		html += '<option value="mrblue">미스터블루</option>'
 		html += '<option value="ridibooks">리디북스</option>'
 		html += '<option value="naverSeries">네이버 시리즈</option>'
@@ -174,7 +171,6 @@ function add_link(){
 	html += '<option value="kakaoPage">카카오페이지</option>'
 	html += '<option value="bomtoon">봄툰</option>'
 	html += '<option value="lezhin">레진</option>'
-	html += '<option value="toptoon">탑툰</option>'
 	html += '<option value="mrblue">미스터블루</option>'
 	html += '<option value="ridibooks">리디북스</option>'
 	html += '</select> ';
@@ -200,7 +196,6 @@ function add_link(){
 		html += '<option value="kakaoPage">카카오페이지</option>'
 		html += '<option value="bomtoon">봄툰</option>'
 		html += '<option value="lezhin">레진</option>'
-		html += '<option value="toptoon">탑툰</option>'
 		html += '<option value="mrblue">미스터블루</option>'
 		html += '<option value="ridibooks">리디북스</option>'
 		html += '<option value="naverSeries">네이버 시리즈</option>'
@@ -270,7 +265,10 @@ function add_link(){
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g10">감성 &ensp; 
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g11">스릴러 &ensp; 
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; <br>
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 	<br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g14">로맨스 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g15">무협 &ensp; 	
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g16">소년 &ensp; 	<br>
 		
 		<b>원작 링크</b><button type="button" onclick="add_origin_link()">+</button> <br>
 		<div id="origin_box"> </div>

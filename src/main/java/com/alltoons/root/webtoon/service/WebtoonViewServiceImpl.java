@@ -34,14 +34,26 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		model.addAttribute("platformList", platformList);
 
 		ArrayList<WebtoonOriginDTO> originList = wvm.originList(webtoonNum);
+		if(originList.isEmpty()) {
+			WebtoonOriginDTO originDTO=new WebtoonOriginDTO();
+			originDTO.setWebtoonOriginalLink("nan");
+			originList.add(originDTO);
+		}
 		model.addAttribute("originList", originList);
 
 		// 링크 수
 		int cnt = wvm.linkCount(webtoonNum);
-		System.out.println("링크수: " + cnt);
 		model.addAttribute("linkCount", cnt);
+		
+		//조회수 증가
+		upHit(webtoonNum);
 	}
 	
+	private void upHit(String webtoonNum) {
+		wvm.upHit(webtoonNum);
+		
+	}
+
 	//첫 화면 관심,즐겨찾기 버튼 onoff여부 
 	@Override
 	public void favorites(String webtoonNum, FavoritesDTO fd, Model model, HttpSession session) {
@@ -52,7 +64,6 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 		} else {
 			fd = wvm.check(webtoonNum, userEmail);
 		} // 세션 아이디값
-		System.out.println(MemberSessionName.LOGIN);
 		model.addAttribute("favoritesDTO", fd);
 
 		// 숫자
@@ -112,7 +123,6 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 
 	@Override
 	public void platformView(Model model, String platformName) {
-		System.out.println("platformName이름"+platformName);
 		// 웹툰 명,작가,썸네일,플랫폼,웹툰 번호 ==>상세페이지로 웹툰 num만 넘겨줌
 		ArrayList<WebtoonCategoryDTO> platformView = wvm.platformView(platformName);
 		model.addAttribute("platformView", platformView);
@@ -149,23 +159,31 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	private ArrayList<WebtoonCategoryDTO> onlyPlatform(ArrayList<WebtoonCategoryDTO> pageName) {
 		for(int i=0;i<pageName.size();i++) {
 			ArrayList<String> onlyPlatform = wvm.onlyPlatform(pageName.get(i).getWebtoonNum());
-			int platformCount = onlyPlatform.size();
-			if(platformCount>1) {
-				pageName.get(i).setPlatformName(onlyPlatform.get(0));
-			}int count =platformCount-1;
+			int count  = onlyPlatform.size()-1;
+			pageName.get(i).setPlatformName(onlyPlatform.get(0));
 			pageName.get(i).setPlatformNum(count);//외 n으로 쓰임
 		}return pageName;
 	}
 
-	@Override //플랫폼 ajax처리
-	public ArrayList<WebtoonCategoryDTO> platformAjax(Model model, String platformName) {
-		ArrayList<WebtoonCategoryDTO> platformAjax = wvm.platformView(platformName);
+	@Override //플랫폼정렬 ajax처리
+	public ArrayList<WebtoonCategoryDTO> sortNameAjax(String sort,String platformName) {
+		ArrayList<WebtoonCategoryDTO> platformAjax = null;
+		if(sort.equals("popularity")) {
+			platformAjax = wvm.platformPopularPage(platformName);
+		}else if(sort.equals("nameDesc")||sort.equals("nameAsc")||sort.equals("viewCount")) {
+			platformAjax = wvm.sortNameAjax(platformName,sort);
+		}
 		return platformAjax;
 	}
 
-	@Override //장르 ajax처리
-	public ArrayList<WebtoonCategoryDTO> genreAjax(Model model, String webtoonGenre) {
-		ArrayList<WebtoonCategoryDTO> genreAjax = wvm.genreView(webtoonGenre);
-		return genreAjax;
+	@Override //장르정렬 ajax처리
+	public ArrayList<WebtoonCategoryDTO> genreSortAjax(String sort, String webtoonGenre) {
+		ArrayList<WebtoonCategoryDTO> platformAjax = null;
+		if(sort.equals("popularity")) {
+			platformAjax = wvm.genrePopularPage(webtoonGenre);
+		}else if(sort.equals("nameDesc")||sort.equals("nameAsc")||sort.equals("viewCount")) {
+			platformAjax = wvm.genreSortAjax(webtoonGenre,sort);
+		}
+		return platformAjax;
 	}
 }

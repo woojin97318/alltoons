@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 신고 확인</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <style type="text/css">
 .td {
 	width: 100px;
@@ -67,11 +68,11 @@
 						<tr>
 							<td>
 								<img src="${contextPath }/member/webtoonImageView?file=${report.webtoonImage }"
-									width="70px" height="70px" onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${report.webtoonNum}'"
+									width="70px" height="70px" onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${report.webtoonNum}'"
 									style="cursor:pointer">
 							</td>
 							<td colspan="2">
-								<span onclick="location.href='${contextPath}/webtooninfo?webtoonNum=${report.webtoonNum }'"
+								<span onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${report.webtoonNum }'"
 									style="cursor:pointer">
 									${report.webtoonTitle }
 								</span>

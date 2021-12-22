@@ -72,28 +72,24 @@ public class WebtoonController {
 		return "/common/alertHref";
 	}
 
-	//관심 클릭시 수 변경
+	// 관심 클릭시 수 변경
 	@GetMapping("webtoon/interestClick")
 	@ResponseBody
 	public String interest(@RequestParam("webtoonNum") String webtoonNum, @RequestParam("userEmail") String userEmail) {
-		System.out.println("웹툰 번호: " + webtoonNum);
-		System.out.println("이메일: " + userEmail);
 		int cnt = ws.interestClick(webtoonNum, userEmail);
 		return cnt + "";
 	}
-	
-	//즐겨찾기 클릭시 수 변경
+
+	// 즐겨찾기 클릭시 수 변경
 	@GetMapping("webtoon/favoritesClick")
 	@ResponseBody
 	public String favorites(@RequestParam("webtoonNum") String webtoonNum,
 			@RequestParam("userEmail") String userEmail) {
-		System.out.println("웹툰 번호: " + webtoonNum);
-		System.out.println("이메일: " + userEmail);
 		int cnt = ws.favoritesClick(webtoonNum, userEmail);
 		return cnt + "";
 	}
-	
-	//관심버튼 T,F값을 jsp에 넘김 -> 하트 꺼짐 켜짐
+
+	// 관심버튼 T,F값을 jsp에 넘김 -> 하트 꺼짐 켜짐
 	@GetMapping("webtoon/i_onOff")
 	@ResponseBody
 	public String i_onOff(FavoritesDTO fd, @RequestParam("webtoonNum") String webtoonNum,
@@ -101,8 +97,8 @@ public class WebtoonController {
 		fd = ws.onOff(fd, webtoonNum, userEmail);// 메소드만 재사용
 		return fd.getInterest() + "";
 	}
-	
-	//즐겨찾기버튼 T,F값을 jsp에 넘김 -> 별 꺼짐 켜짐
+
+	// 즐겨찾기버튼 T,F값을 jsp에 넘김 -> 별 꺼짐 켜짐
 	@GetMapping("webtoon/f_onOff")
 	@ResponseBody
 	public String f_onOff(FavoritesDTO fd, @RequestParam("webtoonNum") String webtoonNum,
@@ -134,12 +130,6 @@ public class WebtoonController {
 	// 즐겨찾기
 	@GetMapping("/member/favorites")
 	public String favorties(Model model, HttpSession session) {
-		if ((String) session.getAttribute(MemberSessionName.LOGIN) == null) {
-			model.addAttribute("message", "로그인이 필요한 기능입니다");
-			model.addAttribute("url", "/member/login");
-			return "common/alertHref"; // 임시 ->후에 인터셉터 필요
-		}
-
 		ws.favortiesPage(model, (String) session.getAttribute(MemberSessionName.LOGIN));
 		return "webtoonview/favoritesWebtoon";
 	}
@@ -147,30 +137,23 @@ public class WebtoonController {
 	// 관심
 	@GetMapping("/member/interest")
 	public String interest(Model model, HttpSession session) {
-		if ((String) session.getAttribute(MemberSessionName.LOGIN) == null) {
-			model.addAttribute("message", "로그인이 필요한 기능입니다");
-			model.addAttribute("url", "/member/login");
-			return "common/alertHref"; // 임시 ->후에 인터셉터 필요
-		}
-
 		ws.interestPage(model, (String) session.getAttribute(MemberSessionName.LOGIN));
 		return "webtoonview/interestWebtoon";
 	}
-	
-	// 플랫폼 ajax
-	@PostMapping("/webtoon/platformWebtoon")
+
+	// 정렬 ajax
+	@PostMapping("/webtoon/sort")
 	@ResponseBody
-	public ArrayList<WebtoonCategoryDTO> platformAjax(Model model, @RequestParam(required = false) String platformName) {
-		System.out.println("controller platformAjax:" + platformName);
-		ArrayList<WebtoonCategoryDTO> platformAjax = ws.platformAjax(model, platformName);
+	public ArrayList<WebtoonCategoryDTO> sortAjax(@RequestParam("platformName")String platformName,@RequestParam(required = false) String sort) {
+		ArrayList<WebtoonCategoryDTO> platformAjax= ws.sortNameAjax(sort,platformName);
 		return platformAjax;
 	}
 	
-	// 장르 ajax
-	@PostMapping("/webtoon/genreWebtoon")
+	// 장르정렬 ajax
+	@PostMapping("/webtoon/genreSort")
 	@ResponseBody
-	public ArrayList<WebtoonCategoryDTO> genreAjax(Model model, @RequestParam(required = false) String webtoonGenre) {
-		ArrayList<WebtoonCategoryDTO> platformAjax = ws.genreAjax(model, webtoonGenre);
+	public ArrayList<WebtoonCategoryDTO> genreSortAjax(@RequestParam(required = false) String sort,@RequestParam(required = false) String webtoonGenre) {
+		ArrayList<WebtoonCategoryDTO> platformAjax= ws.genreSortAjax(sort,webtoonGenre);
 		return platformAjax;
 	}
 

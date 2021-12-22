@@ -32,4 +32,5 @@ public interface MemberService {
 	public String rand();
 	public void sendMail(String to, String subject, String body);
 	public int emailChk(String email);
+	public int userFindChk(String email);
 }

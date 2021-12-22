@@ -20,16 +20,27 @@ public class ReviewReportController implements MemberSessionName {
 	@Autowired ReviewReportService rrs;
 
 	@GetMapping("report")
-	public String report(@RequestParam int reviewNum, Model model, HttpSession session) {
-		model.addAttribute("reportUserEmail", (String)session.getAttribute(LOGIN));
-		model.addAttribute("reviewNum", reviewNum);
-		return "report";
+	public String report(Model model, @RequestParam("reviewNum") int reviewNum,
+			@RequestParam("webtoonNum") int webtoonNum, HttpSession session) {
+		int result = rrs.getMyreportChk((String)session.getAttribute(LOGIN), reviewNum);
+
+		if(result == 1) {
+			model.addAttribute("message", "이미 신고하신 리뷰입니다");
+			model.addAttribute("url", "webtoon/webtooninfo?webtoonNum=" + webtoonNum);
+			return "/common/alertHref";
+		}else {
+			model.addAttribute("reviewNum", reviewNum);
+			model.addAttribute("webtoonNum", webtoonNum);
+			return "report";
+		}
 	}
 
 	@PostMapping("reportinsert")
-	public String reportinsert(ReviewReportDTO dto, Model model) {
+	public String reportinsert(@RequestParam("webtoonNum") String webtoonNum,
+			ReviewReportDTO dto, Model model) {		
 		int result = rrs.setReport(dto);
-		String message, url = "";
+
+		String message, url = "webtoon/webtooninfo?webtoonNum=" + webtoonNum;
 		if(result == 1) message = "신고가 완료되었습니다";
 		else message = "신고하기 Error";
 		model.addAttribute("message", message);

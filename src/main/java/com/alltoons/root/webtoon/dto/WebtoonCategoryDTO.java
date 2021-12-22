@@ -6,8 +6,26 @@ public class WebtoonCategoryDTO {
 	public String webtoonWriter;
 	public String webtoonImage;
 	public String webtoonGenre;
+	public String webtoonGenreKor;
 	public String platformName;
+	public String platformNameKor;
 	public int platformNum;
+	
+	public String getWebtoonGenreKor() {
+		return webtoonGenreKor;
+	}
+
+	public void setWebtoonGenreKor(String webtoonGenreKor) {
+		this.webtoonGenreKor = webtoonGenreKor;
+	}
+
+	public String getPlatformNameKor() {
+		return platformNameKor;
+	}
+
+	public void setPlatformNameKor(String platformNameKor) {
+		this.platformNameKor = platformNameKor;
+	}
 
 	public int getPlatformNum() {
 		return platformNum;
