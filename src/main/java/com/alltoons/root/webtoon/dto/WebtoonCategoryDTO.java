@@ -11,6 +11,13 @@ public class WebtoonCategoryDTO {
 	public String platformNameKor;
 	public int platformNum;
 	
+	public String getWebtoonGenreKor() {
+		return webtoonGenreKor;
+	}
+
+	public void setWebtoonGenreKor(String webtoonGenreKor) {
+		this.webtoonGenreKor = webtoonGenreKor;
+	}
 
 	public String getPlatformNameKor() {
 		return platformNameKor;

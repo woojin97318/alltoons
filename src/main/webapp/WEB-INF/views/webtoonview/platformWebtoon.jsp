@@ -17,7 +17,7 @@ $(document).ready(function(){
 			var data = history.state; 
 			if(data){ 
 				$('#platformChange').html(data.list); 
-				$("#platformNameKor").html(data.kor_name);
+				$("#nameKor").html(data.kor_name);
 		}
 	}
 });
@@ -70,7 +70,7 @@ $(document).ready(function(){
 		});html += "</table>"
 		$("#platformChange").html(html)
 		total_list +=html;
-		$("#platformNameKor").html(p_name);
+		$("#nameKor").html(p_name);
 		history.replaceState({list:total_list,kor_name:p_name},'', '${contextPath}/webtoon/platformWebtoon##');
 		total_list="";
 	}
@@ -118,7 +118,7 @@ function sort(){
 		</div>
 	</header>
 	<c:import url="../default/moveTopBtn.jsp"/>
-	<label id="platformNameKor">${platformView[0].platformNameKor }</label><!-- 플랫폼 명 뜸 -->
+	<label id="nameKor">${platformView[0].platformNameKor }</label><!-- 플랫폼 명 뜸 -->
 	<select name="webtoonSort" id="webtoonSort" onchange="sort()" >
 		<option value="nameAsc">제목 오름차순</option>
 		<option value="nameDesc">제목 내림차순</option>

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>AllToons genre</title>
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/sort_nameStyle.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
@@ -15,8 +16,7 @@ $(document).ready(function(){
 			var data = history.state; 
 			if(data){ 
 				$('#platformChange').html(data.list); 
-				nowGenre = data.genre;
-				console.log(nowGenre)
+				$('#nameKor').html(data.kor_name); 
 		}
 	}
 });
@@ -45,9 +45,11 @@ function genreChange(genre) {
 };
 function insertGenre(genreView){
 	let html="";
+	let g_name=null;
 	html += "<table border=1>";
 	var i=0; var j=3;
 	$.each(genreView,function(index,webtoonList){
+		g_name=webtoonList.webtoonGenreKor
 		if(i%j ==0){
 			html += "<tr>"
 		}
@@ -65,9 +67,10 @@ function insertGenre(genreView){
 		}
 		i += 1;
 	});html += "</table>"
-	$("#platformChange").html(html)
+	$("#platformChange").html(html);
 	total_list +=html;
-	history.replaceState({list:total_list,genre: nowGenre},'', '${contextPath}/webtoon/genreWebtoon##');
+	$("#nameKor").html(g_name); 
+	history.replaceState({list:total_list,kor_name: g_name},'', '${contextPath}/webtoon/genreWebtoon##');
 	total_list="";
 }
 </script>
@@ -124,6 +127,7 @@ function sort(){
 		</div>
 	</header>
 	<c:import url="../default/moveTopBtn.jsp"/>
+	<label id="nameKor">${genreView[0].webtoonGenreKor }</label><!-- 장르 명 뜸 -->
 	<select name="webtoonSort" id="webtoonSort" onchange="sort()" >
 		<option value="nameAsc">제목 오름차순</option>
 		<option value="nameDesc">제목 내림차순</option>
