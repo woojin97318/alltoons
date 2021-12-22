@@ -49,16 +49,20 @@
 	margin: 10px 30px;
 }
 .menuBtn {
-	width: 40px; height: 40px;
-	margin: 10px;
+	z-index: 666;
+	width: 35px; height: 35px;
+	margin: 5px;
 	position: absolute;
 	cursor: pointer;
 }
 .closetBtn {
 	z-index: 999;
-	width: 40px; height: 40px;
-	margin: 10px;
+	width: 35px; height: 35px;
+	margin: 5px;
 	cursor: pointer;
+}
+.menu_close{
+	width: 35px; height: 35px;
 }
 </style>
 <script>
@@ -94,7 +98,7 @@
 <body>
 	<div class="hideMenuBody" id="hideMenuBodyId">
 		<div class="closetBtn" onclick="closeLeftMenu(); return false;">
-			<img src="${contextPath }/resources/img/close.png">
+			<img class="menu_close" src="${contextPath }/resources/img/close.png">
 		</div>
 		<div>
 			<ul>
@@ -121,7 +125,7 @@
 	</div>
 	<div class="hideMenuBody2" id="hideMenuBodyId2" onclick="closeLeftMenu(); return false;"></div>
 	<div class="menuBtn" id="menuBtn" onclick="showLeftMenu(); return false;">
-		<img src="${contextPath }/resources/img/menu.png">
+		<img class="menu_close" src="${contextPath }/resources/img/menu.png">
 	</div>
 </body>
 </html>
