@@ -32,6 +32,7 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 		}
 		return webtoonList;
 	}
+	@Override
 	public ArrayList<WebtoonDTO> getPlatformResult(ArrayList<WebtoonDTO> arr,
 											Model model, String name){
 		int webtoonNum; 
@@ -75,6 +76,7 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 	public String getplatFirst(int webtoonNum) {//첫번째 플랫폼 값만 가져옴, 한글이름
 		String platFirst = mapper.getplatFirst(webtoonNum);
 		System.out.println(platFirst);
+		
 		if(platFirst.equals("kakaoWebtoon")) {
 			platFirst = kor.getKakaoWebtoon();
 		}else if (platFirst.equals("ridibooks")) {

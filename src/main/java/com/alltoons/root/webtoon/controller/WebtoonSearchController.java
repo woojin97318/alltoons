@@ -50,7 +50,7 @@ public class WebtoonSearchController {
 								HttpServletRequest request,
 								HttpServletResponse response,
 								Model model) {
-		
+		search = search.trim();
 		ArrayList<WebtoonDTO> webtoonList = new ArrayList<WebtoonDTO>();
 		System.out.println("ajax 실행 / "+view);
 		webtoonList = SearchSvc.searchList(search, model, view);

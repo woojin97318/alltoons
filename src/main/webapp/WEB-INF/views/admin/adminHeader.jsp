@@ -25,8 +25,6 @@
 	<div class="menu-title">
 		<c:out value="${param.tag }"></c:out>
 	</div>
-	
-	<button id="backBtn" onclick="back()" type="button"></button><br>
 	<div class="scrollBtn">
 		<nav>
 			<ul>
@@ -39,6 +37,5 @@
 			</ul>
 		</nav>
 	</div>
-	<a href="${contextPath}/main"><input type="button" class="mainBtn"></a>
 </body>
 </html>

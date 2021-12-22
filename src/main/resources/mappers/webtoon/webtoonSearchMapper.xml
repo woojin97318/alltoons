@@ -21,6 +21,7 @@
 		from webtoon_info 
 		order by webtoon_num ASC
 	</select>
+	
 	<select id="writerList" resultMap="wtnList">
 		select * 
 		from webtoon_info 
@@ -28,6 +29,7 @@
 		like REPLACE(LOWER('%'||#{search}||'%'),' ','') 
 		order by webtoon_num ASC
 	</select>
+	
 	<select id="titleList" resultMap="wtnList">
 		select * 
 		from webtoon_info 
@@ -35,26 +37,29 @@
 		like REPLACE(LOWER('%'||#{search}||'%'),' ','') 
 		order by webtoon_num ASC
 	</select>
+	
 	<select id="getImageFileName" resultType="string">
 		select webtoon_image 
 		from webtoon_info 
 		where webtoon_num=#{webtoonNum}
 	</select>
+	
 	<select id="getplatFirst" resultType="string">
-		select webtoon_platform_name 
-		from PLATFORM_TABLE where webtoon_num=#{webtoonNum} and ROWNUM=1 
-		order by webtoon_platform_name
+		select webtoon_platform_name from PLATFORM_TABLE where webtoon_num=#{webtoonNum} and ROWNUM=1 order by webtoon_platform_name
 	</select>
+	
 	<select id="getplatformAll" resultType="string">
 		select LISTAGG(webtoon_platform_name, '/') 
 		WITHIN GROUP (ORDER BY webtoon_platform_name) 
 		FROM PLATFORM_TABLE where webtoon_num=#{webtoonNum}
 	</select>
+	
 	<select id="platformlist" resultType="string">
 		select webtoon_platform_name 
 		from PLATFORM_TABLE where webtoon_num=#{webtoonNum} 
 		order by webtoon_platform_name
 	</select>
+	
 	<select id="platCnt" resultType="int">
 		select count(webtoon_platform_name) 
 		from PLATFORM_TABLE where webtoon_num=#{webtoonNum} 
