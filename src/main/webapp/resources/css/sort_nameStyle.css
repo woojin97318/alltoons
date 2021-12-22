@@ -1,0 +1,13 @@
+#platformNameKor{
+font-size: 30px;
+}
+#webtoonSort{
+	float: right;
+	width: 150px; /* 원하는 너비설정 */ 
+	padding: .5em 1.1em; /* 여백으로 높이 설정 */ font-family: inherit; /* 폰트 상속 */ 
+	background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 30%; /* 네이티브 화살표 대체 */ 
+	border: 1px 0px 1px 0px solid #ffffff; border-radius: 7px; 
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+	-moz-appearance: none; 
+	appearance: none;
+}

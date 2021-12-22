@@ -33,9 +33,9 @@ public interface WebtoonViewService {
 
 	public void popularWebtoon(Model model);
 
-	public ArrayList<WebtoonCategoryDTO> platformAjax(Model model, String platformName);
+	//public ArrayList<WebtoonCategoryDTO> platformAjax(Model model, String platformName);
 
-	public ArrayList<WebtoonCategoryDTO> genreAjax(Model model, String webtoonGenre);
+	//public ArrayList<WebtoonCategoryDTO> genreAjax(Model model, String webtoonGenre);
 
 	public ArrayList<WebtoonCategoryDTO> sortNameAjax(String sort, String platformName);
 

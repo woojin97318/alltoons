@@ -6,6 +6,7 @@ public class WebtoonCategoryDTO {
 	public String webtoonWriter;
 	public String webtoonImage;
 	public String webtoonGenre;
+	public String webtoonGenreKor;
 	public String platformName;
 	public String platformNameKor;
 	public int platformNum;

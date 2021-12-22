@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>AllToons platform</title>
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/sort_nameStyle.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
@@ -16,8 +17,7 @@ $(document).ready(function(){
 			var data = history.state; 
 			if(data){ 
 				$('#platformChange').html(data.list); 
-				nowPlatform = data.platform;
-				console.log("ready플랫폼"+nowPlatform)
+				$("#platformNameKor").html(data.kor_name);
 		}
 	}
 });
@@ -25,6 +25,7 @@ $(document).ready(function(){
 <script type="text/javascript">
 	var total_list =""; 
 	nowPlatform=null;//플랫폼 버튼 미선택시
+	let p_name=null;
 	/* 플랫폼 선택시 ajax로 데이터변경 *//* 플랫폼 선택시 결과물을 받아오는 메소드 */
 	function platformChange(platform) {
 		var sort = document.getElementById("webtoonSort");
@@ -46,12 +47,10 @@ $(document).ready(function(){
 	function insertPlatform(platformView){//출력문
 		$("#platformChange").html("")
 		let html="";
-		let p_name=null;
 		html += "<table border=1>";
 		var i=0; var j=3;
 		$.each(platformView,function(index,webtoonList){
 			p_name =webtoonList.platformNameKor;
-			console.log(webtoonList.platformNameKor)
 			if(i%j ==0){
 				html += "<tr>"
 			}
@@ -63,7 +62,7 @@ $(document).ready(function(){
 			}
 			html += "<br>"
 			html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
-			html += "<label>"+webtoonList.webtoonWriter+"</label><br><label>platform : "+webtoonList.platformNameKor+"</label>	</a></td>"
+			html += "<label>"+webtoonList.webtoonWriter+"</label></a></td>"
 			if(i%j == j-1){
 				html += "</tr>"	
 			}
@@ -72,8 +71,7 @@ $(document).ready(function(){
 		$("#platformChange").html(html)
 		total_list +=html;
 		$("#platformNameKor").html(p_name);
-		
-		history.replaceState({list:total_list,platform: nowPlatform},'', '${contextPath}/webtoon/platformWebtoon##');
+		history.replaceState({list:total_list,kor_name:p_name},'', '${contextPath}/webtoon/platformWebtoon##');
 		total_list="";
 	}
 	
