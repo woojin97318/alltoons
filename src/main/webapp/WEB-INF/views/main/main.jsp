@@ -12,12 +12,12 @@
 </head>
 <body>
 	<header>
-		<c:import
-			url="../default/header.jsp">
-		</c:import>
-	</header> 
+		<c:import url="../default/menu.jsp"/>
+		<c:import url="../default/header.jsp"/>
+	</header>
+	<c:import url="../default/moveTopBtn.jsp"/>
 	
-	<div  style="padding-top: 500px;">
+	<div style="padding-top: 150px;">
 	<h3>인기 웹툰</h3>
  <c:set var="i" value="0" />
  <c:set var="j" value="3" /><!-- 가로 n개씩 -->

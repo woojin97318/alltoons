@@ -24,6 +24,7 @@
 </script>
 </head>
 <body>
+	<c:import url="../default/menu.jsp"/>
 	<div align="center">
 		<h3>프로필 사진 수정</h3>
 		<form action="${contextPath }/member/userImageModifyPage" method="post" enctype="multipart/form-data">

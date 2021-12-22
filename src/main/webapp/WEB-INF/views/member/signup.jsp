@@ -123,6 +123,7 @@
 </script>
 </head>
 <body>
+	<c:import url="../default/menu.jsp"/>
 	<div align="center">
 		<form name="join" action="signupform" method="post"
 			enctype="multipart/form-data">

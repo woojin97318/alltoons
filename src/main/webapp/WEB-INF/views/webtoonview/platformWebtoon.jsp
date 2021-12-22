@@ -101,7 +101,10 @@ function sort(){
 </script>
 </head>
 <body>
+	<c:import url="../default/moveTopBtn.jsp"/>
 	<header>
+		<c:import url="../default/header.jsp"/>
+		<c:import url="../default/menu.jsp"/>
 		<!-- 어드민 페이지 헤더 -->
 		<c:import url="./header/webtoonHeader.jsp">
 			<c:param name="tag" value="플랫폼 별 웹툰"></c:param>
@@ -120,7 +123,6 @@ function sort(){
 			</nav>
 		</div>
 	</header>
-	<c:import url="../default/moveTopBtn.jsp"/>
 	<label id="nameKor">${platformView[0].platformNameKor }</label><!-- 플랫폼 명 뜸 -->
 	<select name="webtoonSort" id="webtoonSort" onchange="sort()" >
 		<option value="nameAsc">제목 오름차순</option>

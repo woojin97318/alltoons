@@ -99,11 +99,12 @@ function sort(){
 </script>
 </head>
 <body>
+	<c:import url="../default/moveTopBtn.jsp"/>
 	<header>
-		<!-- 어드민 페이지 헤더 -->
-		<c:import
-			url="./header/webtoonHeader.jsp">
-			<c:param name="tag" value="장르 별 웹툰"></c:param>
+		<c:import url="../default/header.jsp"/>
+		<c:import url="../default/menu.jsp"/>
+		<c:import url="./header/webtoonHeader.jsp">
+			<c:param name="tag" value="장르 별 웹툰"/>
 		</c:import>
 		<div class="scrollBtn">
 			<nav>
@@ -128,7 +129,6 @@ function sort(){
 			</nav>
 		</div>
 	</header>
-	<c:import url="../default/moveTopBtn.jsp"/>
 	<label id="nameKor">${genreView[0].webtoonGenreKor }</label><!-- 장르 명 뜸 -->
 	<select name="webtoonSort" id="webtoonSort" onchange="sort()" >
 		<option value="nameAsc">제목 오름차순</option>

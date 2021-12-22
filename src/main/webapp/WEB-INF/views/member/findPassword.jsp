@@ -61,6 +61,7 @@
 </script>
 </head>
 <body>
+	<c:import url="../default/menu.jsp"/>
 	<div align="center">
 		<h3>비밀번호 찾기</h3>
 		<div class="box email">

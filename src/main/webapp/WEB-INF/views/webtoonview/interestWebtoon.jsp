@@ -10,10 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 </head>
 <body>
+	<c:import url="../default/moveTopBtn.jsp"/>
+	<c:import url="../default/menu.jsp"/>
 	<header>
-		<c:import
-			url="./header/toMypageHeader.jsp">
-			<c:param name="tag" value="관심"></c:param>
+		<c:import url="./header/webtoonHeader.jsp">
+			<c:param name="tag" value="관심"/>
 		</c:import>
 	</header>
 	<c:choose>
