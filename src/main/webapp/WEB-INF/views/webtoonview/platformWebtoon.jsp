@@ -18,6 +18,7 @@ $(document).ready(function(){
 			if(data){ 
 				$('#platformChange').html(data.list); 
 				$("#nameKor").html(data.kor_name);
+				nowPlatform=data.nowPlatform;
 		}
 	}
 });
@@ -50,6 +51,7 @@ $(document).ready(function(){
 		html += "<table border=1>";
 		var i=0; var j=3;
 		$.each(platformView,function(index,webtoonList){
+			nowPlatform=webtoonList.platformName;
 			p_name =webtoonList.platformNameKor;
 			if(i%j ==0){
 				html += "<tr>"
@@ -71,13 +73,14 @@ $(document).ready(function(){
 		$("#platformChange").html(html)
 		total_list +=html;
 		$("#nameKor").html(p_name);
-		history.replaceState({list:total_list,kor_name:p_name},'', '${contextPath}/webtoon/platformWebtoon##');
+		history.replaceState({list:total_list,kor_name:p_name,nowPlatform:nowPlatform},'', '${contextPath}/webtoon/platformWebtoon##');
 		total_list="";
 	}
 	
 </script>
 <script type="text/javascript">/* 정렬ajax *//* 지속유지필요 */
 function sort(){
+	console.log("정렬시 플랫폼 상황: "+nowPlatform)
 	var sort = document.getElementById("webtoonSort");
 	var sortValue = sort.options[sort.selectedIndex].value;
 	if(nowPlatform == null){

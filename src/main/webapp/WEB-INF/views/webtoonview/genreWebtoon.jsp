@@ -17,6 +17,7 @@ $(document).ready(function(){
 			if(data){ 
 				$('#platformChange').html(data.list); 
 				$('#nameKor').html(data.kor_name); 
+				nowGenre=data.nowGenre;
 		}
 	}
 });
@@ -50,6 +51,7 @@ function insertGenre(genreView){
 	var i=0; var j=3;
 	$.each(genreView,function(index,webtoonList){
 		g_name=webtoonList.webtoonGenreKor
+		nowGenre=webtoonList.webtoonGenre
 		if(i%j ==0){
 			html += "<tr>"
 		}
@@ -70,7 +72,7 @@ function insertGenre(genreView){
 	$("#platformChange").html(html);
 	total_list +=html;
 	$("#nameKor").html(g_name); 
-	history.replaceState({list:total_list,kor_name: g_name},'', '${contextPath}/webtoon/genreWebtoon##');
+	history.replaceState({list:total_list,kor_name: g_name,nowGenre:nowGenre},'', '${contextPath}/webtoon/genreWebtoon##');
 	total_list="";
 }
 </script>
