@@ -32,7 +32,6 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 
 		ArrayList<WebtoonPlatformDTO> platformList = wvm.platformList(webtoonNum);
 		model.addAttribute("platformList", platformList);
-
 		ArrayList<WebtoonOriginDTO> originList = wvm.originList(webtoonNum);
 		if(originList.isEmpty()) {
 			WebtoonOriginDTO originDTO=new WebtoonOriginDTO();
