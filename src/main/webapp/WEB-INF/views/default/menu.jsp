@@ -110,7 +110,7 @@ input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:tra
 		    if(obj.checked == true){
 				menu1.style['left'] = "0px";
 				menu2.style['visibility'] = "visible";
-				menu2.style['opacity'] = "0.5";
+				menu2.style['opacity'] = "0.3";
 			}else{
 		    	menu1.removeAttribute("style");
 		    	menu2.style['opacity'] = "0";
