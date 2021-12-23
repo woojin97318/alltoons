@@ -13,7 +13,6 @@
 <script type="text/javascript">
 
 (function(){
-	$('#main-menu').hide();
 	if (${sessionScope.user == null}) {
 		console.log('null');
 	}else{
@@ -32,18 +31,7 @@ function menuOpen(){
 	}
 };
 
-function TOmyPage(obj, page) {
-	if(${sessionScope.user != null}){
-		window.location.href=page;
-	}else{
-		login();
-	}
-}
 
-function login(){
-	alert("로그인 후 이용 가능합니다.");
-	window.location.href = 'member/login';
-}
 
 function showId(id){
 	document.getElementById(id).style.display ='block';
@@ -58,7 +46,6 @@ function hideId(id){
 <title>header</title>
 
 <style type="text/css">
-.center {position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);}/*정가운데*/
 .center1{display:flex;justify-content:center;}
 #logo{transform:translate(-50%,-150%);}
 
@@ -101,8 +88,13 @@ position:relative;
 
 left: 90px;
 }
+#main-title{
+	height:100px;
+	background-color:rgba(111, 173, 255, 0.56);
+	backdrop-filter: blur(8px);
+}
 #main-menu{
-overflow: hidden;
+	overflow: hidden;
 	padding: 10% 0;
 	width: 300px;
 	height: 100%;
@@ -116,7 +108,7 @@ overflow: hidden;
 .wrap{
 }
 
-#menuBtn {order: 2; width:50px;height:50px;position:absolute;top:50%;left:30px;transform:translate(10%,-50%);border-radius:100%;}
+#menu-Btn {order: 2; width:50px;height:50px;position:absolute;top:50%;left:30px;transform:translate(10%,-50%);border-radius:100%;}
 input[id="menuicon"] {display:none;}
 input[id="menuicon"] + label {display:block;width:30px;height:30px;position:relative;cursor:pointer;}
 input[id="menuicon"] + label span {display:block;position:absolute;width:100%;height:4px;border-radius:30px;background:white;transition:all .35s;}
@@ -127,9 +119,6 @@ input[id="menuicon"]:checked + label span:nth-child(1) {top:50%;transform:transl
 input[id="menuicon"]:checked + label span:nth-child(2) {opacity:0;}
 input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:translateY(50%) rotate(-45deg);}
 
-#menuBtn:hover ~ #main-menu{
-
-}
 
 
 </style>
@@ -137,7 +126,7 @@ input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:tra
 </head>
 <c:set var="cookie" value='${cookie.logincookie.value}'/>
 <c:url var="interest" value='member/interest'/>
-<c:url var="favorties" value='member/favorites'/>
+<c:url var="favorites" value='member/favorites'/>
 <c:url var="myPage" value='member/myPage'/>
 <c:url var="admin" value='admin/report'/>
 <c:url var="login" value='member/login'/>
@@ -155,48 +144,9 @@ input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:tra
          </form>
       </div>
    </div>
-	
+</div>	
  
-   <!-- <div id="main-menu"> 메뉴창 -->
-    <!--  
-         <ul id="menu1">
-         	<li><h3>메뉴</h3></li>
-            <li><a href="${contextPath}/webtoon/platformWebtoon?platformName=naver">플랫폼별 웹툰</a></li>
-            <li><a href="${contextPath}/webtoon/genreWebtoon?webtoonGenre=g1">장르별 웹툰</a></li>
-            
-            <li id="inter"><a interest="onclick=interest" href="javascript:TOmyPage(this, '${interest }');">관심목록</a></li>
-	        <li id="fav"><a favorties="onclick=favorties" href="javascript:TOmyPage(this, '${favorties }');">즐겨찾기</a></li>
-	        <c:if test="${user != null}">
-		        <li id="mypg"><a myPage="onclick=myPage" href="javascript:TOmyPage(this, '${myPage }');">마이 페이지</a></li>
-	        </c:if>
-	     </ul>
-         <ul id="menu2">
-          	<c:if test="${division == 'admin'}">
-			   <li><a id="admin" href="${contextPath }/admin/report">관리자 페이지</a></li>
-	        </c:if>
-            <c:choose>
-               <c:when test="${sessionScope.user != null}">
-                   <li><a href="${contextPath}/member/logout">로그아웃</a></li>
-               </c:when>
-               <c:otherwise>
-                  <li><a href="${contextPath}/member/login">로그인</a></li>
-               </c:otherwise>
-            </c:choose>
-         </ul>
-  -->     
-   </div>
 
-	<div id="menuBtn" onclick="menuOpen()"><!-- 메뉴버튼 -->
-	   <div class="center">
-		   <input type="checkbox" id="menuicon">
-		   <label for="menuicon">
-			   <span></span>
-			   <span></span>
-			   <span></span>
-		   </label>
-	   </div>
-	</div>
-</div>
 
 </body>
 </html>
