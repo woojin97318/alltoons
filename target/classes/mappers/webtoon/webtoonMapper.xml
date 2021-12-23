@@ -130,7 +130,7 @@
 		<result property="platformNum" column="p_num" />
 	</resultMap>
 
-	<select id="platformView" resultMap="category">
+	<!-- <select id="platformView" resultMap="category">
 		select
 		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
 		webtoon_info.webtoon_writer, webtoon_info.webtoon_image,
@@ -140,6 +140,24 @@
 		and	PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
 		and KOR_PLATFORM.eng = PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
 		order by  webtoon_info.webtoon_title asc
+	</select> -->
+	<select id="platformView" resultMap="category">
+		select * from(
+		select
+		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
+		webtoon_info.webtoon_writer, webtoon_info.webtoon_image,
+		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME,KOR_PLATFORM.kor
+		from
+		PLATFORM_TABLE,webtoon_info,KOR_PLATFORM
+		where
+		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} 
+		and
+		PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
+		and
+		KOR_PLATFORM.eng = PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
+		order by
+		webtoon_info.webtoon_title asc
+		)<![CDATA[WHERE ROWNUM <= 21]]>
 	</select>
 	
 	<!-- 제목 정렬 -->

@@ -80,6 +80,8 @@ $(document).ready(function(){
 </script>
 <script type="text/javascript">/* 정렬ajax *//* 지속유지필요 */
 function sort(){
+	var start = 1;
+	var limit = 15;
 	console.log("정렬시 플랫폼 상황: "+nowPlatform)
 	var sort = document.getElementById("webtoonSort");
 	var sortValue = sort.options[sort.selectedIndex].value;
@@ -87,11 +89,12 @@ function sort(){
 		nowPlatform="naver";
 	}
 	$.ajax({
-		url: "${contextPath}/webtoon/sort",
+		url: "${contextPath}/webtoon/paging_sort",
 		type: "POST",
-		data: {sort: sortValue, platformName: nowPlatform},
+		data: {sort: sortValue, platformName: nowPlatform,
+			start: start, limit: limit},
 		success : function(platformView){
-			insertPlatform(platformView);
+			insertList(platformView);
 		},
 		error:function(request,status,error){
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -99,6 +102,97 @@ function sort(){
 	})  
 }
 </script>
+<script type="text/javascript">
+
+var platform='naver';
+var start =16;
+var limit=30;
+function appendList(){
+	var sort = document.getElementById("webtoonSort");
+	var sortValue = sort.options[sort.selectedIndex].value;
+	//var sortValue = 'nameAsc';
+	console.log("스크롤 내려옴")
+	$.ajax({
+		url : "${contextPath}/webtoon/paging_sort",
+		type : "POST",
+		dataType : "json",
+		data : {
+			platformName : platform,sort: sortValue, 
+			start: start, limit: limit
+		},
+		success : function(platformView) {
+			console.log("성공")
+			nowPlatform=platform;
+			insertList(platformView);
+			if(start == 1){
+				console.log("여기")
+				start +=15
+				limit +=15
+			}else{
+				start = start +15
+				limit = limit +15
+			}
+			
+		},error:function(request,status,error){
+			console.log("실패")
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+	})
+}
+function insertList(platformView){
+	let html="";
+	var i=0; var j=3;
+	$.each(platformView,function(index,webtoonList){
+		nowPlatform=webtoonList.platformName;
+		p_name =webtoonList.platformNameKor;
+		if(i%j ==0){
+			html += "<tr>"
+		}
+		html += "<td><a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
+		if(webtoonList.webtoonImage == 'default_image.png'){
+			html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
+		}else{
+			html += "<img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"'width=200 height=200 alt='this has image' />"
+		}
+		html += "<br>"
+		html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
+		html += "<label>"+webtoonList.webtoonWriter+"</label></a></td>"
+		if(i%j == j-1){
+			html += "</tr>"	
+		}
+		i += 1;
+	});
+	$("#platform_Change").append(html)
+}
+
+
+function debounce(callback, limit = 100) {
+	  let timeout;
+	  return function (...args) {
+	    clearTimeout(timeout);
+	    timeout = setTimeout(() => {
+	      callback.apply(this, args);
+	    }, limit);
+	  };
+	}
+
+	//appendList();
+	
+	// ===== 무한 스크롤 (스크롤 이벤트) =====
+	document.addEventListener("scroll", debounce(e => {
+    
+    // clientHeight : 웹 브라우저 창의 높이
+    // scrollTop : 현재 스크롤된 부분의 맨 위의 높이
+    // scrollHeight : 문서의 총 높이 (= 스크롤의 총 높이)
+    // 스크롤의 마지막에 도달 : clientHeight + scrollTop >= scrollHeight
+    
+    const { clientHeight, scrollTop, scrollHeight } = e.target.scrollingElement
+    if(clientHeight + scrollTop >= scrollHeight) {
+    	appendList()
+    	}
+	}, 200));
+
+</script>
+
 </head>
 <body>
 	<c:import url="../default/moveTopBtn.jsp"/>
@@ -125,7 +219,7 @@ function sort(){
 	</header>
 	<label id="nameKor">${platformView[0].platformNameKor }</label><!-- 플랫폼 명 뜸 -->
 	<select name="webtoonSort" id="webtoonSort" onchange="sort()" >
-		<option value="nameAsc">제목 오름차순</option>
+		<option value="nameAsc"selected="selected">제목 오름차순</option>
 		<option value="nameDesc">제목 내림차순</option>
 		<option value="viewCount">조회수 순</option>
 		<option value="popularity">인기순</option>
@@ -134,7 +228,7 @@ function sort(){
 	<c:set var="j" value="3" />
 	<!-- 가로 n개씩 -->
 	<div id="platformChange">
-		<table border=1>
+		<table border=1 id="platform_Change">
 			<c:forEach items="${platformView }" var="webtoonList">
 				<c:if test="{i%j == 0}">
 					<tr>
