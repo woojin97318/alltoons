@@ -74,10 +74,11 @@
 </script>
 <title>작품 검색</title>
 </head>
-
-<header>
-	<c:import url="../default/header.jsp"/>
-</header>
+	<header>
+		<c:import url="../default/menu.jsp"/>
+		<c:import url="../default/header.jsp"/>
+	</header>
+	<c:import url="../default/moveTopBtn.jsp"/>
 
 <c:set var="defaultImg" value='${contextPath }/resources/img/webtoon/default_image.png'/>
 <c:set var="thumbnail" value='${contextPath }/thumbnail?webtoonImage='/>
