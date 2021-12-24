@@ -7,23 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mainStyle.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>Insert title here</title>
 <style>
-a{text-decoration: none;}
-.hideMenuBody ul li {
-	width : 300px;
-	position : relative;
-	top : 50px;
-	left : -100px;
-	margin: 10%;
-	list-style: none;
+	@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap');
+:root {
+	--blue: rgb(0,119,255);
+	--skyblueL: rgb(174, 209, 255);
+	--heart: rgb(255, 38, 0);
+	--star: rgb(255, 208, 0);
 }
-.closetBtn {
-	z-index: 999;
-	width: 35px; height: 35px;
-	margin: 5px;
-	cursor: pointer;
+a {
+	text-decoration: none;
 }
 .center {/*정가운데*/
 	position: absolute;
@@ -41,15 +37,47 @@ a{text-decoration: none;}
 	transform: translate(10%,-50%);
 	border-radius: 100%;
 }
-#menu-Btn:hover{
+#menu-Btn:hover {
 	background: rgba(0, 0, 0, 0.1);
 }
-#menu1{
+.hideMenuBody #menu1 {
 	position: absolute;
+	top: -5px;
 }
-#menu2{
+.hideMenuBody #menu2 {
 	position: absolute;
-	bottom: 150px;
+	bottom: 90px;
+}
+.hideMenuBody ul li {
+	width: 300px;
+	position: relative;
+	left: -20px;
+	margin: 5%;
+	list-style: none;
+}
+.hideMenuBody ul li a {
+	color: #6c7a83c7;
+	line-height: 50px;
+	font-family: 'Nanum Gothic Coding', monospace;
+}
+.hideMenuBody ul li:hover a {
+	color: var(--blue);
+}
+.hideMenuBody ul li a .menuicon {
+	position: relative;
+	bottom: -7px;
+}
+.hideMenuBody ul li a .menuicon ion-icon {
+	font-size: 1.75em;
+}
+.hideMenuBody ul li:hover a .heart {
+	color: var(--heart);
+}
+.hideMenuBody ul li:hover a .star {
+	color: var(--star);
+}
+.hideMenuBody ul li a .menutitle {
+	font-size: 1.2em;
 }
 div[id="hideMenuBodyId"] {
 	left: -300px;
@@ -97,7 +125,6 @@ input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:tra
 </style>
 
 <script>
-
 	function loginChk() {
 		if(${user == null}){
 			alert("로그인 후 이용 가능합니다.");
@@ -137,31 +164,73 @@ input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:tra
 	</div>
 
 	<div class="hideMenuBody" id="hideMenuBodyId">
-		<div>
 			<ul id="menu1">
-				<li><a href="${contextPath}/webtoon/platformWebtoon?platformName=naver">플랫폼별 웹툰</a></li>
-				<li><a href="${contextPath}/webtoon/genreWebtoon?webtoonGenre=g1">장르별 웹툰</a></li>
-				<li><a href="${contextPath }/member/interest" onclick="loginChk()">관심목록</a></li>
-				<li><a href="${contextPath }/member/favorites" onclick="loginChk()">즐겨찾기</a></li>
+				<li>
+					<a href="${contextPath}/webtoon/platformWebtoon?platformName=naver">
+						<span class="menutitle">플랫폼별 웹툰 </span>
+					</a>
+				</li>
+				<li>
+					<a href="${contextPath}/webtoon/genreWebtoon?webtoonGenre=g1">
+						<span class="menutitle">장르별 웹툰 </span>
+					</a>
+				</li>
+				<li>
+					<a href="${contextPath }/member/interest" onclick="loginChk()">
+						<span class="menutitle">관심목록 </span>
+						<span class="menuicon"><ion-icon name="heart-outline" class="heart"></ion-icon></span>
+					</a>
+				</li>
+				<li>
+					<a href="${contextPath }/member/favorites" onclick="loginChk()">
+						<span class="menutitle">즐겨찾기 </span>
+						<span class="menuicon"><ion-icon name="star-outline" class="star"></ion-icon></span>
+					</a>
+				</li>
 			</ul>
 			<ul id="menu2">
 				<c:if test="${division == 'admin' }">
-					<li><a href="${contextPath }/admin/report">관리자 페이지</a></li>
+					<li>
+						<a href="${contextPath }/admin/report">
+							<span class="menutitle">관리자 페이지 </span>
+						</a>
+					</li>
 				</c:if>
 				<c:choose>
 					<c:when test="${user == null }">
-						<li><a href="${contextPath }/member/login">로그인</a></li>
+						<li>
+							<a href="${contextPath }/member/login">
+								<span class="menutitle">로그인 </span>
+								<span class="menuicon"><ion-icon name="log-in-outline"></ion-icon></span>
+							</a>
+						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="${contextPath }/member/myPage">마이페이지</a></li>
-						<li><a href="${contextPath }/member/logout">로그아웃</a></li>
+						<li>
+							<a href="${contextPath }/member/myPage">
+								<span class="menutitle">마이페이지 </span>
+								<span class="menuicon"><ion-icon name="person-outline"></ion-icon></span>
+							</a>
+						</li>
+						<li>
+							<a href="${contextPath }/member/logout">
+								<span class="menutitle">로그아웃 </span>
+								<span class="menuicon"><ion-icon name="log-out-outline"></ion-icon></span>
+							</a>
+						</li>
 					</c:otherwise>
 				</c:choose>
-				<li><a href="${contextPath }/main">HOME</a></li>
+				<li>
+					<a href="${contextPath }/main">
+						<span class="menutitle">HOME </span>
+						<span class="menuicon"><ion-icon name="home-outline"></ion-icon></span>
+					</a>
+				</li>
 			</ul>
 		</div>
-	</div>
 	<div class="hideMenuBody2" id="hideMenuBodyId2" ></div>
 
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

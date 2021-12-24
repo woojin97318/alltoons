@@ -22,7 +22,6 @@
 	$.each(btn, function(index, el){
 		console.log('el:', index, el);
 		console.log('name:', el.name,'/value:',el.value);
-		
 	});
 	
 	function searchResult(view, name, search){
@@ -103,6 +102,33 @@
 	
 	<div>
 	<h2 id="result">제목명</h2>
+			<c:choose>
+				<c:when test="${titleList == null }">
+						데이터가 없습니다.
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="dto" items="${titleList }">
+						<section class="webtoon-search-result">
+							<c:choose>
+								<c:when test="${dto.webtoonImage eq 'default_image.png'}">
+									<section class="webtoonImg"><img src="${defaultImg}"></section>
+								</c:when>
+								<c:otherwise>
+									<section class="webtoonImg"><img src="${thumbnail}${dto.webtoonImage }"></section>
+								</c:otherwise>
+							</c:choose>
+							<section>
+								<a href="#" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">
+									<label class="title-result">${dto.webtoonTitle }</label><br>
+										<label>${dto.webtoonWriter }</label><br>
+										<label class="platform">${ dto.platformName}</label>
+								</a>
+							</section>
+						</section>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+
 		<div id="changeList">
 		<table border="1">
 			<tr class="table-top">

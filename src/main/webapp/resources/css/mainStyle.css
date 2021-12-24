@@ -9,6 +9,14 @@ font-family: 'Song Myung', serif;
 font-family: 'Gowun Dodum', sans-serif;
 버튼 컬러:70A9FF, rgb(255, 191, 43)
 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap');
+/*
+font-family: 'Nanum Gothic Coding', monospace;
+*/
+:root {
+	--blue: rgb(0,119,255);
+	--skyblueL: rgb(174, 209, 255);
+}
 @media all and (min-width:320px){ 
 
    
@@ -38,7 +46,6 @@ font-family: 'Gowun Dodum', sans-serif;
 	transition: all 1s;
 }
 body{
-	
 	/*-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none;*/
 }
 header {
@@ -48,8 +55,6 @@ header {
  	right: 0;
  	max-height:95px;
 }
-
-
 #wrap{
 	max-width:768px;
 }
