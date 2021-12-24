@@ -48,7 +48,7 @@ $(document).ready(function(){
 	function insertPlatform(platformView){//출력문
 		$("#platformChange").html("")
 		let html="";
-		html += "<table border=1>";
+		html += "<table border=1 id='platform_Change'>";
 		var i=0; var j=3;
 		$.each(platformView,function(index,webtoonList){
 			nowPlatform=webtoonList.platformName;
@@ -79,12 +79,13 @@ $(document).ready(function(){
 	
 </script>
 <script type="text/javascript">/* 정렬ajax *//* 지속유지필요 */
+var sortValue ="";
 function sort(){
 	var start = 1;
 	var limit = 15;
 	console.log("정렬시 플랫폼 상황: "+nowPlatform)
-	var sort = document.getElementById("webtoonSort");
-	var sortValue = sort.options[sort.selectedIndex].value;
+	sort = document.getElementById("webtoonSort");
+	sortValue = sort.options[sort.selectedIndex].value;
 	if(nowPlatform == null){
 		nowPlatform="naver";
 	}
@@ -94,7 +95,14 @@ function sort(){
 		data: {sort: sortValue, platformName: nowPlatform,
 			start: start, limit: limit},
 		success : function(platformView){
-			insertList(platformView);
+			if(start ==1){
+				console.log("html")
+				insertPlatform(platformView);
+			}else{
+				console.log("append")
+				insertList(platformView);
+			}
+			
 		},
 		error:function(request,status,error){
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -123,12 +131,13 @@ function appendList(){
 		success : function(platformView) {
 			console.log("성공")
 			nowPlatform=platform;
-			insertList(platformView);
 			if(start == 1){
 				console.log("여기")
+				insertPlatform(platformView);
 				start +=15
 				limit +=15
 			}else{
+				insertList(platformView);
 				start = start +15
 				limit = limit +15
 			}
@@ -165,6 +174,8 @@ function insertList(platformView){
 }
 
 
+</script>
+<script type="text/javascript">/* 스크롤 감지 */
 function debounce(callback, limit = 100) {
 	  let timeout;
 	  return function (...args) {
@@ -175,24 +186,19 @@ function debounce(callback, limit = 100) {
 	  };
 	}
 
-	//appendList();
 	
 	// ===== 무한 스크롤 (스크롤 이벤트) =====
 	document.addEventListener("scroll", debounce(e => {
-    
-    // clientHeight : 웹 브라우저 창의 높이
-    // scrollTop : 현재 스크롤된 부분의 맨 위의 높이
-    // scrollHeight : 문서의 총 높이 (= 스크롤의 총 높이)
-    // 스크롤의 마지막에 도달 : clientHeight + scrollTop >= scrollHeight
-    
-    const { clientHeight, scrollTop, scrollHeight } = e.target.scrollingElement
-    if(clientHeight + scrollTop >= scrollHeight) {
-    	appendList()
-    	}
+  // clientHeight : 웹 브라우저 창의 높이
+  // scrollTop : 현재 스크롤된 부분의 맨 위의 높이
+  // scrollHeight : 문서의 총 높이 (= 스크롤의 총 높이)
+  // 스크롤의 마지막에 도달 : clientHeight + scrollTop >= scrollHeight
+  const { clientHeight, scrollTop, scrollHeight } = e.target.scrollingElement
+  if(clientHeight + scrollTop >= scrollHeight) {
+  	appendList()
+  	}
 	}, 200));
-
 </script>
-
 </head>
 <body>
 	<c:import url="../default/moveTopBtn.jsp"/>

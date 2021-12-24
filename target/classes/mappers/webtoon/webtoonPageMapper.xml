@@ -31,10 +31,12 @@
 	
 	<select id="platformView" resultMap="category">
 		select * from(
-		select
+   		 	select a.*,rownum as num	from
+     		 (
+			select
 		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
 		webtoon_info.webtoon_writer, webtoon_info.webtoon_image,
-		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME,KOR_PLATFORM.kor,rownum as num
+		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME,KOR_PLATFORM.kor
 		from
 		PLATFORM_TABLE,webtoon_info,KOR_PLATFORM
 		where
@@ -45,46 +47,51 @@
 		KOR_PLATFORM.eng = PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
 		order by
 		webtoon_info.webtoon_title asc
-		)
+			 )a
+	    )
 		<![CDATA[WHERE ROWNUM <= 15]]>
 	</select>
 	
 	<!-- 제목 정렬 -->
 	<select id="sortNameAjax" resultMap="category">
-		select * 
-		from(
-			select
-				webtoon_info.webtoon_num, webtoon_info.webtoon_title,
-				webtoon_info.webtoon_writer, webtoon_info.webtoon_image,
-				PLATFORM_TABLE.WEBTOON_PLATFORM_NAME,KOR_PLATFORM.kor,rownum as num
-			from
-				PLATFORM_TABLE,webtoon_info,KOR_PLATFORM
-			where
-				PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} 
-			and
-				PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
-			and
-				KOR_PLATFORM.eng = PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
-			<if test="sort.equals('nameAsc') ">
-			 	order by webtoon_info.webtoon_title asc
-			</if>
-			<if test="sort.equals('nameDesc')">
-				order by webtoon_info.webtoon_title desc
-			</if>
-			<if test="sort.equals('viewCount')">
-				order by webtoon_info.webtoon_hit desc , webtoon_info.webtoon_title asc
-			</if>
-			
-		)<![CDATA[WHERE num between #{start} and #{limit}]]>
+		select * from(
+		    select a.*,rownum as num  from
+		      (
+				select
+					webtoon_info.webtoon_num, webtoon_info.webtoon_title,
+					webtoon_info.webtoon_writer, webtoon_info.webtoon_image,
+					PLATFORM_TABLE.WEBTOON_PLATFORM_NAME,KOR_PLATFORM.kor
+				from
+					PLATFORM_TABLE,webtoon_info,KOR_PLATFORM
+				where
+					PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} 
+				and
+					PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
+				and
+					KOR_PLATFORM.eng = PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
+				<if test="sort.equals('nameAsc') ">
+				 	order by webtoon_info.webtoon_title asc
+				</if>
+				<if test="sort.equals('nameDesc')">
+					order by webtoon_info.webtoon_title desc
+				</if>
+				<if test="sort.equals('viewCount')">
+					order by webtoon_info.webtoon_hit desc , webtoon_info.webtoon_title asc
+				</if>
+				
+			)a
+	    )<![CDATA[WHERE num between #{start} and #{limit}]]>
 			
 	</select>
 	
 	<!-- 플랫폼별 인기순 정렬 -->
 	<select id="platformPopularPage" resultMap="category2">
 		select * from(
-		select DISTINCT
-		webtoon_info.webtoon_num, webtoon_info.webtoon_title, webtoon_info.webtoon_writer,
-		webtoon_info.webtoon_image,(
+   		 select a.*,rownum as num	from
+      		(
+			select DISTINCT
+			webtoon_info.webtoon_num, webtoon_info.webtoon_title, webtoon_info.webtoon_writer,
+			webtoon_info.webtoon_image,(
 			select count(favorites) 
 			from FAVORITES_INFO 
 			where FAVORITES_INFO.webtoon_num =PLATFORM_TABLE.WEBTOON_NUM 
@@ -95,7 +102,8 @@
 		and  PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName}
 		and KOR_PLATFORM.eng = WEBTOON_PLATFORM_NAME
 		order by count desc, webtoon_info.webtoon_title asc
-		)
+			)a
+	    )
 		<![CDATA[WHERE num between #{start} and #{limit}]]>
 	</select>
 	
