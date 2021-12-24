@@ -56,7 +56,7 @@
 		background-color: transparent;
 		color: var(--blue);
 		top: 3px;
-		left: 150px;
+		left: 130px;
 		border: none;
 	}
 	.searchBtn ion-icon {

@@ -71,6 +71,35 @@
 		});
 	};
 </script>
+<style>
+	.container {
+    min-width: 320px;
+		max-width: 768px;
+		height: 100vh;
+    margin: 0 auto;
+    margin-top: 30px;
+    background-color: lightblue;
+	}
+	.webtoon-result-box {
+		width: 100px;
+		height: 150px;
+		padding: 5px;
+		cursor: pointer;
+		background-color: aqua;
+	}
+	.webtoonImg {
+
+	}
+	.webtoonImg img {
+
+	}
+	.title-result {
+
+	}
+	.small-font {
+
+	}
+</style>
 <title>작품 검색</title>
 </head>
 	<header>
@@ -83,16 +112,17 @@
 <c:set var="thumbnail" value='${contextPath }/thumbnail?webtoonImage='/>
 <c:set var="webtooninfo" value='${contextPath }/webtoon/webtooninfo?webtoonNum='/>
 
-<body style="padding-top: 100px;">
-<div class="scrollBtn">
-	<nav>
-		<ul>
-			<li><button class="listBtn" id="title" onclick="searchResult('titleList', '제목명','${search }')">제목</button></li>
-			<li><button class="listBtn" id="writer" onclick="searchResult('writerList','작가명','${search }')">작가</button></li>
-		</ul>
-	</nav>
-</div>
-<input id="top" type="hidden" value="top">
+<body style="padding-top: 70px;">
+<div class="container">
+	<div class="scrollBtn">
+		<nav>
+			<ul>
+				<li><button class="listBtn" id="title" onclick="searchResult('titleList', '제목명','${search }')">제목</button></li>
+				<li><button class="listBtn" id="writer" onclick="searchResult('writerList','작가명','${search }')">작가</button></li>
+			</ul>
+		</nav>
+	</div>
+	<input id="top" type="hidden" value="top">
 
 	<c:if test="${search != null }">
 		<label><b>" ${search } "</b>에 대한 검색 결과 입니다.</label><br>
@@ -108,7 +138,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="dto" items="${titleList }">
-						<section class="webtoon-search-result">
+						<div class="webtoon-result-box" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">
 							<c:choose>
 								<c:when test="${dto.webtoonImage eq 'default_image.png'}">
 									<section class="webtoonImg"><img src="${defaultImg}"></section>
@@ -118,13 +148,11 @@
 								</c:otherwise>
 							</c:choose>
 							<section>
-								<a href="#" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">
-									<label class="title-result">${dto.webtoonTitle }</label><br>
-										<label>${dto.webtoonWriter }</label><br>
-										<label class="platform">${ dto.platformName}</label>
-								</a>
+								<label class="title-result">${dto.webtoonTitle }</label><br>
+									<label class="small-font">${dto.webtoonWriter }</label><br>
+									<label class="small-font">${dto.platformName }</label>
 							</section>
-						</section>
+						</div>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
@@ -156,7 +184,7 @@
 						<td>${dto.webtoonGenre }</td>
 						<th><a href="#" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">${dto.webtoonTitle }</a></th>
 						<td>${dto.webtoonWriter }</td>
-						<td class="platform">${ dto.platformName}</td>
+						<td class="platform">${dto.platformName }</td>
 					</tr>
 					</c:forEach>
 				</c:otherwise>
@@ -167,6 +195,6 @@
 	
 	<section class="center1">더 이상 데이터가 없습니다.</section>
 	<a href="#top" class="center1"><button>top</button></a>
-	
+</div>
 </body>
 </html>
