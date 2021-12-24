@@ -96,7 +96,7 @@
 			from FAVORITES_INFO 
 			where FAVORITES_INFO.webtoon_num =PLATFORM_TABLE.WEBTOON_NUM 
 			and FAVORITES_INFO.favorites = 'T')as count,
-			KOR_PLATFORM.kor,rownum as num
+			KOR_PLATFORM.kor
 		from webtoon_info, FAVORITES_INFO,PLATFORM_TABLE,KOR_PLATFORM
 		where webtoon_info.webtoon_num =PLATFORM_TABLE.WEBTOON_NUM
 		and  PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName}
