@@ -49,7 +49,7 @@
 		webtoon_info.webtoon_title asc
 			 )a
 	    )
-		<![CDATA[WHERE ROWNUM <= 15]]>
+		<![CDATA[WHERE num <= 15]]>
 	</select>
 	
 	<!-- 제목 정렬 -->

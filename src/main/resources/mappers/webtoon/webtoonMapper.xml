@@ -157,7 +157,7 @@
 		KOR_PLATFORM.eng = PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
 		order by
 		webtoon_info.webtoon_title asc
-		)<![CDATA[WHERE ROWNUM <= 21]]>
+		)<![CDATA[WHERE ROWNUM <= 15]]>
 	</select>
 	
 	<!-- 제목 정렬 -->
@@ -179,6 +179,7 @@
 		<if test="sort.equals('viewCount')">
 			order by webtoon_info.webtoon_hit desc , webtoon_info.webtoon_title asc
 		</if>
+		<![CDATA[WHERE ROWNUM <= 15]]>
 	</select>
 	
 	<!-- 플랫폼별 인기순 정렬 -->
@@ -196,6 +197,7 @@
 		and  PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName}
 		and KOR_PLATFORM.eng = WEBTOON_PLATFORM_NAME
 		order by count desc, webtoon_info.webtoon_title asc
+		<![CDATA[WHERE ROWNUM <= 15]]>
 	</select>
 
 

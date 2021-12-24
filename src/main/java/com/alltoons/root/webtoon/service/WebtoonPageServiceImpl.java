@@ -18,6 +18,10 @@ public class WebtoonPageServiceImpl implements WebtoonPageService{
 		System.out.println("start "+start);
 		System.out.println("limit "+limit);
 		System.out.println("sort "+sort);
+		if(start==null) {
+			start =Integer.toString(1);
+			limit =Integer.toString(15);
+		}
 		ArrayList<WebtoonCategoryDTO> platformAjax = null;
 		if(sort.equals("popularity")) {
 			platformAjax = wpm.platformPopularPage(platformName,start,limit);

@@ -19,6 +19,7 @@ $(document).ready(function(){
 				$("#nameKor").html(data.kor_name);
 				nowPlatform=data.nowPlatform;
 				sortValue=data.sortValue;
+				$("#webtoonSort").val(sortValue).attr("selected","selected")
 		}
 	}
 });
@@ -30,10 +31,14 @@ $(document).ready(function(){
 	var sortValue =null;
 	/* 플랫폼 클릭시 */
 	function platformChange(platform) {
+		console.log("플랫폼 버튼 작동")
 		sort = document.getElementById("webtoonSort");
 		sortValue = sort.options[sort.selectedIndex].value;
+		window.scrollTo({top:0, left:0, behavior:'auto'});
+		start = 1;
+		limit = 15;
 		$.ajax({
-			url : "${contextPath}/webtoon/sort",
+			url : "${contextPath}/webtoon/paging_sort",
 			type : "POST",
 			dataType : "json",
 			data : {
@@ -41,6 +46,8 @@ $(document).ready(function(){
 			},
 			success : function(platformView) {
 				nowPlatform=platform;
+				start +=15
+				limit +=15
 				insertPlatform(platformView);
 			},error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
@@ -49,9 +56,9 @@ $(document).ready(function(){
 	
 	/* 정렬문 */
 	function sort_webtoon(){
+		window.scrollTo({top:0, left:0, behavior:'auto'});
 		var start = 1;
 		var limit = 15;
-		console.log("정렬 이전 정렬 상황: "+sortValue)
 		sort = document.getElementById("webtoonSort");
 		sortValue = sort.options[sort.selectedIndex].value;
 		console.log("정렬시 정렬 상황: "+sortValue)
@@ -64,14 +71,11 @@ $(document).ready(function(){
 			data: {sort: sortValue, platformName: nowPlatform,
 				start: start, limit: limit},
 			success : function(platformView){
-				if(start ==1){
-					console.log("html")
-					insertPlatform(platformView);
-				}else{
-					console.log("append")
-					insertList(platformView);
-				}
 				
+				start +=15
+				limit +=15
+				console.log("html")
+				insertPlatform(platformView);
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -81,34 +85,38 @@ $(document).ready(function(){
 	
 	
 	/* 무한스크롤 */
-	var platform='naver';
-	var start =16;
-	var limit=30;
+	
+	var start =1;
+	var limit=15;
 	function appendList(){
+		if(nowPlatform == null){
+			nowPlatform="naver";
+		}
 		sort = document.getElementById("webtoonSort");
 		sortValue = sort.options[sort.selectedIndex].value;
 		console.log("스크롤 내려옴")
+		console.log("스크롤 내려옴"+start)
+		console.log("스크롤 내려옴"+limit)
 		$.ajax({
 			url : "${contextPath}/webtoon/paging_sort",
 			type : "POST",
 			dataType : "json",
 			data : {
-				platformName : platform,sort: sortValue, 
+				platformName : nowPlatform,sort: sortValue, 
 				start: start, limit: limit
 			},
 			success : function(platformView) {
+				if(platformView.size ==15)console.log("15개는 아님")
 				console.log("성공")
 				nowPlatform=platform;
 				if(start == 1){
 					console.log("여기")
 					insertPlatform(platformView);
-					start +=15
-					limit +=15
 				}else{
 					insertList(platformView);
-					start = start +15
-					limit = limit +15
 				}
+				start = start +15
+				limit = limit +15
 				
 			},error:function(request,status,error){
 				console.log("실패")
@@ -120,6 +128,7 @@ $(document).ready(function(){
 /* html출력문 */
 function insertPlatform(platformView){
 	$("#platformChange").html("")
+	$("#platform_Change").html("")
 	let html="";
 	html += "<table border=1 id='platform_Change'>";
 	var i=0; var j=3;

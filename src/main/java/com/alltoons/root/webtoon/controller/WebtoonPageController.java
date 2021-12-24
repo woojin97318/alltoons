@@ -19,6 +19,7 @@ public class WebtoonPageController {
 		@ResponseBody
 		public ArrayList<WebtoonCategoryDTO> sortAjax(@RequestParam("platformName")String platformName,@RequestParam(required = false) String sort,
 				@RequestParam(required = false) String start,@RequestParam(required = false) String limit) {
+			System.out.println("controller start "+start);
 			ArrayList<WebtoonCategoryDTO> platformAjax= wps.sortNameAjax(sort,platformName,start,limit);
 			System.out.println("controller: "+platformAjax.isEmpty());
 			return platformAjax;
