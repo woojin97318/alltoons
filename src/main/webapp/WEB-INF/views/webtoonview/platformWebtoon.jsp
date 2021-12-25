@@ -57,8 +57,8 @@ $(document).ready(function(){
 	/* 정렬문 */
 	function sort_webtoon(){
 		window.scrollTo({top:0, left:0, behavior:'auto'});
-		var start = 1;
-		var limit = 15;
+		start = 1;
+		limit = 15;
 		sort = document.getElementById("webtoonSort");
 		sortValue = sort.options[sort.selectedIndex].value;
 		console.log("정렬시 정렬 상황: "+sortValue)
@@ -92,6 +92,10 @@ $(document).ready(function(){
 		if(nowPlatform == null){
 			nowPlatform="naver";
 		}
+		if(start ==1){
+			start +=15
+			limit +=15
+		}
 		sort = document.getElementById("webtoonSort");
 		sortValue = sort.options[sort.selectedIndex].value;
 		console.log("스크롤 내려옴")
@@ -109,12 +113,7 @@ $(document).ready(function(){
 				if(platformView.size ==15)console.log("15개는 아님")
 				console.log("성공")
 				nowPlatform=platform;
-				if(start == 1){
-					console.log("여기")
-					insertPlatform(platformView);
-				}else{
-					insertList(platformView);
-				}
+				insertList(platformView);
 				start = start +15
 				limit = limit +15
 				

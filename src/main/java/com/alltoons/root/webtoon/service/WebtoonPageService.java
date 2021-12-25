@@ -12,4 +12,6 @@ public interface WebtoonPageService {
 
 	void platformView(Model model, String platformName, String start);
 
+	ArrayList<WebtoonCategoryDTO> genreSortAjax(String sort, String webtoonGenre, String start, String limit);
+
 }

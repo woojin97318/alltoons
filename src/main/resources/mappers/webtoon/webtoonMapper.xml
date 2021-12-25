@@ -179,7 +179,6 @@
 		<if test="sort.equals('viewCount')">
 			order by webtoon_info.webtoon_hit desc , webtoon_info.webtoon_title asc
 		</if>
-		<![CDATA[WHERE ROWNUM <= 15]]>
 	</select>
 	
 	<!-- 플랫폼별 인기순 정렬 -->
@@ -202,7 +201,8 @@
 
 
 	<select id="genreView" resultMap="category">
-		select
+		select * from
+		(select
 		webtoon_info.webtoon_num,
 		webtoon_info.webtoon_title,webtoon_info.webtoon_writer,webtoon_info.webtoon_image,GENRE_TABLE.webtoon_genre,
 		kor_genre.genre_kor
@@ -213,6 +213,7 @@
 		GENRE_TABLE.webtoon_genre=#{webtoonGenre}
 		and kor_genre.genre_eng = #{webtoonGenre}
 		order by  webtoon_info.webtoon_title asc
+		)<![CDATA[WHERE ROWNUM <= 15]]>
 	</select>
 	
 	<select id="genreSortAjax" resultMap="category">

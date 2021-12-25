@@ -18,4 +18,12 @@ public interface WebtoonPageMapper {
 
 	ArrayList<WebtoonCategoryDTO> platformView(String platformName);
 
+	ArrayList<WebtoonCategoryDTO> genrePopularPage(
+			@Param("webtoonGenre")String webtoonGenre, @Param("start")String start, 
+			@Param("limit")String limit);
+
+	ArrayList<WebtoonCategoryDTO> genreSortAjax(
+			@Param("webtoonGenre")String webtoonGenre, @Param("sort") String sort, 
+			@Param("start")String start, @Param("limit") String limit);
+
 }

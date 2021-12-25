@@ -40,4 +40,23 @@ public class WebtoonPageServiceImpl implements WebtoonPageService{
 		
 	}
 
+
+	@Override
+	public ArrayList<WebtoonCategoryDTO> genreSortAjax(String sort, String webtoonGenre, String start, String limit) {
+		System.out.println("genre start "+start);
+		System.out.println("genre limit "+limit);
+		System.out.println("genre sort "+sort);
+		if(start==null) {
+			start =Integer.toString(1);
+			limit =Integer.toString(15);
+		}
+		ArrayList<WebtoonCategoryDTO> platformAjax = null;
+		if(sort.equals("popularity")) {
+			platformAjax = wpm.genrePopularPage(webtoonGenre,start,limit);
+		}else if(sort.equals("nameDesc")||sort.equals("nameAsc")||sort.equals("viewCount")) {
+			platformAjax = wpm.genreSortAjax(webtoonGenre,sort,start,limit);
+		}
+		return platformAjax;
+	}
+
 }
