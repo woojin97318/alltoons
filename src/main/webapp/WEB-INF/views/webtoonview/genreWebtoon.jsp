@@ -61,6 +61,8 @@ function genreChange(genre) {
 	limit = 15;
 	sort = document.getElementById("webtoonSort");
 	sortValue = sort.options[sort.selectedIndex].value;
+	console.log("현 장르 위치"+nowGenre)
+	console.log("현 정렬 위치"+sortValue)
 	if(nowGenre == null){
 		nowGenre="g1";
 	}
@@ -197,7 +199,7 @@ function debounce(callback, limit = 100) {
   // scrollHeight : 문서의 총 높이 (= 스크롤의 총 높이)
   // 스크롤의 마지막에 도달 : clientHeight + scrollTop >= scrollHeight
   const { clientHeight, scrollTop, scrollHeight } = e.target.scrollingElement
-  if(clientHeight + scrollTop >= scrollHeight-300) {
+  if(clientHeight + scrollTop >= scrollHeight) {
   	appendList()
   	}
 	}, 200));
