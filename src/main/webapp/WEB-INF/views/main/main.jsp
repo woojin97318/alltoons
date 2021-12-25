@@ -12,8 +12,8 @@
 </head>
 <body>
 	<header>
-		<c:import url="../default/menu.jsp"/>
 		<c:import url="../default/header.jsp"/>
+		<c:import url="../default/menu.jsp"/>
 	</header>
 	<c:import url="../default/moveTopBtn.jsp"/>
 	
