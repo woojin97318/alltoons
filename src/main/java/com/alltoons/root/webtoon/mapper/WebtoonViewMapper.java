@@ -56,15 +56,8 @@ public interface WebtoonViewMapper {
 
 	ArrayList<WebtoonCategoryDTO> popularPage();
 
-	ArrayList<WebtoonCategoryDTO> sortNameAjax(@Param("platformName") String platformName, @Param("sort") String sort);
-
-	ArrayList<WebtoonCategoryDTO> platformPopularPage(String platformName);
-
 	public void upHit(String webtoonNum);
 
-	ArrayList<WebtoonCategoryDTO> genreSortAjax(@Param("webtoonGenre") String webtoonGenre, @Param("sort") String sort);
-
-	ArrayList<WebtoonCategoryDTO> genrePopularPage(String webtoonGenre);
 
 
 

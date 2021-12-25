@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.alltoons.root.webtoon.mapper.WebtoonPageMapper">
+	<resultMap
+		type="com.alltoons.root.webtoon.dto.WebtoonCategoryDTO" id="category">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="webtoonTitle" column="webtoon_title" />
+		<result property="webtoonWriter" column="webtoon_writer" />
+		<result property="webtoonImage" column="webtoon_image" />
+		<result property="webtoonGenre" column="webtoon_genre" />
+		<result property="webtoonGenreKor" column="genre_kor" />
+		<result property="platformName" column="WEBTOON_PLATFORM_NAME" />
+		<result property="platformNameKor" column="kor" />
+		<result property="platformNum" column="p_num" />
+	</resultMap>
+	<resultMap
+		type="com.alltoons.root.webtoon.dto.WebtoonCategoryDTO" id="category2">
+		<result property="webtoonNum" column="webtoon_num" />
+		<result property="webtoonTitle" column="webtoon_title" />
+		<result property="webtoonWriter" column="webtoon_writer" />
+		<result property="webtoonImage" column="webtoon_image" />
+		<result property="webtoonGenre" column="webtoon_genre" />
+				<result property="webtoonGenreKor" column="genre_kor" />
+		<result property="platformName" column="WEBTOON_PLATFORM_NAME" />
+		<result property="platformNameKor" column="kor" />
+		<result property="platformNum" column="count" />
+	</resultMap>
+	
+	<select id="platformView" resultMap="category">
+		select * from(
+   		 	select a.*,rownum as num	from
+     		 (
+			select
+		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
+		webtoon_info.webtoon_writer, webtoon_info.webtoon_image,
+		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME,KOR_PLATFORM.kor
+		from
+		PLATFORM_TABLE,webtoon_info,KOR_PLATFORM
+		where
+		PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} 
+		and
+		PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
+		and
+		KOR_PLATFORM.eng = PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
+		order by
+		webtoon_info.webtoon_title asc
+			 )a
+	    )
+		<![CDATA[WHERE num <= 15]]>
+	</select>
+	
+	<!-- 제목 정렬 -->
+	<select id="sortNameAjax" resultMap="category">
+		select * from(
+		    select a.*,rownum as num  from
+		      (
+				select
+					webtoon_info.webtoon_num, webtoon_info.webtoon_title,
+					webtoon_info.webtoon_writer, webtoon_info.webtoon_image,
+					PLATFORM_TABLE.WEBTOON_PLATFORM_NAME,KOR_PLATFORM.kor
+				from
+					PLATFORM_TABLE,webtoon_info,KOR_PLATFORM
+				where
+					PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName} 
+				and
+					PLATFORM_TABLE.webtoon_num = webtoon_info.webtoon_num
+				and
+					KOR_PLATFORM.eng = PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
+				<if test="sort.equals('nameAsc') ">
+				 	order by webtoon_info.webtoon_title asc
+				</if>
+				<if test="sort.equals('nameDesc')">
+					order by webtoon_info.webtoon_title desc
+				</if>
+				<if test="sort.equals('viewCount')">
+					order by webtoon_info.webtoon_hit desc , webtoon_info.webtoon_title asc
+				</if>
+				
+			)a
+	    )<![CDATA[WHERE num between #{start} and #{limit}]]>
+			
+	</select>
+	
+	<!-- 플랫폼별 인기순 정렬 -->
+	<select id="platformPopularPage" resultMap="category2">
+		select * from(
+   		 select a.*,rownum as num	from
+      		(
+			select DISTINCT
+			webtoon_info.webtoon_num, webtoon_info.webtoon_title, webtoon_info.webtoon_writer,
+			webtoon_info.webtoon_image,(
+			select count(favorites) 
+			from FAVORITES_INFO 
+			where FAVORITES_INFO.webtoon_num =PLATFORM_TABLE.WEBTOON_NUM 
+			and FAVORITES_INFO.favorites = 'T')as count,
+			KOR_PLATFORM.kor,PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
+		from webtoon_info, FAVORITES_INFO,PLATFORM_TABLE,KOR_PLATFORM
+		where webtoon_info.webtoon_num =PLATFORM_TABLE.WEBTOON_NUM
+		and  PLATFORM_TABLE.WEBTOON_PLATFORM_NAME = #{platformName}
+		and KOR_PLATFORM.eng = WEBTOON_PLATFORM_NAME
+		order by count desc, webtoon_info.webtoon_title asc
+			)a
+	    )
+		<![CDATA[WHERE num between #{start} and #{limit}]]>
+	</select>
+	
+	
+	<select id="genreView" resultMap="category">
+		select * from(
+   		 	select a.*,rownum as num	from
+     		 (
+			select
+		webtoon_info.webtoon_num,
+		webtoon_info.webtoon_title,webtoon_info.webtoon_writer,webtoon_info.webtoon_image,GENRE_TABLE.webtoon_genre,
+		kor_genre.genre_kor
+		from GENRE_TABLE,webtoon_info,kor_genre
+		where
+		GENRE_TABLE.webtoon_num=webtoon_info.webtoon_num
+		and
+		GENRE_TABLE.webtoon_genre=#{webtoonGenre}
+		and kor_genre.genre_eng = #{webtoonGenre}
+		order by
+		webtoon_info.webtoon_title asc
+			 )a
+	    )
+		<![CDATA[WHERE num <= 15]]>
+	</select>
+	
+	<!-- 제목 정렬 -->
+	<select id="genreSortAjax" resultMap="category">
+		select * from(
+		    select a.*,rownum as num  from
+		      (
+				select
+				webtoon_info.webtoon_num,
+				webtoon_info.webtoon_title,webtoon_info.webtoon_writer,webtoon_info.webtoon_image,GENRE_TABLE.webtoon_genre,
+				kor_genre.genre_kor
+				from GENRE_TABLE,webtoon_info,kor_genre
+				where
+				GENRE_TABLE.webtoon_num=webtoon_info.webtoon_num
+				and
+				GENRE_TABLE.webtoon_genre=#{webtoonGenre}
+				and kor_genre.genre_eng = #{webtoonGenre}
+				<if test="sort.equals('nameAsc') ">
+				 	order by webtoon_info.webtoon_title asc
+				</if>
+				<if test="sort.equals('nameDesc')">
+					order by webtoon_info.webtoon_title desc
+				</if>
+				<if test="sort.equals('viewCount')">
+					order by webtoon_info.webtoon_hit desc , webtoon_info.webtoon_title asc
+				</if>
+			)a
+	    )<![CDATA[WHERE num between #{start} and #{limit}]]>
+			
+	</select>
+	
+	<!-- 장르 별 인기순 정렬 -->
+	<select id="genrePopularPage" resultMap="category2">
+		select * from(
+   		 select a.*,rownum as num	from
+      		(
+			select DISTINCT
+			webtoon_info.webtoon_num, webtoon_info.webtoon_title, webtoon_info.webtoon_writer,
+			webtoon_info.webtoon_image,(
+				select count(favorites) 
+				from FAVORITES_INFO 
+				where FAVORITES_INFO.webtoon_num =GENRE_TABLE.WEBTOON_NUM 
+				and FAVORITES_INFO.favorites = 'T')as count,
+				kor_genre.genre_kor,GENRE_TABLE.webtoon_genre
+			from webtoon_info, FAVORITES_INFO,GENRE_TABLE,kor_genre
+			where webtoon_info.webtoon_num =GENRE_TABLE.WEBTOON_NUM
+			and  GENRE_TABLE.webtoon_genre = #{webtoonGenre}
+			and kor_genre.genre_eng = #{webtoonGenre}
+			order by count desc, webtoon_info.webtoon_title asc
+			)a
+	    )
+		<![CDATA[WHERE num between #{start} and #{limit}]]>
+	</select>
+	
+	
+</mapper>
