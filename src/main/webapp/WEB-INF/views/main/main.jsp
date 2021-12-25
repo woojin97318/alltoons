@@ -44,7 +44,7 @@
 		     <label>${webtoonList.webtoonTitle}</label><br>
 		     <label>${webtoonList.webtoonWriter}</label><br>
 		     <label>${webtoonList.platformName}</label> 
-		     <c:if test="${webtoonList.platformNum !=0}">외 ${webtoonList.platformNum}</c:if>
+		     <c:if test="${webtoonList.platformNum !=0}">외 ${webtoonList.platformNum}곳</c:if>
 		</a>
      </td>
     <c:if test="${i%j == j-1}">

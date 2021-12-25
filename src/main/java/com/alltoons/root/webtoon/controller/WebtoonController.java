@@ -142,20 +142,6 @@ public class WebtoonController {
 		return "webtoonview/interestWebtoon";
 	}
 
-	// 정렬 ajax
-	@PostMapping("/webtoon/sort")
-	@ResponseBody
-	public ArrayList<WebtoonCategoryDTO> sortAjax(@RequestParam("platformName")String platformName,@RequestParam(required = false) String sort) {
-		ArrayList<WebtoonCategoryDTO> platformAjax= ws.sortNameAjax(sort,platformName);
-		return platformAjax;
-	}
 	
-	// 장르정렬 ajax
-	@PostMapping("/webtoon/genreSort")
-	@ResponseBody
-	public ArrayList<WebtoonCategoryDTO> genreSortAjax(@RequestParam(required = false) String sort,@RequestParam(required = false) String webtoonGenre) {
-		ArrayList<WebtoonCategoryDTO> platformAjax= ws.genreSortAjax(sort,webtoonGenre);
-		return platformAjax;
-	}
 
 }
