@@ -143,7 +143,5 @@ function hideId(id){
 		</div>
 	</div>	
  
-
-
 </body>
 </html>

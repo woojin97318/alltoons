@@ -72,32 +72,47 @@
 	};
 </script>
 <style>
+	.centered {
+		position: absolute;
+		left: 50%; 
+		transform: translateX(-50%);
+	}
+	hr {
+		height : 1px;
+		border: 0;
+	}
 	.container {
     min-width: 320px;
 		max-width: 768px;
-		height: 100vh;
-    margin: 0 auto;
+		height: auto;
+    margin: 20px auto;
     margin-top: 30px;
     background-color: lightblue;
 	}
+	.webtoon-result {
+		z-index: 1;
+	}
 	.webtoon-result-box {
-		width: 100px;
-		height: 150px;
-		padding: 5px;
+		float: left;
+		margin: 10px;
+		width: 150px;
+		height: 200px;
+		padding: 15px;
 		cursor: pointer;
 		background-color: aqua;
 	}
 	.webtoonImg {
-
+		padding: auto;
 	}
 	.webtoonImg img {
-
+		width: 100px;
+		height: 100px;
 	}
 	.title-result {
-
+		font-size: 20px;
 	}
 	.small-font {
-
+		font-size: 15px;
 	}
 </style>
 <title>작품 검색</title>
@@ -132,13 +147,15 @@
 	
 	<div>
 	<h2 id="result">제목명</h2>
+	<!--
+		<div class="centered webtoon-result">
 			<c:choose>
 				<c:when test="${titleList == null }">
-						데이터가 없습니다.
+						<label class="centered">데이터가 없습니다.</label> 
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="dto" items="${titleList }">
-						<div class="webtoon-result-box" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">
+						<section class="webtoon-result-box" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">
 							<c:choose>
 								<c:when test="${dto.webtoonImage eq 'default_image.png'}">
 									<section class="webtoonImg"><img src="${defaultImg}"></section>
@@ -149,14 +166,15 @@
 							</c:choose>
 							<section>
 								<label class="title-result">${dto.webtoonTitle }</label><br>
-									<label class="small-font">${dto.webtoonWriter }</label><br>
-									<label class="small-font">${dto.platformName }</label>
+								<label class="small-font">${dto.webtoonWriter }</label><br>
+								<label class="small-font">${dto.platformName }</label>
 							</section>
-						</div>
+						</section>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
-
+		</div>
+	-->
 		<div id="changeList">
 		<table border="1">
 			<tr class="table-top">
