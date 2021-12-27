@@ -232,6 +232,10 @@ function debounce(callback, limit = 100) {
 					<li><button	class="listBtn" onclick="genreChange('g14')">로맨스</button></li>
 					<li><button	class="listBtn" onclick="genreChange('g15')">무협</button></li>
 					<li><button	class="listBtn" onclick="genreChange('g16')">소년</button></li>
+					<li><button	class="listBtn" onclick="genreChange('g17')">BL</button></li>
+					<li><button	class="listBtn" onclick="genreChange('g18')">백합</button></li>
+					<li><button	class="listBtn" onclick="genreChange('g19')">미스터리</button></li>
+					<li><button	class="listBtn" onclick="genreChange('g20')">학원</button></li>
 				</ul>
 			</nav>
 		</div>

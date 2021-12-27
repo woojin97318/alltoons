@@ -134,7 +134,7 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 	$(function(){
 		$(document).on('keyup', '#webtoonContent', function(e){
 		    var webtoonContent = $(this).val();
-		    $('#webtoonContent_cnt').text(getBytes(webtoonContent)+'/500');    
+		    $('#webtoonContent_cnt').text(getBytes(webtoonContent)+'/2000');    
 		});$('#webtoonContent').keyup();
 	});
 	
@@ -269,6 +269,10 @@ function add_link(){
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g14">로맨스 &ensp; 
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g15">무협 &ensp; 	
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g16">소년 &ensp; 	<br>
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g17">BL &ensp; 	
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g18">백합 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g19">미스터리 &ensp; 	
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g20">학원 &ensp; <br>	
 		
 		<b>원작 링크</b><button type="button" onclick="add_origin_link()">+</button> <br>
 		<div id="origin_box"> </div>
