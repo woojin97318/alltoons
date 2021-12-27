@@ -138,15 +138,43 @@ input[id="menuicon"]:checked + label span:nth-child(1) {top:50%;transform:transl
 input[id="menuicon"]:checked + label span:nth-child(2) {opacity:0;}
 input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:translateY(50%) rotate(-45deg);}
 
+img#MOVE_TOP_BTN {
+	position: fixed;
+	right: 2%;
+	bottom: 50px;
+	display: none;
+	z-index: 999;
+	width: 50px; height: 50px;
+	cursor: pointer;
+}
+
 </style>
 
 <script>
+	$(function() {
+		$(window).scroll(function() {
+			if ($(this).scrollTop() > 500) {
+				$('#MOVE_TOP_BTN').fadeIn();
+			} else {
+				$('#MOVE_TOP_BTN').fadeOut();
+			}
+		});
+
+		$("#MOVE_TOP_BTN").click(function() {
+			$('html, body').animate({
+				scrollTop : 0
+			}, 400);
+			return false;
+		});
+	});
+
 	function loginChk() {
 		if(${user == null}){
 			alert("로그인 후 이용 가능합니다.");
 			window.location.href = 'member/login';
 		}
 	}
+
 	function moveMenu(obj){
 		    var menu1 = document.getElementById('hideMenuBodyId');
 			var menu2 = document.getElementById('hideMenuBodyId2');
@@ -167,6 +195,7 @@ input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:tra
 	
 </script>
 </head>
+
 <body>
 	<div id="menu-Btn" ><!-- 메뉴버튼 -->
 	   <div class="center">
@@ -245,6 +274,7 @@ input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:tra
 			</ul>
 		</div>
 	<div class="hideMenuBody2" id="hideMenuBodyId2" ></div>
+	<img id="MOVE_TOP_BTN" src="${contextPath}/resources/img/moveTopBtn.png">
 
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

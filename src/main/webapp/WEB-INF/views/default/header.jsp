@@ -14,7 +14,7 @@
 		display: flex;
 		justify-content: center;
 	}
-	
+
 	#logo {
 		font-family: 'Nanum Gothic Coding', monospace;
 		transform: translate(-50%,-150%);
@@ -57,7 +57,7 @@
 		outline: none;
 	}
 
-	.searchBtn {/*검색버튼*/
+	.searchBtn {	/*검색버튼*/
 		cursor: pointer;
 		position: absolute;
 		width: 40px;
@@ -77,19 +77,6 @@
 		height: 100px;
 		background-color:rgba(111, 173, 255, 0.56);
 		backdrop-filter: blur(8px);
-	}
-
-	#main-menu {
-		overflow: hidden;
-		padding: 10% 0;
-		width: 300px;
-		height: 100%;
-		position: relative;
-		top: 0;
-		left: 0;
-		border-radius: 10px;
-		background-color:rgb(174, 209, 255);
-		transform: translateX(-300px);
 	}
 
 	#menu-Btn {order: 2; width:50px;height:50px;position:absolute;top:50%;left:30px;transform:translate(10%,-50%);border-radius:100%;}
@@ -146,15 +133,15 @@ function hideId(id){
 <body>
 	<div>
 		<div id="main-title"><!-- 검색창&로고 -->
-		<span id="logo" class="center"><a href="${contextPath}/main">AllToons</a></span>
-				<div id="searchBar" class="center" class="wrap">
-					<form action="${contextPath }/main/webtoonSearch" method="POST">
-							<input type="text" name="search" class="searchIn" size="50" placeholder="원하는 웹툰을 찾아보세요 :)" value="${search}" required >
-							<button type="submit" class="searchBtn">
-								<ion-icon name="search"></ion-icon>
-							</button>
-					</form>
-				</div>
+			<span id="logo" class="center"><a href="${contextPath}/main">AllToons</a></span>
+			<div id="searchBar" class="center" class="wrap">
+				<form action="${contextPath }/main/webtoonSearch" method="POST">
+						<input type="text" name="search" class="searchIn" size="50" placeholder="원하는 웹툰을 찾아보세요 :)" value="${search}" required >
+						<button type="submit" class="searchBtn">
+							<ion-icon name="search"></ion-icon>
+						</button>
+				</form>
+			</div>
 		</div>
 	</div>	
  

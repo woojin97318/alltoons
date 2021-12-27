@@ -22,7 +22,6 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 		ArrayList<WebtoonDTO> webtoonList = new ArrayList<WebtoonDTO>();
 		if(view.equals("titleList")) {
 			webtoonList = mapper.titleList(search);	//제목별 검색
-			
 		}else if(view.equals("writerList")) {
 			webtoonList = mapper.writerList(search);//작가명 검색
 		}
