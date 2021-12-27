@@ -14,27 +14,34 @@
 		display: flex;
 		justify-content: center;
 	}
+	
 	#logo {
 		font-family: 'Nanum Gothic Coding', monospace;
 		transform: translate(-50%,-150%);
 	}
+
 	input::-webkit-input-placeholder {
 		padding: auto;
 		color:#335999;
 		font-weight: bold;
 	}
+
 	input:-ms-input-placeholder {
 		color:#335999;
 	}
+
 	textarea::-webkit-input-placeholder {
 		color:#335999;
 	}
+
 	textarea:-ms-input-placeholder {
 		color:#335999;
 	}
+
 	#searchBar {/*검색창+버튼*/
 		transform: translate(-50%, -10%);
 	}
+
 	.searchIn {/*검색창*/
 		position: fixed;
 		transform: translate(-50%, 10%);
@@ -44,10 +51,12 @@
 		border-radius: 25px;
 		font-family: 'Nanum Gothic Coding', monospace;
 	}
+
 	.searchIn:focus {
 		box-shadow: 0px 0px 5px 2px var(--blue);
 		outline: none;
 	}
+
 	.searchBtn {/*검색버튼*/
 		cursor: pointer;
 		position: absolute;
@@ -59,14 +68,17 @@
 		left: 130px;
 		border: none;
 	}
+
 	.searchBtn ion-icon {
 		font-size: 20px;
 	}
+
 	#main-title {
 		height: 100px;
 		background-color:rgba(111, 173, 255, 0.56);
 		backdrop-filter: blur(8px);
 	}
+
 	#main-menu {
 		overflow: hidden;
 		padding: 10% 0;
@@ -79,6 +91,7 @@
 		background-color:rgb(174, 209, 255);
 		transform: translateX(-300px);
 	}
+
 	#menu-Btn {order: 2; width:50px;height:50px;position:absolute;top:50%;left:30px;transform:translate(10%,-50%);border-radius:100%;}
 	input[id="menuicon"] {display:none;}
 	input[id="menuicon"] + label {display:block;width:30px;height:30px;position:relative;cursor:pointer;}
@@ -89,9 +102,11 @@
 	input[id="menuicon"]:checked + label span:nth-child(1) {top:50%;transform:translateY(-50%) rotate(45deg);}
 	input[id="menuicon"]:checked + label span:nth-child(2) {opacity:0;}
 	input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:translateY(50%) rotate(-45deg);}
-	</style>
+</style>
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+
 (function(){
 	if (${sessionScope.user == null}) {
 		console.log('null');

@@ -12,8 +12,6 @@
 <!-- 
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mainStyle.css">
  -->
-<style type="text/css">
-</style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
@@ -71,63 +69,103 @@
 		});
 	};
 </script>
-<style>
-	.centered {
+
+<style type="text/css">
+	@media all and (min-width:320px){ 
+		.webtoon-result-box {
+			float: left;
+			margin: 10px;
+			width: 120px;
+			height: 150px;
+			padding: 10px;
+			cursor: pointer;
+			background-color: aqua;
+		}
+
+		.webtoonImg img {
+			width: 70px;
+			height: 70px;
+		}
+	}
+
+	header {
+		position: fixed;
+		z-index: 1000;
+	}
+
+	.centered {/*가운데*/
 		position: absolute;
 		left: 50%; 
 		transform: translateX(-50%);
 	}
-	hr {
-		height : 1px;
-		border: 0;
-	}
+
 	.container {
     min-width: 320px;
 		max-width: 768px;
 		height: auto;
     margin: 20px auto;
     margin-top: 30px;
-    background-color: lightblue;
 	}
+
+	hr {
+		height : 1px;
+		border: 0;
+	}
+
 	.webtoon-result {
-		z-index: 1;
+		background-color: yellowgreen;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
 	}
+
 	.webtoon-result-box {
 		float: left;
 		margin: 10px;
-		width: 150px;
-		height: 200px;
-		padding: 15px;
+		width: 110px;
+		height: 150px;
 		cursor: pointer;
 		background-color: aqua;
+
 	}
+
 	.webtoonImg {
 		padding: auto;
 	}
+
 	.webtoonImg img {
 		width: 100px;
 		height: 100px;
 	}
+	.title-result, .small-font {
+		white-space: nowrap; /*줄넘김 없음*/
+		text-overflow: ellipsis; /*...처리*/
+		overflow : hidden;
+	}
+
 	.title-result {
 		font-size: 20px;
 	}
+
 	.small-font {
 		font-size: 15px;
 	}
+
 </style>
 <title>작품 검색</title>
-</head>
-	<header>
-		<c:import url="../default/menu.jsp"/>
-		<c:import url="../default/header.jsp"/>
-	</header>
-	<c:import url="../default/moveTopBtn.jsp"/>
 
 <c:set var="defaultImg" value='${contextPath }/resources/img/webtoon/default_image.png'/>
 <c:set var="thumbnail" value='${contextPath }/thumbnail?webtoonImage='/>
 <c:set var="webtooninfo" value='${contextPath }/webtoon/webtooninfo?webtoonNum='/>
 
 <body style="padding-top: 70px;">
+<header>
+	<c:import url="../default/header.jsp"/>
+	<c:import url="../default/menu.jsp"/>
+	<c:import url="../default/moveTopBtn.jsp"/>
+</header>
+
 <div class="container">
 	<div class="scrollBtn">
 		<nav>
@@ -146,9 +184,9 @@
 	<hr>
 	
 	<div>
-	<h2 id="result">제목명</h2>
-	<!--
-		<div class="centered webtoon-result">
+		<h2 id="result">제목명</h2>
+	
+		<div class="webtoon-result">
 			<c:choose>
 				<c:when test="${titleList == null }">
 						<label class="centered">데이터가 없습니다.</label> 
@@ -174,8 +212,10 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-	-->
-		<div id="changeList">
+	</div>
+		
+	<div id="changeList"></div>
+	<!--
 		<table border="1">
 			<tr class="table-top">
 				<th>썸네일</th>
@@ -209,6 +249,7 @@
 			</c:choose>
 		</div>
 		</table>
+	-->
 	</div>
 	
 	<section class="center1">더 이상 데이터가 없습니다.</section>

@@ -11,22 +11,26 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>Insert title here</title>
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap');
+
 :root {
 	--blue: rgb(0,119,255);
 	--skyblueL: rgb(174, 209, 255);
 	--heart: rgb(255, 38, 0);
 	--star: rgb(255, 208, 0);
 }
+
 a {
 	text-decoration: none;
 }
+
 .center {/*정가운데*/
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
+
 #menu-Btn {
 	z-index: 1000;
 	width: 50px;
@@ -37,17 +41,21 @@ a {
 	transform: translate(10%,-50%);
 	border-radius: 100%;
 }
+
 #menu-Btn:hover {
 	background: rgba(0, 0, 0, 0.1);
 }
+
 .hideMenuBody #menu1 {
 	position: absolute;
 	top: -5px;
 }
+
 .hideMenuBody #menu2 {
 	position: absolute;
 	bottom: 90px;
 }
+
 .hideMenuBody ul li {
 	width: 300px;
 	position: relative;
@@ -55,30 +63,38 @@ a {
 	margin: 5%;
 	list-style: none;
 }
+
 .hideMenuBody ul li a {
 	color: #6c7a83c7;
 	line-height: 50px;
 	font-family: 'Nanum Gothic Coding', monospace;
 }
+
 .hideMenuBody ul li:hover a {
 	color: var(--blue);
 }
+
 .hideMenuBody ul li a .menuicon {
 	position: relative;
 	bottom: -7px;
 }
+
 .hideMenuBody ul li a .menuicon ion-icon {
 	font-size: 1.75em;
 }
+
 .hideMenuBody ul li:hover a .heart {
 	color: var(--heart);
 }
+
 .hideMenuBody ul li:hover a .star {
 	color: var(--star);
 }
+
 .hideMenuBody ul li a .menutitle {
 	font-size: 1.2em;
 }
+
 div[id="hideMenuBodyId"] {
 	left: -300px;
 	width: 300px;

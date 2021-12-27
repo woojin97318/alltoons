@@ -14,8 +14,8 @@
 	<header>
 		<c:import url="../default/header.jsp"/>
 		<c:import url="../default/menu.jsp"/>
+		<c:import url="../default/moveTopBtn.jsp"/>
 	</header>
-	<c:import url="../default/moveTopBtn.jsp"/>
 	
 	<div style="padding-top: 150px;">
 	<h3>인기 웹툰</h3>
