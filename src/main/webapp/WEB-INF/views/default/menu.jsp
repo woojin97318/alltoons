@@ -139,12 +139,13 @@ input[id="menuicon"]:checked + label span:nth-child(2) {opacity:0;}
 input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:translateY(50%) rotate(-45deg);}
 
 img#MOVE_TOP_BTN {
+	width: 50px; 
+	height: 50px;
 	position: fixed;
 	right: 2%;
-	bottom: 50px;
+	bottom: 10%;
 	display: none;
 	z-index: 999;
-	width: 50px; height: 50px;
 	cursor: pointer;
 }
 

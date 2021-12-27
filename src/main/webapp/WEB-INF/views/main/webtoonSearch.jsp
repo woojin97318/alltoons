@@ -74,7 +74,6 @@
 			height: 150px;
 			padding: 10px;
 			cursor: pointer;
-			background-color: aqua;
 		}
 
 		.webtoonImg img {
@@ -88,10 +87,11 @@
 		--skyblueL: rgb(174, 209, 255);
 		--heart: rgb(255, 38, 0);
 		--star: rgb(255, 208, 0);
+		--grayL: rgb(245, 245, 245);
 	}
 
 	body {
-		background-color: rgb(245, 245, 245);
+		/*background-color: var(--grayL);*/
 	}
 
 	header {
@@ -121,8 +121,8 @@
 	hr {
 		height: 2px;
     border: 0 none;
-    color: rgb(245, 245, 245);
-    background-color: rgb(245, 245, 245);
+    color: var(--grayL);
+    background-color: var(--grayL);
 		width: 95%;
 		text-align: center;
 	}
@@ -203,7 +203,6 @@
 	<header>
 		<c:import url="../default/header.jsp"/>
 		<c:import url="../default/menu.jsp"/>
-		<c:import url="../default/moveTopBtn.jsp"/>
 	</header>
 
 	<div class="container">

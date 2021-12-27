@@ -54,15 +54,6 @@ label{
 	margin : 5px 20px -40px 20px;
 }
 
-.scrollBtn > nav ul {/*횡스크롤 버튼*/
-	list-style: none;
-	display: flex;
-	justify-content: flex-start;
-	overflow-x:scroll;
-	white-space:nowrap;
-	margin : 10px 0 0;
-}
-
 a {
 	cursor: pointer;
 }
@@ -139,6 +130,15 @@ td{
 
 #border1px{
 	border: 1px solid;
+}
+
+.scrollBtn > nav ul {/*횡스크롤 버튼*/
+	list-style: none;
+	display: flex;
+	justify-content: flex-start;
+	overflow-x:scroll;
+	white-space:nowrap;
+	margin : 10px 0 0;
 }
 
 .scrollBtn > nav ul li {
