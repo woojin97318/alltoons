@@ -22,6 +22,8 @@
 
 </head>
 <body>
+	<c:import url="../default/menu.jsp"/>
+	<c:import url="../default/moveTopBtn.jsp"/>
 	<div class="menu-title">
 		<c:out value="${param.tag }"></c:out>
 	</div>

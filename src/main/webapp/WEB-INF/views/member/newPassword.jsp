@@ -37,6 +37,7 @@
 </script>
 </head>
 <body>
+	<c:import url="../default/menu.jsp"/>
 	<div align="center">
 		<h3>비밀번호 변경</h3>
 		<form name="modify" action="newPasswordChk" method="post">

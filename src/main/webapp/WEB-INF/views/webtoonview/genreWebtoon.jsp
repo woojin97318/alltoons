@@ -18,19 +18,26 @@ $(document).ready(function(){
 				$('#platformChange').html(data.list); 
 				$('#nameKor').html(data.kor_name); 
 				nowGenre=data.nowGenre;
+				sortValue=data.sortValue;
+				$("#webtoonSort").val(sortValue).attr("selected","selected")
+				window.scrollTo({top:0, left:0, behavior:'auto'});
 		}
 	}
 });
 </script>
 <script type="text/javascript">
 var total_list =""; 
-nowGenre=null;
+var nowGenre=null;
+/* 장르선택 */
 function genreChange(genre) {
+	window.scrollTo({top:0, left:0, behavior:'auto'});
 	var sort = document.getElementById("webtoonSort");
 	var sortValue = sort.options[sort.selectedIndex].value;
 	console.log(genre)
+	start = 1;
+	limit = 15;
 	$.ajax({
-		url : "${contextPath}/webtoon/genreSort",
+		url : "${contextPath}/webtoon/genre_Sort",
 		type : "POST",
 		dataType : "json",
 		data : {
@@ -40,14 +47,84 @@ function genreChange(genre) {
 			nowGenre=genre;
 			console.log(genreView);
 			insertGenre(genreView);
+			start +=15
+			limit +=15
 		},error:function(request,status,error){
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
 	})
 };
+
+/* 정렬ajax */
+ function sort_webtoon(){
+	 window.scrollTo({top:0, left:0, behavior:'auto'});
+	start = 1;
+	limit = 15;
+	sort = document.getElementById("webtoonSort");
+	sortValue = sort.options[sort.selectedIndex].value;
+	console.log("현 장르 위치"+nowGenre)
+	console.log("현 정렬 위치"+sortValue)
+	if(nowGenre == null){
+		nowGenre="g1";
+	}
+	$.ajax({
+		url: "${contextPath}/webtoon/genre_Sort",
+		type: "POST",
+		data: {sort: sortValue, webtoonGenre: nowGenre,
+			start: start, limit: limit},
+		success : function(genreView){
+			insertGenre(genreView);
+		},
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    }
+			
+	})  
+}
+ /* 무한스크롤 */
+	
+	var start =1;
+	var limit=15;
+	function appendList(){
+		if(nowGenre == null){
+			nowGenre="g1";
+		}
+		if(start ==1){
+			start +=15
+			limit +=15
+		}
+		sort = document.getElementById("webtoonSort");
+		sortValue = sort.options[sort.selectedIndex].value;
+		console.log("스크롤 내려옴")
+		console.log("스크롤 내려옴"+start)
+		console.log("스크롤 내려옴"+limit)
+		console.log("스크롤 내려옴"+sortValue)
+		$.ajax({
+			url : "${contextPath}/webtoon/genre_Sort",
+			type : "POST",
+			dataType : "json",
+			data : {
+				webtoonGenre : nowGenre, sort: sortValue, 
+				start: start, limit: limit
+			},
+			success : function(genreView) {
+				if(genreView.size ==15)console.log("15개는 아님")
+				console.log("성공")
+				insertList(genreView);
+				start = start +15
+				limit = limit +15
+				
+			},error:function(request,status,error){
+				console.log("실패")
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+		})
+	}
+</script>
+<script type="text/javascript">
+/* http출력문 */
 function insertGenre(genreView){
 	let html="";
 	let g_name=null;
-	html += "<table border=1>";
+	html += "<table border=1 id='platform_Change'>";
 	var i=0; var j=3;
 	$.each(genreView,function(index,webtoonList){
 		g_name=webtoonList.webtoonGenreKor
@@ -72,38 +149,69 @@ function insertGenre(genreView){
 	$("#platformChange").html(html);
 	total_list +=html;
 	$("#nameKor").html(g_name); 
-	history.replaceState({list:total_list,kor_name: g_name,nowGenre:nowGenre},'', '${contextPath}/webtoon/genreWebtoon##');
+	console.log("장르이름"+g_name)
+	history.replaceState({list:total_list,kor_name: g_name,nowGenre:nowGenre,sortValue: sortValue},'', '${contextPath}/webtoon/genreWebtoon##');
 	total_list="";
 }
-</script>
-<script type="text/javascript">/* 정렬ajax */
-function sort(){
-	var sort = document.getElementById("webtoonSort");
-	var sortValue = sort.options[sort.selectedIndex].value;
-	if(nowGenre == null){
-		nowGenre="g1";
-	}
-	$.ajax({
-		url: "${contextPath}/webtoon/genreSort",
-		type: "POST",
-		data: {sort: sortValue, webtoonGenre: nowGenre},
-		success : function(genreView){
-			insertGenre(genreView);
-		},
-		error:function(request,status,error){
-		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		    }
-			
-	})  
+/* append */
+function insertList(genreView){
+	let html="";
+	var i=0; var j=3;
+	$.each(genreView,function(index,webtoonList){
+		nowGenre=webtoonList.webtoonGenre;
+		g_name=webtoonList.webtoonGenreKor
+		if(i%j ==0){
+			html += "<tr>"
+		}
+		html += "<td><a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
+		if(webtoonList.webtoonImage == 'default_image.png'){
+			html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
+		}else{
+			html += "<img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"'width=200 height=200 alt='this has image' />"
+		}
+		html += "<br>"
+		html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
+		html += "<label>"+webtoonList.webtoonWriter+"</label>	</a></td>"
+		if(i%j == j-1){
+			html += "</tr>"	
+		}
+		i += 1;
+	});
+	$("#platform_Change").append(html)
 }
+</script>
+<script type="text/javascript">/* 스크롤 감지 */
+function debounce(callback, limit = 100) {
+	  let timeout;
+	  return function (...args) {
+	    clearTimeout(timeout);
+	    timeout = setTimeout(() => {
+	      callback.apply(this, args);
+	    }, limit);
+	  };
+	}
+
+	
+	// ===== 무한 스크롤 (스크롤 이벤트) =====
+	document.addEventListener("scroll", debounce(e => {
+  // clientHeight : 웹 브라우저 창의 높이
+  // scrollTop : 현재 스크롤된 부분의 맨 위의 높이
+  // scrollHeight : 문서의 총 높이 (= 스크롤의 총 높이)
+  // 스크롤의 마지막에 도달 : clientHeight + scrollTop >= scrollHeight
+  const { clientHeight, scrollTop, scrollHeight } = e.target.scrollingElement
+  if(clientHeight + scrollTop >= scrollHeight) {
+  	appendList()
+  	}
+	}, 200));
 </script>
 </head>
 <body>
+	<c:import url="../default/moveTopBtn.jsp"/>
 	<header>
-		<!-- 어드민 페이지 헤더 -->
-		<c:import
-			url="./header/webtoonHeader.jsp">
-			<c:param name="tag" value="장르 별 웹툰"></c:param>
+		<c:import url="../default/header.jsp"/>
+		<c:import url="../default/menu.jsp"/>
+		<c:import url="./header/webtoonHeader.jsp">
+			<c:param name="tag" value="장르 별 웹툰"/>
 		</c:import>
 		<div class="scrollBtn">
 			<nav>
@@ -128,9 +236,8 @@ function sort(){
 			</nav>
 		</div>
 	</header>
-	<c:import url="../default/moveTopBtn.jsp"/>
 	<label id="nameKor">${genreView[0].webtoonGenreKor }</label><!-- 장르 명 뜸 -->
-	<select name="webtoonSort" id="webtoonSort" onchange="sort()" >
+	<select name="webtoonSort" id="webtoonSort" onchange="sort_webtoon()" >
 		<option value="nameAsc">제목 오름차순</option>
 		<option value="nameDesc">제목 내림차순</option>
 		<option value="viewCount">조회수 순</option>

@@ -12,12 +12,12 @@
 </head>
 <body>
 	<header>
-		<c:import
-			url="../default/header.jsp">
-		</c:import>
-	</header> 
+		<c:import url="../default/header.jsp"/>
+		<c:import url="../default/menu.jsp"/>
+	</header>
+	<c:import url="../default/moveTopBtn.jsp"/>
 	
-	<div  style="padding-top: 500px;">
+	<div style="padding-top: 150px;">
 	<h3>인기 웹툰</h3>
  <c:set var="i" value="0" />
  <c:set var="j" value="3" /><!-- 가로 n개씩 -->
@@ -44,7 +44,9 @@
 		     <label>${webtoonList.webtoonTitle}</label><br>
 		     <label>${webtoonList.webtoonWriter}</label><br>
 		     <label>${webtoonList.platformName}</label> 
-		     <c:if test="${webtoonList.platformNum !=0}">외 ${webtoonList.platformNum}</c:if>
+		     <c:if test="${webtoonList.platformNum !=0}">
+		     	<label> 외 ${webtoonList.platformNum}곳</label>
+		     </c:if>
 		</a>
      </td>
     <c:if test="${i%j == j-1}">

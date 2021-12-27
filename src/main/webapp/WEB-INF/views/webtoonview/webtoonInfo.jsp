@@ -148,7 +148,9 @@ function mailCut(mail) {
 </head>
 <body>
 <header>
-	<c:import url="./header/pageHeader.jsp">
+	<c:import url="../default/moveTopBtn.jsp"/>
+	<c:import url="../default/menu.jsp"/>
+	<c:import url="./header/webtoonHeader.jsp">
 		<c:param name="tag" value="작품 상세 페이지"></c:param>
 	</c:import>
 	</header>

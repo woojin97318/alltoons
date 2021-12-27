@@ -22,7 +22,6 @@
 	$.each(btn, function(index, el){
 		console.log('el:', index, el);
 		console.log('name:', el.name,'/value:',el.value);
-		
 	});
 	
 	function searchResult(view, name, search){
@@ -72,27 +71,73 @@
 		});
 	};
 </script>
+<style>
+	.centered {
+		position: absolute;
+		left: 50%; 
+		transform: translateX(-50%);
+	}
+	hr {
+		height : 1px;
+		border: 0;
+	}
+	.container {
+    min-width: 320px;
+		max-width: 768px;
+		height: auto;
+    margin: 20px auto;
+    margin-top: 30px;
+    background-color: lightblue;
+	}
+	.webtoon-result {
+		z-index: 1;
+	}
+	.webtoon-result-box {
+		float: left;
+		margin: 10px;
+		width: 150px;
+		height: 200px;
+		padding: 15px;
+		cursor: pointer;
+		background-color: aqua;
+	}
+	.webtoonImg {
+		padding: auto;
+	}
+	.webtoonImg img {
+		width: 100px;
+		height: 100px;
+	}
+	.title-result {
+		font-size: 20px;
+	}
+	.small-font {
+		font-size: 15px;
+	}
+</style>
 <title>작품 검색</title>
 </head>
-
-<header>
-	<c:import url="../default/header.jsp"/>
-</header>
+	<header>
+		<c:import url="../default/menu.jsp"/>
+		<c:import url="../default/header.jsp"/>
+	</header>
+	<c:import url="../default/moveTopBtn.jsp"/>
 
 <c:set var="defaultImg" value='${contextPath }/resources/img/webtoon/default_image.png'/>
 <c:set var="thumbnail" value='${contextPath }/thumbnail?webtoonImage='/>
 <c:set var="webtooninfo" value='${contextPath }/webtoon/webtooninfo?webtoonNum='/>
 
-<body style="padding-top: 100px;">
-<div class="scrollBtn">
-	<nav>
-		<ul>
-			<li><button class="listBtn" id="title" onclick="searchResult('titleList', '제목명','${search }')">제목</button></li>
-			<li><button class="listBtn" id="writer" onclick="searchResult('writerList','작가명','${search }')">작가</button></li>
-		</ul>
-	</nav>
-</div>
-<input id="top" type="hidden" value="top">
+<body style="padding-top: 70px;">
+<div class="container">
+	<div class="scrollBtn">
+		<nav>
+			<ul>
+				<li><button class="listBtn" id="title" onclick="searchResult('titleList', '제목명','${search }')">제목</button></li>
+				<li><button class="listBtn" id="writer" onclick="searchResult('writerList','작가명','${search }')">작가</button></li>
+			</ul>
+		</nav>
+	</div>
+	<input id="top" type="hidden" value="top">
 
 	<c:if test="${search != null }">
 		<label><b>" ${search } "</b>에 대한 검색 결과 입니다.</label><br>
@@ -102,6 +147,34 @@
 	
 	<div>
 	<h2 id="result">제목명</h2>
+	<!--
+		<div class="centered webtoon-result">
+			<c:choose>
+				<c:when test="${titleList == null }">
+						<label class="centered">데이터가 없습니다.</label> 
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="dto" items="${titleList }">
+						<section class="webtoon-result-box" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">
+							<c:choose>
+								<c:when test="${dto.webtoonImage eq 'default_image.png'}">
+									<section class="webtoonImg"><img src="${defaultImg}"></section>
+								</c:when>
+								<c:otherwise>
+									<section class="webtoonImg"><img src="${thumbnail}${dto.webtoonImage }"></section>
+								</c:otherwise>
+							</c:choose>
+							<section>
+								<label class="title-result">${dto.webtoonTitle }</label><br>
+								<label class="small-font">${dto.webtoonWriter }</label><br>
+								<label class="small-font">${dto.platformName }</label>
+							</section>
+						</section>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	-->
 		<div id="changeList">
 		<table border="1">
 			<tr class="table-top">
@@ -129,7 +202,7 @@
 						<td>${dto.webtoonGenre }</td>
 						<th><a href="#" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">${dto.webtoonTitle }</a></th>
 						<td>${dto.webtoonWriter }</td>
-						<td class="platform">${ dto.platformName}</td>
+						<td class="platform">${dto.platformName }</td>
 					</tr>
 					</c:forEach>
 				</c:otherwise>
@@ -140,6 +213,6 @@
 	
 	<section class="center1">더 이상 데이터가 없습니다.</section>
 	<a href="#top" class="center1"><button>top</button></a>
-	
+</div>
 </body>
 </html>
