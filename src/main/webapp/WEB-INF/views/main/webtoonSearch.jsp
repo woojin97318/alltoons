@@ -41,9 +41,9 @@
 					}else{
 						html += '<section class="webtoon-result-box" onclick="location.href='+'${webtooninfo}'+list.webtoonNum+'">';
 							if(list.webtoonImage == 'default_image.png') {
-								html += '<section class="webtoonImg"><img src="${defaultImg}"></section>';
+								html += '<section class="webtoonImg"><img alt="썸네일X" src="${defaultImg}"></section>';
 							}else{
-								html += '<section class="webtoonImg"><img src="${thumbnail}'+list.webtoonImage+'"></section>';
+								html += '<section class="webtoonImg"><img alt="썸네일O" src="${thumbnail}'+list.webtoonImage+'"></section>';
 							}
 							html += '<section class="webtoon-result-title">';
 								html += '<label class="title-result">'+list.webtoonTitle+'</label><br>';
@@ -237,10 +237,10 @@
 								<section class="webtoon-result-box" onclick="location.href='${webtooninfo}${dto.webtoonNum}'">
 									<c:choose>
 										<c:when test="${dto.webtoonImage eq 'default_image.png'}">
-											<section class="webtoonImg"><img src="${defaultImg}"></section>
+											<section class="webtoonImg"><img alt="썸네일X" src="${defaultImg}"></section>
 										</c:when>
 										<c:otherwise>
-											<section class="webtoonImg"><img src="${thumbnail}${dto.webtoonImage }"></section>
+											<section class="webtoonImg"><img alt="썸네일O" src="${thumbnail}${dto.webtoonImage }"></section>
 										</c:otherwise>
 									</c:choose>
 									<section class="webtoon-result-title">
