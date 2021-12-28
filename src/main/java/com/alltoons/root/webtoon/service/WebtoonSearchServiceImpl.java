@@ -47,11 +47,11 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 
 				if(platFirst.equals("없음")) {
 					platform = "정보 없음";
-				}else {
+				}else{
 					platform = platFirst;
 					platCnt = platCnt(webtoonNum); //플랫폼 수
 					if(platCnt>=2) {
-						platform += " 외 " + (platCnt-1)+"곳"; //플랫폼1 외 n-1곳
+						platform += " 외 "+(platCnt-1)+"곳"; //플랫폼1 외 n-1곳
 					}
 					System.out.println("플랫폼: "+platform);
 					System.out.println("플랫폼 수: "+platCnt);
@@ -77,7 +77,9 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 		String platFirst;
 		platFirst = mapper.getplatFirst(webtoonNum);
 		
-		if(platFirst != null) {
+		if(platFirst == null) {
+			platFirst = "없음";
+		}else{
 			if(platFirst.equals("kakaoWebtoon")) {
 				platFirst = kor.getKakaoWebtoon();
 			}else if (platFirst.equals("ridibooks")) {
@@ -97,8 +99,6 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 			}else if (platFirst.equals("munpia")) {
 				platFirst = kor.getMunpia();
 			}
-		}else{
-			platFirst = "없음";
 		}
 		System.out.println("getplatFirst: "+platFirst);
 		return platFirst;
@@ -108,8 +108,4 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 		int platCnt = mapper.platCnt(webtoonNum);
 		return platCnt;
 	}
-
-	
-
-	
 }

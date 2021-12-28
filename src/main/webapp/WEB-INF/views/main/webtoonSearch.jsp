@@ -115,7 +115,7 @@
 		height: auto;
     margin: 20px auto;
     margin-top: 30px;
-		background-color: white;
+		background: white;
 	}
 
 	hr {
@@ -148,6 +148,8 @@
 	}
 
 	.webtoon-result-box {
+		border-image: linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
+    border-image-slice: 1;
 		border-radius: 10px;
 		float: left;
 		margin: 10px;

@@ -143,7 +143,7 @@ img#MOVE_TOP_BTN {
 	height: 50px;
 	position: fixed;
 	right: 2%;
-	bottom: 10%;
+	bottom: 20px;
 	display: none;
 	z-index: 999;
 	cursor: pointer;
