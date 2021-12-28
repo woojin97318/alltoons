@@ -91,6 +91,8 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
-	
+	<footer>
+		<c:import url="../default/footer.jsp"/>
+	</footer>
 </body>
 </html>

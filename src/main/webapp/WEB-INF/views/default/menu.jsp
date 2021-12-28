@@ -104,7 +104,8 @@ div[id="hideMenuBodyId"] {
 	z-index: 999;
 	transition: all .35s ease-in;
 }
-div[id="hideMenuBodyId2"] {
+
+div[id="hideMenu-overlayId"] {
 	visibility : hidden;
 	width: 100vw;
 	height: 100vh;
@@ -114,7 +115,11 @@ div[id="hideMenuBodyId2"] {
 	z-index: 998;
 	transition: opacity .35s ease;
 }
-input[id="menuicon"] {display: none;}
+
+input[id="menuicon"] {
+	display: none;
+}
+
 input[id="menuicon"] + label {
 	display: block;
 	width: 30px;
@@ -122,6 +127,7 @@ input[id="menuicon"] + label {
 	position: relative;
 	cursor: pointer;
 }
+
 input[id="menuicon"] + label span {
 	display: block;
 	position: absolute;
@@ -131,9 +137,11 @@ input[id="menuicon"] + label span {
 	background: white;
 	transition: all .35s;
 }
+
 input[id="menuicon"] + label span:nth-child(1) {top:10%;}
 input[id="menuicon"] + label span:nth-child(2) {top:50%;transform:translateY(-50%);} /* 비슷하게 사용할 수 있는 style top:calc(50% - 2.5px); margin-top:-2.5px;*/
 input[id="menuicon"] + label span:nth-child(3) {bottom:10%;}
+input[id="menuicon"]:checked + label span {background: rgb(116, 116, 116);}
 input[id="menuicon"]:checked + label span:nth-child(1) {top:50%;transform:translateY(-50%) rotate(45deg);}
 input[id="menuicon"]:checked + label span:nth-child(2) {opacity:0;}
 input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:translateY(50%) rotate(-45deg);}
@@ -152,6 +160,7 @@ img#MOVE_TOP_BTN {
 </style>
 
 <script>
+
 	$(function() {
 		$(window).scroll(function() {
 			if ($(this).scrollTop() > 500) {
@@ -161,11 +170,21 @@ img#MOVE_TOP_BTN {
 			}
 		});
 
-		$("#MOVE_TOP_BTN").click(function() {
+		$("#MOVE_TOP_BTN").click(function() {/*맨 위로 이동*/
+			var overlay = document.getElementById('hideMenu-overlayId');
 			$('html, body').animate({
 				scrollTop : 0
 			}, 400);
 			return false;
+		});
+
+		$('#hideMenu-overlayId').on('click', function (e) {/*오버레이 클릭시 메뉴 닫힘*/
+			if($('#hideMenu-overlayId').is(e.target)){
+				var overlay = document.getElementById('hideMenu-overlayId');
+				var menuBtn = document.getElementById('menuicon');
+				$("#menuicon").prop("checked", false);
+				moveMenu(menuBtn);
+			}
 		});
 	});
 
@@ -176,24 +195,27 @@ img#MOVE_TOP_BTN {
 		}
 	}
 
-	function moveMenu(obj){
-		    var menu1 = document.getElementById('hideMenuBodyId');
-			var menu2 = document.getElementById('hideMenuBodyId2');
-		    if(obj.checked == true){
-				menu1.style['left'] = "0px";
-				menu2.style['visibility'] = "visible";
-				menu2.style['opacity'] = "0.3";
-			}else{
-		    	menu1.removeAttribute("style");
-		    	menu2.style['opacity'] = "0";
-		    	menu2.style['transition'] = "opacity .35s ease";
-		    	setTimeout(function() {
-		    		var menu2 = document.getElementById('hideMenuBodyId2');
-		    		menu2.style['visibility'] = "hidden";
-		    	}, 0.35*1000);
-		    }
+	function moveMenu(obj){/*메뉴버튼 클릭시 메뉴 움직임*/
+		var menu = document.getElementById('hideMenuBodyId');
+		var overlay = document.getElementById('hideMenu-overlayId');
+		if(obj.checked == true){
+			menu.style['left'] = "0px";
+			overlay.style['visibility'] = "visible";
+			overlay.style['opacity'] = "0.3";
+		}else{
+		  menu.removeAttribute("style");
+		  overlay.style['opacity'] = "0";
+		  overlay.style['transition'] = "opacity .35s ease";
+			timeout(overlay);
+		}
 	}
-	
+
+	function timeout(obj){ /*오버레이 사라짐*/
+		setTimeout(function() {
+		  	obj.style['visibility'] = "hidden";
+		  }, 0.35*1000);
+	}
+
 </script>
 </head>
 
@@ -274,7 +296,7 @@ img#MOVE_TOP_BTN {
 				</li>
 			</ul>
 		</div>
-	<div class="hideMenuBody2" id="hideMenuBodyId2" ></div>
+	<div class="hideMenu-overlay" id="hideMenu-overlayId" ></div>
 	<img id="MOVE_TOP_BTN" src="${contextPath}/resources/img/moveTopBtn.png">
 
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

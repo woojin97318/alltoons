@@ -90,15 +90,6 @@
 		--grayL: rgb(245, 245, 245);
 	}
 
-	body {
-		/*background-color: var(--grayL);*/
-	}
-
-	header {
-		position: fixed;
-		z-index: 1000;
-	}
-
 	.blue {
 		color: var(--blue);
 	}
@@ -259,5 +250,8 @@
 		<section class="center1">더 이상 데이터가 없습니다.</section>
 		<a href="#top" class="center1"><button>top</button></a>
 	</div>
+	<footer>
+		<c:import url="../default/footer.jsp"/>
+	</footer>
 </body>
 </html>

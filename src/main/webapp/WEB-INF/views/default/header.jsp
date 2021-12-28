@@ -16,10 +16,14 @@
 	}
 
 	#logo {
+		
 		font-family: 'Nanum Gothic Coding', monospace;
 		transform: translate(-50%,-150%);
 	}
-
+	#logo a > img {
+		height: 50px;
+		width: auto;
+	}
 	input::-webkit-input-placeholder {
 		padding: auto;
 		color:#335999;
@@ -133,7 +137,7 @@ function hideId(id){
 <body>
 	<div>
 		<div id="main-title"><!-- 검색창&로고 -->
-			<span id="logo" class="center"><a href="${contextPath}/main">AllToons</a></span>
+			<span id="logo" class="center"><a href="${contextPath}/main"><img src="${contextPath}/resources/img/alltoons_logo.png" alt="AllToons"></a></span>
 			<div id="searchBar" class="center" class="wrap">
 				<form action="${contextPath }/main/webtoonSearch" method="POST">
 						<input type="text" name="search" class="searchIn" size="50" placeholder="원하는 웹툰을 찾아보세요 :)" value="${search}" required >

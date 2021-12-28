@@ -66,10 +66,10 @@ font-family: 'Nanum Gothic Coding', monospace;
 
 header {
 	position: fixed;
-  	top: 0;
+  top: 0;
  	left: 0;
  	right: 0;
- 	max-height:95px;
+	z-index: 1000;
 }
 
 .container {
@@ -203,7 +203,7 @@ h1, h2, th, td{
 .title-result {
 	cursor: pointer;
 	font-size: 1.3em;
-	font-family: 'Nanum Gothic Coding', monospace;
+	font-family: 'Gowun Dodum', sans-serif;
 }
 
 .small-font {

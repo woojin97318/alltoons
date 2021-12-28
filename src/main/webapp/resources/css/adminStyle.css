@@ -21,7 +21,6 @@ header {
   left: 0;
   right: 0;
   background: linear-gradient( to bottom, white 80%, transparent );
-  max-height:100px;
 }
 
 label{
@@ -46,10 +45,8 @@ label{
 }
 
 .menu-title {/*카테고리?*/
-	
 	font-weight: bold;
 	font-size : 40px;
-	/*font-family: 'Song Myung', serif;*/
 	font-family: 'Gowun Dodum', sans-serif;
 	margin : 5px 20px -40px 20px;
 }
