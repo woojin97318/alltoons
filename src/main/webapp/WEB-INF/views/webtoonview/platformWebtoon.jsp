@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/sort_nameStyle.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
+<link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/mainStyle.css">
 <script type="text/javascript">
 $(document).ready(function(){
 		if(location.hash){ 
@@ -230,14 +231,45 @@ function debounce(callback, limit = 100) {
 			</nav>
 		</div>
 	</header>
-	<h1>플랫폼 별 웹툰</h1>
-	<label id="nameKor">${platformView[0].platformNameKor }</label><!-- 플랫폼 명 뜸 -->
-	<select name="webtoonSort" id="webtoonSort" onchange="sort_webtoon()" >
-		<option value="nameAsc">제목 오름차순</option>
-		<option value="nameDesc">제목 내림차순</option>
-		<option value="viewCount">조회수 순</option>
-		<option value="popularity">인기순</option>
-	</select>
+	
+	<div style="padding-top: 70px;" class="container">
+		<h2>플랫폼 별 웹툰</h2>
+		<label id="nameKor">${platformView[0].platformNameKor }</label><!-- 플랫폼 명 뜸 -->
+		<select name="webtoonSort" id="webtoonSort" onchange="sort_webtoon()" >
+			<option value="nameAsc">제목 오름차순</option>
+			<option value="nameDesc">제목 내림차순</option>
+			<option value="viewCount">조회수 순</option>
+			<option value="popularity">인기순</option>
+		</select>
+		<div class="webtoon-result" id="platform_Change">
+			<c:forEach items="${platformView }" var="webtoonList">
+				<section class="webtoon-result-box" onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${webtoonList.webtoonNum}'">
+					<c:choose>
+						<c:when test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
+							<section class="webtoonImg">
+								<img id="webtoonImage" src="resources/img/webtoon/default_image.png" alt="선택된 이미지가 없습니다" />
+							</section>
+						</c:when>
+						<c:otherwise>
+							<section class="webtoonImg">
+								<img id="webtoonImage" src="${contextPath }/thumbnail?webtoonImage=${webtoonList.webtoonImage}" alt="썸네일이 존재" />
+							</section>
+							</c:otherwise>
+					</c:choose>
+					<section class="webtoon-result-title">
+						<label class="title-result">${webtoonList.webtoonTitle}</label><br>
+						<label class="small-font">${webtoonList.webtoonWriter}</label><br>
+					</section>
+				</section>
+			</c:forEach>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
 	<c:set var="i" value="0" />
 	<c:set var="j" value="3" />
 	<!-- 가로 n개씩 -->

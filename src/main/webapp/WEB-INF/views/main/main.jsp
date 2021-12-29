@@ -91,7 +91,6 @@ function debounce(callback, limit = 100) {
 		<c:import url="../default/menu.jsp"/>
 		<c:import url="../default/moveTopBtn.jsp"/>
 	</header>
-	
 	<div style="padding-top: 70px;" class="container">
 		<h2>전체보기 [ 인기순 ]</h2>
 		<div class="webtoon-result" id="paging">
