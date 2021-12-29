@@ -15,15 +15,21 @@
 		justify-content: center;
 	}
 
-	#logo {
-		
-		font-family: 'Nanum Gothic Coding', monospace;
-		transform: translate(-50%,-150%);
+	.header-container {
+		min-width: 320px;
+		max-width: 768px;
+		height: auto;
 	}
+
+	#logo {
+		transform: translate(-50%,-90%);
+	}
+
 	#logo a > img {
 		height: 50px;
 		width: auto;
 	}
+
 	input::-webkit-input-placeholder {
 		padding: auto;
 		color:#335999;
@@ -31,15 +37,21 @@
 	}
 
 	input:-ms-input-placeholder {
+		padding: auto;
 		color:#335999;
+		font-weight: bold;
 	}
 
 	textarea::-webkit-input-placeholder {
+		padding: auto;
 		color:#335999;
+		font-weight: bold;
 	}
 
 	textarea:-ms-input-placeholder {
+		padding: auto;
 		color:#335999;
+		font-weight: bold;
 	}
 
 	#searchBar {/*검색창+버튼*/
@@ -137,14 +149,16 @@ function hideId(id){
 <body>
 	<div>
 		<div id="main-title"><!-- 검색창&로고 -->
-			<span id="logo" class="center"><a href="${contextPath}/main"><img src="${contextPath}/resources/img/alltoons_logo.png" alt="AllToons"></a></span>
-			<div id="searchBar" class="center" class="wrap">
-				<form action="${contextPath }/main/webtoonSearch" method="POST">
-						<input type="text" name="search" class="searchIn" size="50" placeholder="원하는 웹툰을 찾아보세요 :)" value="${search}" required >
-						<button type="submit" class="searchBtn">
-							<ion-icon name="search"></ion-icon>
-						</button>
-				</form>
+			<div class="header-container">
+				<span id="logo" class="center"><a href="${contextPath}/main"><img src="${contextPath}/resources/img/alltoons_logo.png" alt="AllToons"></a></span>
+				<div id="searchBar" class="center" class="wrap">
+					<form action="${contextPath }/main/webtoonSearch" method="POST">
+							<input type="text" name="search" class="searchIn" size="50" placeholder="원하는 웹툰을 찾아보세요 :)" value="${search}" required >
+							<button type="submit" class="searchBtn">
+								<ion-icon name="search"></ion-icon>
+							</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>	

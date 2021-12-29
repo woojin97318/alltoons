@@ -72,12 +72,23 @@ header {
 	z-index: 1000;
 }
 
+footer {
+	
+}
+
 .container {
 	min-width: 320px;
 	max-width: 768px;
 	height: auto;
 	margin: 20px auto;
 	margin-top: 30px;
+}
+
+.center {/*정가운데*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 }
 
 .centered {/*가운데*/

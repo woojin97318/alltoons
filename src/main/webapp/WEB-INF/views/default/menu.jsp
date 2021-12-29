@@ -20,6 +20,10 @@
 	--star: rgb(255, 208, 0);
 }
 
+body {
+	padding-top: 90px;
+}
+
 a {
 	text-decoration: none;
 }
@@ -163,6 +167,7 @@ img#MOVE_TOP_BTN {
 
 	$(function() {
 		$(window).scroll(function() {
+			/*스크롤 내리면 top버튼 보임,숨김*/
 			if ($(this).scrollTop() > 500) {
 				$('#MOVE_TOP_BTN').fadeIn();
 			} else {
@@ -170,15 +175,16 @@ img#MOVE_TOP_BTN {
 			}
 		});
 
-		$("#MOVE_TOP_BTN").click(function() {/*맨 위로 이동*/
-			var overlay = document.getElementById('hideMenu-overlayId');
+		/*맨 위로 이동*/
+		$("#MOVE_TOP_BTN").click(function() {
 			$('html, body').animate({
 				scrollTop : 0
 			}, 400);
 			return false;
 		});
 
-		$('#hideMenu-overlayId').on('click', function (e) {/*오버레이 클릭시 메뉴 닫힘*/
+		/*오버레이 클릭시 메뉴 닫힘*/
+		$('#hideMenu-overlayId').on('click', function (e) {
 			if($('#hideMenu-overlayId').is(e.target)){
 				var overlay = document.getElementById('hideMenu-overlayId');
 				var menuBtn = document.getElementById('menuicon');
@@ -195,7 +201,8 @@ img#MOVE_TOP_BTN {
 		}
 	}
 
-	function moveMenu(obj){/*메뉴버튼 클릭시 메뉴 움직임*/
+/*메뉴버튼 클릭시 메뉴 움직임*/
+	function moveMenu(obj){
 		var menu = document.getElementById('hideMenuBodyId');
 		var overlay = document.getElementById('hideMenu-overlayId');
 		if(obj.checked == true){
@@ -210,7 +217,8 @@ img#MOVE_TOP_BTN {
 		}
 	}
 
-	function timeout(obj){ /*오버레이 사라짐*/
+/*오버레이 사라짐*/
+	function timeout(obj){ 
 		setTimeout(function() {
 		  	obj.style['visibility'] = "hidden";
 		  }, 0.35*1000);
@@ -220,7 +228,8 @@ img#MOVE_TOP_BTN {
 </head>
 
 <body>
-	<div id="menu-Btn" ><!-- 메뉴버튼 -->
+	<!-- 메뉴버튼 -->
+	<div id="menu-Btn" >
 	   <div class="center">
 		   <input type="checkbox" id="menuicon" onclick="moveMenu(this)">
 		   <label for="menuicon">
@@ -230,73 +239,80 @@ img#MOVE_TOP_BTN {
 		   </label>
 	   </div>
 	</div>
-
+	<!--메뉴바-->
 	<div class="hideMenuBody" id="hideMenuBodyId">
-			<ul id="menu1">
+		<!--플랫폼,장르,관심,즐찾-->
+		<ul id="menu1">
+			<li>
+				<a href="${contextPath}/webtoon/platformWebtoon?platformName=naver">
+					<span class="menutitle">플랫폼별 웹툰 </span>
+				</a>
+			</li>
+			<li>
+				<a href="${contextPath}/webtoon/genreWebtoon?webtoonGenre=g1">
+					<span class="menutitle">장르별 웹툰 </span>
+				</a>
+			</li>
+			<li>
+				<a href="${contextPath }/member/interest" onclick="loginChk()">
+					<span class="menutitle">관심목록 </span>
+					<span class="menuicon"><ion-icon name="heart-outline" class="heart"></ion-icon></span>
+				</a>
+			</li>
+			<li>
+				<a href="${contextPath }/member/favorites" onclick="loginChk()">
+					<span class="menutitle">즐겨찾기 </span>
+					<span class="menuicon"><ion-icon name="star-outline" class="star"></ion-icon></span>
+				</a>
+			</li>
+		</ul>
+
+		<!--관리자,로그인,로그아웃,마이페이지,메인-->
+		<ul id="menu2">
+			<c:if test="${division == 'admin' }">
 				<li>
-					<a href="${contextPath}/webtoon/platformWebtoon?platformName=naver">
-						<span class="menutitle">플랫폼별 웹툰 </span>
+					<a href="${contextPath }/admin/report">
+						<span class="menutitle">관리자 페이지 </span>
 					</a>
 				</li>
-				<li>
-					<a href="${contextPath}/webtoon/genreWebtoon?webtoonGenre=g1">
-						<span class="menutitle">장르별 웹툰 </span>
-					</a>
-				</li>
-				<li>
-					<a href="${contextPath }/member/interest" onclick="loginChk()">
-						<span class="menutitle">관심목록 </span>
-						<span class="menuicon"><ion-icon name="heart-outline" class="heart"></ion-icon></span>
-					</a>
-				</li>
-				<li>
-					<a href="${contextPath }/member/favorites" onclick="loginChk()">
-						<span class="menutitle">즐겨찾기 </span>
-						<span class="menuicon"><ion-icon name="star-outline" class="star"></ion-icon></span>
-					</a>
-				</li>
-			</ul>
-			<ul id="menu2">
-				<c:if test="${division == 'admin' }">
+			</c:if>
+			<c:choose>
+				<c:when test="${user == null }">
 					<li>
-						<a href="${contextPath }/admin/report">
-							<span class="menutitle">관리자 페이지 </span>
+						<a href="${contextPath }/member/login">
+							<span class="menutitle">로그인 </span>
+							<span class="menuicon"><ion-icon name="log-in-outline"></ion-icon></span>
 						</a>
 					</li>
-				</c:if>
-				<c:choose>
-					<c:when test="${user == null }">
-						<li>
-							<a href="${contextPath }/member/login">
-								<span class="menutitle">로그인 </span>
-								<span class="menuicon"><ion-icon name="log-in-outline"></ion-icon></span>
-							</a>
-						</li>
-					</c:when>
-					<c:otherwise>
-						<li>
-							<a href="${contextPath }/member/myPage">
-								<span class="menutitle">마이페이지 </span>
-								<span class="menuicon"><ion-icon name="person-outline"></ion-icon></span>
-							</a>
-						</li>
-						<li>
-							<a href="${contextPath }/member/logout">
-								<span class="menutitle">로그아웃 </span>
-								<span class="menuicon"><ion-icon name="log-out-outline"></ion-icon></span>
-							</a>
-						</li>
-					</c:otherwise>
-				</c:choose>
-				<li>
-					<a href="${contextPath }/main">
-						<span class="menutitle">HOME </span>
-						<span class="menuicon"><ion-icon name="home-outline"></ion-icon></span>
-					</a>
-				</li>
-			</ul>
-		</div>
+				</c:when>
+				<c:otherwise>
+					<li>
+						<a href="${contextPath }/member/myPage">
+							<span class="menutitle">마이페이지 </span>
+							<span class="menuicon"><ion-icon name="person-outline"></ion-icon></span>
+						</a>
+					</li>
+					<li>
+						<a href="${contextPath }/member/logout">
+							<span class="menutitle">로그아웃 </span>
+							<span class="menuicon"><ion-icon name="log-out-outline"></ion-icon></span>
+						</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			<li>
+				<a href="${contextPath }/main">
+					<span class="menutitle">HOME </span>
+					<span class="menuicon"><ion-icon name="home-outline"></ion-icon></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<!--오버레이-->
 	<div class="hideMenu-overlay" id="hideMenu-overlayId" ></div>
+
+	<!--맨위로 이동하는 버튼-->
 	<img id="MOVE_TOP_BTN" src="${contextPath}/resources/img/moveTopBtn.png">
 
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
