@@ -148,21 +148,21 @@ public class WebtoonViewServiceImpl implements WebtoonViewService {
 	}
 	
 	@Override	//인기페이지 작업 service
-	public void popularWebtoon(Model model) {
-		ArrayList<WebtoonCategoryDTO> popularPage = wvm.popularPage();
+	public ArrayList<WebtoonCategoryDTO> popularWebtoon(Model model,String start,String limit ) {
+		ArrayList<WebtoonCategoryDTO> popularPage = wvm.popularPage(start,limit);
 		popularPage = onlyPlatform(popularPage);
 		model.addAttribute("popularPage", popularPage);
+		return popularPage;
 	}
 	
-	//플랫폼 외 n개를 작업해주는 메소드(재사용)
-	private ArrayList<WebtoonCategoryDTO> onlyPlatform(ArrayList<WebtoonCategoryDTO> pageName) {
-		for(int i=0;i<pageName.size();i++) {
-			ArrayList<String> onlyPlatform = wvm.onlyPlatform(pageName.get(i).getWebtoonNum());
-			int count  = onlyPlatform.size()-1;
-			pageName.get(i).setPlatformName(onlyPlatform.get(0));
-			pageName.get(i).setPlatformNum(count);//외 n으로 쓰임
-		}return pageName;
-	}
-
+	//플랫폼 외 n개를 작업해주는 메소드
+		private ArrayList<WebtoonCategoryDTO> onlyPlatform(ArrayList<WebtoonCategoryDTO> pageName) {
+			for(int i=0;i<pageName.size();i++) {
+				ArrayList<String> onlyPlatform = wvm.onlyPlatform(pageName.get(i).getWebtoonNum());
+				int count  = onlyPlatform.size()-1;
+				pageName.get(i).setPlatformName(onlyPlatform.get(0));
+				pageName.get(i).setPlatformNum(count);//외 n으로 쓰임
+			}return pageName;
+		}
 	
 }

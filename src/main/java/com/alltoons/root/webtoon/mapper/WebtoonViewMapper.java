@@ -54,7 +54,7 @@ public interface WebtoonViewMapper {
 
 	ArrayList<WebtoonCategoryDTO> interestPage(String userEmail);
 
-	ArrayList<WebtoonCategoryDTO> popularPage();
+	ArrayList<WebtoonCategoryDTO> popularPage(@Param("start") String start,@Param("limit") String limit);
 
 	public void upHit(String webtoonNum);
 

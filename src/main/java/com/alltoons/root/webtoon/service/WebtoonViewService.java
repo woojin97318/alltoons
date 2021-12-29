@@ -31,6 +31,6 @@ public interface WebtoonViewService {
 
 	public void interestPage(Model model, String userEmail);
 
-	public void popularWebtoon(Model model);
+	public ArrayList<WebtoonCategoryDTO> popularWebtoon(Model model, String start, String limit);
 
 }
