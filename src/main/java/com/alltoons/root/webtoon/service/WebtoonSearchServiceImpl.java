@@ -22,7 +22,6 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 		ArrayList<WebtoonDTO> webtoonList = new ArrayList<WebtoonDTO>();
 		if(view.equals("titleList")) {
 			webtoonList = mapper.titleList(search);	//제목별 검색
-			
 		}else if(view.equals("writerList")) {
 			webtoonList = mapper.writerList(search);//작가명 검색
 		}
@@ -41,22 +40,23 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 		String platform;//플랫폼 결과값
 		
 		if(arr.size()!=0) {
-			for(int i=0; i<arr.size(); i++ ) {
+			for(int i=0; i<arr.size(); i++ ) {//플랫폼 값 arr에 추가
 				webtoonNum = arr.get(i).getWebtoonNum(); //웹툰식별번호
 				System.out.println("webtoonNum: "+webtoonNum);
-				platFirst = getplatFirst(webtoonNum);//첫번째 플랫폼
-				
-				if(platFirst == null) {
-					platform = "없음";
-				}else {
+				platFirst = getplatFirst(webtoonNum); //첫번째 플랫폼
+
+				if(platFirst.equals("없음")) {
+					platform = "정보 없음";
+				}else{
 					platform = platFirst;
-					platCnt = platCnt(webtoonNum);
+					platCnt = platCnt(webtoonNum); //플랫폼 수
 					if(platCnt>=2) {
-						platform += " 외 " + (platCnt-1)+"곳";//플랫폼 외 n곳
+						platform += " 외 "+(platCnt-1)+"곳"; //플랫폼1 외 n-1곳
 					}
-				}System.out.println(platform);
-				//platform = getplatformAll(webtoonNum); //플랫폼1/플랫폼2/플랫폼3...
-				
+					System.out.println("플랫폼: "+platform);
+					System.out.println("플랫폼 수: "+platCnt);
+					//platform = getplatformAll(webtoonNum); //플랫폼1/플랫폼2/플랫폼3...
+				}
 				arr.get(i).platformName = platform; //검색 결과에 플랫폼 값도 추가
 			}
 		}return arr;
@@ -74,30 +74,33 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 	
 	@Override
 	public String getplatFirst(int webtoonNum) {//첫번째 플랫폼 값만 가져옴, 한글이름
-		String platFirst = mapper.getplatFirst(webtoonNum);
-		System.out.println(platFirst);
+		String platFirst;
+		platFirst = mapper.getplatFirst(webtoonNum);
 		
-		if(platFirst.equals("kakaoWebtoon")) {
-			platFirst = kor.getKakaoWebtoon();
-		}else if (platFirst.equals("ridibooks")) {
-			platFirst = kor.getRidibooks();
-		}else if (platFirst.equals("naver")) {
-			platFirst = kor.getNaver();
-		}else if (platFirst.equals("naverSeries")) {
-			platFirst = kor.getNaverSeries();
-		}else if (platFirst.equals("kakaoPage")) {
-			platFirst = kor.getKakaoPage();
-		}else if (platFirst.equals("lezhin")) {
-			platFirst = kor.getLezhin();
-		}else if (platFirst.equals("toptoon")) {
-			platFirst = kor.getToptoon();
-		}else if (platFirst.equals("mrblue")) {
-			platFirst = kor.getMrblue();
-		}else if (platFirst.equals("munpia")) {
-			platFirst = kor.getMunpia();
-		}else {
+		if(platFirst == null) {
 			platFirst = "없음";
+		}else{
+			if(platFirst.equals("kakaoWebtoon")) {
+				platFirst = kor.getKakaoWebtoon();
+			}else if (platFirst.equals("ridibooks")) {
+				platFirst = kor.getRidibooks();
+			}else if (platFirst.equals("naver")) {
+				platFirst = kor.getNaver();
+			}else if (platFirst.equals("naverSeries")) {
+				platFirst = kor.getNaverSeries();
+			}else if (platFirst.equals("kakaoPage")) {
+				platFirst = kor.getKakaoPage();
+			}else if (platFirst.equals("lezhin")) {
+				platFirst = kor.getLezhin();
+			}else if (platFirst.equals("toptoon")) {
+				platFirst = kor.getToptoon();
+			}else if (platFirst.equals("mrblue")) {
+				platFirst = kor.getMrblue();
+			}else if (platFirst.equals("munpia")) {
+				platFirst = kor.getMunpia();
+			}
 		}
+		System.out.println("getplatFirst: "+platFirst);
 		return platFirst;
 	}
 	
@@ -105,8 +108,4 @@ public class WebtoonSearchServiceImpl implements WebtoonSearchService{
 		int platCnt = mapper.platCnt(webtoonNum);
 		return platCnt;
 	}
-
-	
-
-	
 }

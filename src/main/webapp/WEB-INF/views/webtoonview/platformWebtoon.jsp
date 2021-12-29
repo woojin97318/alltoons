@@ -212,14 +212,10 @@ function debounce(callback, limit = 100) {
 </script>
 </head>
 <body>
-	<c:import url="../default/moveTopBtn.jsp"/>
 	<header>
 		<c:import url="../default/header.jsp"/>
 		<c:import url="../default/menu.jsp"/>
-		<!-- 어드민 페이지 헤더 -->
-		<c:import url="./header/webtoonHeader.jsp">
-			<c:param name="tag" value="플랫폼 별 웹툰"></c:param>
-		</c:import>
+		
 		<div class="scrollBtn">
 			<nav>
 				<ul id="platform">
@@ -234,6 +230,7 @@ function debounce(callback, limit = 100) {
 			</nav>
 		</div>
 	</header>
+	<h1>플랫폼 별 웹툰</h1>
 	<label id="nameKor">${platformView[0].platformNameKor }</label><!-- 플랫폼 명 뜸 -->
 	<select name="webtoonSort" id="webtoonSort" onchange="sort_webtoon()" >
 		<option value="nameAsc">제목 오름차순</option>
