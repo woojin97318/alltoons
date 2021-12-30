@@ -10,8 +10,6 @@
 <title>리뷰 신고하기</title>
 </head>
 <body>
-	<c:import url="../default/menu.jsp"/>
-	<c:import url="../default/moveTopBtn.jsp"/>
 	<div align="center">
 		<h3>리뷰 신고하기</h3>
 		<form action="${contextPath }/webtoon/reportinsert" method="post">
