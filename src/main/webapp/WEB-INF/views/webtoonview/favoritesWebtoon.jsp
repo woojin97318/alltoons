@@ -14,7 +14,11 @@
 <body>
 	<header>
 		<div class="head">
-			<h1 class="txt-align-center">즐겨찾기</h1>
+			<h1 class="txt-align-center"><span class="menuicon">
+				<span class="menuicon"><ion-icon name="star" class="star"></ion-icon></span>
+				즐겨찾기
+				<span class="menuicon"><ion-icon name="star" class="star"></ion-icon></span>
+			</h1>
 		</div>
 	</header>
 	<c:import url="../default/menu.jsp"/>
@@ -61,5 +65,7 @@
 		</c:otherwise>
 	</c:choose>
 </div>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

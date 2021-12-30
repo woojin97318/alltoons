@@ -10,15 +10,8 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mainStyle.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>Insert title here</title>
-<style>
+<style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap');
-
-:root {
-	--blue: rgb(0,119,255);
-	--skyblueL: rgb(174, 209, 255);
-	--heart: rgb(255, 38, 0);
-	--star: rgb(255, 208, 0);
-}
 
 body {
 	padding-top: 90px;
