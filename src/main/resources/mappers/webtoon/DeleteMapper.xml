@@ -16,7 +16,10 @@
 		<result property="webtoonGenre" column="webtoon_genre"/>
 	</resultMap>
 	<select id="webtoonAllList" resultMap="wtnList">
-		select * from webtoon_info order by webtoon_num ASC
+		select * from(
+			select * from webtoon_info order by webtoon_num desc
+		)
+		<![CDATA[WHERE rownum <= 100]]>
 	</select>
 	<select id="writerList" resultMap="wtnList">
 		select * from webtoon_info where webtoon_writer like '%'||#{search}||'%' order by webtoon_num ASC
@@ -30,5 +33,13 @@
 	<delete id="deleteWebtoon" >
 		delete from webtoon_info where webtoon_num=#{webtoonNum}
 	</delete>
+	
+	<select id="paging" resultMap="wtnList">
+		select * from(
+   		 	select a.*,rownum as num	from
+     		 (select * from webtoon_info order by webtoon_num desc
+     		 )a
+     		  )<![CDATA[WHERE num between #{start} and #{limit}]]>
+	</select>
 	
 </mapper>
