@@ -94,17 +94,6 @@
 		background-color:rgba(111, 173, 255, 0.56);
 		backdrop-filter: blur(8px);
 	}
-
-	#menu-Btn {order: 2; width:50px;height:50px;position:absolute;top:50%;left:30px;transform:translate(10%,-50%);border-radius:100%;}
-	input[id="menuicon"] {display:none;}
-	input[id="menuicon"] + label {display:block;width:30px;height:30px;position:relative;cursor:pointer;}
-	input[id="menuicon"] + label span {display:block;position:absolute;width:100%;height:4px;border-radius:30px;background:white;transition:all .35s;}
-	input[id="menuicon"] + label span:nth-child(1) {top:10%;}
-	input[id="menuicon"] + label span:nth-child(2) {top:50%;transform:translateY(-50%);} /* 비슷하게 사용할 수 있는 style top:calc(50% - 2.5px); margin-top:-2.5px;*/
-	input[id="menuicon"] + label span:nth-child(3) {bottom:10%;}
-	input[id="menuicon"]:checked + label span:nth-child(1) {top:50%;transform:translateY(-50%) rotate(45deg);}
-	input[id="menuicon"]:checked + label span:nth-child(2) {opacity:0;}
-	input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:translateY(50%) rotate(-45deg);}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

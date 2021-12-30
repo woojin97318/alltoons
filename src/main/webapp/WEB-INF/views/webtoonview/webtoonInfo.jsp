@@ -225,8 +225,8 @@ function mailCut(mail) {
 				</c:choose>
 				<!--하트,별-->
 				<section class="heart-star-icon">
-					<span id="icount"></span><img src="" onclick="interestClick()" id="interest">${intesrestCount }</span>
-					<span id="fcount"></span><img src="" onclick="favoritesClick()" id="favorites">${favoritesCount }</span>
+					<img src="" onclick="interestClick()" id="interest"><span id="icount">${intesrestCount }</span>
+					<img src="" onclick="favoritesClick()" id="favorites"><span id="fcount">${favoritesCount }</span>
 				</section>
 			</div>
 			<div class="webtooninfo-content">

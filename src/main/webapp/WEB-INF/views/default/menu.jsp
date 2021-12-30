@@ -161,6 +161,11 @@ img#MOVE_TOP_BTN {
 	cursor: pointer;
 }
 
+.xsmall-font {
+	font-size: 0.6em;
+	font-family: 'Nanum Gothic Coding', monospace;
+}
+
 </style>
 
 <script>

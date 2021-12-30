@@ -82,24 +82,6 @@
 		}
 	}
 
-	:root {
-		--blue: rgb(0,119,255);
-		--skyblueL: rgb(174, 209, 255);
-		--heart: rgb(255, 38, 0);
-		--star: rgb(255, 208, 0);
-		--grayL: rgb(245, 245, 245);
-	}
-
-	.blue {
-		color: var(--blue);
-	}
-
-	.centered {/*가운데*/
-		position: absolute;
-		left: 50%; 
-		transform: translateX(-50%);
-	}
-
 	.container {
     min-width: 320px;
 		max-width: 768px;
@@ -124,69 +106,6 @@
 		display: inline-block;
 		font-size: 2em;
 		font-weight: 400;
-	}
-
-	.reverse {
-		transform: scaleX(-1);
-	}
-
-	.webtoon-result {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		align-content: start;
-	}
-
-	.webtoon-result-box {
-		border-image: linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
-    border-image-slice: 1;
-		border-radius: 10px;
-		float: left;
-		margin: 10px;
-		width: 110px;
-		height: 170px;
-		cursor: pointer;
-		background-color:rgba(174, 209, 255, 0.56);
-		backdrop-filter: blur(8px);
-		overflow: hidden;
-	}
-
-	.webtoon-result-box:hover .webtoonImg img {
-		transform: scale(1.2);
-	}
-
-	.webtoonImg {
-		border-radius: 5px;
-		overflow: hidden;
-		padding: auto;
-		height: 100px;
-		width: 110px;
-	}
-
-	.webtoonImg img {
-		transition: all .35s linear;
-		width: 100%;
-		min-height: 100px;
-		min-width: 110px;
-		height: auto;
-	}
-
-	.webtoon-result-title {
-		white-space: nowrap; /*줄넘김 없음*/
-		text-overflow: ellipsis; /*...처리*/
-		overflow : hidden;
-		cursor: pointer;
-	}
-
-	.title-result {
-		cursor: pointer;
-		font-size: 1.3em;
-	}
-
-	.small-font {
-		cursor: pointer;
-		font-size: 0.8em;
 	}
 
 </style>
@@ -235,9 +154,9 @@
 										</c:otherwise>
 									</c:choose>
 									<section class="webtoon-result-title">
-										<label class="title-result">${dto.webtoonTitle }</label><br>
-										<label class="small-font">${dto.webtoonWriter }</label><br>
-										<label class="small-font">${dto.platformName }</label>
+										<label class="title-result pointer">${dto.webtoonTitle }</label><br>
+										<label class="small-font pointer">${dto.webtoonWriter }</label><br>
+										<label class="xsmall-font pointer">${dto.platformName }</label>
 									</section>
 								</section>
 							</c:forEach>

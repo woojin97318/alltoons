@@ -72,10 +72,6 @@ header {
 	z-index: 1000;
 }
 
-footer {
-	
-}
-
 .container {
 	min-width: 320px;
 	max-width: 768px;
@@ -211,14 +207,21 @@ h1, h2, th, td{
 	cursor: pointer;
 }
 
-.title-result {
+.pointer {
 	cursor: pointer;
+}
+
+.title-result {
 	font-size: 1.3em;
 	font-family: 'Gowun Dodum', sans-serif;
 }
 
 .small-font {
-	cursor: pointer;
 	font-size: 0.8em;
+	font-family: 'Nanum Gothic Coding', monospace;
+}
+
+.xsmall-font {
+	font-size: 0.6em;
 	font-family: 'Nanum Gothic Coding', monospace;
 }

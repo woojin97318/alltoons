@@ -35,9 +35,9 @@
 							</c:otherwise>
 					</c:choose>
 					<section class="webtoon-result-title">
-						<label class="title-result">${webtoonList.webtoonTitle}</label><br>
-						<label class="small-font">${webtoonList.webtoonWriter}</label><br>
-						<label class="small-font">
+						<label class="title-result pointer">${webtoonList.webtoonTitle}</label><br>
+						<label class="small-font pointer">${webtoonList.webtoonWriter}</label><br>
+						<label class="xsmall-font pointer">
 							${webtoonList.platformName} 
 							<c:if test="${webtoonList.platformNum !=0}"> 외 ${webtoonList.platformNum}곳</c:if>
 						</label>
