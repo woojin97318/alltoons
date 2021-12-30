@@ -158,7 +158,7 @@
 		
 		
 		<h2>전체</h2>
-		<table border="1">
+		<table border="1" id="paging">
 			<tr class="table-top">
 				<th>썸네일</th>
 				<th>수정</th>

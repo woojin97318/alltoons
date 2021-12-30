@@ -16,7 +16,7 @@ $(document).ready(function(){
 		if(location.hash){ 
 			var data = history.state; 
 			if(data){ 
-				$('#platformChange').html(data.list); 
+				$('#platform_Change').html(data.list); 
 				$("#nameKor").html(data.kor_name);
 				nowPlatform=data.nowPlatform;
 				sortValue=data.sortValue;
@@ -127,32 +127,24 @@ $(document).ready(function(){
 <script type="text/javascript">
 /* html출력문 */
 function insertPlatform(platformView){
-	$("#platformChange").html("")
 	$("#platform_Change").html("")
 	let html="";
-	html += "<table border=1 id='platform_Change'>";
-	var i=0; var j=3;
 	$.each(platformView,function(index,webtoonList){
 		nowPlatform=webtoonList.platformName;
 		p_name =webtoonList.platformNameKor;
-		if(i%j ==0){
-			html += "<tr>"
-		}
-		html += "<td><a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
+		
+		html += "<a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'><section class='webtoon-result-box'>"
 		if(webtoonList.webtoonImage == 'default_image.png'){
-			html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
+			html += "<section class='webtoonImg'><img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' alt='선택된 이미지가 없습니다' /></section>"
 		}else{
-			html += "<img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"'width=200 height=200 alt='this has image' />"
+			html += "<section class='webtoonImg'><img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"' alt='썸네일이 존재' /></section>"
 		}
-		html += "<br>"
+		html += "<section class='webtoon-result-title'>"
 		html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
-		html += "<label>"+webtoonList.webtoonWriter+"</label></a></td>"
-		if(i%j == j-1){
-			html += "</tr>"	
-		}
-		i += 1;
-	});html += "</table>"
-	$("#platformChange").html(html)
+		html += "<label class='small-font'>"+webtoonList.webtoonWriter+"</label><br>" 
+		html += "</section></section></a>"
+	});
+	$("#platform_Change").html(html)
 	total_list +=html;
 	$("#nameKor").html(p_name);
 	history.replaceState({list:total_list,kor_name:p_name,nowPlatform:nowPlatform, sortValue: sortValue},'', '${contextPath}/webtoon/platformWebtoon##');
@@ -162,26 +154,19 @@ function insertPlatform(platformView){
 /* append */
 function insertList(platformView){
 	let html="";
-	var i=0; var j=3;
 	$.each(platformView,function(index,webtoonList){
 		nowPlatform=webtoonList.platformName;
 		p_name =webtoonList.platformNameKor;
-		if(i%j ==0){
-			html += "<tr>"
-		}
-		html += "<td><a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
+		html += "<a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'><section class='webtoon-result-box'>"
 		if(webtoonList.webtoonImage == 'default_image.png'){
-			html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
+			html += "<section class='webtoonImg'><img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' alt='선택된 이미지가 없습니다' /></section>"
 		}else{
-			html += "<img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"'width=200 height=200 alt='this has image' />"
+			html += "<section class='webtoonImg'><img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"' alt='썸네일이 존재' /></section>"
 		}
-		html += "<br>"
+		html += "<section class='webtoon-result-title'>"
 		html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
-		html += "<label>"+webtoonList.webtoonWriter+"</label></a></td>"
-		if(i%j == j-1){
-			html += "</tr>"	
-		}
-		i += 1;
+		html += "<label class='small-font'>"+webtoonList.webtoonWriter+"</label><br>" 
+		html += "</section></section></a>"
 	});
 	$("#platform_Change").append(html)
 }
@@ -263,44 +248,6 @@ function debounce(callback, limit = 100) {
 				</section>
 			</c:forEach>
 		</div>
-	</div>
-	
-	
-	
-	
-	
-	
-	<c:set var="i" value="0" />
-	<c:set var="j" value="3" />
-	<!-- 가로 n개씩 -->
-	<div id="platformChange">
-		<table border=1 id="platform_Change">
-			<c:forEach items="${platformView }" var="webtoonList">
-				<c:if test="{i%j == 0}">
-					<tr>
-				</c:if>
-				<td><a
-					href="${contextPath}/webtoon/webtooninfo?webtoonNum=${webtoonList.webtoonNum}">
-						<c:choose>
-							<c:when
-								test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
-								<img id="webtoonImage"
-									src="${contextPath }/resources/img/webtoon/default_image.png"
-									width=200 height=200 alt="선택된 이미지가 없습니다" />
-							</c:when>
-							<c:otherwise>
-								<img id="webtoonImage"
-									src="${contextPath }/thumbnail?webtoonImage=${webtoonList.webtoonImage}"
-									width=200 height=200 alt="썸네일이 존재" />
-							</c:otherwise>
-						</c:choose> <br> <label>${webtoonList.webtoonTitle}</label><br> <label>${webtoonList.webtoonWriter}</label>
-				</a></td>
-				<c:if test="${i%j == j-1}">
-					</tr>
-				</c:if>
-				<c:set var="i" value="${i+1}" />
-			</c:forEach>
-		</table>
 	</div>
 </body>
 </html>

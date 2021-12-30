@@ -157,15 +157,15 @@
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g6">판타지 &ensp; 
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g7">액션 &ensp; 
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g8">드라마 &ensp; <br>
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g9">순정 &ensp; 
+			<!-- <input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g9">순정 &ensp;  -->
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g10">감성 &ensp; 
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g11">스릴러 &ensp; 
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; <br>
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g12">시대극 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g13">스포츠 &ensp; <br>
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g14">로맨스 &ensp; 	
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g15">무협 &ensp; 
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g16">소년 &ensp; 	<br>
-			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g17">BL &ensp; 	
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g16">소년 &ensp; 
+			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g17">BL &ensp; 		<br>
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g18">백합 &ensp; 
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g19">미스터리 &ensp; 	
 			<input type="checkbox" id="webtoonGenre" name="webtoonGenre" value="g20">학원 &ensp; <br>	

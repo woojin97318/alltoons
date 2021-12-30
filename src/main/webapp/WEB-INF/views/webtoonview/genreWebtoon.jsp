@@ -15,7 +15,7 @@ $(document).ready(function(){
 		if(location.hash){ 
 			var data = history.state; 
 			if(data){ 
-				$('#platformChange').html(data.list); 
+				$('#platform_Change').html(data.list); 
 				$('#nameKor').html(data.kor_name); 
 				nowGenre=data.nowGenre;
 				sortValue=data.sortValue;
@@ -124,29 +124,21 @@ function genreChange(genre) {
 function insertGenre(genreView){
 	let html="";
 	let g_name=null;
-	html += "<table border=1 id='platform_Change'>";
-	var i=0; var j=3;
 	$.each(genreView,function(index,webtoonList){
 		g_name=webtoonList.webtoonGenreKor
 		nowGenre=webtoonList.webtoonGenre
-		if(i%j ==0){
-			html += "<tr>"
-		}
-		html += "<td><a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
+		html += "<a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'><section class='webtoon-result-box'>"
 		if(webtoonList.webtoonImage == 'default_image.png'){
-			html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
+			html += "<section class='webtoonImg'><img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' alt='선택된 이미지가 없습니다' /></section>"
 		}else{
-			html += "<img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"'width=200 height=200 alt='this has image' />"
+			html += "<section class='webtoonImg'><img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"' alt='썸네일이 존재' /></section>"
 		}
-		html += "<br>"
+		html += "<section class='webtoon-result-title'>"
 		html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
-		html += "<label>"+webtoonList.webtoonWriter+"</label>	</a></td>"
-		if(i%j == j-1){
-			html += "</tr>"	
-		}
-		i += 1;
-	});html += "</table>"
-	$("#platformChange").html(html);
+		html += "<label class='small-font'>"+webtoonList.webtoonWriter+"</label><br>" 
+		html += "</section></section></a>"
+	});
+	$("#platform_Change").html(html);
 	total_list +=html;
 	$("#nameKor").html(g_name); 
 	console.log("장르이름"+g_name)
@@ -160,22 +152,16 @@ function insertList(genreView){
 	$.each(genreView,function(index,webtoonList){
 		nowGenre=webtoonList.webtoonGenre;
 		g_name=webtoonList.webtoonGenreKor
-		if(i%j ==0){
-			html += "<tr>"
-		}
-		html += "<td><a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'>"
+		html += "<a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ webtoonList.webtoonNum+"'><section class='webtoon-result-box'>"
 		if(webtoonList.webtoonImage == 'default_image.png'){
-			html += "<img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' width=200 height=200 alt='no image' />"
+			html += "<section class='webtoonImg'><img id='webtoonImage' src='${contextPath}/resources/img/webtoon/default_image.png' alt='선택된 이미지가 없습니다' /></section>"
 		}else{
-			html += "<img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"'width=200 height=200 alt='this has image' />"
+			html += "<section class='webtoonImg'><img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"' alt='썸네일이 존재' /></section>"
 		}
-		html += "<br>"
+		html += "<section class='webtoon-result-title'>"
 		html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
-		html += "<label>"+webtoonList.webtoonWriter+"</label>	</a></td>"
-		if(i%j == j-1){
-			html += "</tr>"	
-		}
-		i += 1;
+		html += "<label class='small-font'>"+webtoonList.webtoonWriter+"</label><br>" 
+		html += "</section></section></a>"
 	});
 	$("#platform_Change").append(html)
 }
@@ -224,7 +210,7 @@ function debounce(callback, limit = 100) {
 					<li><button	class="listBtn" onclick="genreChange('g6')">판타지</button></li>
 					<li><button	class="listBtn" onclick="genreChange('g7')">액션</button></li>
 					<li><button	class="listBtn" onclick="genreChange('g8')">드라마</button></li>
-					<li><button	class="listBtn" onclick="genreChange('g9')">순정</button></li>
+					<!-- <li><button	class="listBtn" onclick="genreChange('g9')">순정</button></li> -->
 					<li><button	class="listBtn" onclick="genreChange('g10')">감성</button></li>
 					<li><button	class="listBtn" onclick="genreChange('g11')">스릴러</button></li>
 					<li><button	class="listBtn" onclick="genreChange('g12')">시대극</button></li>
@@ -240,6 +226,41 @@ function debounce(callback, limit = 100) {
 			</nav>
 		</div>
 	</header>
+	
+	<div style="padding-top: 70px;" class="container">
+		<h2>플랫폼 별 웹툰</h2>
+		<label id="nameKor">${genreView[0].webtoonGenreKor }</label><!-- 플랫폼 명 뜸 -->
+		<select name="webtoonSort" id="webtoonSort" onchange="sort_webtoon()" >
+			<option value="nameAsc">제목 오름차순</option>
+			<option value="nameDesc">제목 내림차순</option>
+			<option value="viewCount">조회수 순</option>
+			<option value="popularity">인기순</option>
+		</select>
+		<div class="webtoon-result" id="platform_Change">
+			<c:forEach items="${genreView }" var="webtoonList">
+				<section class="webtoon-result-box" onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${webtoonList.webtoonNum}'">
+					<c:choose>
+						<c:when test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
+							<section class="webtoonImg">
+								<img id="webtoonImage" src="resources/img/webtoon/default_image.png" alt="선택된 이미지가 없습니다" />
+							</section>
+						</c:when>
+						<c:otherwise>
+							<section class="webtoonImg">
+								<img id="webtoonImage" src="${contextPath }/thumbnail?webtoonImage=${webtoonList.webtoonImage}" alt="썸네일이 존재" />
+							</section>
+							</c:otherwise>
+					</c:choose>
+					<section class="webtoon-result-title">
+						<label class="title-result">${webtoonList.webtoonTitle}</label><br>
+						<label class="small-font">${webtoonList.webtoonWriter}</label><br>
+					</section>
+				</section>
+			</c:forEach>
+		</div>
+	</div>
+	
+	<%-- 
 	<label id="nameKor">${genreView[0].webtoonGenreKor }</label><!-- 장르 명 뜸 -->
 	<select name="webtoonSort" id="webtoonSort" onchange="sort_webtoon()" >
 		<option value="nameAsc">제목 오름차순</option>
@@ -278,7 +299,7 @@ function debounce(callback, limit = 100) {
 				<c:set var="i" value="${i+1}" />
 			</c:forEach>
 		</table>
-	</div>
+	</div> --%>
 </div>
 </body>
 </html>
