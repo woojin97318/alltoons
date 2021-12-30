@@ -64,6 +64,15 @@ font-family: 'Nanum Gothic Coding', monospace;
 	transition: all 1s;
 }
 
+.head {
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	height: 100px;
+	background-color:rgba(111, 173, 255, 0.56);
+	backdrop-filter: blur(8px);
+}
+
 header {
 	position: fixed;
   top: 0;
@@ -72,8 +81,14 @@ header {
 	z-index: 1000;
 }
 
+#main-title {
+	height: 100px;
+	background-color:rgba(111, 173, 255, 0.56);
+	backdrop-filter: blur(8px);
+}
+
 .container {
-	min-width: 320px;
+	min-width: 360px;
 	max-width: 768px;
 	height: auto;
 	margin: 20px auto;
@@ -224,4 +239,8 @@ h1, h2, th, td{
 .xsmall-font {
 	font-size: 0.6em;
 	font-family: 'Nanum Gothic Coding', monospace;
+}
+
+.txt-align-center {
+	text-align: center;
 }

@@ -6,55 +6,60 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>favorites Page</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
+<link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/mainStyle.css">
+<title>즐겨찾기</title>
 </head>
+
 <body>
-	<c:import url="../default/moveTopBtn.jsp"/>
-	<c:import url="../default/menu.jsp"/>
 	<header>
-		<c:import url="./header/webtoonHeader.jsp">
-			<c:param name="tag" value="즐겨찾기"/>
-		</c:import>
+		<div class="head">
+			<h1 class="txt-align-center">즐겨찾기</h1>
+		</div>
 	</header>
+	<c:import url="../default/menu.jsp"/>
+<div class="container">
 	<c:choose>
 		<c:when test="${favortiesPage.isEmpty()}">
-			<label>즐겨찾기 작품이 없습니다.</label>
+			<table>
+				<tr>
+					<th>
+						<label class="small-font">즐겨찾는 작품이 없습니다.</label>
+					</th>
+				</tr>
+			</table>
 		</c:when>
 		<c:otherwise>
-			<c:set var="i" value="0" />
-			<c:set var="j" value="3" />
-			<!-- 가로 n개씩 -->
-			<table border=1>
-				<c:forEach items="${favortiesPage }" var="webtoonList">
-					<c:if test="{i%j == 0}">
-						<tr>
-					</c:if>
-					<td><a href="${contextPath}/webtoon/webtooninfo?webtoonNum=${webtoonList.webtoonNum}">
-							<c:choose>
-								<c:when
-									test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
-									<img id="webtoonImage"
-										src="${contextPath }/resources/img/webtoon/default_image.png"
-										width=200 height=200 alt="선택된 이미지가 없습니다" />
-								</c:when>
-								<c:otherwise>
-									<img id="webtoonImage"
-										src="${contextPath }/thumbnail?webtoonImage=${webtoonList.webtoonImage}"
-										width=200 height=200 alt="썸네일이 존재" />
-								</c:otherwise>
-							</c:choose> <br> <label>${webtoonList.webtoonTitle}</label><br> <label>${webtoonList.webtoonWriter}</label><br>
-							<label>${webtoonList.platformName}</label> <c:if
-								test="${webtoonList.platformNum !=0}">외 ${webtoonList.platformNum}</c:if>
-					</a></td>
-					<c:if test="${i%j == j-1}">
-						</tr>
-					</c:if>
-					<c:set var="i" value="${i+1}" />
-				</c:forEach>
-			</table>
+			<c:forEach items="${favortiesPage }" var="webtoonList">
+				<section class="webtoon-result-box" onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${webtoonList.webtoonNum}'">
+					<c:choose>
+						<c:when test="${webtoonList.webtoonImage=='default_image'||webtoonList.webtoonImage=='default_image.png'}">
+							<section class="webtoonImg">
+								<img id="webtoonImage"
+									src="${contextPath }/resources/img/webtoon/default_image.png"
+									alt="선택된 이미지가 없습니다"/>
+							</section>
+						</c:when>
+						<c:otherwise>
+							<section class="webtoonImg">
+								<img id="webtoonImage"
+									src="${contextPath }/thumbnail?webtoonImage=${webtoonList.webtoonImage}"
+									alt="썸네일이 존재"/>
+							</section>
+						</c:otherwise>
+					</c:choose>
+					<section class="webtoon-result-title">
+						<label class="title-result pointer">${webtoonList.webtoonTitle}</label><br>
+						<label class="small-font pointer">${webtoonList.webtoonWriter}</label><br>
+						<label class="xsmall-font pointer">
+							${webtoonList.platformName} 
+							<c:if test="${webtoonList.platformNum !=0}"> 외 ${webtoonList.platformNum}</c:if>
+						</label>
+					</section>
+				</section>
+			</c:forEach>
 		</c:otherwise>
 	</c:choose>
+</div>
 </body>
 </html>

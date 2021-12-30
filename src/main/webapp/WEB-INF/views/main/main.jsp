@@ -6,15 +6,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AllToons</title>
 <meta name="viewport"content="width=device-width, initial-scale=1.0, user-scalable=yes,	maximum-scale=1.0, minimum-scale=1.0" />
 <link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/mainStyle.css">
+<title>AllToons</title>
 </head>
-<body>
+
+<body style="margin-top: -80px;">
 	<header>
 		<c:import url="../default/header.jsp"/>
 		<c:import url="../default/menu.jsp"/>
-		<c:import url="../default/moveTopBtn.jsp"/>
 	</header>
 	
 	<div style="padding-top: 70px;" class="container">

@@ -16,7 +16,7 @@
 	}
 
 	.header-container {
-		min-width: 320px;
+		min-width: 360px;
 		max-width: 768px;
 		height: auto;
 	}
@@ -136,21 +136,19 @@ function hideId(id){
 <c:url var="main" value='main'/>
 
 <body>
-	<div>
-		<div id="main-title"><!-- 검색창&로고 -->
-			<div class="header-container">
-				<span id="logo" class="center"><a href="${contextPath}/main"><img src="${contextPath}/resources/img/alltoons_logo.png" alt="AllToons"></a></span>
-				<div id="searchBar" class="center" class="wrap">
-					<form action="${contextPath }/main/webtoonSearch" method="POST">
-							<input type="text" name="search" class="searchIn" size="50" placeholder="원하는 웹툰을 찾아보세요 :)" value="${search}" required >
-							<button type="submit" class="searchBtn">
-								<ion-icon name="search"></ion-icon>
-							</button>
-					</form>
-				</div>
+	<div id="main-title"><!-- 검색창&로고 -->
+		<div class="header-container">
+			<span id="logo" class="center"><a href="${contextPath}/main"><img src="${contextPath}/resources/img/alltoons_logo.png" alt="AllToons"></a></span>
+			<div id="searchBar" class="center" class="wrap">
+				<form action="${contextPath }/main/webtoonSearch" method="POST">
+						<input type="text" name="search" class="searchIn" size="50" placeholder="원하는 웹툰을 찾아보세요 :)" value="${search}" required >
+						<button type="submit" class="searchBtn">
+							<ion-icon name="search"></ion-icon>
+						</button>
+				</form>
 			</div>
 		</div>
-	</div>	
+	</div>
  
 </body>
 </html>

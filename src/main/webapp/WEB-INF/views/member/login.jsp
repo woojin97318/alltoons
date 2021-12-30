@@ -91,8 +91,5 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
-	<footer>
-		<jsp:include page="../default/footer.jsp"/>
-	</footer>
 </body>
 </html>

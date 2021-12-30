@@ -100,22 +100,14 @@
 		text-align: center;
 	}
 
-	hr::after {
-		content: '\f4b4';
-		font-family: "Font Awesome 5 Free";
-		display: inline-block;
-		font-size: 2em;
-		font-weight: 400;
-	}
-
 </style>
 </head>
 
 <body style="padding-top: 70px;">
 	<header>
 		<c:import url="../default/header.jsp"/>
-		<c:import url="../default/menu.jsp"/>
 	</header>
+	<c:import url="../default/menu.jsp"/>
 
 	<div class="container">
 		<div class="scrollBtn">

@@ -2,7 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
-<%@  taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,24 +145,25 @@ function mailCut(mail) {
 </script>
 <style type="text/css">
 	.webtooninfo-img-content {
-
+		width: 100%;
 	}
 
 	.webtooninfo-img {
 		width: 200px;
 		height: 200px;
 		overflow: hidden;
-		display: inline;
+		display: inline-block;
 	}
 
 	.webtooninfo-content {
-		padding: 10%;
+		padding: 20px;
 	}
 
-	.webtooninfo-img > .thumbnail {
+	.webtooninfo-img .thumbnail {
 		width: 200px;
 		height: 200px;
 		object-fit: cover;
+		border-radius: 10px;
 	}
 
 	#platform{
@@ -200,147 +201,157 @@ function mailCut(mail) {
 
 </style>
 </head>
+
 <body>
 	<header>
 		<c:import url="../default/header.jsp"/>
 		<c:import url="../default/menu.jsp"/>
 	</header>
 
-<div class="container">
-	<h1>작품 상세 페이지</h1>
+	<div class="container">
+		<h1>작품 상세 페이지</h1>
 		<div class="webtooninfo-img-content">
-			<!--썸네일-->
-			<div class="webtooninfo-img">
-				<c:choose>
-					<c:when test="${webtoonDate.webtoonImage=='default_image.png'}">
-						<img class="thumbnail"
-						src="${contextPath}/resources/img/webtoon/default_image.png"
-						alt="선택된 이미지가 없습니다" />
-					</c:when>
-					<c:otherwise>
-						<img class="thumbnail"
-						src="${contextPath }/thumbnail?webtoonImage=${webtoonDate.webtoonImage}"
-						alt="썸네일 존재" />
-					</c:otherwise>
-				</c:choose>
-				<!--하트,별-->
-				<section class="heart-star-icon">
-					<img src="" onclick="interestClick()" id="interest"><span id="icount">${intesrestCount }</span>
-					<img src="" onclick="favoritesClick()" id="favorites"><span id="fcount">${favoritesCount }</span>
-				</section>
-			</div>
-			<div class="webtooninfo-content">
-				<h2>${webtoonDate.webtoonTitle}</h2><br>
-				<h4><b>작가명</b>${webtoonDate.webtoonWriter }</h4><br>
-			</div>
+		<table>
+			<tr style="height: 230px;">
+				<td style="width: 200px;">
+					<!--썸네일-->
+					<div class="webtooninfo-img">
+						<c:choose>
+							<c:when test="${webtoonDate.webtoonImage=='default_image.png'}">
+								<img class="thumbnail"
+								src="${contextPath}/resources/img/webtoon/default_image.png"
+								alt="선택된 이미지가 없습니다">
+							</c:when>
+							<c:otherwise>
+								<img class="thumbnail"
+								src="${contextPath }/thumbnail?webtoonImage=${webtoonDate.webtoonImage}"
+								alt="썸네일 존재">
+							</c:otherwise>
+						</c:choose>
+						<!--하트,별-->
+						<section class="heart-star-icon">
+							<img src="" onclick="interestClick()" id="interest"><span id="icount">${intesrestCount }</span>
+							<img src="" onclick="favoritesClick()" id="favorites"><span id="fcount">${favoritesCount }</span>
+						</section>
+					</div>
+				</td>
+				<td>
+					<div class="webtooninfo-content">
+						<h2>${webtoonDate.webtoonTitle}</h2>
+						<h4>작가명</h4>
+						<label class="small-font">${webtoonDate.webtoonWriter }</label> 
+					</div>
+				</td>
+			</tr>
+		</table>
 		</div>
 
-	<b><label class="title-result">보러가기</label></b>
+		<hr>
 
-	<div id="platform">
-	<c:forEach var="list" items="${platformList}">
-		<div>
-			<img class="platform-img"
-				src="${contextPath}/resources/img/webtoon/logo/${list.platformName}.png"
-				onclick="location.href='${list.webtoonLink}'"><br>
-				${list.platformNameKor }
-			<%-- <button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button> --%>
-		</div>
-	</c:forEach>
-	</div>
+		<b><label class="title-result">보러가기</label></b>
 
-	<c:if test="${originList[0].webtoonOriginalLink !='nan'}">
-		<b><label class="title-result">원작 소설 보러가기!</label></b>
-		<br>
-		<div id="platform">
-			<c:forEach var="origin" items="${originList }">
-				<div>
-					<img class="platform-img"
-						src="${contextPath}/resources/img/webtoon/logo/${origin.originalPlatform}.png"
-						onclick="location.href='${origin.webtoonOriginalLink}'"><br>
-						${origin.originalPlatformKor }
-					<%-- <button type="button" onclick="location.href='${origin.webtoonOriginalLink}'" >${origin.originalPlatform}</button> --%>
-				</div>
+		<section id="platform">
+			<c:forEach var="list" items="${platformList}">
+				<img class="platform-img"
+					src="${contextPath}/resources/img/webtoon/logo/${list.platformName}.png"
+					onclick="location.href='${list.webtoonLink}'"><br>
+					${list.platformNameKor }
+				<%-- <button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button> --%>
 			</c:forEach>
-		</div>
-   </c:if>
+		</section>
 
-	 <hr>
+		<c:if test="${originList[0].webtoonOriginalLink !='nan'}">
+			<hr>
 
-   <label class="title-result"><b>작품 소개글</b></label><br>
-   <label>${webtoonDate.webtoonContent }</label>
-
-	<table>
-		<tr><td colspan="3"><hr></td></tr>
-		<tr><th colspan="3">${reviewCnt }개의 리뷰</th></tr>
-		<tr><td colspan="3"><hr></td></tr>
-		<c:choose>
-			<c:when test="${myReview == 'n' }">
-				<tr><th colspan="3">리뷰 작성은 로그인이 필요합니다</th></tr>
-			</c:when>
-			<c:otherwise>
-				<c:choose>
-					<c:when test="${myReview == null }">
-						<tr><th colspan="3">리뷰 작성</th></tr>
-						<tr>
-							<td colspan="2">
-								<form action="${contextPath }/webtoon/review/reviewInsert" method="post">
-									<input type="hidden" name="webtoonNum" value="${webtoonDate.webtoonNum }">
-									<input type="hidden" name="userEmail" value="${user }">
-									<textarea rows="5" cols="20" name="reviewContent"></textarea>
-							</td>
-							<td>
-									<input type="submit" value="작성">
-								</form>
-							</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<th colspan="2">내가 작성한 리뷰</th>
-							<td>
-								<button type="button" onclick="location.href='${contextPath}/webtoon/review/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
-									삭제
-								</button>
-							</td>
-						</tr>
-						<tr><td colspan="3">${myReview.reviewContent }</td></tr>
-						<tr><td colspan="3">작성 시간 : ${myReview.reviewTime }</td></tr>
-					</c:otherwise>
-				</c:choose>
-			</c:otherwise>
-		</c:choose>
-		<tr><td colspan="3"><hr></td></tr>
-		<c:choose>
-			<c:when test="${reviewList.isEmpty() }">
-				<tr><th colspan="3">작성된 리뷰가 없습니다</th></tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach var="review" items="${reviewList }">
-					<tr>
-						<td class="td">
-							<section class="profil">
-							<img src="${contextPath }/member/userImageView?file=${review.userImage }"
-								width="50px" height="50px">
-							</section>
-						</td>
-						<th><script>mailCut('${review.userEmail }')</script></th>
-						<td class="td">
-							<c:if test="${user != null }">
-								<button type="button" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
-									신고
-								</button>
-							</c:if>
-						</td>
-					</tr>
-					<tr><td colspan="3">${review.reviewContent }</td></tr>
-					<tr><td colspan="3">${review.reviewTime }</td></tr>
-					<tr><td colspan="3"><hr></td></tr>
+			<b><label class="title-result">원작 소설 보러가기!</label></b><br>
+			<section id="platform">
+				<c:forEach var="origin" items="${originList }">
+					<span>
+						<img class="platform-img"
+							src="${contextPath}/resources/img/webtoon/logo/${origin.originalPlatform}.png"
+							onclick="location.href='${origin.webtoonOriginalLink}'"><br>
+						${origin.originalPlatformKor }<!--플랫폼 이름-->
+						<%-- <button type="button" onclick="location.href='${origin.webtoonOriginalLink}'" >${origin.originalPlatform}</button> --%>
+					</span>
 				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-	</table>
-</div>
+			</section>
+		</c:if>
+
+		<hr>
+
+		<label class="title-result"><b>작품 소개글</b></label><br>
+		<label>${webtoonDate.webtoonContent }</label>
+
+		<table>
+			<tr><td colspan="3"><hr></td></tr>
+			<tr><th colspan="3">${reviewCnt }개의 리뷰</th></tr>
+			<tr><td colspan="3"><hr></td></tr>
+			<c:choose>
+				<c:when test="${myReview == 'n' }">
+					<tr><th colspan="3">리뷰 작성은 로그인이 필요합니다</th></tr>
+				</c:when>
+				<c:otherwise>
+					<c:choose>
+						<c:when test="${myReview == null }">
+							<tr><th colspan="3">리뷰 작성</th></tr>
+							<tr>
+								<td colspan="2">
+									<form action="${contextPath }/webtoon/review/reviewInsert" method="post">
+										<input type="hidden" name="webtoonNum" value="${webtoonDate.webtoonNum }">
+										<input type="hidden" name="userEmail" value="${user }">
+										<textarea rows="5" cols="20" name="reviewContent"></textarea>
+								</td>
+								<td>
+										<input type="submit" value="작성">
+									</form>
+								</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<th colspan="2">내가 작성한 리뷰</th>
+								<td>
+									<button type="button" onclick="location.href='${contextPath}/webtoon/review/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
+										삭제
+									</button>
+								</td>
+							</tr>
+							<tr><td colspan="3">${myReview.reviewContent }</td></tr>
+							<tr><td colspan="3">작성 시간 : ${myReview.reviewTime }</td></tr>
+						</c:otherwise>
+					</c:choose>
+				</c:otherwise>
+			</c:choose>
+			<tr><td colspan="3"><hr></td></tr>
+			<c:choose>
+				<c:when test="${reviewList.isEmpty() }">
+					<tr><th colspan="3">작성된 리뷰가 없습니다</th></tr>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="review" items="${reviewList }">
+						<tr>
+							<td class="td">
+								<section class="profil">
+									<img src="${contextPath }/member/userImageView?file=${review.userImage }">
+								</section>
+							</td>
+							<th><script>mailCut('${review.userEmail }')</script></th>
+							<td class="td">
+								<c:if test="${user != null }">
+									<button type="button" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
+										신고
+									</button>
+								</c:if>
+							</td>
+						</tr>
+						<tr><td colspan="3">${review.reviewContent }</td></tr>
+						<tr><td colspan="3">${review.reviewTime }</td></tr>
+						<tr><td colspan="3"><hr></td></tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</table>
+	</div>
 <footer>
 	<c:import url="../default/footer.jsp"/>
 </footer>
