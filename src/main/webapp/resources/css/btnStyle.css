@@ -1,0 +1,113 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Serif+KR&display=swap');
+/*font-family: 'Noto Serif KR', serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Poor+Story&family=Song+Myung&display=swap');
+/*
+font-family: 'Poor Story', cursive;
+font-family: 'Black Han Sans', sans-serif;
+font-family: 'Song Myung', serif;
+font-family: 'Gowun Dodum', sans-serif;
+버튼 컬러:70A9FF, rgb(255, 191, 43)
+*/
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap');
+/*
+font-family: 'Nanum Gothic Coding', monospace;
+*/
+
+:root {
+  --blue: rgb(0, 119, 255);
+  --blueD: rgb(0, 87, 187);
+  --skyblueL: rgb(174, 209, 255);
+  --skyblue: #70A9FF;
+  --skyblueD: #418ee4;
+  --heart: rgb(255, 38, 0);
+  --star: rgb(255, 208, 0);
+  --grayL: rgb(245, 245, 245);
+  --grayML: rgb(226, 226, 226);
+  --grayD: rgb(73, 73, 73);
+}
+
+/*파란색 버튼 + 흰 텍스트*/
+.small-btn-blue-white {
+  color: white;
+  height: 25px;
+  padding: auto;
+  border: none;
+  border-radius: 30px;
+  background-color: var(--blue);
+  font-family: 'Nanum Gothic Coding', monospace;
+}
+
+.small-btn-blue-white:hover {
+  background-color: var(--blueD);
+}
+
+/*횡스크롤 버튼*/
+.scrollBtn>nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  white-space: nowrap;
+  margin: 10px 0 0;
+}
+
+.scrollBtn>nav ul li {
+  margin: 0 5px;
+}
+
+.listBtn {
+  cursor: pointer;
+  border: none;
+  background-color: #70A9FF;
+  padding: 2px 15px;
+  height: 40px;
+  color: white;
+  border-radius: 40px;
+  text-align: center;
+  font-size: 17px;
+  font-family: 'Poor Story', cursive;
+}
+
+.listBtn:hover {
+  background-color: rgb(255, 191, 43);
+}
+
+.listBtn:active {
+  /*box-shadow:inset 0 0 20px #ca7a01;*/
+  background-color: rgb(255, 191, 43);
+}
+
+/*플랫폼 버튼*/
+.platform-btn {
+  cursor: pointer;
+  border: none;
+  position: relative;
+  background-color: var(--skyblue);
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+  font-family: 'Nanum Gothic Coding', monospace;
+  margin-left: 10px;
+}
+
+.platform-btn:hover {
+  background-color: var(--skyblueD);
+}
+
+.gray-btn {
+  margin: 10px 0;
+  width: 100%;
+  height: 40px;
+  background-color: var(--grayML);
+  border: none;
+  border-radius: 10px;
+  color: #7a7a7a;
+  font-size: 1.1em;
+  font-family: 'Nanum Gothic Coding', monospace;
+  cursor: pointer;
+}
+
+.gray-btn:hover {
+  background-color: #c4c4c4;
+}

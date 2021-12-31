@@ -10,237 +10,274 @@ font-family: 'Gowun Dodum', sans-serif;
 버튼 컬러:70A9FF, rgb(255, 191, 43)
 */
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap');
+
 /*
 font-family: 'Nanum Gothic Coding', monospace;
 */
 :root {
-   --blue: rgb(0,119,255);
-   --skyblueL: rgb(174, 209, 255);
-   --heart: rgb(255, 38, 0);
-   --star: rgb(255, 208, 0);
-   --grayL: rgb(245, 245, 245);
+  --blue: rgb(0, 119, 255);
+  --blueD: rgb(0, 87, 187);
+  --skyblueL: rgb(174, 209, 255);
+  --heart: rgb(255, 38, 0);
+  --star: rgb(255, 208, 0);
+  --grayL: rgb(245, 245, 245);
+  --grayML: rgb(226, 226, 226);
+  --grayLD: rgb(171, 171, 171);
+  --grayD: rgb(73, 73, 73);
 }
 
-@media all and (min-width:320px){ 
-   .webtoon-result-box {
-      float: left;
-      margin: 10px;
-      width: 120px;
-      height: 150px;
-      padding: 10px;
-      cursor: pointer;
-   }
-
-   .webtoonImg img {
-      width: 70px;
-      height: 70px;
-   }
+#heart {
+	color: var(--heart);
 }
 
-@media all and (min-width:768px){ 
-
-    
+#star {
+	color: var(--star);
 }
 
-@media all and (min-width:1024px){ 
-
-    
-}
-
-::-webkit-scrollbar {/*스크롤바 전체*/
-    background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {/*스크롤 막대*/
-    background-color: rgba(209, 209, 209, 0.3);
-    border-radius: 10px;
-    background-clip: padding-box;
-    border: 6px solid transparent;
+@media all and (min-width:360px) {
+  .webtoon-result-box {
+    float: left;
+    margin: 10px;
+    width: 120px;
+    height: 150px;
+    padding: 10px;
+    cursor: pointer;
   }
 
-::-webkit-scrollbar-thumb:hover{
-  	background-color: rgba(191, 210, 255, 0.8);
-  	border: 5.5px solid transparent;
-   	transition: all 1s;
+  .webtoonImg img {
+    width: 70px;
+    height: 70px;
+  }
 }
 
+@media all and (min-width:768px) {}
+
+@media all and (min-width:1024px) {}
+
+/*스크롤바*/
+::-webkit-scrollbar {
+  /*스크롤바 전체*/
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  /*스크롤 막대*/
+  background-color: rgba(209, 209, 209, 0.3);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 6px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(191, 210, 255, 0.8);
+  border: 5.5px solid transparent;
+  transition: all 1s;
+}
+
+/*헤더*/
 .head {
-	position: fixed;
-	top: 0;
-	width: 100vw;
-	height: 100px;
-	background-color:rgba(111, 173, 255, 0.56);
-	backdrop-filter: blur(8px);
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100px;
+  background-color: rgba(111, 173, 255, 0.56);
+  backdrop-filter: blur(8px);
 }
 
 header {
-   	position: fixed;
-  	top: 0;
- 	left: 0;
- 	right: 0;
-	z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 #main-title {
-	height: 100px;
-	background-color:rgba(111, 173, 255, 0.56);
-	backdrop-filter: blur(8px);
+  height: 100px;
+  background-color: rgba(111, 173, 255, 0.56);
+  backdrop-filter: blur(8px);
 }
 
-.container {
-	min-width: 360px;
-	max-width: 768px;
-	height: auto;
-	margin: 20px auto;
-	margin-top: 30px;
-}
-
-.center {/*정가운데*/
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%,-50%);
-}
-
-.centered {/*가운데*/
-   position: absolute;
-   left: 50%; 
-   transform: translateX(-50%);
-}
-
+/*태그*/
 a {
-   text-decoration: none;
+  text-decoration: none;
 }
 
-.scrollBtn > nav ul {/*횡스크롤 버튼*/
-   list-style: none;
-   display: flex;
-   justify-content: flex-start;
-   overflow-x:scroll;
-   white-space:nowrap;
-   margin : 10px 0 0;
+hr.hr-bord {
+  height: 2px;
+  border: 0 none;
+  color: #bbb;
+  background-color: #bbb;
+  width: 95%;
+  text-align: center;
 }
 
-.scrollBtn > nav ul li {
-   margin : 0 5px;
+hr.hr-dashed {
+  border-top: 1px dashed #bbb;
+}
+
+h1,
+h2,
+th,
+td {
+  font-family: 'Gowun Dodum', sans-serif;
+  border-left: none;
+  border-right: none;
+}
+
+/*컨테이너*/
+.container {
+  min-width: 360px;
+  max-width: 768px;
+  height: auto;
+  margin: 20px auto;
+  margin-top: 30px;
+}
+
+/*위치*/
+.center {
+  /*정가운데*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centered {
+  /*가운데*/
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/*크기*/
+.width-100 {
+  width: 100%;
+}
+
+/*횡스크롤 버튼*/
+.scrollBtn>nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  white-space: nowrap;
+  margin: 10px 0 0;
+}
+
+.scrollBtn>nav ul li {
+  margin: 0 5px;
 }
 
 .listBtn {
-   cursor: pointer;
-   border: none;
-   background-color: #70A9FF;
-   padding : 2px 15px;
-   height: 40px;
-   color: white;
-   border-radius: 40px;
-   text-align: center;
-   font-size: 17px;
-   font-family: 'Poor Story', cursive;
+  cursor: pointer;
+  border: none;
+  background-color: #70A9FF;
+  padding: 2px 15px;
+  height: 40px;
+  color: white;
+  border-radius: 40px;
+  text-align: center;
+  font-size: 17px;
+  font-family: 'Poor Story', cursive;
 }
 
 .listBtn:hover {
-   background-color: rgb(255, 191, 43);
+  background-color: rgb(255, 191, 43);
 }
 
-.listBtn:active{
-   /*box-shadow:inset 0 0 20px #ca7a01;*/
-   background-color: rgb(255, 191, 43);
+.listBtn:active {
+  /*box-shadow:inset 0 0 20px #ca7a01;*/
+  background-color: rgb(255, 191, 43);
 }
 
-header {
-   position: fixed;
-   z-index: 1000;
+/*포인터*/
+.pointer {
+  cursor: pointer;
 }
 
-hr {
-   height: 2px;
-   border: 0 none;
-   color: var(--grayL);
-   background-color: var(--grayL);
-   width: 95%;
-   text-align: center;
-}
-
-h1, h2, th, td{
-   font-family: 'Gowun Dodum', sans-serif;
-   border-left: none;
-   border-right: none;
-}
-
-.small-font {
-   font-family: 'Nanum Gothic Coding', monospace;
-}
-
+/*좌우반대*/
 .reverse {
-   transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
+.block {
+  display: block;
+}
+
+/*웹툰 목록*/
 .webtoon-result {
-   display: flex;
-   flex-direction: row;
-   flex-wrap: wrap;
-   justify-content: space-between;
-   align-content: start;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: start;
 }
 
 .webtoon-result-box {
-   border-radius: 10px;
-   float: left;
-   margin: 10px;
-   width: 110px;
-   height: 170px;
-   cursor: pointer;
-   background-color:rgba(174, 209, 255, 0.56);
-   backdrop-filter: blur(8px);
-   overflow: hidden;
-}
-
-.webtoon-result-box:hover .webtoonImg img {
-   transform: scale(1.2);
-}
-
-.webtoonImg {
-   border-radius: 5px;
-   overflow: hidden;
-   padding: auto;
-   height: 100px;
-   width: 110px;
-}
-
-.webtoonImg img {
-   transition: all .35s linear;
-   width: 100%;
-   min-height: 100px;
-   min-width: 110px;
-   height: auto;
+  border-radius: 10px;
+  float: left;
+  margin: 10px;
+  width: 110px;
+  height: 170px;
+  cursor: pointer;
+  background-color: rgba(174, 209, 255, 0.56);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
 }
 
 .webtoon-result-title {
-   white-space: nowrap; /*줄넘김 없음*/
-   text-overflow: ellipsis; /*...처리*/
-   overflow : hidden;
-   cursor: pointer;
+  white-space: nowrap;
+  /*줄넘김 없음*/
+  text-overflow: ellipsis;
+  /*...처리*/
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.pointer {
-	cursor: pointer;
+/*웹툰 썸네일*/
+.webtoonImg {
+  border-radius: 5px;
+  overflow: hidden;
+  padding: auto;
+  height: 100px;
+  width: 110px;
 }
 
+.webtoonImg img {
+  transition: all .35s linear;
+  width: 100%;
+  min-height: 100px;
+  min-width: 110px;
+  height: auto;
+}
+
+.webtoon-result-box:hover .webtoonImg img {
+  transform: scale(1.2);
+}
+
+/*폰트, 크기*/
 .title-result {
-	font-size: 1.3em;
-	font-family: 'Gowun Dodum', sans-serif;
+  font-size: 1.3em;
+  font-family: 'Gowun Dodum', sans-serif;
+}
+
+.godic-font {
+  font-family: 'Nanum Gothic Coding', monospace;
 }
 
 .small-font {
-	font-size: 0.8em;
-	font-family: 'Nanum Gothic Coding', monospace;
+  line-height: 1.2em;
+  font-size: 0.8em;
+  font-family: 'Nanum Gothic Coding', monospace;
 }
 
 .xsmall-font {
-	font-size: 0.6em;
-	font-family: 'Nanum Gothic Coding', monospace;
+  line-height: 1.1em;
+  font-size: 0.6em;
+  font-family: 'Nanum Gothic Coding', monospace;
 }
 
 .txt-align-center {
-	text-align: center;
+  text-align: center;
 }

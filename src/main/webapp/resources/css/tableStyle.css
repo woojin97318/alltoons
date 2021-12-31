@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+}
+
+th {
+  align: center;
+}
+
+.table-center {
+  padding: auto;
+  width: 100%;
+}
+
+.txt-align-center {
+  text-align: center;
+}
+
+.td-padding {
+  align: center;
+  padding: 20px;
+}

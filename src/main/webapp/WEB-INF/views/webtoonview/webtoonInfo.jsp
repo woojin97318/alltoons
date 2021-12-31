@@ -10,6 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <title>작품 상세페이지</title>
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mainStyle.css">
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/btnStyle.css">
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/tableStyle.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -177,7 +179,7 @@ function mailCut(mail) {
 	}
 
 	.heart-star-icon {
-			position: absolute;
+		position: absolute;
 	}
 
 	#interest, #favorites {
@@ -186,10 +188,6 @@ function mailCut(mail) {
 		height: 20px;
 	}
 	
-	table {
-		width: 100%;
-	}
-
 	.td {
 		width: 50px;
 	}
@@ -197,6 +195,36 @@ function mailCut(mail) {
 	.profil {
 		width: 50px;
 		height: 50px;
+		border-radius: 100%;
+	}
+
+	textarea {
+		padding: 10px;
+		resize: none;
+		border: none;
+		background: var(--grayML);
+		border-radius: 5px;
+	}
+
+	textarea:focus {
+		background: var(--grayL);
+	}
+	
+	.relative{
+		position: relative;
+	}
+	
+	th div textarea, th div button {
+		vertical-align: middle;
+	}
+	
+	.width-100 {
+		width: 100%;
+	}
+
+	.content-box {
+		padding: 15px;
+		background-color: var(--grayML);
 	}
 
 </style>
@@ -209,10 +237,10 @@ function mailCut(mail) {
 	</header>
 
 	<div class="container">
+		<div class="webtooninfo-img-content" style="margin: 0 20px 50px 20px;">
 		<h1>작품 상세 페이지</h1>
-		<div class="webtooninfo-img-content">
 		<table>
-			<tr style="height: 230px;">
+			<tr style="height: 250px;">
 				<td style="width: 200px;">
 					<!--썸네일-->
 					<div class="webtooninfo-img">
@@ -237,8 +265,9 @@ function mailCut(mail) {
 				</td>
 				<td>
 					<div class="webtooninfo-content">
+						<!--제목-->
 						<h2>${webtoonDate.webtoonTitle}</h2>
-						<h4>작가명</h4>
+						<b><label class="godic-font">작가명</label></b><br>
 						<label class="small-font">${webtoonDate.webtoonWriter }</label> 
 					</div>
 				</td>
@@ -246,86 +275,116 @@ function mailCut(mail) {
 		</table>
 		</div>
 
-		<hr>
-
-		<b><label class="title-result">보러가기</label></b>
-
-		<section id="platform">
-			<c:forEach var="list" items="${platformList}">
-				<img class="platform-img"
-					src="${contextPath}/resources/img/webtoon/logo/${list.platformName}.png"
-					onclick="location.href='${list.webtoonLink}'"><br>
-					${list.platformNameKor }
-				<%-- <button type="button" onclick="location.href='${list.webtoonLink}'" >${list.platformName }</button> --%>
-			</c:forEach>
-		</section>
-
-		<c:if test="${originList[0].webtoonOriginalLink !='nan'}">
-			<hr>
-
-			<b><label class="title-result">원작 소설 보러가기!</label></b><br>
-			<section id="platform">
-				<c:forEach var="origin" items="${originList }">
-					<span>
-						<img class="platform-img"
-							src="${contextPath}/resources/img/webtoon/logo/${origin.originalPlatform}.png"
-							onclick="location.href='${origin.webtoonOriginalLink}'"><br>
-						${origin.originalPlatformKor }<!--플랫폼 이름-->
-						<%-- <button type="button" onclick="location.href='${origin.webtoonOriginalLink}'" >${origin.originalPlatform}</button> --%>
-					</span>
-				</c:forEach>
-			</section>
-		</c:if>
-
-		<hr>
-
-		<label class="title-result"><b>작품 소개글</b></label><br>
-		<label>${webtoonDate.webtoonContent }</label>
+		<hr class="hr-dashed">
 
 		<table>
-			<tr><td colspan="3"><hr></td></tr>
-			<tr><th colspan="3">${reviewCnt }개의 리뷰</th></tr>
-			<tr><td colspan="3"><hr></td></tr>
+			<tr>
+				<td class="td-padding">
+					<section id="platform">
+						<b>
+							<label class="title-result" style="position: relative; top:10px; margin-right: 10px;">
+							웹툰 보러가기
+							<span style="position: relative; bottom:5px;">👉</span>
+							</label>
+						</b>
+						<!--웹툰 플랫폼 이름-->
+						<c:forEach var="list" items="${platformList}">
+							<button class="platform-btn" onclick="location.href='${list.webtoonLink}'">
+								<img class="platform-img"
+									src="${contextPath}/resources/img/webtoon/logo/${list.platformName}.png"
+									onclick="location.href='${list.webtoonLink}'"><br>
+								${list.platformNameKor }
+								<%-- ${list.platformName } --%>
+							</button>
+						</c:forEach>
+					</section>
+				</td>
+			</tr>
+		</table>
+
+		<!--원작이 있을 경우-->
+		<c:if test="${originList[0].webtoonOriginalLink !='nan'}">
+			<hr>
+			<table>
+				<td class="td-padding">
+					<b><label class="title-result" style="position: relative; top:10px; margin-right: 10px;">원작 소설 보러가기!</label></b><br>
+					<section id="platform">
+						<!--원작 플랫폼 이름-->
+						<c:forEach var="origin" items="${originList }">
+							<span>
+								<button class="platform-btn" onclick="location.href='${origin.webtoonOriginalLink}'" >
+								<img class="platform-img"
+									src="${contextPath}/resources/img/webtoon/logo/${origin.originalPlatform}.png"
+									onclick="location.href='${origin.webtoonOriginalLink}'"><br>
+									${origin.originalPlatformKor }
+									<%-- ${origin.originalPlatform} --%>
+								</button>
+							</span>
+						</c:forEach>
+					</section>
+				</td>
+			</table>
+		</c:if>
+
+		<hr class="hr-dashed">
+
+		<div style="padding: 20px;">
+			<label class="title-result"><b>작품 소개글</b></label><br>
+			<section class="content-box">
+				<label class="godic-font">${webtoonDate.webtoonContent }</label>
+			</section>
+		</div>
+		
+		<table>
+			<tr><td><hr></td></tr>
+			<tr><th>${reviewCnt }개의 리뷰가 존재합니다.</th></tr>
+			<tr><td><hr></td></tr>
 			<c:choose>
 				<c:when test="${myReview == 'n' }">
-					<tr><th colspan="3">리뷰 작성은 로그인이 필요합니다</th></tr>
+					<tr><th>리뷰 작성을 원하시면 로그인이 필요합니다.</th></tr>
 				</c:when>
 				<c:otherwise>
 					<c:choose>
 						<c:when test="${myReview == null }">
-							<tr><th colspan="3">리뷰 작성</th></tr>
 							<tr>
-								<td colspan="2">
+								<th>
 									<form action="${contextPath }/webtoon/review/reviewInsert" method="post">
 										<input type="hidden" name="webtoonNum" value="${webtoonDate.webtoonNum }">
 										<input type="hidden" name="userEmail" value="${user }">
-										<textarea rows="5" cols="20" name="reviewContent"></textarea>
-								</td>
-								<td>
-										<input type="submit" value="작성">
+										<div class="table-center">
+											<textarea rows="5" cols="30" name="reviewContent" placeholder="친절한 리뷰를 달아주세요:)"></textarea>
+											<button class="small-btn-blue-white" type="submit" value="작성">작성하기</button>
+										</div>
 									</form>
-								</td>
+								</th>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<tr>
 								<th colspan="2">내가 작성한 리뷰</th>
 								<td>
-									<button type="button" onclick="location.href='${contextPath}/webtoon/review/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
+									<button onclick="location.href='${contextPath}/webtoon/review/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
 										삭제
 									</button>
 								</td>
 							</tr>
-							<tr><td colspan="3">${myReview.reviewContent }</td></tr>
-							<tr><td colspan="3">작성 시간 : ${myReview.reviewTime }</td></tr>
+							<tr><td>${myReview.reviewContent }</td></tr>
+							<tr><td>작성 시간 : ${myReview.reviewTime }</td></tr>
 						</c:otherwise>
 					</c:choose>
 				</c:otherwise>
 			</c:choose>
-			<tr><td colspan="3"><hr></td></tr>
+			<tr>
+				<td><hr></td>
+			</tr>
 			<c:choose>
 				<c:when test="${reviewList.isEmpty() }">
-					<tr><th colspan="3">작성된 리뷰가 없습니다</th></tr>
+					<tr>
+						<th>
+							아직 작성된 리뷰가 없습니다.<br>
+							여러분의 소중한 리뷰를 달아주세요!
+						</th>
+					</tr>
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="review" items="${reviewList }">
@@ -338,22 +397,23 @@ function mailCut(mail) {
 							<th><script>mailCut('${review.userEmail }')</script></th>
 							<td class="td">
 								<c:if test="${user != null }">
-									<button type="button" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
-										신고
+									<button title="신고하기" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
+										신고하기
 									</button>
 								</c:if>
 							</td>
 						</tr>
-						<tr><td colspan="3">${review.reviewContent }</td></tr>
-						<tr><td colspan="3">${review.reviewTime }</td></tr>
-						<tr><td colspan="3"><hr></td></tr>
+						<tr><td>${review.reviewContent }</td></tr>
+						<tr><td>${review.reviewTime }</td></tr>
+						<tr><td><hr></td></tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</table>
-	</div>
-<footer>
-	<c:import url="../default/footer.jsp"/>
-</footer>
+
+	<footer>
+		<c:import url="../default/footer.jsp"/>
+	</footer>
+</div>
 </body>
 </html>

@@ -14,7 +14,7 @@
 <body>
 	<header>
 		<div class="head">
-			<h1 class="txt-align-center"><span class="menuicon">
+			<h1 class="txt-align-center">
 				<span class="menuicon"><ion-icon name="star" class="star"></ion-icon></span>
 				즐겨찾기
 				<span class="menuicon"><ion-icon name="star" class="star"></ion-icon></span>

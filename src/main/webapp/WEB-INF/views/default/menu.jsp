@@ -227,16 +227,17 @@ img#MOVE_TOP_BTN {
 
 <body>
 	<!-- 메뉴버튼 -->
-	<div id="menu-Btn" >
-	   <div class="center">
-		   <input type="checkbox" id="menuicon" onclick="moveMenu(this)">
-		   <label for="menuicon">
-			   <span></span>
-			   <span></span>
-			   <span></span>
-		   </label>
-	   </div>
+	<div id="menu-Btn">
+		<div class="center">
+			<input type="checkbox" id="menuicon" onclick="moveMenu(this)">
+			<label for="menuicon">
+				<span></span>
+				<span></span>
+				<span></span>
+			</label>
+		</div>
 	</div>
+	
 	<!--메뉴바-->
 	<div class="hideMenuBody" id="hideMenuBodyId">
 		<!--플랫폼,장르,관심,즐찾-->

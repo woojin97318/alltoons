@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Serif+KR&display=swap');
 /*font-family: 'Noto Serif KR', serif;*/
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Poor+Story&family=Song+Myung&display=swap');
+
 /*
 font-family: 'Poor Story', cursive;
 font-family: 'Black Han Sans', sans-serif;
@@ -16,136 +17,145 @@ body {
 
 header {
 	position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient( to bottom, white 80%, transparent );
+	top: 0;
+	left: 0;
+	right: 0;
+	background: linear-gradient(to bottom, white 80%, transparent);
 }
 
-label{
+label {
 	font-family: 'Gowun Dodum', sans-serif;
 }
 
-::-webkit-scrollbar {/*스크롤바 전체*/
-  background-color: transparent;
+::-webkit-scrollbar {
+	/*스크롤바 전체*/
+	background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb {/*스크롤 막대*/
-  background-color: rgba(209, 209, 209, 0.3);
-  border-radius: 10px;
-  background-clip: padding-box;
-  border: 6px solid transparent;
+::-webkit-scrollbar-thumb {
+	/*스크롤 막대*/
+	background-color: rgba(209, 209, 209, 0.3);
+	border-radius: 10px;
+	background-clip: padding-box;
+	border: 6px solid transparent;
 }
 
-::-webkit-scrollbar-thumb:hover{
+::-webkit-scrollbar-thumb:hover {
 	background-color: rgba(191, 210, 255, 0.8);
 	border: 5.5px solid transparent;
 	transition: all 1s;
 }
 
-.menu-title {/*카테고리?*/
+.menu-title {
+	/*카테고리?*/
 	font-weight: bold;
-	font-size : 40px;
+	font-size: 40px;
 	font-family: 'Gowun Dodum', sans-serif;
-	margin : 5px 20px -40px 20px;
+	margin: 5px 20px -40px 20px;
 }
 
 a {
 	cursor: pointer;
 }
 
-h1, h2, th, td{
+h1,
+h2,
+th,
+td {
 	font-family: 'Gowun Dodum', sans-serif;
 	border-left: none;
 	border-right: none;
 }
 
-table{
-	padding : 10px;
+table {
+	padding: 10px;
 	border-left: none;
 	border-right: none;
 	width: 100%;
 	border-collapse: collapse;
 }
 
-td{
+td {
 	max-width: 100px;
-	white-space : nowrap;
-	overflow : hidden;
-	text-overflow : ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	text-align: center;
 }
 
-.table-top{
+.table-top {
 	background-color: #e1edff;
 }
 
-.table-top > th{
+.table-top>th {
 	color: #004080;
 }
 
-.webtoonImage{/*div에 주는 속성*/
+.webtoonImage {
+	/*div에 주는 속성*/
 	width: 50px;
 	height: 50px;
 	overflow: hidden;
 }
 
-.webtoonImage > img {/*div안에 img 속성*/
+.webtoonImage>img {
+	/*div안에 img 속성*/
 	width: 50px;
 	object-fit: cover;
 }
 
-#backBtn {/*뒤로가기*/
+#backBtn {
+	/*뒤로가기*/
 	all: unset;
 	background:
-		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2017/png/iconmonstr-arrow-68.png&r=112&g=169&b=255')
-		no-repeat;
+		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2017/png/iconmonstr-arrow-68.png&r=112&g=169&b=255') no-repeat;
 	width: 40px;
 	height: 40px;
 	background-color: white;
-	border-radius:75px;
+	border-radius: 75px;
 	background-position: center;
 	background-size: contain;
 	border: none;
-	position : fixed;
-	top:20px;
-	right :20px;
+	position: fixed;
+	top: 20px;
+	right: 20px;
 }
 
-#backBtn:hover{/*뒤로가기*/
+#backBtn:hover {
+	/*뒤로가기*/
 	background-color: #eaeaea;
 	background:
-		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2017/png/iconmonstr-arrow-68.png&r=54&g=101&b=255')
-		no-repeat;
+		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2017/png/iconmonstr-arrow-68.png&r=54&g=101&b=255') no-repeat;
 	background-position: center;
 	background-size: contain;
-	transform: rotate( -360deg );
-	transition-timing-function : ease;
+	transform: rotate(-360deg);
+	transition-timing-function: ease;
 	transition: all 1s;
 }
 
-#border1px{
+#border1px {
 	border: 1px solid;
 }
 
-.scrollBtn > nav ul {/*횡스크롤 버튼*/
+.scrollBtn>nav ul {
+	/*횡스크롤 버튼*/
 	list-style: none;
 	display: flex;
 	justify-content: flex-start;
-	overflow-x:scroll;
-	white-space:nowrap;
-	margin : 10px 0 0;
+	overflow-x: scroll;
+	white-space: nowrap;
+	margin: 10px 0 0;
 }
 
-.scrollBtn > nav ul li {
-	margin : 0 5px;
+.scrollBtn>nav ul li {
+	margin: 0 5px;
 }
 
 .listBtn {
 	cursor: pointer;
 	border: none;
 	background-color: #70A9FF;
-	padding : 2px 15px;
+	padding: 2px 15px;
 	height: 40px;
 	color: white;
 	border-radius: 40px;
@@ -158,64 +168,65 @@ td{
 	background-color: rgb(255, 191, 43);
 }
 
-.listBtn:active{
+.listBtn:active {
 	/*box-shadow:inset 0 0 20px #ca7a01;*/
 	background-color: rgb(255, 191, 43);
 }
 
-.searchBar:focus{
-	all: unset;	
-	border:yellow;
+.searchBar:focus {
+	all: unset;
+	border: yellow;
 }
 
-.mainBtn{/*홈버튼*/
-	background: 
-	url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-home-7.png&r=112&g=169&b=255')
-	no-repeat;
-	border : none;
+.mainBtn {
+	/*홈버튼*/
+	background:
+		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-home-7.png&r=112&g=169&b=255') no-repeat;
+	border: none;
 	background-color: white;
-	border-radius:75px;
+	border-radius: 75px;
 	width: 50px;
 	height: 50px;
 	background-position: center;
 	background-size: 70%;
-	position : fixed;
-	bottom:20px;
-	right :20px;
-	box-shadow : 3px 5px 5px #d1d1d1;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	box-shadow: 3px 5px 5px #d1d1d1;
 }
 
-.mainBtn:hover{/*홈버튼*/
+.mainBtn:hover {
+	/*홈버튼*/
 	background:
-	url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-home-7.png&r=255&g=255&b=255')
-	no-repeat;
+		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-home-7.png&r=255&g=255&b=255') no-repeat;
 	background-color: #70A9FF;
 	background-position: center;
 	background-size: 70%;
-	
+
 	transition: all 1s;
 }
 
-.mainBtn:active{/*홈버튼*/
+.mainBtn:active {
+	/*홈버튼*/
 	background:
-	url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-home-7.png&r=255&g=255&b=255')
-	no-repeat;
+		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-home-7.png&r=255&g=255&b=255') no-repeat;
 	background-color: #70A9FF;
 	background-size: 70%;
 }
 
-.x-box{/*x버튼*/
+.x-box {
+	/*x버튼*/
 	border: none;
-	border-radius:75px;
-	background: 
-	url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2018/png/iconmonstr-x-mark-circle-thin.png&r=122&g=122&b=122') 
-	no-repeat;
+	border-radius: 75px;
+	background:
+		url('https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2018/png/iconmonstr-x-mark-circle-thin.png&r=122&g=122&b=122') no-repeat;
 	background-position: center;
 	background-size: contain;
 	width: 30px;
 	height: 30px;
 }
 
-.x-box:hover{/*x버튼*/
+.x-box:hover {
+	/*x버튼*/
 	background-color: #eaeaea;
 }
