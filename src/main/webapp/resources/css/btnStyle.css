@@ -98,6 +98,7 @@ font-family: 'Nanum Gothic Coding', monospace;
 .gray-btn {
   margin: 10px 0;
   width: 100%;
+  max-width: 400px;
   height: 40px;
   background-color: var(--grayML);
   border: none;

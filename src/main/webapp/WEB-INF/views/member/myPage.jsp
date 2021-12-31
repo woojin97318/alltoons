@@ -43,6 +43,11 @@ a {
 .mypage-profil {
 	cursor: pointer;
 }
+
+.mypage-profil:hover {
+  filter: brightness(70%);
+}
+
 </style>
 </head>
 
@@ -59,8 +64,12 @@ a {
 		<section align="center">
 			<!--프로필 사진-->
 			<img title="프로필 사진 변경하기" class="mypage-profil" src="${contextPath }/member/userImageView?file=${userInfo.userImage}"
-				onclick="location.href='${contextPath}/member/userImageModify'"><br>
-			<label class="gowun-font">이메일 : ${userInfo.userEmail }</label><br>
+				onclick="location.href='${contextPath}/member/userImageModify'">
+			<br>
+			<label class="gowun-font">
+				이메일 : ${userInfo.userEmail }
+			</label>
+			<br>
 			<button class="gray-btn" onclick="location.href='${contextPath}/member/pwModify'">
 				<b>비밀번호 변경</b>
 			</button>
