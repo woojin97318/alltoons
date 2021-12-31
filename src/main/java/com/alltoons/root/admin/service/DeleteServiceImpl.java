@@ -55,6 +55,12 @@ public class DeleteServiceImpl implements DeleteService{
 		String message = Integer.toString(webtoonNum)+"번이 삭제되었습니다.";
 		return message;
 	}
+
+	@Override
+	public ArrayList<WebtoonDTO> webtoonAllList(String start, String limit) {
+		ArrayList<WebtoonDTO> dto = mapper.paging(start,limit);
+		return dto;
+	}
 	
 	
 }

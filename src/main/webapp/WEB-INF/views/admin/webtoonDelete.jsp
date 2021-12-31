@@ -9,7 +9,73 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/adminStyle.css">
+<script type="text/javascript">
+/* 무한스크롤 */
+var start =101;
+var limit=200;
+function appendList(){
+	console.log("스크롤 내려옴")
+	console.log("스크롤 내려옴"+start)
+	console.log("스크롤 내려옴"+limit)
+	$.ajax({
+		url : "${contextPath}/admin/webtoonDeletePaging",
+		type : "POST",
+		dataType : "json",
+		data : {
+			start: start, limit: limit
+		},
+		success : function(webtoonAllList) {
+			console.log("성공")
+			insertList(webtoonAllList);
+			start = start +100
+			limit = limit +100
+			
+		},error:function(request,status,error){
+			console.log("실패")
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+	})
+}
+/* append */
+function insertList(webtoonAllList){
+	let html="";
+	$.each(webtoonAllList,function(index,dto){
+		//html += "<a href='${contextPath}/webtoon/webtooninfo?webtoonNum="+ dto.webtoonNum+"'><section class='webtoon-result-box'>"
+		html += "<tr>"
+		if(dto.webtoonImage == 'default_image.png'){
+			html += "<td><div class='webtoonImage'><img src='${contextPath}/resources/img/webtoon/default_image.png' alt='선택된 이미지가 없습니다' /></div></td>"
+		}else{
+			html += "<td><div class='webtoonImage'><img src='${contextPath}/thumbnail?webtoonImage="+dto.webtoonImage+"' alt='썸네일이 존재' /></div></td>"
+		}
+		html += "<th><button onclick=\"location.href='${contextPath }/admin/webtoonModify?webtoonNum="+dto.webtoonNum+"'\">수정</button></th>"
+		html += "<th>"+dto.webtoonNum+"</th>"
+		html += "<td><a href='${contextPath }/webtoon/webtooninfo?webtoonNum="+dto.webtoonNum+"'>"+dto.webtoonTitle+"</a></td>"
+		html += "<td>"+dto.webtoonWriter+"</td>"
+		html += "<th><input type='button' name='delete_btn' onclick=\"location.href='${contextPath }/admin/deleteWebtoon?webtoonNum="+dto.webtoonNum+"&imageFileName="+dto.webtoonImage+"'\" class='x-box'></th>"
+		html += "</tr>"
+	});
+	$("#paging").append(html)
+}
 
+/* 스크롤 감지 */
+function debounce(callback, limit = 100) {
+	  let timeout;
+	  return function (...args) {
+	    clearTimeout(timeout);
+	    timeout = setTimeout(() => {
+	      callback.apply(this, args);
+	    }, limit);
+	  };
+	}
+
+	
+	// ===== 무한 스크롤 (스크롤 이벤트) =====
+	document.addEventListener("scroll", debounce(e => {
+  const { clientHeight, scrollTop, scrollHeight } = e.target.scrollingElement
+  if(clientHeight + scrollTop >= scrollHeight) {
+  	appendList()
+  	}
+	}, 200));
+</script>
 <style type="text/css">
 .webtoonImage{/*div에 주는 속성*/
 	width: 50px;
@@ -158,7 +224,7 @@
 		
 		
 		<h2>전체</h2>
-		<table border="1">
+		<table border="1" id="paging">
 			<tr class="table-top">
 				<th>썸네일</th>
 				<th>수정</th>
