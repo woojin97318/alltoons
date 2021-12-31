@@ -6,11 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AllToons platform</title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/sort_nameStyle.css">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/sort_nameStyle.css">
 <link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/mainStyle.css">
+<title>AllToons platform</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 		if(location.hash){ 
@@ -217,9 +217,9 @@ function debounce(callback, limit = 100) {
 		</div>
 	</header>
 	
-	<div style="padding-top: 70px;" class="container">
-		<h2>플랫폼 별 웹툰</h2>
-		<label id="nameKor">${platformView[0].platformNameKor }</label><!-- 플랫폼 명 뜸 -->
+	<div style="padding-top: 30px;" class="container">
+		<h1>플랫폼 별 웹툰</h1>
+		<label id="nameKor" class="title-result">${platformView[0].platformNameKor }</label><!-- 플랫폼 명 뜸 -->
 		<select name="webtoonSort" id="webtoonSort" onchange="sort_webtoon()" >
 			<option value="nameAsc">제목 오름차순</option>
 			<option value="nameDesc">제목 내림차순</option>

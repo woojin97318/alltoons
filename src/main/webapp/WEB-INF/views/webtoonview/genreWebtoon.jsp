@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AllToons genre</title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/sort_nameStyle.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/sort_nameStyle.css">
+<title>AllToons genre</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -81,7 +81,6 @@ function genreChange(genre) {
 	})  
 }
  /* 무한스크롤 */
-	
 	var start =1;
 	var limit=15;
 	function appendList(){
@@ -145,6 +144,7 @@ function insertGenre(genreView){
 	history.replaceState({list:total_list,kor_name: g_name,nowGenre:nowGenre,sortValue: sortValue},'', '${contextPath}/webtoon/genreWebtoon##');
 	total_list="";
 }
+
 /* append */
 function insertList(genreView){
 	let html="";
@@ -177,7 +177,6 @@ function debounce(callback, limit = 100) {
 	  };
 	}
 
-	
 	// ===== 무한 스크롤 (스크롤 이벤트) =====
 	document.addEventListener("scroll", debounce(e => {
   // clientHeight : 웹 브라우저 창의 높이
@@ -191,14 +190,11 @@ function debounce(callback, limit = 100) {
 	}, 200));
 </script>
 </head>
+
 <body>
-	<c:import url="../default/moveTopBtn.jsp"/>
 	<header>
 		<c:import url="../default/header.jsp"/>
 		<c:import url="../default/menu.jsp"/>
-		<c:import url="./header/webtoonHeader.jsp">
-			<c:param name="tag" value="장르 별 웹툰"/>
-		</c:import>
 		<div class="scrollBtn">
 			<nav>
 				<ul>
@@ -227,9 +223,9 @@ function debounce(callback, limit = 100) {
 		</div>
 	</header>
 	
-	<div style="padding-top: 70px;" class="container">
-		<h2>플랫폼 별 웹툰</h2>
-		<label id="nameKor">${genreView[0].webtoonGenreKor }</label><!-- 플랫폼 명 뜸 -->
+	<div style="padding-top: 30px;" class="container">
+		<h1>장르 별 웹툰</h1>
+		<label id="nameKor" class="title-result">${genreView[0].webtoonGenreKor }</label><!-- 플랫폼 명 뜸 -->
 		<select name="webtoonSort" id="webtoonSort" onchange="sort_webtoon()" >
 			<option value="nameAsc">제목 오름차순</option>
 			<option value="nameDesc">제목 내림차순</option>
