@@ -18,13 +18,15 @@ font-family: 'Nanum Gothic Coding', monospace;
   --blue: rgb(0, 119, 255);
   --blueD: rgb(0, 87, 187);
   --skyblueL: rgb(174, 209, 255);
-  --skyblue: #70A9FF;
-  --skyblueD: #418ee4;
+  --skyblue: #8acdff;
+  --skyblueD: #2c82e0;
   --heart: rgb(255, 38, 0);
   --star: rgb(255, 208, 0);
   --grayL: rgb(245, 245, 245);
   --grayML: rgb(226, 226, 226);
   --grayD: rgb(73, 73, 73);
+  --yellow: rgb(255, 191, 43);
+  --orange: rgb(241, 178, 75);
 }
 
 /*파란색 버튼 + 흰 텍스트*/
@@ -92,7 +94,12 @@ font-family: 'Nanum Gothic Coding', monospace;
 }
 
 .platform-btn:hover {
-  background-color: var(--skyblueD);
+  background-color: var(--yellow);
+}
+
+.platform-btn>label {
+  font-size: 0.6em;
+  font-family: 'Nanum Gothic Coding', monospace;
 }
 
 .gray-btn {

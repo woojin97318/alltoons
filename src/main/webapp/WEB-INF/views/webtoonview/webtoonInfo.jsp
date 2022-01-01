@@ -287,17 +287,16 @@ function mailCut(mail) {
 					<section id="platform">
 						<b>
 							<label class="title-result" style="position: relative; top:10px; margin-right: 10px;">
-							웹툰 보러가기
-							<span style="position: relative; bottom:5px;">👉</span>
+							웹툰 보러가기<span style="position: relative; bottom:5px;">👉</span>
 							</label>
 						</b>
-						<!--웹툰 플랫폼 이름-->
+						<!--웹툰 플랫폼 버튼-->
 						<c:forEach var="list" items="${platformList}">
 							<button class="platform-btn" onclick="location.href='${list.webtoonLink}'">
 								<img class="platform-img"
 									src="${contextPath}/resources/img/webtoon/logo/${list.platformName}.png"
 									onclick="location.href='${list.webtoonLink}'"><br>
-								${list.platformNameKor }
+								<label>${list.platformNameKor }</label>
 								<%-- ${list.platformName } --%>
 							</button>
 						</c:forEach>
@@ -311,7 +310,11 @@ function mailCut(mail) {
 			<hr>
 			<table>
 				<td class="td-padding">
-					<b><label class="title-result" style="position: relative; top:10px; margin-right: 10px;">원작 소설 보러가기!</label></b><br>
+					<b>
+						<label class="title-result">
+						원작 소설 보러가기!
+						</label>
+					</b>
 					<section id="platform">
 						<!--원작 플랫폼 이름-->
 						<c:forEach var="origin" items="${originList }">
@@ -320,7 +323,7 @@ function mailCut(mail) {
 								<img class="platform-img"
 									src="${contextPath}/resources/img/webtoon/logo/${origin.originalPlatform}.png"
 									onclick="location.href='${origin.webtoonOriginalLink}'"><br>
-									${origin.originalPlatformKor }
+									<label>${origin.originalPlatformKor }</label>
 									<%-- ${origin.originalPlatform} --%>
 								</button>
 							</span>
@@ -383,14 +386,12 @@ function mailCut(mail) {
 					</c:choose>
 				</c:otherwise>
 			</c:choose>
-			<tr>
-				
-			</tr>
+			
 			<c:choose>
 				<c:when test="${reviewCnt == 0 }">
 					<tr>
-						<td><hr></td>
 						<th style="color: gray;">
+							<hr>
 							아직 작성된 리뷰가 없습니다.<br>
 							여러분의 소중한 리뷰를 달아주세요!
 						</th>
@@ -401,8 +402,12 @@ function mailCut(mail) {
 						<tr>
 							<td>
 								<section class="review-box">
-									<img class="profil" src="${contextPath }/member/userImageView?file=${review.userImage }">
-									<script>mailCut('${review.userEmail }')</script><br>
+									<section style="display: inline-block;">
+										<script>mailCut('${review.userEmail }')</script><br>
+										<img class="profil" src="${contextPath }/member/userImageView?file=${review.userImage }">
+									</section><br>
+									<b>${review.reviewContent }</b><br>
+									<label class="small-font">${review.reviewTime }</label>
 									<c:if test="${user != null }">
 										<button class="review-inner-btn" title="신고하기" 
 											onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
@@ -412,8 +417,6 @@ function mailCut(mail) {
 								</section>
 							</td>
 						</tr>
-						<tr><td>${review.reviewContent }</td></tr>
-						<tr><td>${review.reviewTime }</td></tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
