@@ -82,9 +82,18 @@ function debounce(callback, limit = 100) {
 	height: 50px;
 	overflow: hidden;
 }
+
 .webtoonImage > img {/*div안에 img 속성*/
 	max-width: 50px;
 	object-fit: cover;
+}
+
+td {
+	max-width: 100px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
 }
 </style>
 
@@ -122,16 +131,14 @@ function debounce(callback, limit = 100) {
 <title>작품 삭제</title>
 </head>
 
-<header><!-- 어드민 페이지 헤더 -->
+<body>
+	<header><!-- 어드민 페이지 헤더 -->
 		<c:import url="./adminHeader.jsp">
 			<c:param name="tag" value="작품 삭제"></c:param>
 		</c:import><!-- value에 카테고리명을 넣어주세요 -->
-</header>
-	
-<body>
-	
-	
-	<div class="searchBar">
+	</header>
+
+	<div class="searchBar body">
 		<form action="${contextPath }/admin/webtoonDelete" method="POST">
 			<input type="text" name="search" size="20" placeholder="검색어 입력" required >
 			<input type="submit" value="검색">
@@ -141,8 +148,10 @@ function debounce(callback, limit = 100) {
 	<c:if test="${search != null }">
 		<label><b>" ${search } "</b>에 대한 검색 결과 입니다.</label><br>
 	</c:if>
+
 	<hr>
-	<div>
+
+<div>
 	<h2>제목명</h2>
 		<table border="1">
 			<tr class="table-top">
@@ -162,26 +171,31 @@ function debounce(callback, limit = 100) {
 				<c:otherwise>
 					<c:forEach var="dto" items="${titleList }">
 					<tr>
+						<!--웹툰 썸네일-->
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
+								
 								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
 							</c:when>
 							<c:otherwise>
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
+						<!--수정버튼-->
 						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<!--식별번호-->
 						<th>${dto.webtoonNum }</th>
+						<!--제목-->
 						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<!--작가명-->
 						<td>${dto.webtoonWriter }</td>
+						<!--삭제버튼-->
 						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</table>
-		
-		
 		
 		<h2>작가명</h2>
 		<table border="1">
@@ -201,7 +215,8 @@ function debounce(callback, limit = 100) {
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="dto" items="${writerList }">
-					<tr>
+						<tr>
+						<!--웹툰 썸네일-->
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
 								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
@@ -210,18 +225,21 @@ function debounce(callback, limit = 100) {
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
+						<!--수정버튼-->
 						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<!--식별번호-->
 						<th>${dto.webtoonNum }</th>
+						<!--제목-->
 						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'"> ${dto.webtoonTitle }</a></td>
+						<!--작가명-->
 						<td>${dto.webtoonWriter }</td>
+						<!--삭제버튼-->
 						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</table>
-		
-		
 		
 		<h2>전체</h2>
 		<table border="1" id="paging">
@@ -242,6 +260,7 @@ function debounce(callback, limit = 100) {
 				<c:otherwise>
 					<c:forEach var="dto" items="${webtoonAllList }">
 					<tr>
+						<!--웹툰 썸네일-->
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
 								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
@@ -250,16 +269,21 @@ function debounce(callback, limit = 100) {
 								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
 							</c:otherwise>
 						</c:choose>
+						<!--수정버튼-->
 						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<!--식별번호-->
 						<th>${dto.webtoonNum }</th>
+						<!--제목-->
 						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<!--작가명-->
 						<td>${dto.webtoonWriter }</td>
+						<!--삭제버튼-->
 						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</table>
-	</div>
+</div>
 </body>
 </html>

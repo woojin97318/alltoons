@@ -11,8 +11,21 @@ font-family: 'Song Myung', serif;
 font-family: 'Gowun Dodum', sans-serif;
 버튼 컬러:70A9FF, rgb(255, 191, 43)
 */
-body {
-	padding-top: 100px;
+:root {
+  --blue: rgb(0, 119, 255);
+  --blueD: rgb(0, 87, 187);
+  --skyblueL: rgb(174, 209, 255);
+  --skyblue: #70A9FF;
+  --skyblueD: #2c82e0;
+  --heart: rgb(255, 38, 0);
+  --star: rgb(255, 208, 0);
+  --grayL: rgb(245, 245, 245);
+  --grayML: rgb(226, 226, 226);
+  --grayD: rgb(73, 73, 73);
+}
+
+.body {
+	padding-top: 50px;
 }
 
 header {
@@ -20,7 +33,7 @@ header {
 	top: 0;
 	left: 0;
 	right: 0;
-	background: linear-gradient(to bottom, white 80%, transparent);
+	background: linear-gradient(to bottom, var(--grayML) 80%, transparent);
 }
 
 label {
@@ -44,6 +57,15 @@ label {
 	background-color: rgba(191, 210, 255, 0.8);
 	border: 5.5px solid transparent;
 	transition: all 1s;
+}
+
+/*컨테이너*/
+.container {
+  min-width: 360px;
+  max-width: 768px;
+  height: auto;
+  margin: 20px auto;
+  margin-top: 30px;
 }
 
 .menu-title {
@@ -73,14 +95,6 @@ table {
 	border-right: none;
 	width: 100%;
 	border-collapse: collapse;
-}
-
-td {
-	max-width: 100px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	text-align: center;
 }
 
 .table-top {

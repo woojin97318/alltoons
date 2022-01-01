@@ -6,82 +6,71 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 신고 확인</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
+<title>관리자 신고 확인</title>
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/adminStyle.css">
 <style type="text/css">
 .td {
 	width: 100px;
 }
+
+img {
+	width: 70px;
+	height: 70px;
+	cursor: pointer;
+}
+
 </style>
 </head>
+
 <body>
-	<div align="center">
-		<header>
-			<c:import url="./adminHeader.jsp">
-				<c:param name="tag" value="신고 확인"></c:param>
-			</c:import>
-		</header>
-		<table>
-			<tr><td colspan="3"><hr></td></tr>
+	<header>
+		<c:import url="./adminHeader.jsp">
+			<c:param name="tag" value="신고 확인"></c:param>
+		</c:import>
+	</header>
+
+	<div class="body container">
+		<table border="1">
 			<c:choose>
 				<c:when test="${reportList.isEmpty() }">
-					<tr><th colspan="3">신고 테이터가 없습니다</th></tr>
+					<tr><th>신고 테이터가 없습니다</th></tr>
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="report" items="${reportList }">
 						<tr>
-							<th>신고자</th>
-							<td>${report.reportUserEmail }</td>
-							<td class="td">
-								<button type="button"
-									onclick="location.href='${contextPath}/admin/reportDel?reportNum=${report.reportNum }'">
-									신고내용 삭제
-								</button>
+							<td style="padding: 20px;">
+								<b>신고자: </b> ${report.reportUserEmail }<br>
+								
+								<b>신고 내용: </b> ${report.reportContent }<br>
+								
+								<b>신고 시간: </b>${report.reportTime }<br>
+								
+								<b>리뷰 작성자: </b>${report.reviewUserEmail }<br>
+								
+								<b>리뷰 내용: </b><br>
+								${report.reviewContent }<br>
+
+								<b>리뷰 작성시간: </b>${report.reviewTime }<br>
 							</td>
-						</tr>
-						<tr>
-							<th>신고 내용</th>
-							<td>${report.reportContent }</td>
-							<td class="td">
-								<button type="button"
-									onclick="location.href='${contextPath}/admin/reportReviewDel?reviewNum=${report.reviewNum }'">
-									해당리뷰 삭제
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<th>신고 시간</th>
-							<td colspan="2">${report.reportTime }</td>
-						</tr>
-						<tr>
-							<th>리뷰 작성자</th>
-							<td colspan="2">${report.reviewUserEmail }</td>
-						</tr>
-						<tr>
-							<th>리뷰 내용</th>
-							<td colspan="2">${report.reviewContent }</td>
-						</tr>
-						<tr>
-							<th>리뷰 작성시간</th>
-							<td colspan="2">${report.reviewTime }</td>
-						</tr>
-						<tr>
-							<td>
+							
+							<th>
 								<img src="${contextPath }/member/webtoonImageView?file=${report.webtoonImage }"
-									width="70px" height="70px" onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${report.webtoonNum}'"
-									style="cursor:pointer">
-							</td>
-							<td colspan="2">
-								<span onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${report.webtoonNum }'"
-									style="cursor:pointer">
+									onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${report.webtoonNum}'">
+								<br>
+
+								<span onclick="location.href='${contextPath}/webtoon/webtooninfo?webtoonNum=${report.webtoonNum }'">
 									${report.webtoonTitle }
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="3">
-								<hr>
-							</td>
+								</span><br>
+
+								<button onclick="location.href='${contextPath}/admin/reportDel?reportNum=${report.reportNum }'">
+									신고내용 삭제
+								</button><br>
+
+								<button onclick="location.href='${contextPath}/admin/reportReviewDel?reviewNum=${report.reviewNum }'">
+									해당리뷰 삭제
+								</button><br>
+							</th>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
