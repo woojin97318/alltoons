@@ -48,6 +48,12 @@ a {
   filter: brightness(70%);
 }
 
+@media all and (min-width:768px) {
+	.mypage-profil {
+		width: 120px;
+  	height: 120px;
+	}
+}
 </style>
 </head>
 
