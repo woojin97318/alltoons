@@ -180,7 +180,7 @@
 		select DISTINCT
 		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
 		webtoon_info.webtoon_writer,
-		webtoon_info.webtoon_image,PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
+		webtoon_info.webtoon_image
 		from user_info,webtoon_info, FAVORITES_INFO,PLATFORM_TABLE
 		where
 		user_info.user_email = #{userEmail}
@@ -206,7 +206,7 @@
 		select DISTINCT
 		webtoon_info.webtoon_num, webtoon_info.webtoon_title,
 		webtoon_info.webtoon_writer,
-		webtoon_info.webtoon_image,PLATFORM_TABLE.WEBTOON_PLATFORM_NAME
+		webtoon_info.webtoon_image
 		from user_info,webtoon_info, FAVORITES_INFO,PLATFORM_TABLE
 		where
 		user_info.user_email = #{userEmail}
