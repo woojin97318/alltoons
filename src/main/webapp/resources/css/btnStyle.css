@@ -29,6 +29,27 @@ font-family: 'Nanum Gothic Coding', monospace;
   --orange: rgb(241, 178, 75);
 }
 
+button {
+  cursor: pointer;
+}
+
+/*연회색+파란글씨*/
+.nomal-gray-blue-btn {
+  background-color: var(--grayL);
+  color: var(--blue);
+  border-radius: 30px;
+  padding: 3px 6px;
+  font-weight: 500;
+  border: 1px solid var(--blue);
+  font-family: 'Nanum Gothic Coding', monospace;
+  font-size: 0.7em;
+  cursor: pointer;
+}
+
+.nomal-gray-blue-btn:hover {
+  background-color: var(--grayML);
+}
+
 /*파란색 버튼 + 흰 텍스트*/
 .small-btn-blue-white {
   color: white;
@@ -118,4 +139,11 @@ font-family: 'Nanum Gothic Coding', monospace;
 
 .gray-btn:hover {
   background-color: #c4c4c4;
+}
+
+/*버튼 위치*/
+.review-inner-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }

@@ -33,10 +33,6 @@
 		margin: 5px;
 	}
 
-	.container {
-		padding: 0 50px;
-	}
-
 	.input-file-btn {
 		padding: 5px 25px;
 		background-color: var(--skyblue);
@@ -63,7 +59,7 @@
 		</div>
 	</header>
 	<c:import url="../default/menu.jsp"/>
-	<div align="center" class="container">
+	<div align="center" class="mypage-container">
 		<h2>프로필 이미지 수정</h2>
 		<form action="${contextPath }/member/userImageModifyPage" method="post" enctype="multipart/form-data">
 			<section>
@@ -75,7 +71,7 @@
 			</section>
 			
 			<input type="hidden" name="userEmail" value="${userInfo.userEmail}">
-			<input type="file" id="file" name="file" onchange="readURL(this);" style="display: none;">
+			<input type="file" id="file" name="file" class="hidden" onchange="readURL(this);">
 			<button onclick="location.href='${contextPath}/member/userImageDefault?userEmail=${userInfo.userEmail }'">
 				기본 이미지로 변경
 			</button><br>

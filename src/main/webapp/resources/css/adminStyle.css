@@ -61,7 +61,7 @@ label {
 
 /*컨테이너*/
 .container {
-  min-width: 360px;
+  min-width: 350px;
   max-width: 768px;
   height: auto;
   margin: 20px auto;
@@ -73,7 +73,6 @@ label {
 	font-weight: bold;
 	font-size: 40px;
 	font-family: 'Gowun Dodum', sans-serif;
-	margin: 5px 20px -40px 20px;
 }
 
 a {

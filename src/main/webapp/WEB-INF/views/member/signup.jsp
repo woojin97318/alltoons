@@ -7,8 +7,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 페이지</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
+<title>회원가입 페이지</title>
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mainStyle.css">
+<link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/loginStyle.css">
+<link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/btnStyle.css">
+<style type="text/css">
+	.login-box {
+		padding: 20px;
+		width: 80%;
+		position: relative;
+		margin-top: 200px;
+	}
+
+	.container {
+		max-width: 500px;
+	}
+
+	.profil-img {
+		display: block;
+		width: 50px;
+		height: 50px;
+	}
+
+	.login-btn {
+		width: 70%;
+		max-width: 300px;
+		margin: 20px 0 10px 0;
+	}
+
+	th, td {
+		padding: 5px 0;
+	}
+
+
+</style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	var authResult = false;
@@ -122,57 +155,68 @@
 	}
 </script>
 </head>
-<body>
+
+<body class="body-color">
 	<c:import url="../default/menu.jsp"/>
-	<div align="center">
-		<form name="join" action="signupform" method="post"
-			enctype="multipart/form-data">
+<div class="container">
+	<div align="center" class="login-box">
+		<form name="join" action="signupform" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<td colspan="2"><img id="img" src="#" alt="your image"
-						width="100px" height="100px" /></td>
-				</tr>
-				<tr>
-					<td>이미지</td>
-					<td><input type="file" onchange="readURL(this);"
-						name="userImage"></td>
-				</tr>
-				<tr>
-					<td>이메일*</td>
-					<td><input type="text" id="userEmail" name="userEmail"
-						autofocus autocomplete="off" required placeholder="이메일을 입력해주세요" /></td>
-				</tr>
-
-				<tr>
-					<td></td>
-					<td><button type="button" onclick="sendmail()">이메일 전송</button></td>
-				</tr>
-				<tr>
-					<td colspan="2">인증번호 <input type="text" id="authKey" placeholder="인증번호" autofocus
-						autocomplete="off" required>
-						<button type="button" onclick="authChk()">인증하기</button>
+					<!--프로필 이미지-->
+					<td>
+						<img class="profil-img" id="img" src="#" />
 					</td>
 				</tr>
 				<tr>
-					<td></td>
+					<td>프로필 사진</td>
+					<td>
+						<label class="nomal-gray-blue-btn" for="file">파일 선택</label>
+						<input id="file" class="hidden" type="file" onchange="readURL(this);" name="userImage">
+					</td>
 				</tr>
 				<tr>
-					<td>비밀번호*</td>
-					<td><input type="password" name="userPassword"
-						id="userPassword" placeholder="비밀번호" autofocus autocomplete="off"
-						required></td>
+					<td>이메일*</td>
+					<td>
+						<input type="text" id="userEmail" name="userEmail" autofocus autocomplete="off" required placeholder="이메일을 입력해주세요" />
+						<br>
+						<button class="nomal-gray-blue-btn" type="button" onclick="sendmail()">
+							이메일 전송
+						</button>
+					</td>
 				</tr>
 				<tr>
-					<td>비밀번호확인</td>
-					<td><input type="password" name="chkPassword" id="chkPassword"
-						placeholder="비밀번호 확인" autofocus autocomplete="off" required></td>
+					<td>
+						인증번호
+					</td>
+					<td>
+						<input type="text" id="authKey" placeholder="인증번호" autofocus autocomplete="off" required>
+						<br>
+						<button class="nomal-gray-blue-btn" type="button" onclick="authChk()">
+							인증하기
+						</button>
+					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="button" onclick="chkInfo()" value="가입하기"></td>
+					<td>
+						비밀번호*
+					</td>
+					<td>
+						<input type="password" name="userPassword" id="userPassword" placeholder="비밀번호" autofocus autocomplete="off" required>
+					</td>
 				</tr>
-				
+				<tr>
+					<td>
+						비밀번호 확인
+					</td>
+					<td>
+						<input type="password" name="chkPassword" id="chkPassword" placeholder="비밀번호 확인" autofocus autocomplete="off" required>
+					</td>
+				</tr>
 			</table>
+			<input class="login-btn" type="button" onclick="chkInfo()" value="가입하기">
 		</form>
 	</div>
+</div>
 </body>
 </html>

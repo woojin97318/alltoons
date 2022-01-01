@@ -18,10 +18,6 @@ a {
 	font-weight: 600;
 }
 
-.container {
-	padding: 0 50px;
-}
-
 .block {
 	height: 50px;
 	cursor: pointer;
@@ -60,13 +56,13 @@ a {
 <body>
 	<!--헤더&메뉴-->
 	<header>
-		<div class="head">
-			<h1 align="center" style="position:relative; top:5px;">마이페이지</h1>
+		<div class="head" align="center">
+			<h1 style="position:relative; top:5px;">마이페이지</h1>
 		</div>
 	</header>
 	<c:import url="../default/menu.jsp"/>
 
-	<div class="container">
+	<div class="mypage-container">
 		<section align="center">
 			<!--프로필 사진-->
 			<img title="프로필 사진 변경하기" class="mypage-profil" src="${contextPath }/member/userImageView?file=${userInfo.userImage}"

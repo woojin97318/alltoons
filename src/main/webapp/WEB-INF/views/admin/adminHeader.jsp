@@ -15,7 +15,7 @@
 <body>
 	<div align="center">
 		<c:import url="../default/menu.jsp"/>
-		<div class="menu-title" style="position: relative; top: 10px;">
+		<div class="menu-title" style="position: relative; top: 20px;">
 			<c:out value="${param.tag }"></c:out>
 		</div>
 		<div class="scrollBtn" style="position: relative; top: 50px;">

@@ -153,12 +153,16 @@ function mailCut(mail) {
 	.webtooninfo-img {
 		width: 200px;
 		height: 200px;
-		overflow: hidden;
 		display: inline-block;
+		
 	}
 
 	.webtooninfo-content {
 		padding: 20px;
+	}
+
+	.webtooninfo-content>h2 {
+		color: var(--blueD);
 	}
 
 	.webtooninfo-img .thumbnail {
@@ -166,6 +170,8 @@ function mailCut(mail) {
 		height: 200px;
 		object-fit: cover;
 		border-radius: 10px;
+		border: 3px solid white;
+		box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), 0 0 10px 0 rgba(0, 0, 0, 0.19);
 	}
 
 	#platform{
@@ -180,6 +186,8 @@ function mailCut(mail) {
 
 	.heart-star-icon {
 		position: absolute;
+		margin: 5px 10px;
+		display: block;
 	}
 
 	#interest, #favorites {
@@ -187,7 +195,7 @@ function mailCut(mail) {
 		width: 20px;
 		height: 20px;
 	}
-	
+
 	.td {
 		width: 50px;
 	}
@@ -231,6 +239,9 @@ function mailCut(mail) {
 		position: relative;
 	}
 
+	.nomal-gray-blue-btn {
+		border: 1px solid var(--blue);
+	}
 </style>
 </head>
 
@@ -270,7 +281,7 @@ function mailCut(mail) {
 				<td>
 					<div class="webtooninfo-content">
 						<!--제목-->
-						<h2 style="color: var(--blue);">${webtoonDate.webtoonTitle}</h2>
+						<h2>${webtoonDate.webtoonTitle}</h2>
 						<b><label class="godic-font">작가명</label></b><br>
 						<label class="small-font">${webtoonDate.webtoonWriter }</label> 
 					</div>
@@ -343,12 +354,16 @@ function mailCut(mail) {
 		</div>
 		
 		<table>
-			<tr><td><hr></td></tr>
-			<tr><th>${reviewCnt }개의 리뷰가 존재합니다.</th></tr>
-			<tr><td><hr></td></tr>
+			<tr>
+				<th>
+					<hr>
+					${reviewCnt }개의 리뷰가 존재합니다.
+					<hr class="hr-dashed">
+				</th>
+			</tr>
 			<c:choose>
 				<c:when test="${myReview == 'n' }">
-					<tr><th>리뷰 작성을 원하시면 로그인이 필요합니다.</th></tr>
+					<tr><th style="color: gray;">리뷰 작성을 원하시면 로그인이 필요합니다.</th></tr>
 				</c:when>
 				<c:otherwise>
 					<c:choose>
@@ -375,7 +390,7 @@ function mailCut(mail) {
 									<section class="my-review-box">
 										<b>${myReview.reviewContent }</b><br>
 										<label class="small-font">작성 시간 : ${myReview.reviewTime }</label>
-										<button class="review-inner-btn"
+										<button class="review-inner-btn nomal-gray-blue-btn"
 											onclick="location.href='${contextPath}/webtoon/review/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
 											삭제
 										</button>
@@ -391,9 +406,11 @@ function mailCut(mail) {
 				<c:when test="${reviewCnt == 0 }">
 					<tr>
 						<th style="color: gray;">
-							<hr>
-							아직 작성된 리뷰가 없습니다.<br>
-							여러분의 소중한 리뷰를 달아주세요!
+							<hr class="hr-dashed">
+							<section style="margin: 50px 0;">
+								아직 작성된 리뷰가 없습니다.<br>
+								여러분의 소중한 리뷰를 달아주세요!
+							</section>
 						</th>
 					</tr>
 				</c:when>
@@ -409,7 +426,7 @@ function mailCut(mail) {
 									<b>${review.reviewContent }</b><br>
 									<label class="small-font">${review.reviewTime }</label>
 									<c:if test="${user != null }">
-										<button class="review-inner-btn" title="신고하기" 
+										<button class="review-inner-btn nomal-gray-blue-btn" title="신고하기" 
 											onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
 											신고하기
 										</button>

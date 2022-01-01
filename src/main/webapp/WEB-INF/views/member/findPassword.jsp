@@ -8,9 +8,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
 <title>비밀번호 찾기</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
+<link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/mainStyle.css">
+<link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/loginStyle.css">
+<style type="text/css">
+	.login-box {
+		width: 300px;
+		height: 300px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 10px;
+	}
+
+	.login-btn {
+		margin: 20px 0 0 0;
+		width: 150px;
+	}
+</style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	function sendmail() {
@@ -60,18 +76,23 @@
 	}
 </script>
 </head>
-<body>
+<body class="body-color">
 	<c:import url="../default/menu.jsp"/>
-	<div align="center">
-		<h3>비밀번호 찾기</h3>
-		<div class="box email">
-			<form action="findpassword">
-				<label>이메일</label> <input type="text" id="userEmail"
-					name="userEmail" autofocus autocomplete="off" required />
-				<button type="button" onclick="sendmail()">이메일 전송</button>
-			</form>
+	<div class="flex-container">
+		<div align="center" class="login-box">
+			<div class="box email center">
+				<h3>비밀번호 찾기</h3>
+				<form action="findpassword">
+					<label>전송 받을 이메일 주소를 적어주세요.</label>
+					<br>
+					<span>👇</span>
+					<input type="text" id="userEmail" name="userEmail" autofocus autocomplete="off" required />
+					<button class="login-btn" type="button" onclick="sendmail()">
+						이메일 전송
+					</button>
+				</form>
+			</div>
 		</div>
-
 	</div>
 </body>
 </html>
