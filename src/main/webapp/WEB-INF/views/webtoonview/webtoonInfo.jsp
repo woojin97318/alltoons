@@ -270,7 +270,7 @@ function mailCut(mail) {
 				<td>
 					<div class="webtooninfo-content">
 						<!--제목-->
-						<h2>${webtoonDate.webtoonTitle}</h2>
+						<h2 style="color: var(--blue);">${webtoonDate.webtoonTitle}</h2>
 						<b><label class="godic-font">작가명</label></b><br>
 						<label class="small-font">${webtoonDate.webtoonWriter }</label> 
 					</div>
@@ -421,7 +421,6 @@ function mailCut(mail) {
 				</c:otherwise>
 			</c:choose>
 		</table>
-	<hr>
 	<footer>
 		<c:import url="../default/footer.jsp"/>
 	</footer>

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/adminStyle.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript"> /* ready()*/
 $(document).ready(function(){//페이지 들어왔을때 작동
@@ -155,7 +156,7 @@ $(document).ready(function(){//페이지 들어왔을때 작동
 	           $('#webtoonImage').attr('src', e.target.result);
 	          }
 	      }
-	  }  
+	  }
 </script>
 <script type="text/javascript">/* +버튼 -버튼*/
 var cnt=0;
@@ -180,12 +181,12 @@ function add_link(){
 	newP.innerHTML = html;
 	box.appendChild(newP);
 }
- const del_link = (obj) => {
-     document.getElementById('box').removeChild(obj.parentNode);
- }
- 
- function add_origin_link(){
-	 var newspan = document.createElement('span');
+	const del_link = (obj) => {
+		document.getElementById('box').removeChild(obj.parentNode);
+	}
+
+function add_origin_link(){
+		var newspan = document.createElement('span');
 		
 		var html = '';
 		
@@ -207,19 +208,21 @@ function add_link(){
 		newspan.innerHTML = html;
 		origin_box.appendChild(newspan);
 	}
-	 const del_origin_link = (obj) => {
-         document.getElementById('origin_box').removeChild(obj.parentNode);
-     }
+	const del_origin_link = (obj) => {
+    document.getElementById('origin_box').removeChild(obj.parentNode);
+  }
 </script>
 <link rel="stylesheet" href="resources/css/webtoonUpload.css">
 <title>작품 수정</title>
 </head>
+
+<body>
 <header>
 		<c:import url="./adminHeader.jsp">
 			<c:param name="tag" value="작품 수정"></c:param>
 		</c:import>
 </header>
-<body>
+<div class="container body">
 	<form action="${contextPath}/admin/webtoonModify" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="webtoonNum" value="${webtoonList.webtoonNum }">
 		<div style="display: flex;">
@@ -248,6 +251,7 @@ function add_link(){
 		</div>
 		<br> 
 		<b>작가명</b><input type="text" name="webtoonWriter" placeholder="글작가/그림작가" value="${webtoonList.webtoonWriter }"><br>
+		<br>
 		<b>링크</b> <button type="button" onclick="add_link()">+</button> <br>
 		<div id="box">		</div>
 		
@@ -286,6 +290,6 @@ function add_link(){
 		</div>
 		<input type="submit" value="작품 수정">
 	</form>
-
+</div>
 </body>
 </html>

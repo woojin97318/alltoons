@@ -47,9 +47,9 @@ function insertList(popularView){
 			html += "<section class='webtoonImg'><img id='webtoonImage' src='${contextPath}/thumbnail?webtoonImage="+webtoonList.webtoonImage+"' alt='썸네일이 존재' /></section>"
 		}
 		html += "<section class='webtoon-result-title'>"
-		html += "<label>"+webtoonList.webtoonTitle+"</label><br>" 
-		html += "<label class='small-font'>"+webtoonList.webtoonWriter+"</label><br>" 
-		html += "<label class='small-font'>"+webtoonList.platformName
+		html += "<label class='title-result pointer'>"+webtoonList.webtoonTitle+"</label><br>" 
+		html += "<label class='small-font pointer'>"+webtoonList.webtoonWriter+"</label><br>" 
+		html += "<label class='xsmall-font pointer'>"+webtoonList.platformName
 		if(webtoonList.platformNum !=0){
 			html += " 외 "+webtoonList.platformNum+"곳 </label><br>"
 		}else{
