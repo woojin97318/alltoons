@@ -19,7 +19,6 @@
 </head>
 <body>
 	<c:import url="../default/menu.jsp"/>
-    <c:import url="../default/moveTopBtn.jsp"/>
 	<div align="center">
 		<h3>내가 작성한 리뷰</h3>
 		<p>총 댓글 수<br>${myReviewCnt } 개</p>

@@ -25,6 +25,7 @@ font-family: 'Nanum Gothic Coding', monospace;
   --grayL: rgb(245, 245, 245);
   --grayML: rgb(226, 226, 226);
   --grayD: rgb(73, 73, 73);
+  --orange: rgb(241, 178, 75);
 }
 
 #heart {
@@ -282,4 +283,25 @@ td {
 
 .txt-align-center {
   text-align: center;
+}
+
+/*박스*/
+.my-review-box {
+  border-radius: 20px;
+  background-color: var(--orange);
+  margin: 20px;
+  padding: 20px;
+}
+
+.review-box {
+  border-radius: 20px;
+  background-color: var(--skyblueL);
+  margin: 20px;
+  padding: 20px;
+}
+
+.review-inner-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }

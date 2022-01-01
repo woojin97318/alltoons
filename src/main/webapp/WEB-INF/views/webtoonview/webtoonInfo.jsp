@@ -227,6 +227,10 @@ function mailCut(mail) {
 		background-color: var(--grayML);
 	}
 
+	.my-review-box, .review-box {
+		position: relative;
+	}
+
 </style>
 </head>
 
@@ -361,26 +365,32 @@ function mailCut(mail) {
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<th colspan="2">내가 작성한 리뷰</th>
+								<th>내가 작성한 리뷰</th>
+							</tr>
+							<tr>
 								<td>
-									<button onclick="location.href='${contextPath}/webtoon/review/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
-										삭제
-									</button>
+									<section class="my-review-box">
+										<b>${myReview.reviewContent }</b><br>
+										<label class="small-font">작성 시간 : ${myReview.reviewTime }</label>
+										<button class="review-inner-btn"
+											onclick="location.href='${contextPath}/webtoon/review/myReviewDel?reviewNum=${myReview.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
+											삭제
+										</button>
+									</section>
 								</td>
 							</tr>
-							<tr><td>${myReview.reviewContent }</td></tr>
-							<tr><td>작성 시간 : ${myReview.reviewTime }</td></tr>
 						</c:otherwise>
 					</c:choose>
 				</c:otherwise>
 			</c:choose>
 			<tr>
-				<td><hr></td>
+				
 			</tr>
 			<c:choose>
-				<c:when test="${reviewList.isEmpty() }">
+				<c:when test="${reviewCnt == 0 }">
 					<tr>
-						<th>
+						<td><hr></td>
+						<th style="color: gray;">
 							아직 작성된 리뷰가 없습니다.<br>
 							여러분의 소중한 리뷰를 달아주세요!
 						</th>
@@ -389,28 +399,26 @@ function mailCut(mail) {
 				<c:otherwise>
 					<c:forEach var="review" items="${reviewList }">
 						<tr>
-							<td class="td">
-								<section class="profil">
-									<img src="${contextPath }/member/userImageView?file=${review.userImage }">
+							<td>
+								<section class="review-box">
+									<img class="profil" src="${contextPath }/member/userImageView?file=${review.userImage }">
+									<script>mailCut('${review.userEmail }')</script><br>
+									<c:if test="${user != null }">
+										<button class="review-inner-btn" title="신고하기" 
+											onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
+											신고하기
+										</button>
+									</c:if>
 								</section>
-							</td>
-							<th><script>mailCut('${review.userEmail }')</script></th>
-							<td class="td">
-								<c:if test="${user != null }">
-									<button title="신고하기" onclick="location.href='${contextPath}/webtoon/report?reviewNum=${review.reviewNum }&webtoonNum=${webtoonDate.webtoonNum }'">
-										신고하기
-									</button>
-								</c:if>
 							</td>
 						</tr>
 						<tr><td>${review.reviewContent }</td></tr>
 						<tr><td>${review.reviewTime }</td></tr>
-						<tr><td><hr></td></tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</table>
-
+	<hr>
 	<footer>
 		<c:import url="../default/footer.jsp"/>
 	</footer>
