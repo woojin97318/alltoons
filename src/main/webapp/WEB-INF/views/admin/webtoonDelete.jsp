@@ -138,6 +138,7 @@ td {
 		</c:import><!-- value에 카테고리명을 넣어주세요 -->
 	</header>
 
+<div class="container">
 	<div class="searchBar body">
 		<form action="${contextPath }/admin/webtoonDelete" method="POST">
 			<input type="text" name="search" size="20" placeholder="검색어 입력" required >
@@ -151,7 +152,6 @@ td {
 
 	<hr>
 
-<div>
 	<h2>제목명</h2>
 		<table border="1">
 			<tr class="table-top">
