@@ -102,7 +102,6 @@ td {
 	var page = 1;
 	
 	function change() {
-		
 		const btnName = document.getElementById('select');
 		const select = '삭제';
 		const cancel = '취소';
@@ -112,12 +111,15 @@ td {
 			btnName.value = cancel;
 		}
 	}
+
 	function on() {
 		$().show();
 	}
+
 	function off() {
 		$().hide();
 	}
+
 	function btnActive()  {
 		const btn = document.getElementById('delete_btn');
 		btn.disabled = false;
@@ -134,7 +136,7 @@ td {
 <body>
 	<header><!-- 어드민 페이지 헤더 -->
 		<c:import url="./adminHeader.jsp">
-			<c:param name="tag" value="작품 삭제"></c:param>
+			<c:param name="tag" value="웹툰 삭제"></c:param>
 		</c:import><!-- value에 카테고리명을 넣어주세요 -->
 	</header>
 
@@ -174,23 +176,40 @@ td {
 						<!--웹툰 썸네일-->
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
-								
-								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
+								<th>
+									<div class="webtoonImage">
+										<img src="${contextPath }/resources/img/webtoon/default_image.png">
+									</div>
+								</th>
 							</c:when>
 							<c:otherwise>
-								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
+								<td>
+									<div class="webtoonImage">
+										<img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }">
+									</div>
+								</td>
 							</c:otherwise>
 						</c:choose>
 						<!--수정버튼-->
-						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<th>
+							<button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">
+								수정
+							</button>
+						</th>
 						<!--식별번호-->
 						<th>${dto.webtoonNum }</th>
 						<!--제목-->
-						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<td>
+							<a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'">
+								${dto.webtoonTitle }
+							</a>
+						</td>
 						<!--작가명-->
 						<td>${dto.webtoonWriter }</td>
 						<!--삭제버튼-->
-						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th>
+							<input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box">
+						</th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
@@ -219,22 +238,40 @@ td {
 						<!--웹툰 썸네일-->
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
-								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
+								<th>
+									<div class="webtoonImage">
+										<img src="${contextPath }/resources/img/webtoon/default_image.png">
+									</div>
+								</th>
 							</c:when>
 							<c:otherwise>
-								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
+								<td>
+									<div class="webtoonImage">
+										<img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }">
+									</div>
+								</td>
 							</c:otherwise>
 						</c:choose>
 						<!--수정버튼-->
-						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<th>
+							<button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">
+								수정
+							</button>
+						</th>
 						<!--식별번호-->
 						<th>${dto.webtoonNum }</th>
 						<!--제목-->
-						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'"> ${dto.webtoonTitle }</a></td>
+						<td>
+							<a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'">
+								${dto.webtoonTitle }
+							</a>
+						</td>
 						<!--작가명-->
 						<td>${dto.webtoonWriter }</td>
 						<!--삭제버튼-->
-						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th>
+							<input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box">
+						</th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>
@@ -263,22 +300,40 @@ td {
 						<!--웹툰 썸네일-->
 						<c:choose>
 							<c:when test="${dto.webtoonImage eq 'default_image.png'}">
-								<th><div class="webtoonImage"><img src="${contextPath }/resources/img/webtoon/default_image.png"></div></th>
+								<th>
+									<div class="webtoonImage">
+										<img src="${contextPath }/resources/img/webtoon/default_image.png">
+									</div>
+								</th>
 							</c:when>
 							<c:otherwise>
-								<td><div class="webtoonImage"><img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }"></div></td>
+								<td>
+									<div class="webtoonImage">
+										<img src="${contextPath }/thumbnail?webtoonImage=${dto.webtoonImage }">
+									</div>
+								</td>
 							</c:otherwise>
 						</c:choose>
 						<!--수정버튼-->
-						<th><button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">수정</button></th>
+						<th>
+							<button onclick="location.href='${contextPath }/admin/webtoonModify?webtoonNum=${dto.webtoonNum}'">
+								수정
+							</button>
+						</th>
 						<!--식별번호-->
 						<th>${dto.webtoonNum }</th>
 						<!--제목-->
-						<td><a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'">${dto.webtoonTitle }</a></td>
+						<td>
+							<a href="#" onclick="location.href='${contextPath }/webtoon/webtooninfo?webtoonNum=${dto.webtoonNum}'">
+								${dto.webtoonTitle }
+							</a>
+						</td>
 						<!--작가명-->
 						<td>${dto.webtoonWriter }</td>
 						<!--삭제버튼-->
-						<th><input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box"></th>
+						<th>
+							<input type="button" name="delete_btn" onclick="location.href='${contextPath }/admin/deleteWebtoon?webtoonNum=${dto.webtoonNum}&imageFileName=${dto.webtoonImage}'" class="x-box">
+						</th>
 					</tr>
 				</c:forEach>
 				</c:otherwise>

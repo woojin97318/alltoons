@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mainStyle.css">
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/loginStyle.css">
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/btnStyle.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">

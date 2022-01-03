@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/loginStyle.css">
 <style type="text/css">
 	.login-box {
+		position: absolute;
 		width: 300px;
 		height: 300px;
 		top: 50%;
@@ -45,7 +46,7 @@
 						<input type="checkbox" id="autoLogin" name="autoLogin">
 							<label class="small-font" for="autoLogin">자동 로그인</label>
 						<br>
-						<button type="submit" class="login-btn"><label>로그인</label></button>
+						<input type="submit" class="login-btn" value="로그인">
 					</form>
 					<br>
 					<a href="${contextPath}/member/findpassword">비밀번호 찾기</a> /
