@@ -58,7 +58,7 @@ public class MemberController implements MemberSessionName {
 			message = "Alltoons 회원가입이 완료되었습니다";
 			url = "member/login";
 		} else {
-			message = "회원가입 Error / 문의 바랍니다";
+			message = "이미 가입된 사용자입니다.";
 			url = "member/signup";
 		}
 		model.addAttribute("message", message);
