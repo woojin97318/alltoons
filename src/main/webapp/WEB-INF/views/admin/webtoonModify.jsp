@@ -219,7 +219,7 @@ function add_origin_link(){
 <body>
 <header>
 		<c:import url="./adminHeader.jsp">
-			<c:param name="tag" value="작품 수정"></c:param>
+			<c:param name="tag" value="웹툰 수정"></c:param>
 		</c:import>
 </header>
 <div class="container body">

@@ -92,6 +92,11 @@ font-family: 'Nanum Gothic Coding', monospace;
   backdrop-filter: blur(8px);
 }
 
+.head>h1 {
+  position: relative;
+  top: 5px;
+}
+
 header {
   position: fixed;
   top: 0;

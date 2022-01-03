@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +10,13 @@
 <title>비밀번호 변경</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=yes,maximum-scale=1.0, minimum-scale=1.0" />
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style type="text/css">
+	.login-btn {
+		margin-top: 30px;
+	}
 
+</style>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	function passwordChk() {
 		var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
@@ -36,15 +41,28 @@
 	}
 </script>
 </head>
+
 <body>
+	<header>
+		<div class="head">
+			<h1 align="center">마이페이지</h1>
+		</div>
+	</header>
 	<c:import url="../default/menu.jsp"/>
-	<div align="center">
-		<h3>비밀번호 변경</h3>
+
+	<div align="center" class="white-box shadow box-center">
+		<h2>비밀번호 변경</h2>
 		<form name="modify" action="newPasswordChk" method="post">
-			새 비밀번호<br> <input type="password" name="newUserPw"
-				id="newUserPw" placeholder="새 비밀번호"><br> 새 비밀번호 확인<br>
+			새 비밀번호<br>
+			<input type="password" name="newUserPw"
+				id="newUserPw" placeholder="새 비밀번호">
+			<br><br>
+			새 비밀번호 확인
+			<br>
 			<input type="password" name="newUserPwChk" id="newUserPwChk"
-				placeholder="새 비밀번호 확인"><br> <input type="button"
+				placeholder="새 비밀번호 확인">
+			<br>
+			<input class="login-btn" type="button"
 				onclick="passwordChk()" value="비밀번호 변경하기">
 		</form>
 	</div>

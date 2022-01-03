@@ -1,12 +1,29 @@
 .login-box {
   padding: auto;
-  position: absolute;
   background-color:rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 30px;
+  border: 3px solid white;
 }
 
-.login-box-center {
+.blue-box {
+  padding: auto;
+  background-color:rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 30px;
+  border: 3px solid var(--blue);
+}
+
+.white-box {
+  padding: auto;
+  background-color:rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 30px;
+  border: 3px solid white;
+}
+
+.box-center {
+  position: absolute;
   width: 300px;
   height: 300px;
   top: 50%;
@@ -17,7 +34,7 @@
 /*파란 큰 버튼*/
 .login-btn {
   width: 80%;
-  height: 50px;
+  height: 40px;
   border-radius: 30px;
   display: block;
   background-color: var(--blue);
@@ -31,7 +48,7 @@
   font-size: 1.5em;
 }
 
-.login-btn:hover {
+.login-btn:active {
   background-color: var(--blueD);
 }
 
