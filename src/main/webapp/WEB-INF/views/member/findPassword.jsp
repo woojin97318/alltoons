@@ -13,18 +13,8 @@
 <link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/mainStyle.css">
 <link rel="stylesheet" type="text/css"	href="${contextPath}/resources/css/loginStyle.css">
 <style type="text/css">
-	.login-box {
-		width: 300px;
-		height: 300px;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		padding: 10px;
-	}
-
 	.login-btn {
-		margin: 20px 0 0 0;
-		width: 150px;
+		margin-top: 20px;
 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -79,9 +69,9 @@
 <body class="body-color">
 	<c:import url="../default/menu.jsp"/>
 	<div class="flex-container">
-		<div align="center" class="login-box">
-			<div class="box email center">
-				<h3>비밀번호 찾기</h3>
+		<div align="center" class="white-box shadow box-center">
+			<div class="email center">
+				<h2>비밀번호 찾기</h2>
 				<form action="findpassword">
 					<label>전송 받을 이메일 주소를 적어주세요.</label>
 					<br>
