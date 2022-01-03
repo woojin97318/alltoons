@@ -95,26 +95,31 @@
 
 		//이메일 유효성 검사
 		var chkForm = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-		if (false === chkForm.test(userEmail)) {
-			alert('이메일 형식이 아닙니다!');
-			//이메일 전송 시도 X
-		} else {
-			$.ajax({
-				url : "sendmail", //"ajax",
-				type : "GET",
-				data : form,
-				dataType : "json",
-				contentType : "application/json; charset=utf-8",
-				success : function(result) {
-					console.log("메일 전송 성공")
-					alert('메일함을 확인해주세요')
+		if(userEmail === ""){
+			alert('이메일을 입력해주세요!');
+		}else{
+			if (false === chkForm.test(userEmail)) {
+				alert('이메일 형식이 아닙니다!');
+				//이메일 전송 시도 X
+			} else {
+				$.ajax({
+					url : "sendmail", //"ajax",
+					type : "GET",
+					data : form,
+					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					success : function(result) {
+						console.log("메일 전송 성공")
+						alert('메일함을 확인해주세요')
 
-				},
-				error : function() {
-					alert('메일 전송 실패')
-				}
-			})
+					},
+					error : function() {
+						alert('메일 전송 실패')
+					}
+				})
+			}			
 		}
+
 	}
 
 	function authChk() {
