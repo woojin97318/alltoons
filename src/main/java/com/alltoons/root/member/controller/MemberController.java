@@ -245,7 +245,7 @@ public class MemberController implements MemberSessionName {
 		String message = ms.memberDeleteChk(userPw, session.getAttribute(LOGIN).toString());
 		String url = null;
 		if (message.equals("탈퇴가 완료되었습니다"))
-			url = "index";
+			url = "main";
 		else
 			url = "member/memberDelete";
 		model.addAttribute("message", message);
