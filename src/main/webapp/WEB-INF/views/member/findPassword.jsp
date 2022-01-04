@@ -67,25 +67,6 @@
 </script>
 </head>
 <body class="body-color">
-<<<<<<< HEAD
-	<c:import url="../default/menu.jsp"/>
-	<div class="flex-container">
-		<div align="center" class="white-box shadow box-center">
-			<div class="email center">
-				<h2>비밀번호 찾기</h2>
-				<form action="findpassword">
-					<label>전송 받을 이메일 주소를 적어주세요.</label>
-					<br>
-					<span>👇</span>
-					<input type="text" id="userEmail" name="userEmail" autofocus autocomplete="off" required />
-					<button class="login-btn" type="button" onclick="sendmail()">
-						이메일 전송
-					</button>
-				</form>
-			</div>
-		</div>
-	</div>
-=======
    <c:import url="../default/menu.jsp"/>
    <div class="flex-container">
       <div align="center" class="white-box shadow box-center">
@@ -103,6 +84,5 @@
          </div>
       </div>
    </div>
->>>>>>> jeonwujin
 </body>
 </html>
