@@ -13,7 +13,7 @@
          value="oracle.jdbc.driver.OracleDriver" />
       <property name="jdbcUrl"
          value="jdbc:oracle:thin:@210.221.253.215:1521:xe" />
-      <property name="username" value="team05" />
+      <property name="username" value="team5" />
       <property name="password" value="0505" />
    </bean>
    
